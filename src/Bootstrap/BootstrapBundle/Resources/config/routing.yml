@@ -1,0 +1,3 @@
+bootstrap_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: BootstrapBundle:Default:index }

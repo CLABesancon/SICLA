@@ -1,0 +1,8 @@
+
+home:
+  pattern: /
+  defaults: { _controller: SidusAdminBundle:Default:index }
+
+sidus_admin:
+    resource: "@SidusAdminBundle/Resources/config/routing.yml"
+    prefix:   /

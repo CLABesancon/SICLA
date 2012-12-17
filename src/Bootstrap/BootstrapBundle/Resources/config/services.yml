@@ -1,0 +1,7 @@
+parameters:
+#    bootstrap.example.class: Bootstrap\BootstrapBundle\Example
+
+services:
+#    bootstrap.example:
+#        class: %bootstrap.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
