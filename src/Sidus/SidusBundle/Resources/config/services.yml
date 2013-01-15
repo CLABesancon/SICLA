@@ -1,7 +1,0 @@
-parameters:
-#    sidus.example.class: Sidus\SidusBundle\Example
-
-services:
-#    sidus.example:
-#        class: %sidus.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
