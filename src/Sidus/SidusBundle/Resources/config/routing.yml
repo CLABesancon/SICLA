@@ -1,3 +1,6 @@
+
 sidus_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: SidusBundle:Default:index }
+    pattern:  /{node}
+    defaults: { _controller: SidusBundle:Default:view, node:1 }
+    requirements:
+      node: ^(\d+|[A-Za-z0-9-_]+)$
