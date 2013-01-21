@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller {
 
+	public function homeAction(){
+		return $this->render('SidusBundle:Default:home.html.twig');
+	}
+
 	public function viewAction($node) {
 		$id_node = null;
 		$slug = null;
@@ -17,7 +21,7 @@ class DefaultController extends Controller {
 			return $this->render('SidusBundle:Default:error.html.twig', array('id_node' => $id_node));
 		}
 
-		return $this->render('SidusBundle:Default:view.html.twig', array('id_node' => $id_node, 'slug' => $slug));
+		return $this->render('SidusBundle:Folder:view.html.twig', array('id_node' => $id_node, 'slug' => $slug));
 	}
 
 }
