@@ -10,6 +10,8 @@
 		<link rel="shortcut icon" href="{{ asset('bundles/sidus/favicon.png') }}">
 	{% endblock %}
 	<link href="{{ asset('bundles/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/bootstrap/css/font-awesome.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/bootstrap/css/country-flags.css') }}" rel="stylesheet">
 	<link href="{{ asset('bundles/sidus/css/custom.css') }}" rel="stylesheet">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -55,7 +57,12 @@
 		{% block container_west %}
 			<div class="container-fluid">
 				<a class="close close-container" href="#">&times;</a>
-				<h5>Siblings' list</h5>
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#">Siblings</a>
+					</li>
+					<li><a href="#">Favorites</a></li>
+				</ul>
 				<ul class="nav nav-tabs nav-stacked">
 					<li><a href="#">Members</a></li>
 					<li><a href="#">Groups</a></li>
@@ -99,8 +106,12 @@
 							<ul class="dropdown-menu pull-right">
 								<li><a href="#"><i class="icon-arrow-right"></i> Move</a></li>
 								<li><a href="#"><i class="icon-share-alt"></i> Link</a></li>
-								<li><a href="#"><i class="icon-repeat"></i> Copy</a></li>
+								<li><a href="#"><i class="icon-copy"></i> Copy</a></li>
 								<li><a href="#"><i class="icon-lock"></i> Permissions</a></li>
+								<li class="divider"></li>
+								<li class="disabled"><a href="#"><i class="flag-english flag-white"></i> English version</a></li>
+								<li><a href="#"><i class="flag-french"></i> French version</a></li>
+								<li><a href="#"><i class="icon-flag"></i> Localize</a></li>
 								<li class="divider"></li>
 								<li><a href="#"><i class="icon-list"></i> History</a></li>
 								<li><a href="#"><i class="icon-signal"></i> Feed</a></li>
@@ -116,13 +127,13 @@
 					<small class="muted">Created by <a href="#">Vincent</a> 2 hours ago</small>
 				</p>
 				<div class="hidden-phone">
-					<p class="center"><img src="{{ asset('bundles/sidus/images/folder.png') }}" class="img-polaroid"></p>
+					<p class="center"><i class="icon-folder-open img-polaroid" style="font-size:100px;"></i></p>
 				</div>
 			</div>
 		{% endblock %}
 	</div>
 	<div class="container-center">
-		<div class="container-fluid" id="main">{% block main %}{% endblock %}</div>
+		<div class="container-fluid" id="main">{% block message %}{% endblock %}{% block main %}{% endblock %}</div>
 	</div>
 	<script src="{{ asset('bundles/bootstrap/js/jquery.min.js') }}"></script>
 	<script src="{{ asset('bundles/bootstrap/js/bootstrap.min.js') }}"></script>

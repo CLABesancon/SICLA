@@ -1,5 +1,6 @@
 html, body{padding:0;margin:0;height:100%;min-width:330px;}
 #main{padding-top:50px;}
+#main > .alert{margin-bottom:5px;}
 
 .center{text-align:center;}
 
@@ -13,10 +14,11 @@ html, body{padding:0;margin:0;height:100%;min-width:330px;}
 .container-east{float:right;border-left:1px solid #EEE;margin-left:20px;}
 .container-center{padding-left:242px;padding-right:242px;}
 
-.container-west > .container-fluid{padding:40px 20px 0;}
+.container-west > .container-fluid{padding:50px 20px 0;}
 .container-east > .container-fluid{padding:40px 20px 0;}
 .close-container{margin-right:-16px;}
-.btn-toolbar.actions{margin:0;}
+.btn-toolbar.actions{margin:5px;text-align:left;}
+.btn-toolbar.actions-condensed{margin:0;}
 th.actions{width:10px;}
 
 #navbar-top .navbar-inner{position:relative;}
@@ -25,10 +27,14 @@ th.actions{width:10px;}
 .node-infos-line{margin:5px 0;line-height:28px;}
 
 caption .pagination{margin:5px;}
-caption .infos{padding:5px;line-height:30px;margin:0;}
+caption .infos{padding:3px;line-height:30px;margin:0;}
 caption.caption-bottom{caption-side:bottom;}
 
 td.visible-desktop, th.visible-desktop{display:table-cell !important;}
+
+input.radio-condensed{margin-top:-3px;}
+
+.filter-form{margin-top:10px;margin-bottom:10px;}
 
 @media (max-width:979px){
 	#main{padding-top:9px;}
