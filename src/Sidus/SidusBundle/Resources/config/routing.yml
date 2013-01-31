@@ -3,8 +3,25 @@ sidus_homepage:
   pattern:  /
   defaults: { _controller: SidusBundle:Default:home }
 
-sidus_node:
-  pattern:  /{node}
-  defaults: { _controller: SidusBundle:Default:view, node:1 }
+sidus_node_lang:
+  pattern:  /{_locale}/{id_node}
+  defaults: { _controller: SidusBundle:Default:view, id_node:1 }
   requirements:
-    node: ^(\d+|[A-Za-z0-9-_]+)$
+    node: (\d.*)
+    _locale: (\w{2})?
+    
+sidus_node:
+  pattern:  /{id_node}
+  defaults: { _controller: SidusBundle:Default:view, id_node:1}
+  requirements:
+    node: (\d.*)
+    
+sidus_user:
+  pattern: /users/{id}
+  defaults: { _controller: SidusBundle:User:form }
+  requirements:
+    id: \d*
+    
+SidusBundle_user:
+  resource: "@SidusBundle/Resources/config/routing/user.yml"
+  prefix:   /user

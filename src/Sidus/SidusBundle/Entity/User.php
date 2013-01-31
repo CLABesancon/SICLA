@@ -68,7 +68,6 @@ class User extends Object {
 	 * @var boolean
 	 *
 	 * @ORM\Column(name="is_inactive", type="boolean")
-	 * @Assert\NotBlank()
 	 */
 	private $isInactive;
 
@@ -156,7 +155,7 @@ class User extends Object {
      */
     public function setExpireAt($expireAt)
     {
-        $this->expireAt = $expireAt;
+        $this->expireAt = new \DateTime($expireAt);
     
         return $this;
     }
@@ -168,7 +167,7 @@ class User extends Object {
      */
     public function getExpireAt()
     {
-        return $this->expireAt;
+        return $this->expireAt->format('Y-m-d H:i:s');
     }
 
     /**

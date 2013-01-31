@@ -14,14 +14,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Version {
 
 	/**
-	 * @ORM\ManytoOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="versions", cascade={"persist"})
+	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="versions", cascade={"persist"})
 	 * @ORM\JoinColumn(name="node_id", referencedColumnName="id")
 	 * @ORM\Id
 	 */
 	private $node;
 
 	/**
-	 * @ORM\ManytoOne(targetEntity="Sidus\SidusBundle\Entity\Object", inversedBy="versions", cascade={"persist"})
+	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Object")
 	 * @ORM\JoinColumn(name="object_id", referencedColumnName="id")
 	 * @ORM\Id
 	 */

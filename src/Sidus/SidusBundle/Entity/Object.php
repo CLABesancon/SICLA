@@ -11,10 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\ObjectRepository")
  * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="typename", type="string")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({
- *  "core_user"="User",
- *  "core_metadata"="Metadata"
+ *	"core_page" = "Page",
+ *	"core_user" = "User",
+ *	"core_type" = "Type",
+ *	"core_folder" = "Folder",
+ *	"core_users" = "Folder",
+ *	"core_types" = "Folder"
  * })
  */
 class Object {
@@ -27,18 +31,22 @@ class Object {
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
 	private $id;
-
-	/**
-	 * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Version", mappedBy="object", cascade={"persist"})
-	 * @ORM\JoinColumn(nullable=false)
+	
+	/** var string
+	 * @ORM\Column(name="title", type="string", length=255)
 	 */
-	private $versions;
+	private $title;
+	
+	/*
+	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Type")
+	 * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
+	 */
+	private $type;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->versions = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	/**
@@ -80,4 +88,49 @@ class Object {
 		return $this->versions;
 	}
 
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Object
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+	
+	public function __toString() {
+		return $this->getTitle();
+	}
+	
+	public function getControllerPath(){
+		/*
+		 * Le controller path doit dépendre du type de l'objet, et prendre en compte l'arborescence des types
+		 * Si le type de l'objet n'a pas de controller défini, on prend celui du parent, récursivement
+		 * Si on en trouve finalement pas, on prend le controller par défaut (page? folder? autre?)
+		 */
+		
+		
+		$path_class = get_class($this); //--> retourne bien la classe de l'objet! (ex : Sidus\SidusBundle\Entity\Page)
+		$array = explode('\\',$path_class);
+		
+		$class= $array[count($array)-1];
+		$bundle = $array[count($array)-3];
+		
+		return $bundle.':'.$class;
+		
+	}
 }

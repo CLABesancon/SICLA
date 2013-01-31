@@ -23,12 +23,18 @@ class Node {
 	private $id;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="Sidus\SidusBundle\Entity\User", cascade={"persist"})
+	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\User")
 	 * @ORM\JoinColumn(nullable=false)
 	 * @Assert\NotBlank()
 	 */
 	private $createdBy;
 
+	/**
+	 * @ORM\Column(name="nodename", type="string", length=255)
+	 * @ORM\JoinColumn(nullable=true)
+	 */
+	private $nodeName;
+		
 	/**
 	 * @var \DateTime
 	 *
@@ -39,7 +45,7 @@ class Node {
 	private $createdAt;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="Sidus\SidusBundle\Entity\User", cascade={"persist"})
+	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\User")
 	 * @ORM\JoinColumn(nullable=false)
 	 * @Assert\NotBlank()
 	 */
@@ -61,8 +67,8 @@ class Node {
 	private $childs;
 
 	/**
-	 * @ORM\ManytoOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="childs", cascade={"persist"})
-	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="childs", cascade={"persist"})
+	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
 	 */
 	private $parent;
 
@@ -76,9 +82,11 @@ class Node {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->createdAt = new DateTime('now');
+		$this->createdAt = new \DateTime('now');
+		$this->modifiedAt = new \DateTime('now');
 		$this->childs = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->versions = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->parent = null;
 	}
 
 	/**
@@ -89,7 +97,30 @@ class Node {
 	public function getId() {
 		return $this->id;
 	}
+	
+    /**
+     * Set nodeName
+     *
+     * @param string $nodeName
+     * @return Node
+     */
+    public function setNodeName($nodeName)
+    {
+        $this->nodeName = $nodeName;
+    
+        return $this;
+    }
 
+    /**
+     * Get nodeName
+     *
+     * @return string 
+     */
+    public function getNodeName()
+    {
+        return $this->nodeName;
+    }
+	
 	/**
 	 * Set created_by
 	 *
@@ -182,7 +213,6 @@ class Node {
 	 */
 	public function setParent(\Sidus\SidusBundle\Entity\Node $parent) {
 		$this->parent = $parent;
-
 		return $this;
 	}
 
@@ -192,9 +222,26 @@ class Node {
 	 * @return \Sidus\SidusBundle\Entity\Node 
 	 */
 	public function getParent() {
-		return $this->parent;
+		if($this->id != 1){
+			return $this->parent;
+		}else{
+			return null;
+		}
 	}
-
+	
+	public function getParents(){
+		$result = array(); //Array of parents nodes
+		if($this->getParent() !== null){
+			$tmp = $this;
+			do {
+				$tmp = $tmp->getParent();
+				$result[] = $tmp;
+			} while($tmp->getParent() !== null);
+		}
+		return $result;
+		
+	}
+	
 	/**
 	 * Add childs
 	 *

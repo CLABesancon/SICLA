@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Metadata
+ * Page
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\MetadataRepository")
+ * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\PageRepository")
  */
-class Metadata extends Object {
+class Page extends Object {
 
 	/**
 	 * @var integer
@@ -22,24 +22,18 @@ class Metadata extends Object {
 	 */
 	private $id;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="title", type="string", length=255)
-	 */
-	private $title;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="content", type="blob")
+	 * @ORM\Column(name="content", type="text")
 	 */
 	private $content;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="tags", type="blob")
+	 * @ORM\Column(name="tags", type="text")
 	 */
 	private $tags;
 
@@ -50,27 +44,6 @@ class Metadata extends Object {
 	 */
 	public function getId() {
 		return $this->id;
-	}
-
-	/**
-	 * Set title
-	 *
-	 * @param string $title
-	 * @return Metadata
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-
-		return $this;
-	}
-
-	/**
-	 * Get title
-	 *
-	 * @return string 
-	 */
-	public function getTitle() {
-		return $this->title;
 	}
 
 	/**

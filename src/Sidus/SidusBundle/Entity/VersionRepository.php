@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class VersionRepository extends EntityRepository
 {
+	/*
+	 * Find the last version according to the id_node and lang (default:en)
+	 * @TODO : If any version axist according to lang, try the default lang
+	 */
+	public function findLastVersion($node, $lang){
+		$qb = $this->createQueryBuilder('v');
+		$qb	->where('v.node = :node')
+			->andwhere('v.lang = :lang')
+			->setParameter('node',$node)
+			->setParameter('lang',$lang)	
+			->orderBy('v.revision_date', 'DESC');
+		return $qb->getQuery()->getOneOrNullResult();
+	}
 }
