@@ -25,4 +25,5 @@ class VersionRepository extends EntityRepository
 			->orderBy('v.revision_date', 'DESC');
 		return $qb->getQuery()->getOneOrNullResult();
 	}
+
 }

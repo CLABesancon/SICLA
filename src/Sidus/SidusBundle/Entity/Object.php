@@ -37,9 +37,9 @@ class Object {
 	 */
 	private $title;
 	
-	/*
+	/**
 	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Type")
-	 * @ORM\JoinColumn(name="type_id", referencedColumnName="id", nullable=true)
+	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $type;
 
@@ -108,7 +108,7 @@ class Object {
 	}
 	
 	public function getControllerPath(){
-		/*
+		/* @TODO : controller path via l'objet (a mettre dans le repo)
 		 * Le controller path doit dépendre du type de l'objet, et prendre en compte l'arborescence des types
 		 * Si le type de l'objet n'a pas de controller défini, on prend celui du parent, récursivement
 		 * Si on en trouve finalement pas, on prend le controller par défaut (page? folder? autre?)
