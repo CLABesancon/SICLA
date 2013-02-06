@@ -37,13 +37,14 @@ class DefaultController extends Controller {
 				//@TODO : Redirect to last visited node (stored in session ?) instead of forwarding -> catch 418
 				$response = $this->forward('SidusBundle:Default:home');
 			}else{
+				//@TODO : récupéré l'objet ET son type en une seule requête (Repo)
 				$object = $last_version->getObject();
-				$type = $em->getRepository('SidusBundle:Object')->findType($node);
-		
+				$type = $object->getType();
+				
 				$response = $this->forward($object->getControllerPath().':view', array(
 					'node'		=>$node,
 					'object'	=>$object,
-					'type'	=>$type,
+					'type'		=>$type,
 					'version'	=>$last_version,
 				));
 			}

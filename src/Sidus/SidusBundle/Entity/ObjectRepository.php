@@ -12,12 +12,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class ObjectRepository extends EntityRepository
 {
-		
-	public function findType ($node){
-		$qb = $this->createQueryBuilder('o')
-				->leftJoin('o.type','t')
-				->addSelect('t');
-		
-		return $qb->getQuery()->getOneOrNullResult();
-	}
+
 }
