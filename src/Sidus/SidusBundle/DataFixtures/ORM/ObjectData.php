@@ -52,7 +52,7 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface {
 		$object_users->setTitle('Users');
 		$object_users->setContent('List of Users');
 		$object_users->setTags('user, users, folder');
-		$object_root->setType($this->getReference('object-type-folder'));
+		$object_users->setType($this->getReference('object-type-folder'));
 		$manager->persist($object_users);
 		$this->addReference('object-users',$object_users);
 		
@@ -64,7 +64,7 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface {
 		$user->setSalt('salt');
 		$user->setEmail('email@admin.com');
 		$user->setExpireAt($now->format('Y-m-d H:i:s'));
-		$object_root->setType($this->getReference('object-type-user'));
+		$user->setType($this->getReference('object-type-user'));
 		$manager->persist($user);
 		$this->addReference('object-user',$user);
 		
@@ -73,7 +73,7 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface {
 		$object_types->setTitle('Types');
 		$object_types->setContent('List of Types');
 		$object_types->setTags('type, types, folder');
-		$object_root->setType($this->getReference('object-type-folder'));
+		$object_types->setType($this->getReference('object-type-folder'));
 		$manager->persist($object_types);
 		$this->addReference('object-types',$object_types);
 		

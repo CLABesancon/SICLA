@@ -9,7 +9,7 @@ class DefaultController extends Controller {
 
 
 	public function homeAction(){
-		// A récupérer : node d'id 1;
+		// A récupérer : node 'root' (nodename);
 		return $this->render('SidusBundle:Default:home.html.twig');
 	}
 
@@ -19,8 +19,8 @@ class DefaultController extends Controller {
 	}
 
 	public function viewAction($id_node) {
-
-		//Récupérer la langue depuis la locale en session (setter via la route spéciale _locale)
+		
+		//@TODO : Récupérer la langue depuis la locale en session (setter via la route spéciale _locale)
 		$lang='en';
 
 		$em = $this->getDoctrine()->getManager();
@@ -37,14 +37,17 @@ class DefaultController extends Controller {
 			if(!$last_version){
 				//Version not found
 				$this->get('session')->setFlash('error','We are sorry, we cannot found a node according to the lang you are looking for.');
-				//@TODO : Redirect to last visited node (stored in session ?) instead of forwarding.
+				//@TODO : Redirect to last visited node (stored in session ?) instead of forwarding -> catch 418
 				$response = $this->forward('SidusBundle:Default:home');
 			}else{
+				//@TODO : récupéré l'objet ET son type en une seule requête (Repo)
 				$object = $last_version->getObject();
-
+				$type = $object->getType();
+				
 				$response = $this->forward($object->getControllerPath().':view', array(
 					'node'		=>$node,
 					'object'	=>$object,
+					'type'		=>$type,
 					'version'	=>$last_version,
 				));
 			}

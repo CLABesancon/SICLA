@@ -7,13 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PageController extends Controller {
 	
-	public function viewAction($node,$object,$version){
+	public function viewAction($node,$object,$version,$type){
 		
 		$em = $this->getDoctrine()->getManager();
 		
 		return $this->render('SidusBundle:Page:view.html.twig',array(
 			'node'=>$node,
 			'object'=>$object,
+			'type'=>$type,
 		));
 	}
 }
