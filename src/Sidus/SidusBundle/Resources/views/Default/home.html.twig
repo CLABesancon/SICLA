@@ -2,7 +2,7 @@
 
 {% block message %}
 	{% if app.session.hasFlash('error') %}
-		<div class="alert">
+		<div class="alert alert-error">
 		  <button type="button" class="close" data-dismiss="alert">&times;</button>
 		   {{ app.session.flash('error') }}
 		</div>

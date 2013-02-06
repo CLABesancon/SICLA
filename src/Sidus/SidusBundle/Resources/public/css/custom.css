@@ -19,6 +19,8 @@ html, body{padding:0;margin:0;height:100%;min-width:330px;}
 .close-container{margin-right:-16px;}
 .btn-toolbar.actions{margin:5px;text-align:left;}
 .btn-toolbar.actions-condensed{margin:0;}
+tr .btn-toolbar.actions-condensed{visibility:hidden;}
+tr:hover .btn-toolbar.actions-condensed{visibility:visible;}
 th.actions{width:10px;}
 
 #navbar-top .navbar-inner{position:relative;}
