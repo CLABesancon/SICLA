@@ -39,7 +39,7 @@ class Object {
 	
 	/*
 	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Type")
-	 * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="type_id", referencedColumnName="id", nullable=true)
 	 */
 	private $type;
 
@@ -57,35 +57,26 @@ class Object {
 	public function getId() {
 		return $this->id;
 	}
-
+	
 	/**
-	 * Add versions
+	 * Set type
 	 *
-	 * @param \Sidus\SidusBundle\Entity\Version $versions
-	 * @return Object
+	 * @param integer $type
+	 * @return Node
 	 */
-	public function addVersion(\Sidus\SidusBundle\Entity\Version $versions) {
-		$this->versions[] = $versions;
+	public function setType($type) {
+		$this->type = $type;
 
 		return $this;
 	}
 
 	/**
-	 * Remove versions
+	 * Get type
 	 *
-	 * @param \Sidus\SidusBundle\Entity\Version $versions
+	 * @return integer 
 	 */
-	public function removeVersion(\Sidus\SidusBundle\Entity\Version $versions) {
-		$this->versions->removeElement($versions);
-	}
-
-	/**
-	 * Get versions
-	 *
-	 * @return \Doctrine\Common\Collections\Collection 
-	 */
-	public function getVersions() {
-		return $this->versions;
+	public function getType() {
+		return $this->type;
 	}
 
 
