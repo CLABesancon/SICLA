@@ -34,7 +34,7 @@ class Node {
 	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $nodeName;
-		
+
 	/**
 	 * @var \DateTime
 	 *
@@ -61,22 +61,38 @@ class Node {
 	private $modifiedAt;
 
 	/**
+	 * @var Node[]
 	 * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Node", mappedBy="parent", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
 	 */
-	private $childs;
+	private $children;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="childs", cascade={"persist"})
+	 * @var Node
+	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="child", cascade={"persist"})
 	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
 	 */
 	private $parent;
 
 	/**
+	 * @var Versions[]
 	 * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Version", mappedBy="node", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $versions;
+
+	/**
+	 * Last version for each language
+	 * @var Version[]
+	 */
+	protected $last_versions;
+
+	/**
+	 * The current version corresponding to either: what the controller loaded
+	 * or what the last version for the preferred language.
+	 * @var Version
+	 */
+	protected $current_version;
 
 	/**
 	 * Constructor
@@ -84,7 +100,7 @@ class Node {
 	public function __construct() {
 		$this->createdAt = new \DateTime('now');
 		$this->modifiedAt = new \DateTime('now');
-		$this->childs = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->children = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->versions = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->parent = null;
 	}
@@ -92,12 +108,12 @@ class Node {
 	/**
 	 * Get id
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId() {
 		return $this->id;
 	}
-	
+
     /**
      * Set nodeName
      *
@@ -107,20 +123,20 @@ class Node {
     public function setNodeName($nodeName)
     {
         $this->nodeName = $nodeName;
-    
+
         return $this;
     }
 
     /**
      * Get nodeName
      *
-     * @return string 
+     * @return string
      */
     public function getNodeName()
     {
         return $this->nodeName;
     }
-	
+
 	/**
 	 * Set created_by
 	 *
@@ -136,7 +152,7 @@ class Node {
 	/**
 	 * Get created_by
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getCreatedBy() {
 		return $this->createdBy;
@@ -150,14 +166,13 @@ class Node {
 	 */
 	public function setCreatedAt($createdAt) {
 		$this->createdAt = $createdAt;
-
 		return $this;
 	}
 
 	/**
 	 * Get created_at
 	 *
-	 * @return \DateTime 
+	 * @return \DateTime
 	 */
 	public function getCreatedAt() {
 		return $this->createdAt;
@@ -171,14 +186,13 @@ class Node {
 	 */
 	public function setModifiedBy($modifiedBy) {
 		$this->modifiedBy = $modifiedBy;
-
 		return $this;
 	}
 
 	/**
 	 * Get modified_by
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getModifiedBy() {
 		return $this->modifiedBy;
@@ -192,14 +206,13 @@ class Node {
 	 */
 	public function setModifiedAt($modifiedAt) {
 		$this->modifiedAt = $modifiedAt;
-
 		return $this;
 	}
 
 	/**
 	 * Get modified_at
 	 *
-	 * @return \DateTime 
+	 * @return \DateTime
 	 */
 	public function getModifiedAt() {
 		return $this->modifiedAt;
@@ -208,10 +221,10 @@ class Node {
 	/**
 	 * Set parent
 	 *
-	 * @param \Sidus\SidusBundle\Entity\Node $parent
+	 * @param Node $parent
 	 * @return Node
 	 */
-	public function setParent(\Sidus\SidusBundle\Entity\Node $parent) {
+	public function setParent(Node $parent) {
 		$this->parent = $parent;
 		return $this;
 	}
@@ -219,7 +232,7 @@ class Node {
 	/**
 	 * Get parent
 	 *
-	 * @return \Sidus\SidusBundle\Entity\Node 
+	 * @return Node
 	 */
 	public function getParent() {
 		if($this->id != 1){
@@ -228,57 +241,54 @@ class Node {
 			return null;
 		}
 	}
-	
-	public function getParents(){
-		$result = array(); //Array of parents nodes
-		if($this->getParent() !== null){
-			$tmp = $this;
-			do {
-				$tmp = $tmp->getParent();
-				$result[] = $tmp;
-			} while($tmp->getParent() !== null);
+
+	public function getAscendants(){
+		$result = new \Doctrine\Common\Collections\ArrayCollection(); //Array of ascendants nodes
+		$tmp = $this;
+		while($tmp->getParent()){
+			$tmp = $tmp->getParent();
+			$result->add($tmp);
 		}
 		return $result;
-		
 	}
-	
+
 	/**
-	 * Add childs
+	 * Add child
 	 *
-	 * @param \Sidus\SidusBundle\Entity\Node $childs
+	 * @param Node $child
 	 * @return Node
 	 */
-	public function addChild(\Sidus\SidusBundle\Entity\Node $childs) {
-		$this->childs[] = $childs;
+	public function addChild(Node $child) {
+		$this->children[] = $child;
 
 		return $this;
 	}
 
 	/**
-	 * Remove childs
+	 * Remove child
 	 *
-	 * @param \Sidus\SidusBundle\Entity\Node $childs
+	 * @param Node $child
 	 */
-	public function removeChild(\Sidus\SidusBundle\Entity\Node $childs) {
-		$this->childs->removeElement($childs);
+	public function removeChild(Node $child) {
+		$this->children->removeElement($child);
 	}
 
 	/**
-	 * Get childs
+	 * Get children
 	 *
-	 * @return \Doctrine\Common\Collections\Collection 
+	 * @return \Doctrine\Common\Collections\Collection
 	 */
-	public function getChilds() {
-		return $this->childs;
+	public function getChildren() {
+		return $this->children;
 	}
 
 	/**
 	 * Add versions
 	 *
-	 * @param \Sidus\SidusBundle\Entity\Version $versions
+	 * @param Version $versions
 	 * @return Node
 	 */
-	public function addVersion(\Sidus\SidusBundle\Entity\Version $versions) {
+	public function addVersion(Version $versions) {
 		$this->versions[] = $versions;
 
 		return $this;
@@ -287,19 +297,77 @@ class Node {
 	/**
 	 * Remove versions
 	 *
-	 * @param \Sidus\SidusBundle\Entity\Version $versions
+	 * @param Version $versions
 	 */
-	public function removeVersion(\Sidus\SidusBundle\Entity\Version $versions) {
+	public function removeVersion(Version $versions) {
 		$this->versions->removeElement($versions);
 	}
 
 	/**
 	 * Get versions
 	 *
-	 * @return \Doctrine\Common\Collections\Collection 
+	 * @return \Doctrine\Common\Collections\Collection
 	 */
 	public function getVersions() {
 		return $this->versions;
+	}
+
+	/**
+	 * Return the last version for each available language
+	 * @return Versions[]
+	 */
+	public function getLastVersions(){
+		if(!$this->last_versions){
+			$em = $this->getEntityManager(); // @todo BORDEL COMMENT ON FAIT ???
+			$this->last_versions = $em->getRepository('SidusBundle:Version')->findAllLastVersions($this);
+		}
+		return $this->last_versions;
+	}
+
+	/**
+	 * @todo Return the version with the proper language
+	 * @return Version
+	 */
+	public function getDefaultVersion(){
+		$versions = $this->getLastVersions();
+		return array_pop($versions);
+	}
+
+	/**
+	 *
+	 * @return Version
+	 */
+	public function getCurrentVersion(){
+		if(!$this->current_version){
+			return $this->getDefaultVersion();
+		}
+		return $this->current_version;
+	}
+
+	/**
+	 *
+	 * @param Version $version
+	 * @return Node
+	 */
+	public function setCurrentVersion(Version $version){
+		$this->current_version = $version;
+		return $this;
+	}
+
+	public function getObject($version = null){
+
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		try{
+			return (string)$this->getObject();
+		} catch(ErrorException $e){
+			return (string)$this->getNodeName();
+		}
 	}
 
 }

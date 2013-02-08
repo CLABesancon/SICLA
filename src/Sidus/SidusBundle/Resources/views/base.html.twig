@@ -33,9 +33,10 @@
 			{% endblock %}
 			{% block breadcrumb %}
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a> <span class="divider">/</span></li>
-					<li><a href="#">Library</a> <span class="divider">/</span></li>
-					<li class="active">Data</li>
+					{% for ascendant in node.ascendants %}
+						<li><a href="{{ ascendant.url }}">{{ ascendant }} <span class="divider">/</span></a></li>
+					{% endfor %}
+					<li class="active">{{ node }}</li>
 				</ul>
 			{% endblock %}
 			{% block myself %}
@@ -133,7 +134,35 @@
 		{% endblock %}
 	</div>
 	<div class="container-center">
-		<div class="container-fluid" id="main">{% block message %}{% endblock %}{% block main %}{% endblock %}</div>
+		<div class="container-fluid" id="main">
+			{% block messages %}
+				{% if app.session.hasFlash('error') %}
+					<div class="alert alert-error">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('error') }}
+					</div>
+				{% endif %}
+				{% if app.session.hasFlash('warning') %}
+					<div class="alert">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('warning') }}
+					</div>
+				{% endif %}
+				{% if app.session.hasFlash('success') %}
+					<div class="alert alert-success">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('success') }}
+					</div>
+				{% endif %}
+				{% if app.session.hasFlash('info') %}
+					<div class="alert alert-info">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('info') }}
+					</div>
+				{% endif %}
+			{% endblock %}
+			{% block main %}{% endblock %}
+		</div>
 	</div>
 	<script src="{{ asset('bundles/bootstrap/js/jquery.min.js') }}"></script>
 	<script src="{{ asset('bundles/bootstrap/js/bootstrap.min.js') }}"></script>
