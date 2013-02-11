@@ -31,7 +31,7 @@ class Type extends Object
     /**
      * @var string
      *
-     * @ORM\Column(name="classname", type="string", length=255)
+     * @ORM\Column(name="classname", type="string", length=255, nullable=true)
      */
     private $classname;
 
@@ -91,4 +91,17 @@ class Type extends Object
     {
         return $this->classname;
     }
+	
+	public function getControllerPath(){
+
+		$path = '';
+		if(!$this->classname){
+			//@TODO : récupérer le controller du parent
+		}else{
+			$array = explode('\\',$this->classname);
+			$path = $array[count($array)-3].':'.$array[count($array)-1];
+		}
+		return $path;
+		
+	}
 }

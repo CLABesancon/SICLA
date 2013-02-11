@@ -41,7 +41,7 @@ class DefaultController extends Controller {
 				$object = $last_version->getObject();
 				$type = $object->getType();
 				
-				$response = $this->forward($object->getControllerPath().':view', array(
+				$response = $this->forward($type->getControllerPath().':view', array(
 					'node'		=>$node,
 					'object'	=>$object,
 					'type'		=>$type,

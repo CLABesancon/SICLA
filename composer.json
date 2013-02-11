@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "1.0.*",
 		"doctrine/data-fixtures":"dev-master",
 		"doctrine/doctrine-fixtures-bundle":"dev-master",
+		"gedmo/doctrine-extensions":"dev-master",
         "twig/extensions": "1.0.*@dev",
         "symfony/assetic-bundle": "2.1.*",
         "symfony/swiftmailer-bundle": "2.1.*",

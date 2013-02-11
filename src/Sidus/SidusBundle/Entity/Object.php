@@ -107,21 +107,5 @@ class Object {
 		return $this->getTitle();
 	}
 	
-	public function getControllerPath(){
-		/* @TODO : controller path via l'objet (a mettre dans le repo)
-		 * Le controller path doit dépendre du type de l'objet, et prendre en compte l'arborescence des types
-		 * Si le type de l'objet n'a pas de controller défini, on prend celui du parent, récursivement
-		 * Si on en trouve finalement pas, on prend le controller par défaut (page? folder? autre?)
-		 */
-		
-		
-		$path_class = get_class($this); //--> retourne bien la classe de l'objet! (ex : Sidus\SidusBundle\Entity\Page)
-		$array = explode('\\',$path_class);
-		
-		$class= $array[count($array)-1];
-		$bundle = $array[count($array)-3];
-		
-		return $bundle.':'.$class;
-		
-	}
+	
 }
