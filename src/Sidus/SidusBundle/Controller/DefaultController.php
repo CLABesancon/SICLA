@@ -8,7 +8,12 @@ class DefaultController extends Controller {
 
 	public function homeAction() {
 		// A récupérer : node 'root' (nodename);
-		return $this->render('SidusBundle:Default:home.html.twig');
+		$em = $this->getDoctrine()->getManager();
+		$node = $em->getRepository('SidusBundle:Node')->find(1);
+		if (!$node) {
+			return $this->forward('SidusBundle:Default:notFound');
+		}
+		return $this->render('SidusBundle:Default:home.html.twig', array('node' => $node));
 	}
 
 	public function notFoundAction() {

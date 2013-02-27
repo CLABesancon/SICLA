@@ -1,0 +1,37 @@
+services:
+    sidus.navbar:
+        class: %mopa_bootstrap.navbar.generic%
+        arguments:
+            # first argument: a named array of menues:
+            - { leftmenu: "@sidus.menu=", rightmenu: "@sidus.dropdown=" }
+            # second argument: a named array of FormType Classes
+            - { searchform: Sidus\SidusBundle\Form\Type\SearchFormType }
+            # third argument: a named array of options
+            - { title: "BootstrapSandbox", titleRoute: "sidus_welcome", fixedTop: true, isFluid: false, inverse: true }
+        tags:
+            # The alias is used to retrieve the navbar in templates
+            - { name: sidus.navbar, alias: frontendNavbar }
+
+    sidus.navbarssubnavbar:
+        class: %mopa_bootstrap.navbar.generic%
+        arguments:
+            # first argument: a named array of menues:
+            - { menu: "@sidus.navbarsubnavmenu=" }
+            - {}
+            # third argument: a named array of options
+            - { fixedTop: true, isFluid: true, template: MopaBootstrapBundle:Navbar:subnavbar.html.twig }
+        tags:
+            # The alias is used to retrieve the navbar in templates
+            - { name: sidus.navbar, alias: navbarsSubNavbar }
+
+    sidus.componentssubnavbar:
+        class: %mopa_bootstrap.navbar.generic%
+        arguments:
+            # first argument: a named array of menues:
+            - { menu: "@sidus.componentssubnavmenu=" }
+            - {}
+            # third argument: a named array of options
+            - { fixedTop: true, isFluid: true, template: MopaBootstrapBundle:Navbar:subnavbar.html.twig }
+        tags:
+            # The alias is used to retrieve the navbar in templates
+            - { name: sidus.navbar, alias: componentsSubNavbar }
