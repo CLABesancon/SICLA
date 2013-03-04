@@ -59,10 +59,9 @@
 		{% endfor %}
 		<thead>
 			<tr>
-				<th>#</th>
+				<th><input type="checkbox" class="radio-condensed"/> #</th>
 				<th>Name</th>
 				<th>Type</th>
-				<th class="visible-desktop">Versions</th>
 				<th class="hidden-phone">Creation</th>
 				<th class="visible-desktop">Modification</th>
 				<th class="hidden-phone">Owner</th>
@@ -75,28 +74,6 @@
 				<td><input type="checkbox" class="radio-condensed"/> {{i}}</td>
 				<td><a href="#">Lorem ipsum</a></td>
 				<td>Page</td>
-				<td class="visible-desktop">
-					<div class="btn-toolbar actions-condensed">
-						<div class="btn-group">
-							<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
-								<i class="flag-english"></i> <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu pull-right">
-								<li><a href="#">#3 - 2012-05-13 15:48</a></li>
-								<li><a href="#">#2 - 2012-05-13 10:02</a></li>
-								<li><a href="#">#1 - 2012-05-12 21:35</a></li>
-							</ul>
-						</div>
-						<div class="btn-group">
-							<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
-								<i class="flag-french"></i> <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu pull-right">
-								<li><a href="#">#1 - 2012-05-13 15:20</a></li>
-							</ul>
-						</div>
-					</div>
-				</td>
 				<td class="hidden-phone"><time datetime="2012-05-12T21:35+01:00">12/05/2012<span class="hidden-tablet"> 21:35</span></time></td>
 				<td class="visible-desktop"><time datetime="2012-05-13T15:48+01:00">13/05/2012<span class="hidden-tablet"> 15:48</span></time></td>
 				<td class="hidden-phone">Admin</td>

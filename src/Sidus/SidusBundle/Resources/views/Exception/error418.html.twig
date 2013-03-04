@@ -1,0 +1,20 @@
+{% extends 'SidusBundle::base.html.twig' %}
+
+{% block message %}
+	<div class="alert alert-error alert-block">
+	  <h1>{{ status_code }} ERROR <small>Oups, this was not supposed to happen.</small></h1>
+	  <p>{{ status_text }}</p>
+	</div>
+{% endblock %}
+
+{% block container_west %}
+{% endblock %}
+
+{% block container_east %}
+{% endblock %}
+
+{% block main %}
+	<div class="well">
+		<p><a href="#" onclick="history.go(-1);return false;" class="btn btn-info">Go back</a> <a href="/" class="btn">Home</a> <a href="#" class="btn btn-warning pull-right">Report bug</a></p>
+	</div>
+{% endblock %}

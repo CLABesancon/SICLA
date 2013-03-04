@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
+	<meta charset="{{ _charset }}">
 	<title>{% block title %}Sidus{% endblock %}</title>
 	{% block metas %}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +9,13 @@
 		<meta name="author" content="">
 		<link rel="shortcut icon" href="{{ asset('bundles/sidus/favicon.png') }}">
 	{% endblock %}
-	<link href="{{ asset('bundles/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('bundles/bootstrap/css/font-awesome.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('bundles/bootstrap/css/country-flags.css') }}" rel="stylesheet">
-	<link href="{{ asset('bundles/sidus/css/custom.css') }}" rel="stylesheet">
+	{% stylesheets filter='cssrewrite,lessphp,?yui_css'
+		'@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+		'bundles/font-awesome/less/font-awesome.less'
+		'@SidusBundle/Resources/public/css/*'
+	%}
+	   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="all" />
+	{% endstylesheets %}
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,9 +36,10 @@
 			{% endblock %}
 			{% block breadcrumb %}
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a> <span class="divider">/</span></li>
-					<li><a href="#">Library</a> <span class="divider">/</span></li>
-					<li class="active">Data</li>
+					{% for ascendant in node.ascendants %}
+						<li><a href="{{ ascendant.url }}">{{ ascendant }} <span class="divider">/</span></a></li>
+					{% endfor %}
+					<li class="active">{{ node }}</li>
 				</ul>
 			{% endblock %}
 			{% block myself %}
@@ -133,9 +137,38 @@
 		{% endblock %}
 	</div>
 	<div class="container-center">
-		<div class="container-fluid" id="main">{% block message %}{% endblock %}{% block main %}{% endblock %}</div>
+		<div class="container-fluid" id="main">
+			{% block messages %}
+				{% if app.session.hasFlash('error') %}
+					<div class="alert alert-error">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('error') }}
+					</div>
+				{% endif %}
+				{% if app.session.hasFlash('warning') %}
+					<div class="alert">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('warning') }}
+					</div>
+				{% endif %}
+				{% if app.session.hasFlash('success') %}
+					<div class="alert alert-success">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('success') }}
+					</div>
+				{% endif %}
+				{% if app.session.hasFlash('info') %}
+					<div class="alert alert-info">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('info') }}
+					</div>
+				{% endif %}
+			{% endblock %}
+			{% block main %}{% endblock %}
+		</div>
 	</div>
-	<script src="{{ asset('bundles/bootstrap/js/jquery.min.js') }}"></script>
-	<script src="{{ asset('bundles/bootstrap/js/bootstrap.min.js') }}"></script>
+	{% javascripts '@MopaBootstrapBundle/Resources/public/js/*' %}
+		<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
 </body>
 </html>
