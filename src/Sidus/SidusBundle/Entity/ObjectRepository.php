@@ -12,5 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ObjectRepository extends EntityRepository
 {
-
+    public function getObjectWithType(){
+        
+    }
 }

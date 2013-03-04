@@ -81,3 +81,13 @@ mopa_bootstrap:
             wt: 'xxx'
             analytics: 'UA-xxxxxxx-xx'
         diagnostic_mode: true
+        
+services:
+  twig.extension.sidus_date:
+    class: Sidus\SidusBundle\Twig\DateExtension
+    tags:
+      - {name: 'twig.extension'} 
+  twig.extension.debug:
+    class: Twig_Extension_Debug
+    tags:
+      - {name: 'twig.extension'}

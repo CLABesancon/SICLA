@@ -8,9 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class FolderController extends Controller {
 	
 	public function viewAction($node,$object,$version){
-		
-		$em = $this->getDoctrine()->getManager();
-		
-		return $this->render('SidusBundle:Folder:view.html.twig',array('node'=>$node));
+            $em = $this->getDoctrine()->getManager();
+            return $this->render('SidusBundle:Folder:view.html.twig',array(
+                'node'=>$node,
+                'object'=>$object,
+                ));
 	}
 }

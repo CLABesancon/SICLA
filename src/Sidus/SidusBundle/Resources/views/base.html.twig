@@ -37,9 +37,9 @@
 			{% block breadcrumb %}
 				<ul class="breadcrumb">
 					{% for ascendant in node.ascendants %}
-						<li><a href="{{ ascendant.url }}">{{ ascendant }} <span class="divider">/</span></a></li>
-					{% endfor %}
-					<li class="active">{{ node }}</li>
+						<li><a href="{{ ascendant.id }}">{{ ascendant.nodename }} <span class="divider">/</span></a></li>
+                                        {% endfor %}
+					<li class="active">{{ object.title }}</li>
 				</ul>
 			{% endblock %}
 			{% block myself %}
@@ -126,9 +126,9 @@
 					</div>
 				{% endblock %}
 				<p class="node-infos-line">
-					<big class="node-title">Node's name</big><br class="hidden-phone"/><span class="visible-phone"> | </span>
-					<span class="text-info">Type: <b>Folder</b></span><br class="hidden-phone"/><span class="visible-phone"> | </span>
-					<small class="muted">Created by <a href="#">Vincent</a> 2 hours ago</small>
+					<big class="node-title">{{object.title}}</big><br class="hidden-phone"/><span class="visible-phone"> | </span>
+					<span class="text-info">Type: <b>{{object.type.typename}}</b></span><br class="hidden-phone"/><span class="visible-phone"> | </span>
+					<small class="muted">Created by <a href="{{path('sidus_node',{'id_node':node.createdby.id})}}">{{node.createdby.username}}</a> {{node.createdat|datediff()}}</small>
 				</p>
 				<div class="hidden-phone">
 					<p class="center"><i class="icon-folder-open img-polaroid" style="font-size:100px;"></i></p>

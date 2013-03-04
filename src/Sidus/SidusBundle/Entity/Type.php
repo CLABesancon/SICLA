@@ -31,9 +31,9 @@ class Type extends Object
     /**
      * @var string
      *
-     * @ORM\Column(name="classname", type="string", length=255, nullable=true)
+     * @ORM\Column(name="controller", type="string", length=255, nullable=true)
      */
-    private $classname;
+    private $controller;
 
 
     /**
@@ -70,38 +70,25 @@ class Type extends Object
     }
 
     /**
-     * Set classname
+     * Set controller
      *
-     * @param string $classname
+     * @param string $controller
      * @return Type
      */
-    public function setClassname($classname)
+    public function setController($controller)
     {
-        $this->classname = $classname;
+        $this->controller = $controller;
     
         return $this;
     }
 
     /**
-     * Get classname
+     * Get controller
      *
      * @return string 
      */
-    public function getClassname()
+    public function getController()
     {
-        return $this->classname;
+        return $this->controller;
     }
-	
-	public function getControllerPath(){
-
-		$path = '';
-		if(!$this->classname){
-			//@TODO : récupérer le controller du parent
-		}else{
-			$array = explode('\\',$this->classname);
-			$path = $array[count($array)-3].':'.$array[count($array)-1];
-		}
-		return $path;
-		
-	}
 }
