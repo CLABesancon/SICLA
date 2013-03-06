@@ -36,7 +36,7 @@ class DefaultController extends Controller {
             return $this->forward('SidusBundle:Default:notFound');
         }
         
-        //@TODO : Get permissions from ascendants and compile
+        //@TODO : Get permissions from ascendants (if necessary) and compile
         
         $versions = $em->getRepository('SidusBundle:Version')->findAllLastVersions($node);
 
@@ -58,22 +58,23 @@ class DefaultController extends Controller {
         }
 
         $node->setCurrentVersion($languages[$lang]);
-
-        //@TODO : récupérer les nodes parentes, avec version + objet associés a chacune
-        //$ascendants = $em->getRepository('SidusBundle:node')->getAscendants($node,$node->getCurrentVersion());
+		
+		$ascendants=$em->getRepository('SidusBundle:Node')->getPath($node);
+        //@TODO : récupérer les ascendant avec version + objet associés à chacune
+		//->overwrite Gedmo\Tree\Entity\Repository\NestedTreeRepository getPathQueryBuilder($node)
         
         
-        //@TODO : récupérer l'objet ET son type en une seule requête (Repo) 
+        
+        //@TODO : récupérer l'objet ET son type en une seule requête (Depuis quel repo ?) 
         $object = $node->getCurrentVersion()->getObject();
 
-        $response = $this->forward($object->getType()->getController() . ':view', array(
+        return $response = $this->forward($object->getType()->getController() . ':view', array(
             'node' => $node,
-            //'ascendants' => $ascendants,
+            'ascendants' => $ascendants,
             'object' => $object,
             'version' => $node->getCurrentVersion(),
         ));
 
-        return $response;
     }
 
     /**

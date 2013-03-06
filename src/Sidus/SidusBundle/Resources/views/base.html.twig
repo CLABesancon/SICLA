@@ -34,12 +34,12 @@
 					<input type="submit" class="hide">
 				</form>
 			{% endblock %}
+			
 			{% block breadcrumb %}
 				<ul class="breadcrumb">
-					{% for ascendant in node.ascendants %}
+					{% for ascendant in ascendants %}
 						<li><a href="{{ ascendant.id }}">{{ ascendant.nodename }} <span class="divider">/</span></a></li>
-                                        {% endfor %}
-					<li class="active">{{ object.title }}</li>
+					{% endfor %}
 				</ul>
 			{% endblock %}
 			{% block myself %}

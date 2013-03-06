@@ -2,12 +2,14 @@
 
 namespace Sidus\SidusBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Node
  *
+ * @Gedmo\Tree(type="nested")
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\NodeRepository")
  */
@@ -64,11 +66,13 @@ class Node {
      * @var Node[]
      * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Node", mappedBy="parent", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @ORM\OrderBy({"lft" = "ASC"})
      */
     private $children;
 
     /**
      * @var Node
+     * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="children", cascade={"persist"})
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      */
@@ -93,7 +97,36 @@ class Node {
      * @var Version
      */
     protected $current_version;
+    
+    /**
+     * Nested Tree configuration
+     */
+    
+    /**
+    * @Gedmo\TreeLeft
+    * @ORM\Column(name="lft", type="integer")
+    */
+   private $lft;
 
+   /**
+    * @Gedmo\TreeRight
+    * @ORM\Column(name="rgt", type="integer")
+    */
+   private $rgt;
+
+   /**
+    * @Gedmo\TreeLevel
+    * @ORM\Column(name="lvl", type="integer")
+    */
+   private $lvl;
+
+   /**
+    * @Gedmo\TreeRoot
+    * @ORM\Column(name="root", type="integer", nullable=true)
+    */
+   private $root;
+
+    
     /**
      * Constructor
      */
