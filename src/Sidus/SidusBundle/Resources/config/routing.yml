@@ -1,22 +1,23 @@
 
-sidus_homepage:
-  pattern:  /
-  defaults: { _controller: SidusBundle:Default:home }
+#sidus_homepage:
+#  pattern:  /
+#  defaults: { _controller: SidusBundle:Default:home }
 
 
-sidus_node_lang:
-  pattern:  /{_locale}/{id_node}
-  defaults: { _controller: SidusBundle:Default:view, id_node:1 }
-  requirements:
-    id_node: \d*
-    _locale: ([a-zA-Z]{2})
+#sidus_node_lang:
+#  pattern:  /{_locale}/{id_node}
+#  defaults: { _controller: SidusBundle:Default:view, id_node:1 }
+#  requirements:
+#    id_node: \d*
+#    _locale: ([a-zA-Z]{2})
     
 sidus_node:
   pattern:  /{id_node}
-  defaults: { _controller: SidusBundle:Default:view, id_node:1 }
+  defaults: { _controller: SidusBundle:Default:view, id_node: 1 }
   requirements:
     id_node: \d*
-    
+#@TODO si l'id de la node n'est pas donné -> erreur -> id_node ne s'initialise pas a 1. Problème temporairement réglé dans le controller
+
 sidus_user:
   pattern: /users/{id}
   defaults: { _controller: SidusBundle:User:form }

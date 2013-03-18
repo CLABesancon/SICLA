@@ -25,8 +25,8 @@ class Node {
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node")
+     * @ORM\JoinColumn()
      * @Assert\NotBlank()
      */
     private $createdBy;
@@ -47,8 +47,8 @@ class Node {
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node")
+     * @ORM\JoinColumn()
      * @Assert\NotBlank()
      */
     private $modifiedBy;

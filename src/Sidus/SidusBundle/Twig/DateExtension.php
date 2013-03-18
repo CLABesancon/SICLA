@@ -42,9 +42,9 @@ class DateExtension extends \Twig_Extension{
 						return $interval->format('%h hours ago');
 					}
 				}elseif($interval->d == 1){
-					return $interval->format('%h day ago');
+					return $interval->format('%d day ago');
 				}else{
-					return $interval->format('%h days ago');
+					return $interval->format('%d days ago');
 				}
 			}elseif($interval->m == 1){
 				return $interval->format('%m month ago');

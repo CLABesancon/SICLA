@@ -37,9 +37,11 @@
 			
 			{% block breadcrumb %}
 				<ul class="breadcrumb">
+					{% if ascendants is defined %}
 					{% for ascendant in ascendants %}
-						<li><a href="{{ ascendant.id }}">{{ ascendant.nodename }} <span class="divider">/</span></a></li>
+						<li><a href="{{ path('sidus_node', {'id_node':ascendant.id}) }}">{{ ascendant.nodename }} <span class="divider">/</span></a></li>
 					{% endfor %}
+					{% endif %}
 				</ul>
 			{% endblock %}
 			{% block myself %}
@@ -100,8 +102,8 @@
 				{% block nodeMenu %}
 					<div class="btn-toolbar" id="menu-node">
 						<div class="btn-group">
-							<button class="btn" title="Add element"><i class="icon-plus"></i></button>
-							<button class="btn" title="Edit"><i class="icon-pencil"></i></button>
+							<a href="{{ path('sidus_node', {'id_node':node.id}) }}?add" class="btn" title="Add element"><i class="icon-plus"></i></a>
+							<a href="{{ path('sidus_node', {'id_node':node.id}) }}?edit" class="btn" title="Edit"><i class="icon-pencil"></i></a>
 							<button class="btn" title="Add to favorites"><i class="icon-star-empty"></i></button>
 							<button class="btn" title="Print"><i class="icon-print"></i></button>
 							<button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -128,7 +130,7 @@
 				<p class="node-infos-line">
 					<big class="node-title">{{object.title}}</big><br class="hidden-phone"/><span class="visible-phone"> | </span>
 					<span class="text-info">Type: <b>{{object.type.typename}}</b></span><br class="hidden-phone"/><span class="visible-phone"> | </span>
-					<small class="muted">Created by <a href="{{path('sidus_node',{'id_node':node.createdby.id})}}">{{node.createdby.username}}</a> {{node.createdat|datediff()}}</small>
+					<small class="muted">Created by <a href="{{ path('sidus_node', {'id_node':node.createdby.id}) }}">{{node.createdby.nodename}}-user</a> {{node.createdat|datediff()}}</small>
 				</p>
 				<div class="hidden-phone">
 					<p class="center"><i class="icon-folder-open img-polaroid" style="font-size:100px;"></i></p>
