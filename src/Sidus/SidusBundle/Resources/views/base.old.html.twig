@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="{{ _charset }}">
+	<title>{% block title %}Sidus{% endblock %}</title>
+	{% block metas %}
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="{{ asset('bundles/sidus/favicon.png') }}">
+	{% endblock %}
+	{% stylesheets filter='cssrewrite,lessphp,?yui_css'
+		'@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+		'bundles/font-awesome/less/font-awesome.less'
+		'@SidusBundle/Resources/public/css/*'
+	%}
+	   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="all" />
+	{% endstylesheets %}
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="navbar navbar-fixed-top" id="navbar-top">
+		<div class="navbar-inner">
+			{% block brand %}<a class="brand" href="#">Sidus</a>{% endblock %}
+			{% block searchbar %}
+				<form class="navbar-search form-search pull-left" action="?search" method="get">
+					<div class="input-append">
+						<input type="text" name="searchtext" class="span2 search-query" placeholder="Search">
+						<button type="submit" class="btn"><i class="icon-search"></i></button>
+					</div>
+					<input type="submit" class="hide">
+				</form>
+			{% endblock %}
+			{% block breadcrumb %}
+				<ul class="breadcrumb">
+					{% for ascendant in node.ascendants %}
+						<li><a href="{{ ascendant.url }}">{{ ascendant }} <span class="divider">/</span></a></li>
+					{% endfor %}
+					<li class="active">{{ node }}</li>
+				</ul>
+			{% endblock %}
+			{% block myself %}
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="hidden-phone">Vincent Chalnot</span><i class="icon-cog hidden-tablet hidden-desktop"></i><b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#"><i class="icon-home"></i> Profile</a></li>
+							<li><a href="#"><i class="icon-cog"></i> Preferences</a></li>
+							<li class="divider"></li>
+							<li><a href="#"><i class="icon-off"></i> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			{% endblock %}
+		</div>
+	</div>
+	<div class="container-west">
+		{% block container_west %}
+			<div class="container-fluid">
+				<a class="close close-container" href="#">&times;</a>
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#">Siblings</a>
+					</li>
+					<li><a href="#">Favorites</a></li>
+				</ul>
+				<ul class="nav nav-tabs nav-stacked">
+					<li><a href="#">Members</a></li>
+					<li><a href="#">Groups</a></li>
+					<li><a href="#">Productions</a></li>
+					<li><a href="#">Archives</a></li>
+					<li><a href="#">Shootings</a></li>
+					<li><a href="#">Association</a></li>
+					<li><a href="#">Members</a></li>
+					<li><a href="#">Groups</a></li>
+					<li><a href="#">Productions</a></li>
+					<li><a href="#">Archives</a></li>
+					<li><a href="#">Shootings</a></li>
+					<li><a href="#">Association</a></li>
+				</ul>
+				<div class="pagination pagination-centered pagination-mini">
+					<ul>
+						<li class="active"><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li class="disabled"><a href="#">&hellip;</a></li>
+						<li><a href="#">12</a></li>
+					</ul>
+				</div>
+			</div>
+		{% endblock %}
+	</div>
+	<div class="container-east">
+		{% block container_east %}
+			<div class="container-fluid">
+				{% block nodeMenu %}
+					<div class="btn-toolbar" id="menu-node">
+						<div class="btn-group">
+							<button class="btn" title="Add element"><i class="icon-plus"></i></button>
+							<button class="btn" title="Edit"><i class="icon-pencil"></i></button>
+							<button class="btn" title="Add to favorites"><i class="icon-star-empty"></i></button>
+							<button class="btn" title="Print"><i class="icon-print"></i></button>
+							<button class="btn dropdown-toggle" data-toggle="dropdown">
+								<i class="icon-wrench"></i> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu pull-right">
+								<li><a href="#"><i class="icon-arrow-right"></i> Move</a></li>
+								<li><a href="#"><i class="icon-share-alt"></i> Link</a></li>
+								<li><a href="#"><i class="icon-copy"></i> Copy</a></li>
+								<li><a href="#"><i class="icon-lock"></i> Permissions</a></li>
+								<li class="divider"></li>
+								<li class="disabled"><a href="#"><i class="flag-english flag-white"></i> English version</a></li>
+								<li><a href="#"><i class="flag-french"></i> French version</a></li>
+								<li><a href="#"><i class="icon-flag"></i> Localize</a></li>
+								<li class="divider"></li>
+								<li><a href="#"><i class="icon-list"></i> History</a></li>
+								<li><a href="#"><i class="icon-signal"></i> Feed</a></li>
+								<li class="divider"></li>
+								<li class="disabled"><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
+							</ul>
+						</div>
+					</div>
+				{% endblock %}
+				<p class="node-infos-line">
+					<big class="node-title">Node's name</big><br class="hidden-phone"/><span class="visible-phone"> | </span>
+					<span class="text-info">Type: <b>Folder</b></span><br class="hidden-phone"/><span class="visible-phone"> | </span>
+					<small class="muted">Created by <a href="#">Vincent</a> 2 hours ago</small>
+				</p>
+				<div class="hidden-phone">
+					<p class="center"><i class="icon-folder-open img-polaroid" style="font-size:100px;"></i></p>
+				</div>
+			</div>
+		{% endblock %}
+	</div>
+	<div class="container-center">
+		<div class="container-fluid" id="main">
+			{% block messages %}
+				{% if app.session.hasFlash('error') %}
+					<div class="alert alert-error">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('error') }}
+					</div>
+				{% endif %}
+				{% if app.session.hasFlash('warning') %}
+					<div class="alert">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('warning') }}
+					</div>
+				{% endif %}
+				{% if app.session.hasFlash('success') %}
+					<div class="alert alert-success">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('success') }}
+					</div>
+				{% endif %}
+				{% if app.session.hasFlash('info') %}
+					<div class="alert alert-info">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  {{ app.session.flash('info') }}
+					</div>
+				{% endif %}
+			{% endblock %}
+			{% block main %}{% endblock %}
+		</div>
+	</div>
+	{% javascripts '@MopaBootstrapBundle/Resources/public/js/*' %}
+		<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+</body>
+</html>
