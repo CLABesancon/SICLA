@@ -6,15 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller {
 
-	public function homeAction() {
-		// A récupérer : node 'root' (nodename);
-		$em = $this->getDoctrine()->getManager();
-		$node = $em->getRepository('SidusBundle:Node')->find(1);
-		if (!$node) {
-			return $this->forward('SidusBundle:Default:notFound');
-		}
-		return $this->render('SidusBundle:Default:home.html.twig', array('node' => $node));
-	}
+    public function homeAction() {
+        return $this->forward('SidusBundle:Default:view',array('id_node'=>1));
+    }
 
     public function notFoundAction() {
         //@TODO traduction
@@ -78,6 +72,15 @@ class DefaultController extends Controller {
 			$action='edit';
 		}
 		
+		if (!is_null($request->query->get('add'))){
+			return $this->forward('SidusBundle:Default:add', array(
+            'node' => $node,
+            'ascendants' => $ascendants,
+			'descendants' => $descendants,
+            'object' => $object,
+        ));
+		}
+		
         return $this->forward($object->getType()->getController() . ':'.$action, array(
             'node' => $node,
             'ascendants' => $ascendants,
@@ -93,12 +96,18 @@ class DefaultController extends Controller {
                 ));
 	}
 	
-	public function addAction($node){
+	public function addAction($node,$ascendants,$descendants,$object){
 		/* @TODO récupérer la liste des types autorisés (white list) ou de tout les types moins ceux interdit (black list)
 			->Comment différencier white/black list?
 		 * afficher les icones des types ajoutables (include Resources/views/{type}/icon.html.twig
 		 * Lorsqu'on clique sur une des icones -> forward vers addAction du type en question.
 		 */
+		return $this->render('SidusBundle:Default:add.html.twig',array(
+            'node' => $node,
+            'ascendants' => $ascendants,
+			'descendants' => $descendants,
+            'object' => $object,
+        ));
 	}
 	
     /**

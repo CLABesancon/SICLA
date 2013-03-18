@@ -35,7 +35,27 @@ class Type extends Object
      */
     private $controller;
 
-
+	/**
+     * @var Type[]
+     * @ORM\ManyToMany(targetEntity="Sidus\SidusBundle\Entity\Type", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+	private $authorizedTypes;
+	
+	/**
+     * @var Type[]
+     * @ORM\ManyToMany(targetEntity="Sidus\SidusBundle\Entity\Type", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+	private $forbiddenTypes;
+	
+	
+	public function __construct() {
+		parent::__construct();
+		$this->authorizedTypes = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->forbiddenTypes = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+	
     /**
      * Get id
      *
@@ -91,4 +111,29 @@ class Type extends Object
     {
         return $this->controller;
     }
+	
+	public function addAuthorizedType(Type $type){
+		$this->authorizedTypes[] = $type;
+
+        return $this;
+	}
+	public function removeAuthorizedType(Type $type){
+		 $this->authorizedTypes->removeElement($type);
+	}
+	public function getAuthorizedTypes(){
+		return $this->authorizedTypes;
+	}
+	
+	public function addForbiddenType(Type $type){
+		$this->forbiddenTypes[] = $type;
+
+        return $this;
+	}
+	public function removeForbiddenType(Type $type){
+		 $this->forbiddenTypes->removeElement($type);
+	}
+	public function getForbiddenTypes(){
+		return $this->forbiddenTypes;
+	}
+	
 }
