@@ -24,10 +24,11 @@ class AppKernel extends Kernel
 			new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 			new Craue\FormFlowBundle\CraueFormFlowBundle(),
             new Sidus\SidusBundle\SidusBundle(),
+			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-			$bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

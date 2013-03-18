@@ -1870,6 +1870,7 @@
     "stability-flags": {
         "doctrine/data-fixtures": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
+        "gedmo/doctrine-extensions": 20,
         "twig/extensions": 20,
         "kriswallsmith/assetic": 20,
         "mopa/bootstrap-bundle": 20,

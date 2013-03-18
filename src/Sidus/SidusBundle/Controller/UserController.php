@@ -14,6 +14,43 @@ use Sidus\SidusBundle\Form\UserType;
  */
 class UserController extends Controller
 {
+	public function viewAction($node,$ascendants,$descendants,$object){
+            $em = $this->getDoctrine()->getManager();
+            return $this->render('SidusBundle:User:view.html.twig',array(
+                'node'=>$node,
+				'ascendants'=>$ascendants,
+				'descendants' => $descendants,
+                'object'=>$object,
+                ));
+	}
+	
+	public function editAction($node,$ascendants,$descendants,$object,Request $request){
+			$form=$this->createForm(new UserType(), $object);
+			$em=$this->getDoctrine()->getEntityManager();
+			
+			if($request->isMethod('POST')){
+				$form->bind($request);
+				if ($form->isValid()){
+					//@TODO version
+					$em->persist($object);
+					$em->flush();
+					return $this->forward('SidusBundle:User:view', array(
+						'node'=>$node,
+						'ascendants'=>$ascendants,
+						'descendants' => $descendants,
+						'object'=>$object,
+					));
+				}
+			}
+			          
+            return $this->render('SidusBundle:User:edit.html.twig',array(
+                'form'=>$form->createView(),
+				'node'=>$node,
+				'ascendants'=>$ascendants,
+                'object'=>$object,
+                ));
+	}
+	
     /**
      * Lists all User entities.
      *
@@ -93,25 +130,25 @@ class UserController extends Controller
      * Displays a form to edit an existing User entity.
      *
      */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('SidusBundle:User')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        $editForm = $this->createForm(new UserType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('SidusBundle:User:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
+//    public function editAction($id)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $entity = $em->getRepository('SidusBundle:User')->find($id);
+//
+//        if (!$entity) {
+//            throw $this->createNotFoundException('Unable to find User entity.');
+//        }
+//
+//        $editForm = $this->createForm(new UserType(), $entity);
+//        $deleteForm = $this->createDeleteForm($id);
+//
+//        return $this->render('SidusBundle:User:edit.html.twig', array(
+//            'entity'      => $entity,
+//            'edit_form'   => $editForm->createView(),
+//            'delete_form' => $deleteForm->createView(),
+//        ));
+//    }
 
     /**
      * Edits an existing User entity.

@@ -55,7 +55,17 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+          default:
+            auto_mapping: true
+            mappings:
+               gedmo_tree:
+                type: annotation
+                prefix: Gedmo\Tree\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                alias: GedmoTree
+                is_bundle: false
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -81,3 +91,20 @@ mopa_bootstrap:
             wt: 'xxx'
             analytics: 'UA-xxxxxxx-xx'
         diagnostic_mode: true
+        
+services:
+  twig.extension.sidus_date:
+    class: Sidus\SidusBundle\Twig\DateExtension
+    tags:
+      - {name: 'twig.extension'} 
+  twig.extension.debug:
+    class: Twig_Extension_Debug
+    tags:
+      - {name: 'twig.extension'}
+      
+# Doctrines Extensions Configuration
+stof_doctrine_extensions:
+  default_locale: fr_FR
+  orm:
+    default:
+      tree: true

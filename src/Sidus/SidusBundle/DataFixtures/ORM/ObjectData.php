@@ -4,9 +4,6 @@ namespace Sidus\SidusBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sidus\SidusBundle\Entity\Node;
-use Sidus\SidusBundle\Entity\Version;
-use Sidus\SidusBundle\Entity\Object;
 use Sidus\SidusBundle\Entity\User;
 use Sidus\SidusBundle\Entity\Page;
 use Sidus\SidusBundle\Entity\Folder;
@@ -20,19 +17,29 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface {
 		//Type "Type"
 		$object_type = new Type();
 		$object_type->setTitle('Type Type');
-		$object_type->setClassname('SidusBundle\\Entity\\Type');
+		$object_type->setController('SidusBundle:Type');
 		$object_type->setTypename('Type');
 		$object_type->setType($object_type);
 		$manager->persist($object_type);
 		$this->addReference('object-type-type',$object_type);
 		
+                //Type "Root"
+                $object_type_root = new Type();
+                $object_type_root->setType($object_type);
+		$object_type_root->setTitle('Type Root');
+		$object_type_root->setController('SidusBundle:Folder');
+		$object_type_root->setTypename('Root');
+		$object_type_root->setType($object_type);
+		$manager->persist($object_type_root);
+		$this->addReference('object-type-root',$object_type_root);
+                
 		//Other Types
-		$types = array('User','Root','Page','Folder');	
+		$types = array('User','Page','Folder');	
 		foreach ($types as $type) {
 			$object = new Type();
 			$object->setType($object_type);
 			$object->setTitle('Type '.$type);
-			$object->setClassname('SidusBundle\\Entity\\'.$type);
+			$object->setController('SidusBundle:'.$type);
 			$object->setTypename($type);
 			$manager->persist($object);
 			$this->addReference('object-type-'.strtolower($type),$object);
