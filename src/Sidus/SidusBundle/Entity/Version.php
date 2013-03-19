@@ -77,7 +77,7 @@ class Version {
 	 * @return Version
 	 */
 	public function setRevision_Date($revision_date) {
-		$this->revisionDate = $revision_date;
+		$this->revision_date = $revision_date;
 
 		return $this;
 	}
@@ -88,7 +88,7 @@ class Version {
 	 * @return \DateTime 
 	 */
 	public function getRevision_Date() {
-		return $this->revisionDate;
+		return $this->revision_date;
 	}
 	
 	 /**

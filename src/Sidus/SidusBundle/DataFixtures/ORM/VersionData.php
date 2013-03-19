@@ -24,7 +24,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_root->setObject($this->getReference('object-root'));
 		$version_root->setLang('en');
 		$version_root->setRevision(1);
-		$version_root->setRevisionDate($now);
+		$version_root->setRevision_Date($now);
 		$version_root->setRevisionBy($user);
 		$manager->persist($version_root);
 		
@@ -34,7 +34,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_users->setObject($this->getReference('object-users'));
 		$version_users->setLang('en');
 		$version_users->setRevision(1);
-		$version_users->setRevisionDate($now);
+		$version_users->setRevision_Date($now);
 		$version_users->setRevisionBy($user);
 		$manager->persist($version_users);
 		
@@ -44,7 +44,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_user->setObject($this->getReference('object-user'));
 		$version_user->setLang('en');
 		$version_user->setRevision(1);
-		$version_user->setRevisionDate($now);
+		$version_user->setRevision_Date($now);
 		$version_user->setRevisionBy($user);
 		$manager->persist($version_user);
 		
@@ -54,7 +54,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_types->setObject($this->getReference('object-types'));
 		$version_types->setLang('en');
 		$version_types->setRevision(1);
-		$version_types->setRevisionDate($now);
+		$version_types->setRevision_Date($now);
 		$version_types->setRevisionBy($user);
 		$manager->persist($version_types);
 		
@@ -64,7 +64,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_type->setObject($this->getReference('object-type-type'));
 		$version_type->setLang('en');
 		$version_type->setRevision(1);
-		$version_type->setRevisionDate($now);
+		$version_type->setRevision_Date($now);
 		$version_type->setRevisionBy($user);
 		$manager->persist($version_type);
 		
@@ -76,7 +76,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 			$version->setObject($this->getReference('object-type-'.strtolower($type)));
 			$version->setLang('en');
 			$version->setRevision(1);
-			$version->setRevisionDate($now);
+			$version->setRevision_Date($now);
 			$version->setRevisionBy($user);
 			$manager->persist($version);
 		}
