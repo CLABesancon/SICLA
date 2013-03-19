@@ -53,6 +53,13 @@ class Version {
 	 * @Assert\DateTime()
 	 */
 	private $revision_date;
+	
+	    /**
+     * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node")
+     * @ORM\JoinColumn()
+     * @Assert\NotBlank()
+     */
+    private $revisionBy;
 
 	/**
 	 * Get id
@@ -66,11 +73,11 @@ class Version {
 	/**
 	 * Set revision_date
 	 *
-	 * @param \DateTime $revisionDate
+	 * @param \DateTime $revision_date
 	 * @return Version
 	 */
-	public function setRevisionDate($revisionDate) {
-		$this->revision_date = $revisionDate;
+	public function setRevision_Date($revision_date) {
+		$this->revisionDate = $revision_date;
 
 		return $this;
 	}
@@ -80,10 +87,30 @@ class Version {
 	 *
 	 * @return \DateTime 
 	 */
-	public function getRevisionDate() {
-		return $this->revision_date;
+	public function getRevision_Date() {
+		return $this->revisionDate;
 	}
+	
+	 /**
+     * Set revision_by
+     *
+     * @param integer $revisionBy
+     * @return Node
+     */
+    public function setRevisionBy($revisionBy) {
+        $this->revisionBy = $revisionBy;
+        return $this;
+    }
 
+    /**
+     * Get revision_by
+     *
+     * @return integer
+     */
+    public function getRevisionBy() {
+        return $this->revisionBy;
+    }
+	
 	/**
 	 * Set lang
 	 *

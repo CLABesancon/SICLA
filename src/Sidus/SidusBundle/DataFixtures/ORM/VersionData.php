@@ -16,6 +16,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 	
 	public function load(ObjectManager $manager) {
 		$now = new \Datetime('now');
+		$user = $this->getReference('node-user');
 		
 		//Home
 		$version_root = new Version();
@@ -24,6 +25,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_root->setLang('en');
 		$version_root->setRevision(1);
 		$version_root->setRevisionDate($now);
+		$version_root->setRevisionBy($user);
 		$manager->persist($version_root);
 		
 		//Users Folder
@@ -33,6 +35,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_users->setLang('en');
 		$version_users->setRevision(1);
 		$version_users->setRevisionDate($now);
+		$version_users->setRevisionBy($user);
 		$manager->persist($version_users);
 		
 		//User Admin
@@ -42,6 +45,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_user->setLang('en');
 		$version_user->setRevision(1);
 		$version_user->setRevisionDate($now);
+		$version_user->setRevisionBy($user);
 		$manager->persist($version_user);
 		
 		//Types Folders
@@ -51,6 +55,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_types->setLang('en');
 		$version_types->setRevision(1);
 		$version_types->setRevisionDate($now);
+		$version_types->setRevisionBy($user);
 		$manager->persist($version_types);
 		
 		//Type "Type"
@@ -60,6 +65,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 		$version_type->setLang('en');
 		$version_type->setRevision(1);
 		$version_type->setRevisionDate($now);
+		$version_type->setRevisionBy($user);
 		$manager->persist($version_type);
 		
 		//Other Types
@@ -71,6 +77,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface {
 			$version->setLang('en');
 			$version->setRevision(1);
 			$version->setRevisionDate($now);
+			$version->setRevisionBy($user);
 			$manager->persist($version);
 		}
 		$manager->flush();

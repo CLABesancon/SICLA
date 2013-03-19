@@ -38,14 +38,20 @@ class Type extends Object
 	/**
      * @var Type[]
      * @ORM\ManyToMany(targetEntity="Sidus\SidusBundle\Entity\Type", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+	 * @ORM\JoinTable(name="Type_AuthorizedTypes",
+	 *	joinColumns={@ORM\JoinColumn(name="type_id", referencedColumnName="id")},
+	 *	inverseJoinColumns={@ORM\JoinColumn(name="authorized_type_id", referencedColumnName="id")}
+	 *	)
      */
 	private $authorizedTypes;
 	
 	/**
      * @var Type[]
      * @ORM\ManyToMany(targetEntity="Sidus\SidusBundle\Entity\Type", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="Type_ForbiddenTypes",
+	 *	joinColumns={@ORM\JoinColumn(name="type_id", referencedColumnName="id")},
+	 *	inverseJoinColumns={@ORM\JoinColumn(name="forbidden_type_id", referencedColumnName="id")}
+	 *	)
      */
 	private $forbiddenTypes;
 	

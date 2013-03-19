@@ -20,18 +20,21 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface {
 		$object_type->setController('SidusBundle:Type');
 		$object_type->setTypename('Type');
 		$object_type->setType($object_type);
+		$object_type->addAuthorizedType($object_type);
 		$manager->persist($object_type);
 		$this->addReference('object-type-type',$object_type);
 		
-                //Type "Root"
-                $object_type_root = new Type();
-                $object_type_root->setType($object_type);
+		//Type "Root"
+		$object_type_root = new Type();
+		$object_type_root->setType($object_type);
 		$object_type_root->setTitle('Type Root');
 		$object_type_root->setController('SidusBundle:Folder');
 		$object_type_root->setTypename('Root');
 		$object_type_root->setType($object_type);
 		$manager->persist($object_type_root);
 		$this->addReference('object-type-root',$object_type_root);
+		
+		$object_type->addForbiddenType($object_type_root);
                 
 		//Other Types
 		$types = array('User','Page','Folder');	
@@ -41,9 +44,13 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface {
 			$object->setTitle('Type '.$type);
 			$object->setController('SidusBundle:'.$type);
 			$object->setTypename($type);
+			$object->addForbiddenType($object_type_root);
 			$manager->persist($object);
 			$this->addReference('object-type-'.strtolower($type),$object);
 		}
+		
+		$object_type_root->addAuthorizedType($this->getReference('object-type-folder'));
+		$object_type_root->addAuthorizedType($this->getReference('object-type-page'));
 		
 		//Home
 		$object_root = new Page();

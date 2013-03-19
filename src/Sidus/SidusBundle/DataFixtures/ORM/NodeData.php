@@ -21,12 +21,10 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface {
 		$node_user = new Node();
 		$node_user->setNodeName('');
 		$node_user->setCreatedBy($node_user);
-		$node_user->setModifiedBy($node_user);
 		
 		$this->addReference('node-user',$node_user);
 		
 		$node_root->setCreatedBy($node_user);
-		$node_root->setModifiedBy($node_user);
 		
 		$manager->persist($node_root);
 		$manager->persist($node_user);
@@ -35,7 +33,6 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface {
 		$node_users = new Node();
 		$node_users->setNodeName('users');
 		$node_users->setCreatedBy($node_user);
-		$node_users->setModifiedBy($node_user);
 		$node_users->setParent($node_root);
 		$manager->persist($node_users);
 		$this->addReference('node-users',$node_users);
@@ -47,7 +44,6 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface {
 		$node_types = new Node();
 		$node_types->setNodeName('types');
 		$node_types->setCreatedBy($node_user);
-		$node_types->setModifiedBy($node_user);
 		$node_types->setParent($node_root);
 		$manager->persist($node_types);
 		$this->addReference('node-types',$node_types);
@@ -57,7 +53,6 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface {
 		$node_type = new Node();
 		$node_type->setNodeName('type-type');
 		$node_type->setCreatedBy($node_user);
-		$node_type->setModifiedBy($node_user);
 		$node_type->setParent($node_types);
 		$manager->persist($node_type);
 		$this->addReference('node-type-type',$node_type);
@@ -67,7 +62,6 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface {
 			$node= new Node();
 			$node->setNodeName('type-'.strtolower($type));
 			$node->setCreatedBy($node_user);
-			$node->setModifiedBy($node_user);
 			$node->setParent($node_types);
 			$manager->persist($node);
 			$this->addReference('node-type-'.strtolower($type),$node);

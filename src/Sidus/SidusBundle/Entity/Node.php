@@ -47,22 +47,6 @@ class Node {
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node")
-     * @ORM\JoinColumn()
-     * @Assert\NotBlank()
-     */
-    private $modifiedBy;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="modified_at", type="datetime")
-     * @Assert\NotBlank()
-     * @Assert\DateTime()
-     */
-    private $modifiedAt;
-
-    /**
      * @var Node[]
      * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Node", mappedBy="parent", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
@@ -207,46 +191,6 @@ class Node {
      */
     public function getCreatedAt() {
         return $this->createdAt;
-    }
-
-    /**
-     * Set modified_by
-     *
-     * @param integer $modifiedBy
-     * @return Node
-     */
-    public function setModifiedBy($modifiedBy) {
-        $this->modifiedBy = $modifiedBy;
-        return $this;
-    }
-
-    /**
-     * Get modified_by
-     *
-     * @return integer
-     */
-    public function getModifiedBy() {
-        return $this->modifiedBy;
-    }
-
-    /**
-     * Set modified_at
-     *
-     * @param \DateTime $modifiedAt
-     * @return Node
-     */
-    public function setModifiedAt($modifiedAt) {
-        $this->modifiedAt = $modifiedAt;
-        return $this;
-    }
-
-    /**
-     * Get modified_at
-     *
-     * @return \DateTime
-     */
-    public function getModifiedAt() {
-        return $this->modifiedAt;
     }
 
     /**
