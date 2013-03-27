@@ -5,6 +5,7 @@ namespace Sidus\SidusBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+
 use Sidus\SidusBundle\Entity\User;
 use Sidus\SidusBundle\Form\UserType;
 
@@ -14,6 +15,7 @@ use Sidus\SidusBundle\Form\UserType;
  */
 class UserController extends Controller
 {
+
 	public function viewAction($node,$ascendants,$descendants,$object){
             $em = $this->getDoctrine()->getManager();
             return $this->render('SidusBundle:User:view.html.twig',array(

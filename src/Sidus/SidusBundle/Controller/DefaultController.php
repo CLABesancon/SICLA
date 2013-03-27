@@ -3,8 +3,29 @@
 namespace Sidus\SidusBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\SecurityContext;
+use Sidus\SidusBundle\Entity\Node;
 
 class DefaultController extends Controller {
+	
+	public function loginAction(){
+		if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')){
+			return $this->redirect($this->generateUrl('sidus_view_node', array('id_node'=>1)));
+		}
+		$request = $this->getRequest();
+		$session = $request->getSession();
+		if($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)){
+			$error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+		}else{
+			$error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+			$session->remove(SecurityContext::AUTHENTICATION_ERROR);
+		}
+		
+		return $this->render('SidusBundle:User:login.html.twig', array(
+			'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+			'error' => $error,
+		));
+	}
 
     public function homeAction() {
         return $this->forward('SidusBundle:Default:view',array('id_node'=>1));
@@ -23,6 +44,77 @@ class DefaultController extends Controller {
     }
 
     public function viewAction($id_node) {
+		
+		$node = $this->getNode($id_node);
+				
+		
+        return $this->forward($node['object']->getType()->getController() . ':view', array(
+            'node' => $node,
+        ));
+
+    }
+	
+	public function editAction($id_node) {
+		
+		$node = $this->getNode($id_node);
+		
+		return $this->forward($node['object']->getType()->getController() . ':edit',array(
+                'node'=>$node,
+                ));
+	}
+	
+	public function chooseAction($id_node){
+		/** @TODO Lorsqu'on clique sur une des icones -> forward vers addAction du type en question.
+		 */
+		
+		$node = $this->getNode($id_node);
+		
+		$em = $this->getDoctrine()->getManager();
+		
+		$forbidden_types  = $node['object']->getType()->getForbiddenTypes();
+		$authorized_types  = $node['object']->getType()->getAuthorizedTypes();
+		
+		if(!$forbidden_types->isEmpty()){
+			$types = new \Doctrine\Common\Collections\ArrayCollection($em->getRepository('SidusBundle:Type')->findAll());
+			foreach($forbidden_types->toArray() as $type){
+				$types->removeElement($type);
+			}
+		}
+		if(!$authorized_types->isEmpty()){
+			$types = $authorized_types;
+		}
+		
+		if($this->getRequest()->isMethod('POST')){
+			// $this->getRequest()->request->keys() -> récupère le name du submit selectionner $type[0].':add', array('node' => $node,));
+			$type=$this->getRequest()->request->keys();
+			
+			$user=$em->getRepository('SidusBundle:Node')->find(11);
+			
+			$new_node = new Node();
+			$new_node->setParent($node['node']);
+			$new_node->setCreatedBy($user);
+			$new_node->setNodename('');
+			$em->persist($new_node);
+			$em->flush();
+			//Créer une nouvelle node + version + objet (et type) et forward vers edit de la node nouvellement créer)
+			
+			return $this->redirect($this->generateUrl('sidus_add_node',array(
+				'_locale'=>$node['node']->getCurrentVersion()->getLang(),
+				'id_node'=>$new_node->getId(),
+			)));
+		}
+		
+		return $this->render('SidusBundle:Default:choose.html.twig',array(
+            'node' => $node,
+			'types'=>$types,
+        ));
+	}
+	
+	
+	
+	public function getNode($id_node){
+		$em = $this->getDoctrine()->getManager();
+
 		if($id_node == ''){
 			$id_node=1;
 		}
@@ -46,8 +138,9 @@ class DefaultController extends Controller {
         foreach ($versions as $version) {
             $languages[$version->getLang()] = $version;
         }
-
-        $lang = $this->getSession()->get('lang');//Retourne NULL ('lang' not set) Utiliser directement la "Locale" ?
+		
+		
+        $lang = $this->getRequest()->getLocale();
 
         if (!in_array($lang, $languages)) {
             $lang = $this->getRequest()->getPreferredLanguage(array_keys($languages));
@@ -119,6 +212,7 @@ class DefaultController extends Controller {
         if (!$session) {
             $session = new \Symfony\Component\HttpFoundation\Session\Session;
             $session->start();
+			$session->set('lang',$this->getRequest()->getLocale());
         }
         return $session;
     }

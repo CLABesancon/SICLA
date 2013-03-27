@@ -10,12 +10,42 @@
 #  requirements:
 #    id_node: \d*
 #    _locale: ([a-zA-Z]{2})
+
+login:
+  pattern: /login
+  defaults: { _controller: SidusBundle:Default:login}
+login_check:
+  pattern: /login_check
+logout:
+  pattern: /logout
     
-sidus_node:
-  pattern:  /{id_node}
+sidus_view_node:
+  pattern:  /{_locale}/{id_node}
   defaults: { _controller: SidusBundle:Default:view}
   requirements:
     id_node: \d*
+    _locale: ^[a-z]{2}$
+    
+sidus_edit_node:
+  pattern:  /{_locale}/{id_node}/edit
+  defaults: { _controller: SidusBundle:Default:edit}
+  requirements:
+    id_node: \d*
+    _locale: ^[a-z]{2}$
+
+sidus_choose_node:
+  pattern:  /{_locale}/{id_node}/choose
+  defaults: { _controller: SidusBundle:Default:choose}
+  requirements:
+    id_node: \d*
+    _locale: ^[a-z]{2}$
+    
+sidus_add_node:
+  pattern:  /{_locale}/{id_node}/add
+  defaults: { _controller: SidusBundle:Default:add}
+  requirements:
+    id_node: \d*
+    _locale: ^[a-z]{2}$
 #@TODO si l'id de la node n'est pas donné -> erreur -> id_node ne s'initialise pas a 1. Problème temporairement réglé alarache dans le controller 
 
 #sidus_user:

@@ -4,6 +4,7 @@ namespace Sidus\SidusBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use \Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\UserRepository")
  */
-class User extends Object {
+class User extends Object implements UserInterface{
 
 	/**
 	 * @var integer
@@ -215,4 +216,12 @@ class User extends Object {
     {
         return $this->email;
     }
+
+	public function eraseCredentials() {
+		
+	}
+
+	public function getRoles() {
+		
+	}
 }
