@@ -69,19 +69,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for descendant in descendants %}
+			{% for descendant in node.descendants %}
 			<tr>
 				<td><input type="checkbox" class="radio-condensed"/> {{descendant.id}}</td>
-				<td><a href="{{ path('sidus_node',{"id_node":descendant.id}) }}">{{descendant.nodename}}</a></td>
+				<td><a href="{{ path('sidus_view_node',{"id_node":descendant.id}) }}">{{descendant.nodename}}</a></td>
 				<td>Page</td>
 				<td class="hidden-phone"><time datetime="2012-05-12T21:35+01:00">12/05/2012<span class="hidden-tablet"> 21:35</span></time></td>
 				<td class="visible-desktop"><time datetime="2012-05-13T15:48+01:00">13/05/2012<span class="hidden-tablet"> 15:48</span></time></td>
-				<td class="hidden-phone"><a href="{{ path('sidus_node',{"id_node":descendant.createdby.id}) }}">{{descendant.createdby.nodename}}-user</a></td>
+				<td class="hidden-phone"><a href="{{ path('sidus_view_node',{"id_node":descendant.createdby.id}) }}">{{descendant.createdby.nodename}}-user</a></td>
 				<td>
 					<div class="btn-toolbar actions-condensed">
 						<div class="btn-group">
-							<button class="btn btn-mini" title="View"><i class="icon-search"></i></button>
-							<button class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></button>
+							<a href="{{ path('sidus_view_node', {'id_node':descendant.id}) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>
+							<a href="{{ path('sidus_edit_node', {'id_node':descendant.id}) }}" class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></a>
 							<button class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></button>
 							<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
 								<i class="icon-wrench"></i> <span class="caret"></span>
