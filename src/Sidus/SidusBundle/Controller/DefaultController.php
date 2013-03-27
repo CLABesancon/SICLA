@@ -28,14 +28,14 @@ class DefaultController extends Controller {
 		}
         $em = $this->getDoctrine()->getManager();
 		$action = 'view';
-		
+
 		$node = $em->getRepository('SidusBundle:Node')->find($id_node);
         if (!$node) {
             return $this->forward('SidusBundle:Default:notFound');
         }
-        
+
         //@TODO : Get permissions from ascendants (if necessary) and compile
-        
+
         $versions = $em->getRepository('SidusBundle:Version')->findAllLastVersions($node);
 
         if (!$versions) {
@@ -56,22 +56,22 @@ class DefaultController extends Controller {
         }
 
         $node->setCurrentVersion($languages[$lang]);
-		
+
 		$ascendants=$em->getRepository('SidusBundle:Node')->getPath($node);
         //@TODO : récupérer les ascendants(+(createdby, modifiedby + version + node)) avec version + objet associés à chacune
 		//->overwrite Gedmo\Tree\Entity\Repository\NestedTreeRepository getPathQueryBuilder($node)
-		
+
         $descendants=$em->getRepository('SidusBundle:Node')->getChildren($node,true);
 		//@TODO :récupérer les descendants avec version + objet associés.
-		
-        //@TODO : récupérer l'objet ET son type en une seule requête (Depuis quel repo ?) 
+
+        //@TODO : récupérer l'objet ET son type en une seule requête (Depuis quel repo ?)
         $object = $node->getCurrentVersion()->getObject();
-		
+
 		$request = $this->getRequest();
 		if (!is_null($request->query->get('edit'))){
 			$action='edit';
 		}
-		
+
 		if (!is_null($request->query->get('add'))){
 			return $this->forward('SidusBundle:Default:add', array(
             'node' => $node,
@@ -80,7 +80,7 @@ class DefaultController extends Controller {
             'object' => $object,
         ));
 		}
-		
+
         return $this->forward($object->getType()->getController() . ':'.$action, array(
             'node' => $node,
             'ascendants' => $ascendants,
@@ -89,13 +89,13 @@ class DefaultController extends Controller {
         ));
 
     }
-	
+
 	public function editAction($node) {
 		return $this->render('SidusBundle:Default:edit.html.twig',array(
                 'node'=>$node,
                 ));
 	}
-	
+
 	public function addAction($node,$ascendants,$descendants,$object){
 		/* @TODO récupérer la liste des types autorisés (white list) ou de tout les types moins ceux interdit (black list)
 			->Comment différencier white/black list?
@@ -109,7 +109,7 @@ class DefaultController extends Controller {
             'object' => $object,
         ));
 	}
-	
+
     /**
      * Get the current session or create a new one
      * @return \Symfony\Component\HttpFoundation\Session\Session $session
