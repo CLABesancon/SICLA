@@ -1,8 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: "@SidusBundle/Resources/config/menu.yml" }
-    - { resource: "@SidusBundle/Resources/config/navbar.yml" }
+    - { resource: "@SidusBundle/Resources/config/config.yml" }
 
 framework:
     #esi:             ~
@@ -91,17 +90,17 @@ mopa_bootstrap:
             wt: 'xxx'
             analytics: 'UA-xxxxxxx-xx'
         diagnostic_mode: true
-        
+
 services:
   twig.extension.sidus_date:
     class: Sidus\SidusBundle\Twig\DateExtension
     tags:
-      - {name: 'twig.extension'} 
+      - {name: 'twig.extension'}
   twig.extension.debug:
     class: Twig_Extension_Debug
     tags:
       - {name: 'twig.extension'}
-      
+
 # Doctrines Extensions Configuration
 stof_doctrine_extensions:
   default_locale: fr_FR

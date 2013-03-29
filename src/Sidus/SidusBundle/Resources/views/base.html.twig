@@ -34,12 +34,12 @@
 					<input type="submit" class="hide">
 				</form>
 			{% endblock %}
-			
+
 			{% block breadcrumb %}
 				<ul class="breadcrumb">
 					{% if node.ascendants is defined %}
 					{% for ascendant in node.ascendants %}
-						<li><a href="{{ path('sidus_view_node', {'id_node':ascendant.id}) }}">{{ ascendant.nodename }} <span class="divider">/</span></a></li>
+						<li><a href="{{ path('sidus_show_node', {'node_id':ascendant.id}) }}">{{ ascendant.nodename }} <span class="divider">/</span></a></li>
 					{% endfor %}
 					{% endif %}
 				</ul>

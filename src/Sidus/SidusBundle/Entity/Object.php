@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Object
  *
- * @ORM\Table()
+ * @ORM\Table(name="object")
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\ObjectRepository")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
@@ -55,7 +55,7 @@ class Object {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId() {
         return $this->id;
@@ -76,7 +76,7 @@ class Object {
     /**
      * Get type
      *
-     * @return integer 
+     * @return integer
      */
     public function getType() {
         return $this->type;
@@ -97,7 +97,7 @@ class Object {
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle() {
         return $this->title;

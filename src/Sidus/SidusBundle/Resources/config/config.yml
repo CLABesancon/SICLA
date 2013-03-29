@@ -1,0 +1,4 @@
+imports:
+    - { resource: "@SidusBundle/Resources/config/services.yml" }
+    - { resource: "@SidusBundle/Resources/config/menu.yml" }
+    - { resource: "@SidusBundle/Resources/config/navbar.yml" }

@@ -16,9 +16,9 @@ use Sidus\SidusBundle\Form\UserType;
 class UserController extends Controller
 {
 
-	public function viewAction($node,$ascendants,$descendants,$object){
+	public function showAction($node,$ascendants,$descendants,$object){
             $em = $this->getDoctrine()->getManager();
-            return $this->render('SidusBundle:User:view.html.twig',array(
+            return $this->render('SidusBundle:User:show.html.twig',array(
                 'node'=>$node,
 				'ascendants'=>$ascendants,
 				'descendants' => $descendants,
@@ -36,7 +36,7 @@ class UserController extends Controller
 					//@TODO version
 					$em->persist($object);
 					$em->flush();
-					return $this->forward('SidusBundle:User:view', array(
+					return $this->forward('SidusBundle:User:show', array(
 						'node'=>$node,
 						'ascendants'=>$ascendants,
 						'descendants' => $descendants,

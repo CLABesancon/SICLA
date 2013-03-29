@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Page
  *
- * @ORM\Table()
+ * @ORM\Table(name="folder")
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\FolderRepository")
  */
 class Folder extends Object {
@@ -40,7 +40,7 @@ class Folder extends Object {
 	/**
 	 * Get id
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId() {
 		return $this->id;
@@ -61,7 +61,7 @@ class Folder extends Object {
 	/**
 	 * Get content
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getContent() {
 		return $this->content;
@@ -82,7 +82,7 @@ class Folder extends Object {
 	/**
 	 * Get tags
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getTags() {
 		return $this->tags;

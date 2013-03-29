@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Node
  *
  * @Gedmo\Tree(type="nested")
- * @ORM\Table()
+ * @ORM\Table(name="node")
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\NodeRepository")
  */
 class Node {
@@ -26,7 +26,7 @@ class Node {
 
     /**
      * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node")
-     * @ORM\JoinColumn()
+     * @ORM\JoinColumn(name="created_by")
      * @Assert\NotBlank()
      */
     private $createdBy;
@@ -81,11 +81,11 @@ class Node {
      * @var Version
      */
     protected $current_version;
-    
+
     /**
      * Nested Tree configuration
      */
-    
+
     /**
     * @Gedmo\TreeLeft
     * @ORM\Column(name="lft", type="integer")
@@ -110,7 +110,7 @@ class Node {
     */
    private $root;
 
-    
+
     /**
      * Constructor
      */
@@ -332,7 +332,7 @@ class Node {
     }
 
     public function getObject($version = null) {
-        
+
     }
 
     /**
@@ -347,4 +347,119 @@ class Node {
         }
     }
 
+
+    /**
+     * Set lft
+     *
+     * @param integer $lft
+     * @return Node
+     */
+    public function setLft($lft)
+    {
+        $this->lft = $lft;
+
+        return $this;
+    }
+
+    /**
+     * Get lft
+     *
+     * @return integer
+     */
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    /**
+     * Set rgt
+     *
+     * @param integer $rgt
+     * @return Node
+     */
+    public function setRgt($rgt)
+    {
+        $this->rgt = $rgt;
+
+        return $this;
+    }
+
+    /**
+     * Get rgt
+     *
+     * @return integer
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * Set lvl
+     *
+     * @param integer $lvl
+     * @return Node
+     */
+    public function setLvl($lvl)
+    {
+        $this->lvl = $lvl;
+
+        return $this;
+    }
+
+    /**
+     * Get lvl
+     *
+     * @return integer
+     */
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
+
+    /**
+     * Set root
+     *
+     * @param integer $root
+     * @return Node
+     */
+    public function setRoot($root)
+    {
+        $this->root = $root;
+
+        return $this;
+    }
+
+    /**
+     * Get root
+     *
+     * @return integer
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * Add children
+     *
+     * @param \Sidus\SidusBundle\Entity\Node $children
+     * @return Node
+     */
+    public function addChildren(\Sidus\SidusBundle\Entity\Node $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \Sidus\SidusBundle\Entity\Node $children
+     */
+    public function removeChildren(\Sidus\SidusBundle\Entity\Node $children)
+    {
+        $this->children->removeElement($children);
+    }
 }

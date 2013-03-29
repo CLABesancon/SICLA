@@ -72,11 +72,11 @@
 			{% for descendant in descendants %}
 			<tr>
 				<td><input type="checkbox" class="radio-condensed"/> {{descendant.id}}</td>
-				<td><a href="{{ path('sidus_node',{"id_node":descendant.id}) }}">{{descendant.nodename}}</a></td>
+				<td><a href="{{ path('sidus_node',{"node_id":descendant.id}) }}">{{descendant.nodename}}</a></td>
 				<td>Page</td>
 				<td class="hidden-phone"><time datetime="2012-05-12T21:35+01:00">12/05/2012<span class="hidden-tablet"> 21:35</span></time></td>
 				<td class="visible-desktop"><time datetime="2012-05-13T15:48+01:00">13/05/2012<span class="hidden-tablet"> 15:48</span></time></td>
-				<td class="hidden-phone"><a href="{{ path('sidus_node',{"id_node":descendant.createdby.id}) }}">{{descendant.createdby.nodename}}-user</a></td>
+				<td class="hidden-phone"><a href="{{ path('sidus_node',{"node_id":descendant.createdby.id}) }}">{{descendant.createdby.nodename}}-user</a></td>
 				<td>
 					<div class="btn-toolbar actions-condensed">
 						<div class="btn-group">

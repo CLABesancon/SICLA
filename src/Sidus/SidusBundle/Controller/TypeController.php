@@ -9,9 +9,9 @@ use Sidus\SidusBundle\Form\TypeType;
 
 class TypeController extends Controller {
 	
-	public function viewAction($node,$ascendants,$descendants,$object){
+	public function showAction($node,$ascendants,$descendants,$object){
             $em = $this->getDoctrine()->getManager();
-            return $this->render('SidusBundle:Type:view.html.twig',array(
+            return $this->render('SidusBundle:Type:show.html.twig',array(
                 'node'=>$node,
 				'ascendants'=>$ascendants,
 				'descendants' => $descendants,
@@ -29,7 +29,7 @@ class TypeController extends Controller {
 					//@TODO version
 					$em->persist($object);
 					$em->flush();
-					return $this->forward('SidusBundle:Type:view', array(
+					return $this->forward('SidusBundle:Type:show', array(
 						'node'=>$node,
 						'ascendants'=>$ascendants,
 						'descendants' => $descendants,

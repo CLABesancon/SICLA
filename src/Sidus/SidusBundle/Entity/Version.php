@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Version
  *
- * @ORM\Table()
+ * @ORM\Table(name="version")
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\VersionRepository")
  */
 class Version {
@@ -53,7 +53,7 @@ class Version {
 	 * @Assert\DateTime()
 	 */
 	private $revision_date;
-	
+
 	    /**
      * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node")
      * @ORM\JoinColumn()
@@ -64,7 +64,7 @@ class Version {
 	/**
 	 * Get id
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId() {
 		return $this->id;
@@ -85,12 +85,12 @@ class Version {
 	/**
 	 * Get revision_date
 	 *
-	 * @return \DateTime 
+	 * @return \DateTime
 	 */
 	public function getRevision_Date() {
 		return $this->revision_date;
 	}
-	
+
 	 /**
      * Set revision_by
      *
@@ -110,7 +110,7 @@ class Version {
     public function getRevisionBy() {
         return $this->revisionBy;
     }
-	
+
 	/**
 	 * Set lang
 	 *
@@ -126,7 +126,7 @@ class Version {
 	/**
 	 * Get lang
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getLang() {
 		return $this->lang;
@@ -147,7 +147,7 @@ class Version {
 	/**
 	 * Get revision
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getRevision() {
 		return $this->revision;
@@ -168,7 +168,7 @@ class Version {
 	/**
 	 * Get node
 	 *
-	 * @return \Sidus\SidusBundle\Entity\Node 
+	 * @return \Sidus\SidusBundle\Entity\Node
 	 */
 	public function getNode() {
 		return $this->node;
@@ -189,10 +189,33 @@ class Version {
 	/**
 	 * Get object
 	 *
-	 * @return \Sidus\SidusBundle\Entity\Object 
+	 * @return \Sidus\SidusBundle\Entity\Object
 	 */
 	public function getObject() {
 		return $this->object;
 	}
 
+
+    /**
+     * Set revision_date
+     *
+     * @param \DateTime $revisionDate
+     * @return Version
+     */
+    public function setRevisionDate($revisionDate)
+    {
+        $this->revision_date = $revisionDate;
+
+        return $this;
+    }
+
+    /**
+     * Get revision_date
+     *
+     * @return \DateTime
+     */
+    public function getRevisionDate()
+    {
+        return $this->revision_date;
+    }
 }

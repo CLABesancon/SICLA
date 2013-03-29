@@ -9,7 +9,7 @@ use \Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  *
- * @ORM\Table()
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\UserRepository")
  */
 class User extends Object implements UserInterface{
@@ -46,7 +46,7 @@ class User extends Object implements UserInterface{
 	 * @Assert\NotBlank()
 	 */
 	private $salt;
-	
+
 	/**
 	 * @var string
 	 *
@@ -55,8 +55,8 @@ class User extends Object implements UserInterface{
 	 * @Assert\Email()
 	 */
 	private $email;
-	
-	
+
+
 	/**
 	 * @var \Datetime
 	 *
@@ -64,7 +64,7 @@ class User extends Object implements UserInterface{
 	 * @Assert\DateTime()
 	 */
 	private $expireAt;
-	
+
 	/**
 	 * @var boolean
 	 *
@@ -78,7 +78,7 @@ class User extends Object implements UserInterface{
 	/**
 	 * Get id
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId() {
 		return $this->id;
@@ -99,7 +99,7 @@ class User extends Object implements UserInterface{
 	/**
 	 * Get username
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getUsername() {
 		return $this->username;
@@ -120,7 +120,7 @@ class User extends Object implements UserInterface{
 	/**
 	 * Get password
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getPassword() {
 		return $this->password;
@@ -141,7 +141,7 @@ class User extends Object implements UserInterface{
 	/**
 	 * Get salt
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getSalt() {
 		return $this->salt;
@@ -157,14 +157,14 @@ class User extends Object implements UserInterface{
     public function setExpireAt($expireAt)
     {
         $this->expireAt = new \DateTime($expireAt);
-    
+
         return $this;
     }
 
     /**
      * Get expireAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getExpireAt()
     {
@@ -180,14 +180,14 @@ class User extends Object implements UserInterface{
     public function setIsInactive($isInactive)
     {
         $this->isInactive = $isInactive;
-    
+
         return $this;
     }
 
     /**
      * Get isInactive
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsInactive()
     {
@@ -203,14 +203,14 @@ class User extends Object implements UserInterface{
     public function setEmail($email)
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -218,10 +218,10 @@ class User extends Object implements UserInterface{
     }
 
 	public function eraseCredentials() {
-		
+
 	}
 
 	public function getRoles() {
-		
+
 	}
 }

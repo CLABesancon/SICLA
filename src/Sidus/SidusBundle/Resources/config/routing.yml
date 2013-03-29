@@ -5,10 +5,10 @@
 
 
 #sidus_node_lang:
-#  pattern:  /{_locale}/{id_node}
-#  defaults: { _controller: SidusBundle:Default:view, id_node:1 }
+#  pattern:  /{_locale}/{node_id}
+#  defaults: { _controller: SidusBundle:Default:show, node_id:1 }
 #  requirements:
-#    id_node: \d*
+#    node_id: \d*
 #    _locale: ([a-zA-Z]{2})
 
 login:
@@ -18,42 +18,43 @@ login_check:
   pattern: /login_check
 logout:
   pattern: /logout
-    
-sidus_view_node:
-  pattern:  /{_locale}/{id_node}
-  defaults: { _controller: SidusBundle:Default:view}
+
+sidus_show_node:
+  pattern:  /{node_id}/{_locale}
+  defaults: { _controller: SidusBundle:Default:show, _locale: ~ }
   requirements:
-    id_node: \d*
+    node_id: \d*
     _locale: ^[a-z]{2}$
-    
+
 sidus_edit_node:
-  pattern:  /{_locale}/{id_node}/edit
-  defaults: { _controller: SidusBundle:Default:edit}
+  pattern:  /edit/{node_id}/{_locale}
+  defaults: { _controller: SidusBundle:Default:edit, _locale: ~ }
   requirements:
-    id_node: \d*
+    node_id: \d*
     _locale: ^[a-z]{2}$
 
 sidus_choose_node:
-  pattern:  /{_locale}/{id_node}/choose
-  defaults: { _controller: SidusBundle:Default:choose}
+  pattern:  /choose/{node_id}/{_locale}
+  defaults: { _controller: SidusBundle:Default:choose, _locale: ~ }
   requirements:
-    id_node: \d*
+    node_id: \d*
     _locale: ^[a-z]{2}$
-    
+
 sidus_add_node:
-  pattern:  /{_locale}/{id_node}/add
-  defaults: { _controller: SidusBundle:Default:add}
+  pattern:  /add/{node_id}/{_locale}
+  defaults: { _controller: SidusBundle:Default:add, _locale: ~ }
   requirements:
-    id_node: \d*
+    node_id: \d*
     _locale: ^[a-z]{2}$
-#@TODO si l'id de la node n'est pas donné -> erreur -> id_node ne s'initialise pas a 1. Problème temporairement réglé alarache dans le controller 
+
+#@TODO si l'id de la node n'est pas donné -> erreur -> node_id ne s'initialise pas a 1. Problème temporairement réglé alarache dans le controller
 
 #sidus_user:
 #  pattern: /users/{id}
 #  defaults: { _controller: SidusBundle:User:form }
 #  requirements:
 #    id: \d*
-#    
+#
 #SidusBundle_user:
 #  resource: "@SidusBundle/Resources/config/routing/user.yml"
 #  prefix:   /user

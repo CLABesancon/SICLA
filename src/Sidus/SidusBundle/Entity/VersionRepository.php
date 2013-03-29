@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class VersionRepository extends EntityRepository {
 
 	/**
-	 * Find the last version according to the id_node and lang (default:en)
+	 * Find the last version according to the node_id and lang (default:en)
 	 * @todo If any version axist according to lang, try the default lang <= Ça ne veut rien dire :D
 	 * @param Node $node
 	 * @param string $lang
@@ -45,4 +45,29 @@ class VersionRepository extends EntityRepository {
 		return $qb->getQuery()->getResult();
 	}
 
+	public function findByNodeId($node_id, $lang = null) {
+		// SELECT n.*, v.*, o.*, t.*
+		// FROM version AS v
+		// LEFT JOIN node AS n ON v.node_id
+		// LEFT JOIN object AS o ON v.object_id
+		// LEFT JOIN type AS t ON o.type_id
+		// GROUP BY n.id, v.lang
+		// ORDER BY n.id, v.revision_date";
+
+		$qb = $this->createQueryBuilder('v')
+				->join('v.node', 'n')
+				->leftJoin('v.object', 'o')
+				->leftJoin('o.type', 't')
+				->where('n.id = :node_id')
+				->groupBy('n.id')
+				->addGroupBy('v.lang')
+				->orderBy('n.id', 'ASC')
+				->orderBy('v.revision_date', 'DESC')
+				->setParameter('node_id', $node_id);
+		if(null !== $lang){
+			$qb->andwhere('v.lang = :lang')
+					->setParameter('lang', $lang);
+		}
+		return $qb->getQuery()->getResult();
+	}
 }

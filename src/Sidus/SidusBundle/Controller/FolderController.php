@@ -9,8 +9,8 @@ use Sidus\SidusBundle\Form\FolderType;
 
 class FolderController extends Controller {
 	
-	public function viewAction($node){
-		return $this->render('SidusBundle:Folder:view.html.twig',array(
+	public function showAction($node){
+		return $this->render('SidusBundle:Folder:show.html.twig',array(
 			'node'=>$node,
 			));
 	}
@@ -25,7 +25,7 @@ class FolderController extends Controller {
 				//@TODO version
 				$em->persist($node['object']);
 				$em->flush();
-				return $this->forward('SidusBundle:Folder:view', array(
+				return $this->forward('SidusBundle:Folder:show', array(
 					'node'=>$node,
 				));
 			}

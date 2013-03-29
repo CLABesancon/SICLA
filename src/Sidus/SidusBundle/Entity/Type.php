@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Type
  *
- * @ORM\Table()
+ * @ORM\Table(name="type")
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\TypeRepository")
  */
 class Type extends Object
@@ -38,34 +38,34 @@ class Type extends Object
 	/**
      * @var Type[]
      * @ORM\ManyToMany(targetEntity="Sidus\SidusBundle\Entity\Type", cascade={"persist"})
-	 * @ORM\JoinTable(name="Type_AuthorizedTypes",
+	 * @ORM\JoinTable(name="authorized_type",
 	 *	joinColumns={@ORM\JoinColumn(name="type_id", referencedColumnName="id")},
 	 *	inverseJoinColumns={@ORM\JoinColumn(name="authorized_type_id", referencedColumnName="id")}
 	 *	)
      */
 	private $authorizedTypes;
-	
+
 	/**
      * @var Type[]
      * @ORM\ManyToMany(targetEntity="Sidus\SidusBundle\Entity\Type", cascade={"persist"})
-     * @ORM\JoinTable(name="Type_ForbiddenTypes",
+     * @ORM\JoinTable(name="forbidden_type",
 	 *	joinColumns={@ORM\JoinColumn(name="type_id", referencedColumnName="id")},
 	 *	inverseJoinColumns={@ORM\JoinColumn(name="forbidden_type_id", referencedColumnName="id")}
 	 *	)
      */
 	private $forbiddenTypes;
-	
-	
+
+
 	public function __construct() {
 		parent::__construct();
 		$this->authorizedTypes = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->forbiddenTypes = new \Doctrine\Common\Collections\ArrayCollection();
 	}
-	
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,14 +81,14 @@ class Type extends Object
     public function setTypename($typename)
     {
         $this->typename = $typename;
-    
+
         return $this;
     }
 
     /**
      * Get typename
      *
-     * @return string 
+     * @return string
      */
     public function getTypename()
     {
@@ -104,20 +104,20 @@ class Type extends Object
     public function setController($controller)
     {
         $this->controller = $controller;
-    
+
         return $this;
     }
 
     /**
      * Get controller
      *
-     * @return string 
+     * @return string
      */
     public function getController()
     {
         return $this->controller;
     }
-	
+
 	public function addAuthorizedType(Type $type){
 		$this->authorizedTypes[] = $type;
 
@@ -129,7 +129,7 @@ class Type extends Object
 	public function getAuthorizedTypes(){
 		return $this->authorizedTypes;
 	}
-	
+
 	public function addForbiddenType(Type $type){
 		$this->forbiddenTypes[] = $type;
 
@@ -141,5 +141,5 @@ class Type extends Object
 	public function getForbiddenTypes(){
 		return $this->forbiddenTypes;
 	}
-	
+
 }

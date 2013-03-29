@@ -18,12 +18,13 @@ use Doctrine\ORM\Query,
  * repository methods below.
  */
 class NodeRepository extends NestedTreeRepository {
-	
+
+
 	/**
 	 * Récupère la node avec la node User Created By et la node user Modified By
-	 * @param integer $id_node
+	 * @param integer $node_id
 	 */
-	public function getNodeWithCreatedByAndModifiedBy($id_node){
+	public function getNodeWithCreatedByAndModifiedBy($node_id){
 		$qb=$this->createQueryBuilder('n');
 	}
 
