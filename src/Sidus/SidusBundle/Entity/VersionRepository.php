@@ -45,29 +45,43 @@ class VersionRepository extends EntityRepository {
 		return $qb->getQuery()->getResult();
 	}
 
-	public function findByNodeId($node_id, $lang = null) {
+	public function findByNodeIds(array $node_ids) {
+		$qb = $this->getQueryBuilder();
+		$qb->where('n.id IN :node_id')->setParameter('node_id', $node_ids);
+		return $qb->getQuery()->getResult();
+	}
+
+	public function findByNodeId($node_id){
+		$qb = $this->getQueryBuilder();
+		$qb->where('n.id = :node_id')->setParameter('node_id', (int)$node_id);
+		return $qb->getQuery()->getResult();
+	}
+
+	public function findByNodeName($node_name){
+		$qb = $this->getQueryBuilder();
+		$qb->where('n.nodeName = :node_name')->setParameter('node_name', $node_name);
+		return $qb->getQuery()->getResult();
+	}
+
+	protected function getQueryBuilder(){
 		// SELECT n.*, v.*, o.*, t.*
 		// FROM version AS v
 		// LEFT JOIN node AS n ON v.node_id
 		// LEFT JOIN object AS o ON v.object_id
 		// LEFT JOIN type AS t ON o.type_id
+		// WHERE ...
 		// GROUP BY n.id, v.lang
-		// ORDER BY n.id, v.revision_date";
-
+		// ORDER BY n.id, v.revision_date
 		$qb = $this->createQueryBuilder('v')
 				->join('v.node', 'n')
 				->leftJoin('v.object', 'o')
 				->leftJoin('o.type', 't')
-				->where('n.id = :node_id')
 				->groupBy('n.id')
 				->addGroupBy('v.lang')
 				->orderBy('n.id', 'ASC')
-				->orderBy('v.revision_date', 'DESC')
-				->setParameter('node_id', $node_id);
-		if(null !== $lang){
-			$qb->andwhere('v.lang = :lang')
-					->setParameter('lang', $lang);
-		}
-		return $qb->getQuery()->getResult();
+				->orderBy('v.revision_date', 'DESC');
+		return $qb;
 	}
+
+
 }

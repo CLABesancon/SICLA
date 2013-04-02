@@ -32,7 +32,7 @@ class Node {
     private $createdBy;
 
     /**
-     * @ORM\Column(name="nodename", type="string", length=255)
+     * @ORM\Column(name="node_name", type="string", length=255)
      * @ORM\JoinColumn(nullable=true)
      */
     private $nodeName;
@@ -68,19 +68,6 @@ class Node {
      * @ORM\JoinColumn(nullable=false)
      */
     private $versions;
-
-    /**
-     * Last version for each language
-     * @var Version[]
-     */
-    protected $last_versions;
-
-    /**
-     * The current version corresponding to either: what the controller loaded
-     * or what the last version for the preferred language.
-     * @var Version
-     */
-    protected $current_version;
 
     /**
      * Nested Tree configuration

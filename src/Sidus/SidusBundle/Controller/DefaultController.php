@@ -8,6 +8,11 @@ use Sidus\SidusBundle\Entity\Node;
 
 class DefaultController extends Controller {
 
+	protected $node_versions;
+	protected $node_loaded_version;
+	protected $descendants_versions;
+	protected $siblings_versions;
+
 	public function loginAction() {
 		if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
 			return $this->redirect($this->generateUrl('sidus_show_node', array('node_id' => 1)));
@@ -27,8 +32,27 @@ class DefaultController extends Controller {
 		));
 	}
 
+	/**
+	 *
+	 * @param type $node_id
+	 * @return type
+	 */
 	public function homeAction() {
-		return $this->forward('SidusBundle:Default:show', array('node_id' => 1));
+		$version = $this->getVersionByNodeUID('home');
+
+		if (null === $version) {
+			$em = $this->getDoctrine()->getManager();
+			$core_nodes = $em->getRepository('SidusBundle:Node')->getRootNodes();
+			var_dump($core_nodes);
+			//TODO
+		}
+
+		$controller = $version->getObject()->getType()->getController();
+		if ($controller) {
+			return $this->forward($controller.':show', array('version' => $version));
+		}
+
+		return $this->render('SidusBundle:Default:show.html.twig', array('version' => $version, 'node' => $version->getNode(), 'object' => $version->getObject()));
 	}
 
 	public function notFoundAction() {
@@ -37,19 +61,13 @@ class DefaultController extends Controller {
 		return $this->render('SidusBundle:Exception:error404.html.twig', $params)->setStatusCode(404);
 	}
 
-	public function noContentAction($node) {
-		//@TODO traduction
-		$params = array('status_code' => 418, 'status_text' => 'There seems to be no available content for this node.', 'node' => $node);
-		return $this->render('SidusBundle:Exception:error418.html.twig', $params)->setStatusCode(418);
-	}
-
 	/**
-	 * Warning, language match is still working only with request preferred languages
+	 *
 	 * @param type $node_id
 	 * @return type
 	 */
-	public function showAction($node_id) {
-		$version = $this->getVersionByNodeId($node_id);
+	public function showAction($node_id, $_locale = null) {
+		$version = $this->getVersionByNodeUID($node_id, $_locale);
 
 		if (null === $version) {
 			return $this->forward('SidusBundle:Default:notFound');
@@ -120,10 +138,20 @@ class DefaultController extends Controller {
 		));
 	}
 
-	protected function getVersionByNodeId($node_id) {
+	/**
+	 * Get the correct version for the requested node
+	 * Warning, language match is still working only with request preferred languages
+	 * @param mixed $node_id
+	 * @return \Sidus\SidusBundle\Entity\Version $version
+	 */
+	protected function getVersionByNodeUID($node_id, $lang = null) {
 		$em = $this->getDoctrine()->getManager();
 
-		$versions = $em->getRepository('SidusBundle:Version')->findByNodeId($node_id);
+		if(is_numeric($node_id)){
+			$versions = $em->getRepository('SidusBundle:Version')->findByNodeId($node_id);
+		} else {
+			$versions = $em->getRepository('SidusBundle:Version')->findByNodeName($node_id);
+		}
 
 		if(empty($versions)){
 			return null;
@@ -131,13 +159,16 @@ class DefaultController extends Controller {
 
 		$available_languages = array();
 		foreach ($versions as $version) {
+			if($version->getLang() === $lang){
+				return $version;
+			}
 			$available_languages[$version->getLang()] = $version;
 		}
 
 		$best_language_match = $this->getRequest()->getPreferredLanguage(array_keys($available_languages));
 		$version = $available_languages[$best_language_match];
 
-		if (substr($this->getRequest()->getPreferredLanguage(), 0, 2) !== $best_language_match) {
+		if(null !== $lang || $best_language_match !== substr($this->getRequest()->getPreferredLanguage(), 0, 2)){
 			//@TODO traduction
 			$this->getSession()->setFlash('warning', 'Sorry, this content is not available in your language.');
 		}

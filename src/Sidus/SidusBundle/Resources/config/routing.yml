@@ -19,32 +19,34 @@ login_check:
 logout:
   pattern: /logout
 
+sidus_home_node:
+  pattern:  /{_locale}
+  defaults: { _controller: SidusBundle:Default:home, _locale: ~ }
+  requirements:
+    _locale: ^[a-z]{2}$
+
 sidus_show_node:
   pattern:  /{node_id}/{_locale}
   defaults: { _controller: SidusBundle:Default:show, _locale: ~ }
   requirements:
-    node_id: \d*
     _locale: ^[a-z]{2}$
 
 sidus_edit_node:
   pattern:  /edit/{node_id}/{_locale}
   defaults: { _controller: SidusBundle:Default:edit, _locale: ~ }
   requirements:
-    node_id: \d*
     _locale: ^[a-z]{2}$
 
 sidus_choose_node:
   pattern:  /choose/{node_id}/{_locale}
   defaults: { _controller: SidusBundle:Default:choose, _locale: ~ }
   requirements:
-    node_id: \d*
     _locale: ^[a-z]{2}$
 
 sidus_add_node:
   pattern:  /add/{node_id}/{_locale}
   defaults: { _controller: SidusBundle:Default:add, _locale: ~ }
   requirements:
-    node_id: \d*
     _locale: ^[a-z]{2}$
 
 #@TODO si l'id de la node n'est pas donné -> erreur -> node_id ne s'initialise pas a 1. Problème temporairement réglé alarache dans le controller
