@@ -1,12 +1,5 @@
 {% extends 'SidusBundle::base.html.twig' %}
 
-{% block message %}
-<div class="alert">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>Warning!</strong> This is a warning example.
-</div>
-{% endblock %}
-
 {% block main %}
 	<div class="btn-toolbar pull-right">
 		<button class="btn" title="Thumbnail view"><i class="icon-th"></i></button>
@@ -70,37 +63,37 @@
 		</thead>
 		<tbody>
 			{% for child in node.children %}
-			<tr>
-				<td><input type="checkbox" class="radio-condensed"/> {{child.id}}</td>
-				<td><a href="{{ path('sidus_show_node',{"node_id":child.id}) }}">{{child.nodename}}</a></td>
-				<td>{{ object.type }}</td>
-				<td class="hidden-phone"><time datetime="2012-05-12T21:35+01:00">12/05/2012<span class="hidden-tablet"> 21:35</span></time></td>
-				<td class="visible-desktop"><time datetime="2012-05-13T15:48+01:00">13/05/2012<span class="hidden-tablet"> 15:48</span></time></td>
-				<td class="hidden-phone"><a href="{{ path('sidus_show_node',{"node_id":child.createdby.id}) }}">{{child.createdby.nodename}}-user</a></td>
-				<td>
-					<div class="btn-toolbar actions-condensed">
-						<div class="btn-group">
-							<a href="{{ path('sidus_show_node', { 'node_id': child.id }) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>
-							<a href="{{ path('sidus_edit_node', { 'node_id': child.id }) }}" class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></a>
-							<button class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></button>
-							<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
-								<i class="icon-wrench"></i> <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu pull-right">
-								<li><a href="#"><i class="icon-arrow-right"></i> Move</a></li>
-								<li><a href="#"><i class="icon-share-alt"></i> Link</a></li>
-								<li><a href="#"><i class="icon-repeat"></i> Copy</a></li>
-								<li><a href="#"><i class="icon-lock"></i> Permissions</a></li>
-								<li class="divider"></li>
-								<li><a href="#"><i class="icon-list"></i> History</a></li>
-								<li><a href="#"><i class="icon-signal"></i> Feed</a></li>
-								<li class="divider"></li>
-								<li class="disabled"><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
-							</ul>
+				<tr>
+					<td><input type="checkbox" class="radio-condensed"/> {{ child.id }}</td>
+					<td><a href="{{ path('sidus_show_node', { 'node_id': child.id }) }}">{{ child.nodename }}</a></td>
+					<td>{{ object.type }}</td>
+					<td class="hidden-phone"><time datetime="2012-05-12T21:35+01:00">12/05/2012<span class="hidden-tablet"> 21:35</span></time></td>
+					<td class="visible-desktop"><time datetime="2012-05-13T15:48+01:00">13/05/2012<span class="hidden-tablet"> 15:48</span></time></td>
+					<td class="hidden-phone"><a href="{{ path('sidus_show_node', { 'node_id': child.createdby.id }) }}">{{ child.createdby.nodename }}-user</a></td>
+					<td>
+						<div class="btn-toolbar actions-condensed">
+							<div class="btn-group">
+								<a href="{{ path('sidus_show_node', { 'node_id': child.id }) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>
+								<a href="{{ path('sidus_edit_node', { 'node_id': child.id }) }}" class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></a>
+								<button class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></button>
+								<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
+									<i class="icon-wrench"></i> <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu pull-right">
+									<li><a href="#"><i class="icon-arrow-right"></i> Move</a></li>
+									<li><a href="#"><i class="icon-share-alt"></i> Link</a></li>
+									<li><a href="#"><i class="icon-repeat"></i> Copy</a></li>
+									<li><a href="#"><i class="icon-lock"></i> Permissions</a></li>
+									<li class="divider"></li>
+									<li><a href="#"><i class="icon-list"></i> History</a></li>
+									<li><a href="#"><i class="icon-signal"></i> Feed</a></li>
+									<li class="divider"></li>
+									<li class="disabled"><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
+								</ul>
+							</div>
 						</div>
-					</div>
-				</td>
-			</tr>
+					</td>
+				</tr>
 			{% endfor %}
 		</tbody>
 	</table>

@@ -16,20 +16,10 @@ use Sidus\SidusBundle\Form\UserType;
 class UserController extends Controller
 {
 
-	public function showAction($node,$ascendants,$descendants,$object){
-            $em = $this->getDoctrine()->getManager();
-            return $this->render('SidusBundle:User:show.html.twig',array(
-                'node'=>$node,
-				'ascendants'=>$ascendants,
-				'descendants' => $descendants,
-                'object'=>$object,
-                ));
-	}
-	
 	public function editAction($node,$ascendants,$descendants,$object,Request $request){
 			$form=$this->createForm(new UserType(), $object);
 			$em=$this->getDoctrine()->getEntityManager();
-			
+
 			if($request->isMethod('POST')){
 				$form->bind($request);
 				if ($form->isValid()){
@@ -44,7 +34,7 @@ class UserController extends Controller
 					));
 				}
 			}
-			          
+
             return $this->render('SidusBundle:User:edit.html.twig',array(
                 'form'=>$form->createView(),
 				'node'=>$node,
@@ -52,7 +42,7 @@ class UserController extends Controller
                 'object'=>$object,
                 ));
 	}
-	
+
     /**
      * Lists all User entities.
      *
