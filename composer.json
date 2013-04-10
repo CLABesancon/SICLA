@@ -31,7 +31,7 @@
 		"craue/formflow-bundle": "dev-master",
         "leafo/lessphp": "dev-master",
 		"nervo/yuicompressor": "dev-master",
-        "stof/doctrine-extensions-bundle":"dev-master"
+        "stof/doctrine-extensions-bundle": "dev-master"
     },
 	"repositories": [
        {

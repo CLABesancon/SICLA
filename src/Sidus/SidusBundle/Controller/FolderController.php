@@ -12,26 +12,21 @@ class FolderController extends Controller {
 		return $this->render('SidusBundle:Folder:show.html.twig', $loaded_objects);
 	}
 
-	public function editAction($node, Request $request) {
-		$form = $this->createForm(new FolderType(), $node['object']);
+	public function editAction($node, $object, $loaded_objects, Request $request) {
+		$form = $this->createForm(new FolderType(), $object);
 		$em = $this->getDoctrine()->getEntityManager();
 
 		if ($request->isMethod('POST')) {
 			$form->bind($request);
 			if ($form->isValid()) {
 				//@TODO version
-				$em->persist($node['object']);
+				$em->persist($object);
 				$em->flush();
-				return $this->forward('SidusBundle:Folder:show', array(
-							'node' => $node,
-				));
+				return $this->forward('SidusBundle:Folder:show', $loaded_objects);
 			}
 		}
-
-		return $this->render('SidusBundle:Folder:edit.html.twig', array(
-					'form' => $form->createView(),
-					'node' => $node,
-		));
+		$loaded_objects['form'] = $form->createView();
+		return $this->render('SidusBundle:Folder:edit.html.twig', $loaded_objects);
 	}
 
 	public function addAction($node, Request $request) {

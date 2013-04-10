@@ -34,29 +34,6 @@ class DefaultController extends Controller {
 		));
 	}
 
-	/**
-	 *
-	 * @param type $node_id
-	 * @return type
-	 */
-	public function homeAction() {
-		$version = $this->getVersionByNodeUID('home');
-
-		if (null === $version) {
-			$em = $this->getDoctrine()->getManager();
-			$core_nodes = $em->getRepository('SidusBundle:Node')->getRootNodes();
-			var_dump($core_nodes);
-			//TODO
-		}
-
-		$controller = $version->getObject()->getType()->getController();
-		if ($controller) {
-			return $this->forward($controller.':show', array('version' => $version));
-		}
-
-		return $this->render('SidusBundle:Default:show.html.twig', array('version' => $version, 'node' => $version->getNode(), 'object' => $version->getObject()));
-	}
-
 	public function notFoundAction() {
 		//@TODO traduction
 		$params = array('status_code' => 404, 'status_text' => 'Sorry, we were unable to find the requested node.');
@@ -83,19 +60,19 @@ class DefaultController extends Controller {
 		return $this->render('SidusBundle:Default:show.html.twig', $this->loaded_objects);
 	}
 
-	public function editAction($node_id) {
-		$version = $this->getVersionByNodeId($node_id);
+	public function editAction($node_id, $_locale = null) {
+		$this->loadObjectsForNodeUID($node_id, $_locale);
 
-		if (null === $version) {
+		if (null === $this->version) {
 			return $this->forward('SidusBundle:Default:notFound');
 		}
 
-		$controller = $version->getObject()->getType()->getController();
+		$controller = $this->version->getObject()->getType()->getController();
 		if ($controller) {
-			return $this->forward($controller.':edit', array('version' => $version));
+			return $this->forward($controller.':edit', $this->loaded_objects);
 		}
 
-		return $this->render('SidusBundle:Default:edit.html.twig', array('version' => $version, 'node' => $version->getNode(), 'object' => $version->getObject()));
+		return $this->render('SidusBundle:Default:edit.html.twig', $this->loaded_objects);
 	}
 
 	public function chooseAction($node_id) {
@@ -147,7 +124,7 @@ class DefaultController extends Controller {
 
 
 	protected function loadObjectsForNodeUID($node_uid, $lang = null) {
-		$this->loadVersionsForNodeId($node_uid);
+		$this->loadVersionsForNodeUID($node_uid);
 		$this->version = $this->chooseBestVersion($this->versions, $lang);
 		if (null === $this->version) {
 			return;
@@ -167,13 +144,13 @@ class DefaultController extends Controller {
 		$this->loaded_objects['loaded_objects'] = $this->loaded_objects;
 	}
 
-	protected function loadVersionsForNodeId($node_id, $lang = null) {
+	protected function loadVersionsForNodeUID($node_uid, $lang = null) {
 		$em = $this->getDoctrine()->getManager();
 
-		if (is_numeric($node_id)) {
-			$versions = $em->getRepository('SidusBundle:Version')->findByNodeId($node_id);
+		if (is_numeric($node_uid)) {
+			$versions = $em->getRepository('SidusBundle:Version')->findByNodeId($node_uid);
 		} else {
-			$versions = $em->getRepository('SidusBundle:Version')->findByNodeName($node_id);
+			$versions = $em->getRepository('SidusBundle:Version')->findByNodeName($node_uid);
 		}
 
 		$this->versions = $versions;
@@ -206,6 +183,9 @@ class DefaultController extends Controller {
 	protected function loadAscendants(Node $node, $lang = null){
 		$em = $this->getDoctrine()->getManager();
 		$ascendants = $node->getAscendants();
+		if($ascendants->isEmpty()){
+			return;
+		}
 		$ascendant_ids = array();
 		foreach ($ascendants as $ascendant){
 			$ascendant_ids[] = $ascendant->getId();

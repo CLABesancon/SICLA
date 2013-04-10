@@ -1,4 +1,4 @@
-{% extends 'SidusBundle::base.html.twig' %}
+{% extends 'SidusBundle:Default:show.html.twig' %}
 
 {% block main %}
 	<div class="btn-toolbar pull-right">
@@ -67,7 +67,7 @@
 					<td><input type="checkbox" class="radio-condensed"/> {{ child.nodeId }}</td>
 					<td><a href="{{ path('sidus_show_node', { 'node_id': child.nodeId }) }}">{{ child.object }}</a></td>
 					<td>{{ child.object.type }}</td>
-					<td class="hidden-phone"><time datetime="0000-00-00T00:00+00:00">00/00/0000<span class="hidden-tablet"> 00:00</span></time></td>
+					<td class="hidden-phone"><time datetime="{{ child.node.createdAt|date('c') }}">{{ child.node.createdAt|date('d/m/Y') }}<span class="hidden-tablet"> {{ child.node.createdAt|date('H:i') }}</span></time></td>
 					<td class="visible-desktop"><time datetime="{{ child.revisionDate|date('c') }}">{{ child.revisionDate|date('d/m/Y') }}<span class="hidden-tablet"> {{ child.revisionDate|date('H:i') }}</span></time></td>
 					<td class="hidden-phone"><a href="{{ path('sidus_show_node', { 'node_id': child.revisionBy.id }) }}">{{ child.revisionBy }}</a></td>
 					<td>
@@ -75,20 +75,20 @@
 							<div class="btn-group">
 								<a href="{{ path('sidus_show_node', { 'node_id': child.nodeId }) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>
 								<a href="{{ path('sidus_edit_node', { 'node_id': child.nodeId }) }}" class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></a>
-								<button class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></button>
+								<a href="{{ path('sidus_favorite_node', { 'node_id': child.nodeId }) }}" class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></a>
 								<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
 									<i class="icon-wrench"></i> <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu pull-right">
-									<li><a href="#"><i class="icon-arrow-right"></i> Move</a></li>
-									<li><a href="#"><i class="icon-share-alt"></i> Link</a></li>
-									<li><a href="#"><i class="icon-repeat"></i> Copy</a></li>
-									<li><a href="#"><i class="icon-lock"></i> Permissions</a></li>
+									<li><a href="{{ path('sidus_move_node', { 'node_id': child.nodeId }) }}"><i class="icon-arrow-right"></i> Move</a></li>
+									<li><a href="{{ path('sidus_link_node', { 'node_id': child.nodeId }) }}"><i class="icon-share-alt"></i> Link</a></li>
+									<li><a href="{{ path('sidus_copy_node', { 'node_id': child.nodeId }) }}"><i class="icon-repeat"></i> Copy</a></li>
+									<li><a href="{{ path('sidus_node_permissions', { 'node_id': child.nodeId }) }}"><i class="icon-lock"></i> Permissions</a></li>
 									<li class="divider"></li>
-									<li><a href="#"><i class="icon-list"></i> History</a></li>
-									<li><a href="#"><i class="icon-signal"></i> Feed</a></li>
+									<li><a href="{{ path('sidus_node_history', { 'node_id': child.nodeId }) }}"><i class="icon-list"></i> History</a></li>
+									<li><a href="{{ path('sidus_node_feed', { 'node_id': child.nodeId }) }}"><i class="icon-signal"></i> Feed</a></li>
 									<li class="divider"></li>
-									<li class="disabled"><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
+									<li class="disabled"><a href="{{ path('sidus_delete_node', { 'node_id': child.nodeId }) }}"><i class="icon-trash icon-white"></i> Delete</a></li>
 								</ul>
 							</div>
 						</div>

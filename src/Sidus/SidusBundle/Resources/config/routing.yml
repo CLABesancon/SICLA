@@ -19,15 +19,9 @@ login_check:
 logout:
   pattern: /logout
 
-sidus_home_node:
-  pattern:  /{_locale}
-  defaults: { _controller: SidusBundle:Default:home, _locale: ~ }
-  requirements:
-    _locale: ^[a-z]{2}$
-
 sidus_show_node:
   pattern:  /{node_id}/{_locale}
-  defaults: { _controller: SidusBundle:Default:show, _locale: ~ }
+  defaults: { _controller: SidusBundle:Default:show, node_id: home, _locale: ~ }
   requirements:
     _locale: ^[a-z]{2}$
 
@@ -44,12 +38,48 @@ sidus_choose_node:
     _locale: ^[a-z]{2}$
 
 sidus_add_node:
-  pattern:  /add/{node_id}/{_locale}
-  defaults: { _controller: SidusBundle:Default:add, _locale: ~ }
-  requirements:
-    _locale: ^[a-z]{2}$
+  pattern:  /add/{node_id}
+  defaults: { _controller: SidusBundle:Default:add }
 
-#@TODO si l'id de la node n'est pas donné -> erreur -> node_id ne s'initialise pas a 1. Problème temporairement réglé alarache dans le controller
+sidus_delete_node:
+  pattern:  /delete/{node_id}
+  defaults: { _controller: SidusBundle:Default:delete }
+
+sidus_move_node:
+  pattern:  /move/{node_id}
+  defaults: { _controller: SidusBundle:Default:move }
+
+sidus_link_node:
+  pattern:  /link/{node_id}
+  defaults: { _controller: SidusBundle:Default:link }
+
+sidus_copy_node:
+  pattern:  /copy/{node_id}
+  defaults: { _controller: SidusBundle:Default:copy }
+
+sidus_node_permissions:
+  pattern:  /permissions/{node_id}
+  defaults: { _controller: SidusBundle:Default:permissions }
+
+sidus_node_history:
+  pattern:  /history/{node_id}
+  defaults: { _controller: SidusBundle:Default:history }
+
+sidus_node_feed:
+  pattern:  /feed/{node_id}
+  defaults: { _controller: SidusBundle:Default:feed }
+
+sidus_favorite_node:
+  pattern:  /favorite/{node_id}
+  defaults: { _controller: SidusBundle:Default:favorite }
+
+sidus_print_node:
+  pattern:  /print/{node_id}
+  defaults: { _controller: SidusBundle:Default:print }
+
+sidus_localize_node:
+  pattern:  /localize/{node_id}
+  defaults: { _controller: SidusBundle:Default:localize }
 
 #sidus_user:
 #  pattern: /users/{id}
