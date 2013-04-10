@@ -3,7 +3,7 @@
 		<div class="btn-toolbar" id="menu-node">
 			<div class="btn-group">
 				<a href="{{ path('sidus_choose_node', { 'node_id': node.id }) }}" class="btn" title="Add element"><i class="icon-plus"></i></a>
-				<a href="{{ path('sidus_edit_node', { 'node_id': node.id }) }}" class="btn" title="Edit"><i class="icon-pencil"></i></a>
+				<a href="{{ path('sidus_edit_node', { 'node_id': node.id, '_locale': version.lang }) }}" class="btn" title="Edit"><i class="icon-pencil"></i></a>
 				<a href="{{ path('sidus_favorite_node', { 'node_id': node.id }) }}" class="btn" title="Add to favorites"><i class="icon-star-empty"></i></a>
 				<a href="{{ path('sidus_print_node', { 'node_id': node.id }) }}" class="btn" title="Print"><i class="icon-print"></i></a>
 				<button class="btn dropdown-toggle" data-toggle="dropdown">
