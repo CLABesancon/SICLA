@@ -1,57 +1,40 @@
-<h1>User</h1>
+{% extends 'SidusBundle::base.html.twig' %}
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ entity.title }}</td>
-        </tr>
-        <tr>
-            <th>Username</th>
-            <td>{{ entity.username }}</td>
-        </tr>
-        <tr>
-            <th>Password</th>
-            <td>{{ entity.password }}</td>
-        </tr>
-        <tr>
-            <th>Salt</th>
-            <td>{{ entity.salt }}</td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td>{{ entity.email }}</td>
-        </tr>
-        <tr>
-            <th>Expireat</th>
-            <td>{{ entity.expireAt|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Isinactive</th>
-            <td>{{ entity.isInactive }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('user') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('user_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+{% block main %}
+	<table class="record_properties">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ object.id }}</td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td>{{ object.title }}</td>
+			</tr>
+			<tr>
+				<th>Username</th>
+				<td>{{ object.username }}</td>
+			</tr>
+			<tr>
+				<th>Password</th>
+				<td>{{ object.password }}</td>
+			</tr>
+			<tr>
+				<th>Salt</th>
+				<td>{{ object.salt }}</td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td>{{ object.email }}</td>
+			</tr>
+			<tr>
+				<th>Expireat</th>
+				<td>{{ object.expireAt|date('Y-m-d H:i:s') }}</td>
+			</tr>
+			<tr>
+				<th>Isinactive</th>
+				<td>{{ object.isInactive }}</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}

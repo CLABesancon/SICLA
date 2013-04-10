@@ -7,18 +7,13 @@
 		<li><a href="#">Favorites</a></li>
 	</ul>
 	<ul class="nav nav-tabs nav-stacked">
-		<li><a href="#">Members</a></li>
-		<li><a href="#">Groups</a></li>
-		<li><a href="#">Productions</a></li>
-		<li><a href="#">Archives</a></li>
-		<li><a href="#">Shootings</a></li>
-		<li><a href="#">Association</a></li>
-		<li><a href="#">Members</a></li>
-		<li><a href="#">Groups</a></li>
-		<li><a href="#">Productions</a></li>
-		<li><a href="#">Archives</a></li>
-		<li><a href="#">Shootings</a></li>
-		<li><a href="#">Association</a></li>
+		{% for sibling in siblings %}
+			{% if sibling.nodeId == node.id %}
+				<li class="disabled"><a>{{ sibling.object }}</a></li>
+			{% else %}
+				<li><a href="{{ path('sidus_show_node', { 'node_id': sibling.nodeId }) }}">{{ sibling.object }}</a></li>
+			{% endif %}
+		{% endfor %}
 	</ul>
 	<div class="pagination pagination-centered pagination-mini">
 		<ul>

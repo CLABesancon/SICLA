@@ -6,6 +6,7 @@ html, body{padding:0;margin:0;height:100%;min-width:330px;}
 
 .navbar .breadcrumb{position:relative;left:0;display:block;float:left;margin:0 10px 0 0;padding:10px;background:none;}
 .navbar .breadcrumb > li{display:block;float:left;padding-left: 5px;}
+.navbar .breadcrumb > li.active{font-weight:bold;}
 
 .navbar-fixed-top .brand{margin-left:0px;padding:9px 10px 0;}
 

@@ -37,12 +37,12 @@
 
 			{% block breadcrumb %}
 				<ul class="breadcrumb">
-					{% if node.ascendants is defined %}
-						{% for ascendant in node.ascendants %}
-							<li><a href="{{ path('sidus_show_node', {'node_id': ascendant.id }) }}">{{ ascendant.nodename }} <span class="divider">/</span></a></li>
+					{% if ascendants is defined %}
+						{% for ascendant in ascendants %}
+							<li><a href="{{ path('sidus_show_node', {'node_id': ascendant.nodeId }) }}">{{ ascendant.object }} <span class="divider">/</span></a></li>
 						{% endfor %}
 					{% endif %}
-					<li class="active"><a href="{{ path('sidus_show_node', {'node_id': node.id }) }}">{{ node.nodename }}</a></li>
+					<li class="active"><a href="{{ path('sidus_show_node', {'node_id': node.id }) }}">{{ object }}</a></li>
 				</ul>
 			{% endblock %}
 			{% block myself %}

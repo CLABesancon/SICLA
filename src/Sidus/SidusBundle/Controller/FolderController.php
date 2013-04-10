@@ -8,8 +8,8 @@ use Sidus\SidusBundle\Form\FolderType;
 
 class FolderController extends Controller {
 
-	public function showAction($version) {
-		return $this->render('SidusBundle:Folder:show.html.twig', array('version' => $version, 'node' => $version->getNode(), 'object' => $version->getObject()));
+	public function showAction($loaded_objects) {
+		return $this->render('SidusBundle:Folder:show.html.twig', $loaded_objects);
 	}
 
 	public function editAction($node, Request $request) {

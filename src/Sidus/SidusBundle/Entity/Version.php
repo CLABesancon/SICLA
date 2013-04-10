@@ -14,9 +14,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Version {
 
 	/**
+	 * @ORM\Column(name="node_id", type="integer")
+	 * @ORM\Id
+	 */
+	private $nodeId;
+
+	/**
 	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="versions", cascade={"persist"})
 	 * @ORM\JoinColumn(name="node_id", referencedColumnName="id")
-	 * @ORM\Id
 	 */
 	private $node;
 
@@ -52,14 +57,14 @@ class Version {
 	 * @Assert\NotBlank()
 	 * @Assert\DateTime()
 	 */
-	private $revision_date;
+	private $revisionDate;
 
-	    /**
-     * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node")
-     * @ORM\JoinColumn()
-     * @Assert\NotBlank()
-     */
-    private $revisionBy;
+	/**
+	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node")
+	 * @ORM\JoinColumn()
+	 * @Assert\NotBlank()
+	 */
+	private $revisionBy;
 
 	/**
 	 * Get id
@@ -71,45 +76,24 @@ class Version {
 	}
 
 	/**
-	 * Set revision_date
+	 * Set revision_by
 	 *
-	 * @param \DateTime $revision_date
-	 * @return Version
+	 * @param integer $revisionBy
+	 * @return Node
 	 */
-	public function setRevision_Date($revision_date) {
-		$this->revision_date = $revision_date;
-
+	public function setRevisionBy($revisionBy) {
+		$this->revisionBy = $revisionBy;
 		return $this;
 	}
 
 	/**
-	 * Get revision_date
+	 * Get revision_by
 	 *
-	 * @return \DateTime
+	 * @return integer
 	 */
-	public function getRevision_Date() {
-		return $this->revision_date;
+	public function getRevisionBy() {
+		return $this->revisionBy;
 	}
-
-	 /**
-     * Set revision_by
-     *
-     * @param integer $revisionBy
-     * @return Node
-     */
-    public function setRevisionBy($revisionBy) {
-        $this->revisionBy = $revisionBy;
-        return $this;
-    }
-
-    /**
-     * Get revision_by
-     *
-     * @return integer
-     */
-    public function getRevisionBy() {
-        return $this->revisionBy;
-    }
 
 	/**
 	 * Set lang
@@ -195,27 +179,48 @@ class Version {
 		return $this->object;
 	}
 
+	/**
+	 * Set nodeId
+	 *
+	 * @param integer $nodeId
+	 * @return Version
+	 */
+	public function setNodeId($nodeId) {
+		$this->nodeId = $nodeId;
+
+		return $this;
+	}
+
+	/**
+	 * Get nodeId
+	 *
+	 * @return integer
+	 */
+	public function getNodeId() {
+		return $this->nodeId;
+	}
+
 
     /**
-     * Set revision_date
+     * Set revisionDate
      *
      * @param \DateTime $revisionDate
      * @return Version
      */
     public function setRevisionDate($revisionDate)
     {
-        $this->revision_date = $revisionDate;
+        $this->revisionDate = $revisionDate;
 
         return $this;
     }
 
     /**
-     * Get revision_date
+     * Get revisionDate
      *
      * @return \DateTime
      */
     public function getRevisionDate()
     {
-        return $this->revision_date;
+        return $this->revisionDate;
     }
 }

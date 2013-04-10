@@ -56,25 +56,25 @@
 				<th>Name</th>
 				<th>Type</th>
 				<th class="hidden-phone">Creation</th>
-				<th class="visible-desktop">Modification</th>
-				<th class="hidden-phone">Owner</th>
+				<th class="visible-desktop">Revision</th>
+				<th class="hidden-phone">Revision by</th>
 				<th class="actions">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			{% for child in node.children %}
+			{% for child in children %}
 				<tr>
-					<td><input type="checkbox" class="radio-condensed"/> {{ child.id }}</td>
-					<td><a href="{{ path('sidus_show_node', { 'node_id': child.id }) }}">{{ child.nodename }}</a></td>
-					<td>{{ object.type }}</td>
-					<td class="hidden-phone"><time datetime="2012-05-12T21:35+01:00">12/05/2012<span class="hidden-tablet"> 21:35</span></time></td>
-					<td class="visible-desktop"><time datetime="2012-05-13T15:48+01:00">13/05/2012<span class="hidden-tablet"> 15:48</span></time></td>
-					<td class="hidden-phone"><a href="{{ path('sidus_show_node', { 'node_id': child.createdby.id }) }}">{{ child.createdby.nodename }}-user</a></td>
+					<td><input type="checkbox" class="radio-condensed"/> {{ child.nodeId }}</td>
+					<td><a href="{{ path('sidus_show_node', { 'node_id': child.nodeId }) }}">{{ child.object }}</a></td>
+					<td>{{ child.object.type }}</td>
+					<td class="hidden-phone"><time datetime="0000-00-00T00:00+00:00">00/00/0000<span class="hidden-tablet"> 00:00</span></time></td>
+					<td class="visible-desktop"><time datetime="{{ child.revisionDate|date('c') }}">{{ child.revisionDate|date('d/m/Y') }}<span class="hidden-tablet"> {{ child.revisionDate|date('H:i') }}</span></time></td>
+					<td class="hidden-phone"><a href="{{ path('sidus_show_node', { 'node_id': child.revisionBy.id }) }}">{{ child.revisionBy }}</a></td>
 					<td>
 						<div class="btn-toolbar actions-condensed">
 							<div class="btn-group">
-								<a href="{{ path('sidus_show_node', { 'node_id': child.id }) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>
-								<a href="{{ path('sidus_edit_node', { 'node_id': child.id }) }}" class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></a>
+								<a href="{{ path('sidus_show_node', { 'node_id': child.nodeId }) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>
+								<a href="{{ path('sidus_edit_node', { 'node_id': child.nodeId }) }}" class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></a>
 								<button class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></button>
 								<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
 									<i class="icon-wrench"></i> <span class="caret"></span>

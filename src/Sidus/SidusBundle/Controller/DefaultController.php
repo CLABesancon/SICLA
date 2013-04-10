@@ -8,10 +8,12 @@ use Sidus\SidusBundle\Entity\Node;
 
 class DefaultController extends Controller {
 
-	protected $node_versions;
-	protected $node_loaded_version;
-	protected $descendants_versions;
-	protected $siblings_versions;
+	protected $loaded_objects = array();
+	protected $versions;
+	protected $version;
+	protected $ascendants;
+	protected $siblings;
+	protected $children;
 
 	public function loginAction() {
 		if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
@@ -67,22 +69,26 @@ class DefaultController extends Controller {
 	 * @return type
 	 */
 	public function showAction($node_id, $_locale = null) {
-		$version = $this->getVersionByNodeUID($node_id, $_locale);
+		$this->loadObjectsForNodeUID($node_id, $_locale);
 
-		if (null === $version) {
+		if (null === $this->version) {
 			return $this->forward('SidusBundle:Default:notFound');
 		}
 
-		$controller = $version->getObject()->getType()->getController();
+		$controller = $this->version->getObject()->getType()->getController();
 		if ($controller) {
-			return $this->forward($controller.':show', array('version' => $version));
+			return $this->forward($controller.':show', $this->loaded_objects);
 		}
 
-		return $this->render('SidusBundle:Default:show.html.twig', array('version' => $version, 'node' => $version->getNode(), 'object' => $version->getObject()));
+		return $this->render('SidusBundle:Default:show.html.twig', $this->loaded_objects);
 	}
 
 	public function editAction($node_id) {
 		$version = $this->getVersionByNodeId($node_id);
+
+		if (null === $version) {
+			return $this->forward('SidusBundle:Default:notFound');
+		}
 
 		$controller = $version->getObject()->getType()->getController();
 		if ($controller) {
@@ -138,28 +144,50 @@ class DefaultController extends Controller {
 		));
 	}
 
-	/**
-	 * Get the correct version for the requested node
-	 * Warning, language match is still working only with request preferred languages
-	 * @param mixed $node_id
-	 * @return \Sidus\SidusBundle\Entity\Version $version
-	 */
-	protected function getVersionByNodeUID($node_id, $lang = null) {
+
+
+	protected function loadObjectsForNodeUID($node_uid, $lang = null) {
+		$this->loadVersionsForNodeId($node_uid);
+		$this->version = $this->chooseBestVersion($this->versions, $lang);
+		if (null === $this->version) {
+			return;
+		}
+		$this->loadAscendants($this->version->getNode());
+		$this->loadChildren($this->version->getNode());
+		$this->loadSiblings($this->version->getNode());
+		$this->loaded_objects = array(
+			'versions' => $this->versions,
+			'version' => $this->version,
+			'node' => $this->version->getNode(),
+			'object' => $this->version->getObject(),
+			'ascendants' => $this->ascendants,
+			'children' => $this->children,
+			'siblings' => $this->siblings,
+		);
+		$this->loaded_objects['loaded_objects'] = $this->loaded_objects;
+	}
+
+	protected function loadVersionsForNodeId($node_id, $lang = null) {
 		$em = $this->getDoctrine()->getManager();
 
-		if(is_numeric($node_id)){
+		if (is_numeric($node_id)) {
 			$versions = $em->getRepository('SidusBundle:Version')->findByNodeId($node_id);
 		} else {
 			$versions = $em->getRepository('SidusBundle:Version')->findByNodeName($node_id);
 		}
 
-		if(empty($versions)){
+		$this->versions = $versions;
+		return $versions;
+	}
+
+	protected function chooseBestVersion(array $versions, $lang = null) {
+		if (empty($versions)) {
 			return null;
 		}
 
 		$available_languages = array();
 		foreach ($versions as $version) {
-			if($version->getLang() === $lang){
+			if ($version->getLang() === $lang) {
 				return $version;
 			}
 			$available_languages[$version->getLang()] = $version;
@@ -168,11 +196,61 @@ class DefaultController extends Controller {
 		$best_language_match = $this->getRequest()->getPreferredLanguage(array_keys($available_languages));
 		$version = $available_languages[$best_language_match];
 
-		if(null !== $lang || $best_language_match !== substr($this->getRequest()->getPreferredLanguage(), 0, 2)){
+		if (null !== $lang || $best_language_match !== substr($this->getRequest()->getPreferredLanguage(), 0, 2)) {
 			//@TODO traduction
 			$this->getSession()->setFlash('warning', 'Sorry, this content is not available in your language.');
 		}
 		return $version;
+	}
+
+	protected function loadAscendants(Node $node, $lang = null){
+		$em = $this->getDoctrine()->getManager();
+		$ascendants = $node->getAscendants();
+		$ascendant_ids = array();
+		foreach ($ascendants as $ascendant){
+			$ascendant_ids[] = $ascendant->getId();
+		}
+		$versions = $em->getRepository('SidusBundle:Version')->findByNodeIds($ascendant_ids);
+		$node_ascendants = array();
+		foreach($versions as $version){
+			$node_ascendants[$version->getNodeId()][$version->getLang()] = $version;
+		}
+		$ascendants = array();
+		foreach($node_ascendants as $ascendant_versions){
+			$ascendants[] = $this->chooseBestVersion($ascendant_versions, $lang);
+		}
+		$this->ascendants = $ascendants;
+		return $ascendants;
+	}
+
+	protected function loadChildren(Node $node, $lang = null){
+		$em = $this->getDoctrine()->getManager();
+		$versions = $em->getRepository('SidusBundle:Version')->findByParentNodeId($node->getId());
+		$node_children = array();
+		foreach($versions as $version){
+			$node_children[$version->getNodeId()][$version->getLang()] = $version;
+		}
+		$children = array();
+		foreach($node_children as $child_versions){
+			$children[] = $this->chooseBestVersion($child_versions, $lang);
+		}
+		$this->children = $children;
+		return $children;
+	}
+
+	protected function loadSiblings(Node $node, $lang = null){
+		$em = $this->getDoctrine()->getManager();
+		$versions = $em->getRepository('SidusBundle:Version')->findByParentNodeId($node->getParentId());
+		$node_siblings = array();
+		foreach($versions as $version){
+			$node_siblings[$version->getNodeId()][$version->getLang()] = $version;
+		}
+		$siblings = array();
+		foreach($node_siblings as $sibling_versions){
+			$siblings[] = $this->chooseBestVersion($sibling_versions, $lang);
+		}
+		$this->siblings = $siblings;
+		return $siblings;
 	}
 
 	public function addAction($node, $ascendants, $descendants, $object) {

@@ -47,13 +47,19 @@ class VersionRepository extends EntityRepository {
 
 	public function findByNodeIds(array $node_ids) {
 		$qb = $this->getQueryBuilder();
-		$qb->where('n.id IN :node_id')->setParameter('node_id', $node_ids);
+		$qb->where('n.id IN (:node_ids)')->setParameter('node_ids', $node_ids);
 		return $qb->getQuery()->getResult();
 	}
 
 	public function findByNodeId($node_id){
 		$qb = $this->getQueryBuilder();
 		$qb->where('n.id = :node_id')->setParameter('node_id', (int)$node_id);
+		return $qb->getQuery()->getResult();
+	}
+
+	public function findByParentNodeId($node_id){
+		$qb = $this->getQueryBuilder();
+		$qb->where('n.parentId = :parent_id')->setParameter('parent_id', (int)$node_id);
 		return $qb->getQuery()->getResult();
 	}
 
@@ -79,7 +85,7 @@ class VersionRepository extends EntityRepository {
 				->groupBy('n.id')
 				->addGroupBy('v.lang')
 				->orderBy('n.id', 'ASC')
-				->orderBy('v.revision_date', 'DESC');
+				->orderBy('v.revisionDate', 'DESC');
 		return $qb;
 	}
 
