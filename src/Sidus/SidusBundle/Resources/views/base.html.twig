@@ -10,9 +10,8 @@
 		<link rel="shortcut icon" href="{{ asset('bundles/sidus/favicon.png') }}">
 	{% endblock %}
 	{% stylesheets filter='cssrewrite,lessphp,?yui_css'
-		'@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
-		'@BmatznerFontAwesomeBundle/Resources/public/less/font-awesome.less'
-		'@SidusBundle/Resources/public/css/*'
+		'bundles/mopabootstrap/less/mopabootstrapbundle-fa.less'
+		'bundles/sidus/css/*'
 	%}
 	   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="all" />
 	{% endstylesheets %}

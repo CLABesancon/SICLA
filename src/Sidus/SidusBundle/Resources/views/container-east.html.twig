@@ -38,12 +38,9 @@
 	{% endblock %}
 	{% block nodeInfos %}
 		<p class="node-infos-line">
-			<big class="node-title">{{object}}</big><br class="hidden-phone"/><span class="visible-phone"> | </span>
+			<big class="node-title"><i class="icon-folder-open"></i> {{object}}</big><br class="hidden-phone"/><span class="visible-phone"> | </span>
 			<span class="text-info">Type: <b>{{object.type}}</b></span><br class="hidden-phone"/><span class="visible-phone"> | </span>
 			<small class="muted">Created by <a href="{{ path('sidus_show_node', { 'node_id': version.revisionby.id }) }}">{{ version.revisionby }}</a> {{ version.revisionDate|datediff() }}</small>
 		</p>
-		<div class="hidden-phone">
-			<p class="center"><i class="icon-folder-open img-polaroid" style="font-size:100px;"></i></p>
-		</div>
 	{% endblock %}
 </div>
