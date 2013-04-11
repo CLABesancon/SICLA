@@ -220,7 +220,11 @@ class DefaultController extends Controller {
 
 	protected function loadSiblings(Node $node, $lang = null){
 		$em = $this->getDoctrine()->getManager();
-		$versions = $em->getRepository('SidusBundle:Version')->findByParentNodeId($node->getParentId());
+		if(null === $node->getParentId()){
+			$versions = $em->getRepository('SidusBundle:Version')->findRoots();
+		} else {
+			$versions = $em->getRepository('SidusBundle:Version')->findByParentNodeId($node->getParentId());
+		}
 		$node_siblings = array();
 		foreach($versions as $version){
 			$node_siblings[$version->getNodeId()][$version->getLang()] = $version;

@@ -3,8 +3,55 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a28e73f8019bbc2635e2e422ccd24e21",
+    "hash": "bedf5db30a68c424562b17b6a75a1d5a",
     "packages": [
+        {
+            "name": "bmatzner/fontawesome-bundle",
+            "version": "dev-master",
+            "target-dir": "Bmatzner/FontAwesomeBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bmatzner/BmatznerFontAwesomeBundle.git",
+                "reference": "d4bb8150ca49d751d035c11679a794861067c41e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bmatzner/BmatznerFontAwesomeBundle/zipball/d4bb8150ca49d751d035c11679a794861067c41e",
+                "reference": "d4bb8150ca49d751d035c11679a794861067c41e",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Bmatzner\\FontAwesomeBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "CC BY 3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Bernd Matzner",
+                    "email": "bernd@matznermatzner.de",
+                    "homepage": "http://berndmatzner.de"
+                }
+            ],
+            "description": "FontAwesome Bundle for Symfony2",
+            "homepage": "http://fortawesome.github.com/Font-Awesome/",
+            "keywords": [
+                "css",
+                "graphics",
+                "symfony",
+                "typography",
+                "webfonts"
+            ],
+            "time": "2013-02-04 13:05:42"
+        },
         {
             "name": "craue/formflow-bundle",
             "version": "dev-master",
@@ -438,34 +485,17 @@
             "time": "2013-03-24 20:43:58"
         },
         {
-            "name": "fortawesome/font-awesome",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/FortAwesome/Font-Awesome/zipball/master",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library",
-            "time": "2013-01-17 17:25:51"
-        },
-        {
             "name": "gedmo/doctrine-extensions",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "af197d8d65de90827778379a18dd44d82c61d3fc"
+                "reference": "b530031b944f5ab675fe0f624937c364f76544b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/af197d8d65de90827778379a18dd44d82c61d3fc",
-                "reference": "af197d8d65de90827778379a18dd44d82c61d3fc",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/b530031b944f5ab675fe0f624937c364f76544b6",
+                "reference": "b530031b944f5ab675fe0f624937c364f76544b6",
                 "shasum": ""
             },
             "require": {
@@ -531,7 +561,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-04-08 16:55:03"
+            "time": "2013-04-11 15:29:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -834,23 +864,6 @@
                 "security"
             ],
             "time": "2012-09-06 09:12:03"
-        },
-        {
-            "name": "jquery/jquery",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jquery/jquery.git",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/jquery/jquery/archive/master",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library",
-            "time": "2013-04-09 16:48:34"
         },
         {
             "name": "knplabs/knp-components",
@@ -1265,12 +1278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
-                "reference": "5e350fdf96da63bc69745171f864f477ddda41a9"
+                "reference": "587ac8cc21a1bdeedcc7966f01ade0be897d4d6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/5e350fdf96da63bc69745171f864f477ddda41a9",
-                "reference": "5e350fdf96da63bc69745171f864f477ddda41a9",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/587ac8cc21a1bdeedcc7966f01ade0be897d4d6c",
+                "reference": "587ac8cc21a1bdeedcc7966f01ade0be897d4d6c",
                 "shasum": ""
             },
             "require": {
@@ -1318,7 +1331,7 @@
                 "form",
                 "template"
             ],
-            "time": "2013-04-03 16:37:33"
+            "time": "2013-04-11 14:44:14"
         },
         {
             "name": "mopa/composer-bridge",
@@ -2039,15 +2052,14 @@
         "kriswallsmith/assetic": 20,
         "mopa/bootstrap-bundle": 20,
         "twitter/bootstrap": 20,
-        "fortawesome/font-awesome": 20,
+        "bmatzner/fontawesome-bundle": 20,
         "knplabs/knp-paginator-bundle": 20,
         "knplabs/knp-menu": 20,
         "knplabs/knp-menu-bundle": 20,
         "craue/formflow-bundle": 20,
         "leafo/lessphp": 20,
         "nervo/yuicompressor": 20,
-        "stof/doctrine-extensions-bundle": 20,
-        "jquery/jquery": 20
+        "stof/doctrine-extensions-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"

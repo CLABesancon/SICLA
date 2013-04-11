@@ -63,6 +63,12 @@ class VersionRepository extends EntityRepository {
 		return $qb->getQuery()->getResult();
 	}
 
+	public function findRoots(){
+		$qb = $this->getQueryBuilder();
+		$qb->where('n.parentId IS null');
+		return $qb->getQuery()->getResult();
+	}
+
 	public function findByNodeName($node_name){
 		$qb = $this->getQueryBuilder();
 		$qb->where('n.nodeName = :node_name')->setParameter('node_name', $node_name);

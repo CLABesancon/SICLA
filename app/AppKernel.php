@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Sidus\SidusBundle\SidusBundle(),
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+			new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
