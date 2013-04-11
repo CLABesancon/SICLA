@@ -51,31 +51,31 @@ class VersionRepository extends EntityRepository {
 		return $qb->getQuery()->getResult();
 	}
 
-	public function findByNodeId($node_id){
+	public function findByNodeId($node_id) {
 		$qb = $this->getQueryBuilder();
-		$qb->where('n.id = :node_id')->setParameter('node_id', (int)$node_id);
+		$qb->where('n.id = :node_id')->setParameter('node_id', (int) $node_id);
 		return $qb->getQuery()->getResult();
 	}
 
-	public function findByParentNodeId($node_id){
+	public function findByParentNode(Node $parent) {
 		$qb = $this->getQueryBuilder();
-		$qb->where('n.parentId = :parent_id')->setParameter('parent_id', (int)$node_id);
+		$qb->where('n.parent = :parent')->setParameter('parent', $parent);
 		return $qb->getQuery()->getResult();
 	}
 
-	public function findRoots(){
+	public function findRoots() {
 		$qb = $this->getQueryBuilder();
-		$qb->where('n.parentId IS null');
+		$qb->where('n.parent IS null');
 		return $qb->getQuery()->getResult();
 	}
 
-	public function findByNodeName($node_name){
+	public function findByNodeName($node_name) {
 		$qb = $this->getQueryBuilder();
 		$qb->where('n.nodeName = :node_name')->setParameter('node_name', $node_name);
 		return $qb->getQuery()->getResult();
 	}
 
-	protected function getQueryBuilder(){
+	protected function getQueryBuilder() {
 		// SELECT n.*, v.*, o.*, t.*
 		// FROM version AS v
 		// LEFT JOIN node AS n ON v.node_id
@@ -94,6 +94,5 @@ class VersionRepository extends EntityRepository {
 				->orderBy('v.revisionDate', 'DESC');
 		return $qb;
 	}
-
 
 }

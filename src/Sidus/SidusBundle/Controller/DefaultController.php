@@ -121,8 +121,6 @@ class DefaultController extends Controller {
 		));
 	}
 
-
-
 	protected function loadObjectsForNodeUID($node_uid, $lang = null) {
 		$this->loadVersionsForNodeUID($node_uid);
 		$this->version = $this->chooseBestVersion($this->versions, $lang);
@@ -180,57 +178,57 @@ class DefaultController extends Controller {
 		return $version;
 	}
 
-	protected function loadAscendants(Node $node, $lang = null){
+	protected function loadAscendants(Node $node, $lang = null) {
 		$em = $this->getDoctrine()->getManager();
 		$ascendants = $node->getAscendants();
-		if($ascendants->isEmpty()){
+		if ($ascendants->isEmpty()) {
 			return;
 		}
 		$ascendant_ids = array();
-		foreach ($ascendants as $ascendant){
+		foreach ($ascendants as $ascendant) {
 			$ascendant_ids[] = $ascendant->getId();
 		}
 		$versions = $em->getRepository('SidusBundle:Version')->findByNodeIds($ascendant_ids);
 		$node_ascendants = array();
-		foreach($versions as $version){
-			$node_ascendants[$version->getNodeId()][$version->getLang()] = $version;
+		foreach ($versions as $version) {
+			$node_ascendants[$version->getNode()->getId()][$version->getLang()] = $version;
 		}
 		$ascendants = array();
-		foreach($node_ascendants as $ascendant_versions){
+		foreach ($node_ascendants as $ascendant_versions) {
 			$ascendants[] = $this->chooseBestVersion($ascendant_versions, $lang);
 		}
 		$this->ascendants = $ascendants;
 		return $ascendants;
 	}
 
-	protected function loadChildren(Node $node, $lang = null){
+	protected function loadChildren(Node $node, $lang = null) {
 		$em = $this->getDoctrine()->getManager();
-		$versions = $em->getRepository('SidusBundle:Version')->findByParentNodeId($node->getId());
+		$versions = $em->getRepository('SidusBundle:Version')->findByParentNode($node);
 		$node_children = array();
-		foreach($versions as $version){
-			$node_children[$version->getNodeId()][$version->getLang()] = $version;
+		foreach ($versions as $version) {
+			$node_children[$version->getNode()->getId()][$version->getLang()] = $version;
 		}
 		$children = array();
-		foreach($node_children as $child_versions){
+		foreach ($node_children as $child_versions) {
 			$children[] = $this->chooseBestVersion($child_versions, $lang);
 		}
 		$this->children = $children;
 		return $children;
 	}
 
-	protected function loadSiblings(Node $node, $lang = null){
+	protected function loadSiblings(Node $node, $lang = null) {
 		$em = $this->getDoctrine()->getManager();
-		if(null === $node->getParentId()){
+		if (null === $node->getParent()) {
 			$versions = $em->getRepository('SidusBundle:Version')->findRoots();
 		} else {
-			$versions = $em->getRepository('SidusBundle:Version')->findByParentNodeId($node->getParentId());
+			$versions = $em->getRepository('SidusBundle:Version')->findByParentNode($node->getParent());
 		}
 		$node_siblings = array();
-		foreach($versions as $version){
-			$node_siblings[$version->getNodeId()][$version->getLang()] = $version;
+		foreach ($versions as $version) {
+			$node_siblings[$version->getNode()->getId()][$version->getLang()] = $version;
 		}
 		$siblings = array();
-		foreach($node_siblings as $sibling_versions){
+		foreach ($node_siblings as $sibling_versions) {
 			$siblings[] = $this->chooseBestVersion($sibling_versions, $lang);
 		}
 		$this->siblings = $siblings;

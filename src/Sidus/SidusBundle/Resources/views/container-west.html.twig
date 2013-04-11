@@ -8,10 +8,10 @@
 	</ul>
 	<ul class="nav nav-tabs nav-stacked">
 		{% for sibling in siblings %}
-			{% if sibling.nodeId == node.id %}
+			{% if sibling.node.id == node.id %}
 				<li class="disabled"><a>{{ sibling.object }}</a></li>
 			{% else %}
-				<li><a href="{{ path('sidus_show_node', { 'node_id': sibling.nodeId }) }}">{{ sibling.object }}</a></li>
+				<li><a href="{{ path('sidus_show_node', { 'node_id': sibling.node.id }) }}">{{ sibling.object }}</a></li>
 			{% endif %}
 		{% endfor %}
 	</ul>

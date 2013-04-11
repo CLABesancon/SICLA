@@ -38,7 +38,7 @@
 				<ul class="breadcrumb">
 					{% if ascendants is defined %}
 						{% for ascendant in ascendants %}
-							<li><a href="{{ path('sidus_show_node', {'node_id': ascendant.nodeId }) }}">{{ ascendant.object }}</a> <span class="divider">/</span></li>
+							<li><a href="{{ path('sidus_show_node', {'node_id': ascendant.node.id }) }}">{{ ascendant.object }}</a> <span class="divider">/</span></li>
 						{% endfor %}
 					{% endif %}
 					<li class="active"><a href="{{ path('sidus_show_node', {'node_id': node.id }) }}">{{ object }}</a></li>

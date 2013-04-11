@@ -14,12 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Version {
 
 	/**
-	 * @ORM\Column(name="node_id", type="integer")
-	 * @ORM\Id
-	 */
-	private $nodeId;
-
-	/**
 	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="versions", cascade={"persist"})
 	 * @ORM\JoinColumn(name="node_id", referencedColumnName="id")
 	 */
@@ -180,47 +174,24 @@ class Version {
 	}
 
 	/**
-	 * Set nodeId
+	 * Set revisionDate
 	 *
-	 * @param integer $nodeId
+	 * @param \DateTime $revisionDate
 	 * @return Version
 	 */
-	public function setNodeId($nodeId) {
-		$this->nodeId = $nodeId;
+	public function setRevisionDate($revisionDate) {
+		$this->revisionDate = $revisionDate;
 
 		return $this;
 	}
 
 	/**
-	 * Get nodeId
+	 * Get revisionDate
 	 *
-	 * @return integer
+	 * @return \DateTime
 	 */
-	public function getNodeId() {
-		return $this->nodeId;
+	public function getRevisionDate() {
+		return $this->revisionDate;
 	}
 
-
-    /**
-     * Set revisionDate
-     *
-     * @param \DateTime $revisionDate
-     * @return Version
-     */
-    public function setRevisionDate($revisionDate)
-    {
-        $this->revisionDate = $revisionDate;
-
-        return $this;
-    }
-
-    /**
-     * Get revisionDate
-     *
-     * @return \DateTime
-     */
-    public function getRevisionDate()
-    {
-        return $this->revisionDate;
-    }
 }
