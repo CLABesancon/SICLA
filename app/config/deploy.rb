@@ -4,7 +4,7 @@ ssh_options[:port] = "2222"
 set :deploy_to,   "/home/www/#{application}"
 set :app_path,    "app"
 
-set :repository,  "https://github.com/VincentChalnot/SidusAdmin.git"
+set :repository,  "git@github.com:VincentChalnot/SidusAdmin.git"
 set :scm,         :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
 
@@ -25,3 +25,4 @@ set :shared_files,      ["app/config/parameters.yml"]
 set :shared_children,     [app_path + "/logs", web_path + "/uploads", "vendor"]
 set :use_composer, true
 set :update_vendors, true
+set :git_enable_submodules, 1
