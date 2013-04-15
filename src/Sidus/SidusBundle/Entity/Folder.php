@@ -14,16 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Folder extends Object {
 
 	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="id_object", type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-
-
-	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="content", type="text")
@@ -36,15 +26,6 @@ class Folder extends Object {
 	 * @ORM\Column(name="tags", type="text")
 	 */
 	private $tags;
-
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId() {
-		return $this->id;
-	}
 
 	/**
 	 * Set content

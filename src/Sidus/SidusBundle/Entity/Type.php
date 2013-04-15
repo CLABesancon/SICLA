@@ -11,16 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Sidus\SidusBundle\Entity\TypeRepository")
  */
 class Type extends Object {
-
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="id_object", type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-
+	
 	/**
 	 * @var string
 	 *
@@ -60,16 +51,7 @@ class Type extends Object {
 		$this->authorizedTypes = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->forbiddenTypes = new \Doctrine\Common\Collections\ArrayCollection();
 	}
-
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
+	
 	/**
 	 * Set typename
 	 *

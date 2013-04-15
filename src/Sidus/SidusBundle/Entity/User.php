@@ -15,15 +15,6 @@ use \Symfony\Component\Security\Core\User\UserInterface;
 class User extends Object implements UserInterface{
 
 	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="id_object", type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
-
-	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="username", type="string", length=255)
@@ -74,14 +65,6 @@ class User extends Object implements UserInterface{
 
 	public function __construct(){
 		$this->isInactive = false;
-	}
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId() {
-		return $this->id;
 	}
 
 	/**

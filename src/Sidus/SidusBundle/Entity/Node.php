@@ -15,427 +15,379 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Node {
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="id", type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(name="node_name", type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $nodeName;
+
+    /**
+     * @var Node[]
+     * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Node", mappedBy="parent", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OrderBy({"lft" = "ASC"})
+     */
+    private $children;
+
+    /**
+     * @var Node
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="children", cascade={"persist"})
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
+     */
+    private $parent;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node")
-	 * @ORM\JoinColumn(name="created_by")
-	 * @Assert\NotBlank()
-	 */
-	private $createdBy;
+     * @var integer
+     * @ORM\Column(name="parent_id", type="integer")
+     */
+    private $parentId;
 
-	/**
-	 * @ORM\Column(name="node_name", type="string", length=255)
-	 * @ORM\JoinColumn(nullable=true)
-	 */
-	private $nodeName;
+    /**
+     * @var Versions[]
+     * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Version", mappedBy="node", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $versions;
 
-	/**
-	 * @var \DateTime
-	 *
-	 * @ORM\Column(name="created_at", type="datetime")
-	 * @Assert\NotBlank()
-	 * @Assert\DateTime()
-	 */
-	private $createdAt;
+    /**
+     * Nested Tree configuration
+     */
 
-	/**
-	 * @var Node[]
-	 * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Node", mappedBy="parent", cascade={"persist"})
-	 * @ORM\JoinColumn(nullable=false)
-	 * @ORM\OrderBy({"lft" = "ASC"})
-	 */
-	private $children;
+    /**
+    * @Gedmo\TreeLeft
+    * @ORM\Column(name="lft", type="integer")
+    */
+   private $lft;
 
-	/**
-	 * @var Node
-	 * @Gedmo\TreeParent
-	 * @ORM\ManyToOne(targetEntity="Sidus\SidusBundle\Entity\Node", inversedBy="children", cascade={"persist"})
-	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
-	 */
-	private $parent;
+   /**
+    * @Gedmo\TreeRight
+    * @ORM\Column(name="rgt", type="integer")
+    */
+   private $rgt;
 
-	/**
-	 * @var Versions[]
-	 * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Version", mappedBy="node", cascade={"persist"})
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	private $versions;
+   /**
+    * @Gedmo\TreeLevel
+    * @ORM\Column(name="lvl", type="integer")
+    */
+   private $lvl;
 
-	/**
-	 * Nested Tree configuration
-	 */
 
-	/**
-	 * @Gedmo\TreeLeft
-	 * @ORM\Column(name="lft", type="integer")
-	 */
-	private $lft;
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->versions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->parent = null;
+    }
 
-	/**
-	 * @Gedmo\TreeRight
-	 * @ORM\Column(name="rgt", type="integer")
-	 */
-	private $rgt;
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId() {
+        return $this->id;
+    }
 
-	/**
-	 * @Gedmo\TreeLevel
-	 * @ORM\Column(name="lvl", type="integer")
-	 */
-	private $lvl;
+    /**
+     * Set nodeName
+     *
+     * @param string $nodeName
+     * @return Node
+     */
+    public function setNodeName($nodeName) {
+        $this->nodeName = $nodeName;
 
-	/**
-	 * @Gedmo\TreeRoot
-	 * @ORM\Column(name="root", type="integer", nullable=true)
-	 */
-	private $root;
+        return $this;
+    }
 
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->createdAt = new \DateTime('now');
-		$this->modifiedAt = new \DateTime('now');
-		$this->children = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->versions = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->parent = null;
-	}
+    /**
+     * Get nodeName
+     *
+     * @return string
+     */
+    public function getNodeName() {
+        return $this->nodeName;
+    }
 
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * Set parent
+     *
+     * @param Node $parent
+     * @return Node
+     */
+    public function setParent(Node $parent) {
+        $this->parent = $parent;
+        return $this;
+    }
 
-	/**
-	 * Set nodeName
-	 *
-	 * @param string $nodeName
-	 * @return Node
-	 */
-	public function setNodeName($nodeName) {
-		$this->nodeName = $nodeName;
+    /**
+     * Get parent
+     *
+     * @return Node
+     */
+    public function getParent() {
+        if ($this->id != 1) {
+            return $this->parent;
+        } else {
+            return null;
+        }
+    }
 
-		return $this;
-	}
+    public function getAscendants() {
+        $result = new \Doctrine\Common\Collections\ArrayCollection(); //Array of ascendants nodes
+        $tmp = $this;
+        while ($tmp->getParent()) {
+            $tmp = $tmp->getParent();
+            $result->add($tmp);
+        }
+        return $result;
+    }
 
-	/**
-	 * Get nodeName
-	 *
-	 * @return string
-	 */
-	public function getNodeName() {
-		return $this->nodeName;
-	}
+    /**
+     * Add child
+     *
+     * @param Node $child
+     * @return Node
+     */
+    public function addChild(Node $child) {
+        $this->children[] = $child;
 
-	/**
-	 * Set created_by
-	 *
-	 * @param integer $createdBy
-	 * @return Node
-	 */
-	public function setCreatedBy($createdBy) {
-		$this->createdBy = $createdBy;
+        return $this;
+    }
 
-		return $this;
-	}
+    /**
+     * Remove child
+     *
+     * @param Node $child
+     */
+    public function removeChild(Node $child) {
+        $this->children->removeElement($child);
+    }
 
-	/**
-	 * Get created_by
-	 *
-	 * @return integer
-	 */
-	public function getCreatedBy() {
-		return $this->createdBy;
-	}
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren() {
+        return $this->children;
+    }
 
-	/**
-	 * Set created_at
-	 *
-	 * @param \DateTime $createdAt
-	 * @return Node
-	 */
-	public function setCreatedAt($createdAt) {
-		$this->createdAt = $createdAt;
-		return $this;
-	}
+    /**
+     * Add versions
+     *
+     * @param Version $versions
+     * @return Node
+     */
+    public function addVersion(Version $versions) {
+        $this->versions[] = $versions;
 
-	/**
-	 * Get created_at
-	 *
-	 * @return \DateTime
-	 */
-	public function getCreatedAt() {
-		return $this->createdAt;
-	}
+        return $this;
+    }
 
-	/**
-	 * Set parent
-	 *
-	 * @param Node $parent
-	 * @return Node
-	 */
-	public function setParent(Node $parent) {
-		$this->parent = $parent;
-		return $this;
-	}
+    /**
+     * Remove versions
+     *
+     * @param Version $versions
+     */
+    public function removeVersion(Version $versions) {
+        $this->versions->removeElement($versions);
+    }
 
-	/**
-	 * Get parent
-	 *
-	 * @return Node
-	 */
-	public function getParent() {
-		if ($this->id != 1) {
-			return $this->parent;
-		} else {
-			return null;
-		}
-	}
+    /**
+     * Get versions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVersions() {
+        return $this->versions;
+    }
 
-	public function getAscendants() {
-		$result = new \Doctrine\Common\Collections\ArrayCollection(); //Array of ascendants nodes
-		$tmp = $this;
-		while ($tmp->getParent()) {
-			$tmp = $tmp->getParent();
-			$result->add($tmp);
-		}
-		return $result;
-	}
+    /**
+     * Return the last version for each available language
+     * @return Versions[]
+     */
+    /**
+      public function getLastVersions(){
+      if(!$this->last_versions){
+      $em = $this->getEntityManager(); // @todo BORDEL COMMENT ON FAIT ??? --> dans le repository
+      $this->last_versions = $em->getRepository('SidusBundle:Version')->findAllLastVersions($this);
+      }
+      return $this->last_versions;
+      }
+     */
 
-	/**
-	 * Add child
-	 *
-	 * @param Node $child
-	 * @return Node
-	 */
-	public function addChild(Node $child) {
-		$this->children[] = $child;
+    /**
+     * @todo Return the version with the proper language
+     * @return Version
+     */
+    public function getDefaultVersion() {
+        $versions = $this->getLastVersions();
+        return array_pop($versions);
+    }
 
-		return $this;
-	}
+    /**
+     *
+     * @return Version
+     */
+    public function getCurrentVersion() {
+        if (!$this->current_version) {
+            return $this->getDefaultVersion();
+        }
+        return $this->current_version;
+    }
 
-	/**
-	 * Remove child
-	 *
-	 * @param Node $child
-	 */
-	public function removeChild(Node $child) {
-		$this->children->removeElement($child);
-	}
+    /**
+     *
+     * @param Version $version
+     * @return Node
+     */
+    public function setCurrentVersion(Version $version) {
+        $this->current_version = $version;
+        return $this;
+    }
 
-	/**
-	 * Get children
-	 *
-	 * @return \Doctrine\Common\Collections\Collection
-	 */
-	public function getChildren() {
-		return $this->children;
-	}
+    public function getObject($version = null) {
 
-	/**
-	 * Add versions
-	 *
-	 * @param Version $versions
-	 * @return Node
-	 */
-	public function addVersion(Version $versions) {
-		$this->versions[] = $versions;
+    }
 
-		return $this;
-	}
+    /**
+     *
+     * @return string
+     */
+    public function __toString() {
+        try {
+            return (string) $this->getObject();
+        } catch (ErrorException $e) {
+            return (string) $this->getNodeName();
+        }
+    }
 
-	/**
-	 * Remove versions
-	 *
-	 * @param Version $versions
-	 */
-	public function removeVersion(Version $versions) {
-		$this->versions->removeElement($versions);
-	}
 
-	/**
-	 * Get versions
-	 *
-	 * @return \Doctrine\Common\Collections\Collection
-	 */
-	public function getVersions() {
-		return $this->versions;
-	}
+    /**
+     * Set lft
+     *
+     * @param integer $lft
+     * @return Node
+     */
+    public function setLft($lft)
+    {
+        $this->lft = $lft;
 
-	/**
-	 * Return the last version for each available language
-	 * @return Versions[]
-	 */
-	/**
-	  public function getLastVersions(){
-	  if(!$this->last_versions){
-	  $em = $this->getEntityManager(); // @todo BORDEL COMMENT ON FAIT ??? --> dans le repository
-	  $this->last_versions = $em->getRepository('SidusBundle:Version')->findAllLastVersions($this);
-	  }
-	  return $this->last_versions;
-	  }
-	 */
+        return $this;
+    }
 
-	/**
-	 * @todo Return the version with the proper language
-	 * @return Version
-	 */
-	public function getDefaultVersion() {
-		$versions = $this->getLastVersions();
-		return array_pop($versions);
-	}
+    /**
+     * Get lft
+     *
+     * @return integer
+     */
+    public function getLft()
+    {
+        return $this->lft;
+    }
 
-	/**
-	 *
-	 * @return Version
-	 */
-	public function getCurrentVersion() {
-		if (!$this->current_version) {
-			return $this->getDefaultVersion();
-		}
-		return $this->current_version;
-	}
+    /**
+     * Set rgt
+     *
+     * @param integer $rgt
+     * @return Node
+     */
+    public function setRgt($rgt)
+    {
+        $this->rgt = $rgt;
 
-	/**
-	 *
-	 * @param Version $version
-	 * @return Node
-	 */
-	public function setCurrentVersion(Version $version) {
-		$this->current_version = $version;
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getObject($version = null) {
+    /**
+     * Get rgt
+     *
+     * @return integer
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
 
-	}
+    /**
+     * Set lvl
+     *
+     * @param integer $lvl
+     * @return Node
+     */
+    public function setLvl($lvl)
+    {
+        $this->lvl = $lvl;
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		try {
-			return (string) $this->getObject();
-		} catch (ErrorException $e) {
-			return (string) $this->getNodeName();
-		}
-	}
+        return $this;
+    }
 
-	/**
-	 * Set lft
-	 *
-	 * @param integer $lft
-	 * @return Node
-	 */
-	public function setLft($lft) {
-		$this->lft = $lft;
+    /**
+     * Get lvl
+     *
+     * @return integer
+     */
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
 
-		return $this;
-	}
+    /**
+     * Add children
+     *
+     * @param \Sidus\SidusBundle\Entity\Node $children
+     * @return Node
+     */
+    public function addChildren(\Sidus\SidusBundle\Entity\Node $children)
+    {
+        $this->children[] = $children;
 
-	/**
-	 * Get lft
-	 *
-	 * @return integer
-	 */
-	public function getLft() {
-		return $this->lft;
-	}
+        return $this;
+    }
 
-	/**
-	 * Set rgt
-	 *
-	 * @param integer $rgt
-	 * @return Node
-	 */
-	public function setRgt($rgt) {
-		$this->rgt = $rgt;
+    /**
+     * Remove children
+     *
+     * @param \Sidus\SidusBundle\Entity\Node $children
+     */
+    public function removeChildren(\Sidus\SidusBundle\Entity\Node $children)
+    {
+        $this->children->removeElement($children);
+    }
 
-		return $this;
-	}
+    /**
+     * Set parentId
+     *
+     * @param integer $parentId
+     * @return Node
+     */
+    public function setParentId($parentId)
+    {
+        $this->parentId = $parentId;
+    
+        return $this;
+    }
 
-	/**
-	 * Get rgt
-	 *
-	 * @return integer
-	 */
-	public function getRgt() {
-		return $this->rgt;
-	}
-
-	/**
-	 * Set lvl
-	 *
-	 * @param integer $lvl
-	 * @return Node
-	 */
-	public function setLvl($lvl) {
-		$this->lvl = $lvl;
-
-		return $this;
-	}
-
-	/**
-	 * Get lvl
-	 *
-	 * @return integer
-	 */
-	public function getLvl() {
-		return $this->lvl;
-	}
-
-	/**
-	 * Set root
-	 *
-	 * @param integer $root
-	 * @return Node
-	 */
-	public function setRoot($root) {
-		$this->root = $root;
-
-		return $this;
-	}
-
-	/**
-	 * Get root
-	 *
-	 * @return integer
-	 */
-	public function getRoot() {
-		return $this->root;
-	}
-
-	/**
-	 * Add children
-	 *
-	 * @param \Sidus\SidusBundle\Entity\Node $children
-	 * @return Node
-	 */
-	public function addChildren(\Sidus\SidusBundle\Entity\Node $children) {
-		$this->children[] = $children;
-
-		return $this;
-	}
-
-	/**
-	 * Remove children
-	 *
-	 * @param \Sidus\SidusBundle\Entity\Node $children
-	 */
-	public function removeChildren(\Sidus\SidusBundle\Entity\Node $children) {
-		$this->children->removeElement($children);
-	}
-
+    /**
+     * Get parentId
+     *
+     * @return integer 
+     */
+    public function getParentId()
+    {
+        return $this->parentId;
+    }
 }
