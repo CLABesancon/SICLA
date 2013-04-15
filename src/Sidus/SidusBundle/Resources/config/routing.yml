@@ -37,10 +37,6 @@ sidus_choose_node:
   requirements:
     _locale: ^[a-z]{2}$
 
-sidus_add_node:
-  pattern:  /add/{node_id}
-  defaults: { _controller: SidusBundle:Default:add }
-
 sidus_delete_node:
   pattern:  /delete/{node_id}
   defaults: { _controller: SidusBundle:Default:delete }

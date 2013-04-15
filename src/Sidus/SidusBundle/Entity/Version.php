@@ -59,7 +59,11 @@ class Version {
 	 * @Assert\NotBlank()
 	 */
 	private $revisionBy;
-
+	
+	public function __construct() {
+		$this->revisionDate=new \DateTime('now');;
+	}
+	
 	/**
 	 * Get id
 	 *

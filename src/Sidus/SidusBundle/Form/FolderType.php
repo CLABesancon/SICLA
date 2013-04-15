@@ -12,6 +12,8 @@ class FolderType extends AbstractType
     {
         $builder
             ->add('title')
+				->add('content')
+				->add('tags')
         ;
     }
 

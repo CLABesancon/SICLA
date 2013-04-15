@@ -75,15 +75,14 @@ class DefaultController extends Controller {
 		return $this->render('SidusBundle:Default:edit.html.twig', $this->loaded_objects);
 	}
 
-	public function chooseAction($node_id) {
+	public function chooseAction($node_id, $_locale = null) {
+		$em = $this->getDoctrine()->getManager();
 		/** @TODO Lorsqu'on clique sur une des icones -> forward vers addAction du type en question.
 		 */
-		$node = $this->getNode($node_id);
+		$this->loadObjectsForNodeUID($node_id, $_locale);
 
-		$em = $this->getDoctrine()->getManager();
-
-		$forbidden_types = $node['object']->getType()->getForbiddenTypes();
-		$authorized_types = $node['object']->getType()->getAuthorizedTypes();
+		$forbidden_types = $this->version->getObject()->getType()->getForbiddenTypes();
+		$authorized_types = $this->version->getObject()->getType()->getAuthorizedTypes();
 
 		if (!$forbidden_types->isEmpty()) {
 			$types = new \Doctrine\Common\Collections\ArrayCollection($em->getRepository('SidusBundle:Type')->findAll());
@@ -97,28 +96,25 @@ class DefaultController extends Controller {
 
 		if ($this->getRequest()->isMethod('POST')) {
 			// $this->getRequest()->request->keys() -> récupère le name du submit selectionner $type[0].':add', array('node' => $node,));
-			$type = $this->getRequest()->request->keys();
-
-			$user = $em->getRepository('SidusBundle:Node')->find(11);
-
+			$typeid = $this->getRequest()->request->keys();
+			$type = $em->getRepository('SidusBundle:Type')->find($typeid[0]);
+			
 			$new_node = new Node();
-			$new_node->setParent($node['node']);
-			$new_node->setCreatedBy($user);
+			$new_node->setParent($this->version->getNode());
 			$new_node->setNodename('');
 			$em->persist($new_node);
 			$em->flush();
 			//Créer une nouvelle node + version + objet (et type) et forward vers edit de la node nouvellement créer)
 
-			return $this->redirect($this->generateUrl('sidus_add_node', array(
-								'_locale' => $node['node']->getCurrentVersion()->getLang(),
-								'node_id' => $new_node->getId(),
-			)));
+			return $this->forward($type->getController().':add', array(
+								'_locale' => $this->version->getLang(),
+								'node' => $new_node,
+								'type' => $type,
+			));
 		}
-
-		return $this->render('SidusBundle:Default:choose.html.twig', array(
-					'node' => $node,
-					'types' => $types,
-		));
+		
+		$this->loaded_objects['types'] = $types;
+		return $this->render('SidusBundle:Default:choose.html.twig',  $this->loaded_objects);
 	}
 
 	protected function loadObjectsForNodeUID($node_uid, $lang = null) {

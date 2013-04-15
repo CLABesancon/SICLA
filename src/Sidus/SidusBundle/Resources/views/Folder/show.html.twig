@@ -67,7 +67,7 @@
 					<td><input type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
 					<td><a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{ child.object }}</a></td>
 					<td>{{ child.object.type }}</td>
-					<td class="hidden-phone"><time datetime="{{ child.node.createdAt|date('c') }}">{{ child.node.createdAt|date('d/m/Y') }}<span class="hidden-tablet"> {{ child.node.createdAt|date('H:i') }}</span></time></td>
+					<td class="hidden-phone"><time datetime="{{ child.revisionDate|date('c') }}">{{ child.revisionDate|date('d/m/Y') }}<span class="hidden-tablet"> {{ child.revisionDate|date('H:i') }}</span></time></td>
 					<td class="visible-desktop"><time datetime="{{ child.revisionDate|date('c') }}">{{ child.revisionDate|date('d/m/Y') }}<span class="hidden-tablet"> {{ child.revisionDate|date('H:i') }}</span></time></td>
 					<td class="hidden-phone"><a href="{{ path('sidus_show_node', { 'node_id': child.revisionBy.id }) }}">{{ child.revisionBy }}</a></td>
 					<td>

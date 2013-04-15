@@ -46,12 +46,6 @@ class Node {
      */
     private $parent;
 
-	/**
-     * @var integer
-     * @ORM\Column(name="parent_id", type="integer")
-     */
-    private $parentId;
-
     /**
      * @var Versions[]
      * @ORM\OneToMany(targetEntity="Sidus\SidusBundle\Entity\Version", mappedBy="node", cascade={"persist"})
@@ -366,28 +360,5 @@ class Node {
     public function removeChildren(\Sidus\SidusBundle\Entity\Node $children)
     {
         $this->children->removeElement($children);
-    }
-
-    /**
-     * Set parentId
-     *
-     * @param integer $parentId
-     * @return Node
-     */
-    public function setParentId($parentId)
-    {
-        $this->parentId = $parentId;
-    
-        return $this;
-    }
-
-    /**
-     * Get parentId
-     *
-     * @return integer 
-     */
-    public function getParentId()
-    {
-        return $this->parentId;
     }
 }
