@@ -1,7 +1,0 @@
-parameters:
-#    sidus_sidus.example.class: Sidus\SidusBundle\Example
-
-services:
-  sidus_node_loader:
-    class:				Sidus\SidusBundle\Services\NodeLoader
-    arguments:		[ "@doctrine" ]
