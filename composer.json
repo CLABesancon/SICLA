@@ -9,9 +9,9 @@
         "symfony/symfony": "2.1.*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "1.1.*",
-		"doctrine/data-fixtures":"dev-master",
-		"doctrine/doctrine-fixtures-bundle":"dev-master",
-		"gedmo/doctrine-extensions":"dev-master",
+        "doctrine/data-fixtures":"dev-master",
+        "doctrine/doctrine-fixtures-bundle":"dev-master",
+        "gedmo/doctrine-extensions":"dev-master",
         "twig/extensions": "1.0.*@dev",
         "symfony/assetic-bundle": "2.1.*",
         "symfony/swiftmailer-bundle": "2.1.*",
@@ -28,12 +28,13 @@
         "knplabs/knp-paginator-bundle": "dev-master",
         "knplabs/knp-menu": "dev-master",
         "knplabs/knp-menu-bundle": "dev-master",
-		"craue/formflow-bundle": "dev-master",
+        "craue/formflow-bundle": "dev-master",
         "leafo/lessphp": "dev-master",
-		"nervo/yuicompressor": "dev-master",
-        "stof/doctrine-extensions-bundle": "dev-master"
+        "nervo/yuicompressor": "dev-master",
+        "stof/doctrine-extensions-bundle": "dev-master",
+        "sidus/sidus-bundle": "dev-master"
     },
-	"repositories": [
+    "repositories": [
        {
            "type": "package",
            "package": {
@@ -57,14 +58,14 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-			"Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ],
         "post-update-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-			"Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ]
     },
     "extra": {

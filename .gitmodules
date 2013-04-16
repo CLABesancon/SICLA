@@ -1,3 +1,0 @@
-[submodule "src/Sidus/SidusBundle"]
-	path = src/Sidus/SidusBundle
-	url = https://github.com/VincentChalnot/SidusBundle.git
