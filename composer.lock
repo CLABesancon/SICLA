@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "bedf5db30a68c424562b17b6a75a1d5a",
+    "hash": "2a0194509059df892f2493b85d052de2",
     "packages": [
         {
             "name": "bmatzner/fontawesome-bundle",
@@ -59,12 +59,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/craue/CraueFormFlowBundle.git",
-                "reference": "7942b210c6aa52a78267858c223fac2f4f931a86"
+                "reference": "a60f1e32466b1bd21733c8735ff63725e3c551de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/7942b210c6aa52a78267858c223fac2f4f931a86",
-                "reference": "7942b210c6aa52a78267858c223fac2f4f931a86",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/a60f1e32466b1bd21733c8735ff63725e3c551de",
+                "reference": "a60f1e32466b1bd21733c8735ff63725e3c551de",
                 "shasum": ""
             },
             "require": {
@@ -104,7 +104,7 @@
                 "Symfony2",
                 "form"
             ],
-            "time": "2013-04-15 11:54:00"
+            "time": "2013-04-16 00:19:46"
         },
         {
             "name": "doctrine/common",
@@ -1554,6 +1554,73 @@
             "time": "2013-01-04 17:09:08"
         },
         {
+            "name": "sidus/sidus-bundle",
+            "version": "dev-master",
+            "target-dir": "Sidus/SidusBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VincentChalnot/SidusBundle.git",
+                "reference": "593265b62cb7957027324221ddaeb42759a25b79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VincentChalnot/SidusBundle/zipball/593265b62cb7957027324221ddaeb42759a25b79",
+                "reference": "593265b62cb7957027324221ddaeb42759a25b79",
+                "shasum": ""
+            },
+            "require": {
+                "bmatzner/fontawesome-bundle": "dev-master",
+                "craue/formflow-bundle": "dev-master",
+                "doctrine/doctrine-bundle": "1.1.*",
+                "doctrine/orm": ">=2.2.3,<2.4-dev",
+                "gedmo/doctrine-extensions": "dev-master",
+                "jms/di-extra-bundle": "1.1.*",
+                "jms/security-extra-bundle": "1.2.*",
+                "knplabs/knp-menu": "dev-master",
+                "knplabs/knp-menu-bundle": "dev-master",
+                "knplabs/knp-paginator-bundle": "dev-master",
+                "kriswallsmith/assetic": "1.1.*@dev",
+                "mopa/bootstrap-bundle": "dev-master",
+                "php": ">=5.3.3",
+                "sensio/distribution-bundle": "2.1.*",
+                "sensio/framework-extra-bundle": "2.1.*",
+                "stof/doctrine-extensions-bundle": "dev-master",
+                "symfony/assetic-bundle": "2.1.*",
+                "symfony/monolog-bundle": "2.1.*",
+                "symfony/swiftmailer-bundle": "2.1.*",
+                "twig/extensions": "1.0.*@dev"
+            },
+            "type": "framework",
+            "autoload": {
+                "psr-0": {
+                    "Sidus\\SidusBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Chalnot",
+                    "email": "vincent@sidus.fr",
+                    "homepage": "http://chalnot.fr"
+                },
+                {
+                    "name": "Héloïse Régnier",
+                    "email": "heloise@sidus.fr"
+                }
+            ],
+            "description": "Full stack framework to manage complex tree-based typed dataset",
+            "homepage": "http://sidus.fr",
+            "keywords": [
+                "framework",
+                "tree",
+                "typed"
+            ],
+            "time": "2013-04-16 10:28:58"
+        },
+        {
             "name": "stof/doctrine-extensions-bundle",
             "version": "dev-master",
             "target-dir": "Stof/DoctrineExtensionsBundle",
@@ -2065,7 +2132,8 @@
         "craue/formflow-bundle": 20,
         "leafo/lessphp": 20,
         "nervo/yuicompressor": 20,
-        "stof/doctrine-extensions-bundle": 20
+        "stof/doctrine-extensions-bundle": 20,
+        "sidus/sidus-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"
