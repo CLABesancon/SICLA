@@ -27,6 +27,10 @@ class AppKernel extends Kernel
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 			new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
+			new SICLA\HydraBundle\SICLAHydraBundle(),
+			new SICLA\AraBundle\SICLAAraBundle(),
+			new JMS\TranslationBundle\JMSTranslationBundle(),
+            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

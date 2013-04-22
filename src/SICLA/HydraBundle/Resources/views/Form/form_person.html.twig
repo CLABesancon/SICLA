@@ -1,0 +1,12 @@
+{% extends 'SICLAAraBundle::araBase.html.twig' %}
+{% block main %}
+
+{% form_theme form 'SICLAHydraBundle:Form:fields.html.twig' %}
+
+      <form class="form-horizontal">
+        {{ form_widget(form) }}
+			  <button class="btn btn-success" type="submit">Valider</button>
+      </form>
+	
+{% endblock %}
+

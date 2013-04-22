@@ -1,0 +1,16 @@
+sicla_hydra_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: SICLAHydraBundle:Default:index }
+    
+sicla_hydra_create_address:
+    pattern:  /create_address
+    defaults: { _controller: SICLAHydraBundle:Address:form_address }
+    
+sicla_hydra_create_person:
+    pattern:  /create_person
+    defaults: { _controller: SICLAHydraBundle:Person:form_person }
+    
+sicla_hydra_create_phone:
+    pattern:  /create_phone
+    defaults: { _controller: SICLAHydraBundle:Phone:form_phone }        
+    

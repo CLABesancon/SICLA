@@ -1,0 +1,40 @@
+{% extends 'SICLAAraBundle:Default:show.html.twig' %}
+	
+	Type du logement : {{ object.typeLogement }}
+	
+	Loyer hors charges : {{ object.loyer }}
+	
+	Montant des charges : {{ object.charges }}
+	
+	Surface du logement (en m²) : {{ object.surface }}
+	
+	De combien de chambres le logement dispose-t-il ? {{ object.nbChambres }}
+	
+	Le logement est-il meublé ? {{ object.meuble }}
+	
+	Le logement dispose-t-il d\'un ascenseur ? {{ object.ascenseur }}
+	
+	Consommation énergétique : {{ object.consommationEnergie }}
+				
+	Emission de gaz à effet de serre : {{ object.emissionGes }}
+	 
+	Le logement dispose-t-il d\'une salle de bains privative ? {{ object.sdbPrivative }}
+	
+	Le logement dispose des équipements suivants : {{ object.equipement }}
+	
+	<div id="map" style="width: 300px; height: 300px;"></div>
+	<div class="adresse">44 avenue georges clémenceau Besançon, France</div>
+	<div class="adresse">6 rue gabriel plancon 25000 besançon</div>
+	<div id="way"></div>
+	
+	<div class="energie">
+		<div class="curseur_energie">
+			<--
+		</div>
+	</div>
+	
+	<div class="ges">
+		<div class="curseur_ges">
+			<--
+		</div>
+	</div>

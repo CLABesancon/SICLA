@@ -1,0 +1,50 @@
+{% extends 'SICLAAraBundle::araBase.html.twig' %}
+{% block main %}
+{% form_theme form 'SICLAHydraBundle:Form:fields.html.twig' %}
+	<form action="" method="post">
+	<h1>{{ 'Création d\'une nouvelle adresse'}}</h1>
+			   
+		{{ form_label(form.streetNumber) }}
+		{{ form_widget(form.streetNumber) }}
+	
+		{{ form_label(form.streetNumberSuffix) }}
+		{{ form_widget(form.streetNumberSuffix) }}
+		
+		{{ form_label(form.streetType) }}
+		{{ form_widget(form.streetType) }}
+	
+		{{ form_label(form.streetName) }}
+		{{ form_widget(form.streetName) }}
+		
+		{{ form_label(form.addressType) }}
+		{{ form_widget(form.addressType) }}
+		
+		{{ form_label(form.addressTypeNumber) }}
+		{{ form_widget(form.addressTypeNumber)}}
+	
+		{{ form_label(form.minorMunicipality) }}
+		{{ form_widget(form.minorMunicipality)}}
+	
+		{{ form_label(form.majorMunicipality) }}
+		{{ form_widget(form.majorMunicipality)}}
+	
+		{{ form_label(form.governinsDistrict) }}
+		{{ form_widget(form.governinsDistrict)}}
+		
+		{{ form_label(form.postalCode) }}
+		{{ form_widget(form.postalCode)}}
+		
+		{{ form_label(form.country) }}
+		{{ form_widget(form.country)}}
+		
+		{{ form_label(form.cedex) }}
+		{{ form_widget(form.cedex)}}
+		
+		{{ form_label(form.cedexNumber) }}
+		{{ form_widget(form.cedexNumber)}}
+		
+		{{ form_label(form.postofficeNumber) }}
+		{{ form_widget(form.postofficeNumber)}}
+		<button class="btn btn-success" type="submit">Valider</button>
+</form>
+{% endblock %}

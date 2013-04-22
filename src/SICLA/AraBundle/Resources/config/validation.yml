@@ -1,0 +1,16 @@
+## YAML Template.
+---
+SICLA\AraBundle\Entity\Logement:
+  properties:	
+        nbChambres:
+            - Type: \integer
+        surface:
+            - Type: \float
+        loyer:
+            - Type: \float
+        charges:
+            - Type: \float
+        consommationEnergie:
+            - Type: \integer
+        emissionGes:
+            - Type: \integer    

@@ -1,0 +1,47 @@
+/* 
+    Document   : AraCSS
+    Created on : 17 avr. 2013, 15:25:15
+    Author     : laurent
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+label{font-weight : bold;}
+label.radio, .checkbox {display:inline-block; padding-right: 10px; font-weight:normal}
+div.input-append{display:block;}
+.adp-directions{display:none;}
+
+div.form{float:left; margin-right: 20%;}
+
+div.energie{
+	float:left;
+	position: relative; 
+	margin-right: auto;
+	top:10px;
+	width: 237px;
+	height: 204px;
+	background-repeat:no-repeat;
+	background-image:url('../images/energie.png');}
+div.curseur_energie{
+	float:left;
+	position:absolute;
+	left:150px;
+	top:15px; 
+	width:250px;}
+div.ges{
+	position: relative; 
+	margin-left: 70%;
+	margin-right: auto;
+	top:10px;
+	width: 237px;
+	height: 250px;
+	background-repeat:no-repeat;
+	background-image:url('../images/GES.png');
+}
+div.curseur_ges{
+	position:absolute;
+	left:150px;
+	top:15px; 
+	width:250px;}
+

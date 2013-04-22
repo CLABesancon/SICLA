@@ -1,0 +1,12 @@
+parameters:
+#    sicla_ara.example.class: SICLA\AraBundle\Example
+
+services:
+  twig.extension:
+        class: SICLA\AraBundle\Twig\TwigExtension
+        tags:
+            - { name: twig.extension }
+#    sicla_ara.example:
+#        class: %sicla_ara.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    

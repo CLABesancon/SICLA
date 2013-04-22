@@ -1,0 +1,8 @@
+{% extends 'SidusBundle::base.html.twig' %}
+{% block stylesheets %}
+{{ parent() }}
+	{% stylesheets 'bundles/siclahydracss/HydraCSS.css'
+   filter="cssrewrite" %}
+<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+	{% endstylesheets %}
+{% endblock %}

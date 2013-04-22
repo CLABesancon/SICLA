@@ -1,0 +1,7 @@
+parameters:
+#    sicla_hydra.example.class: SICLA\HydraBundle\Example
+
+services:
+#    sicla_hydra.example:
+#        class: %sicla_hydra.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

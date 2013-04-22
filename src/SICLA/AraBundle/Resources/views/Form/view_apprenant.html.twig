@@ -1,0 +1,70 @@
+{% extends 'SICLAAraBundle::araBase.html.twig' %}
+{% block main %}
+
+{% form_theme form 'SICLAAraBundle:Form:form_div_layout.html.twig' %}
+<form action="" method="post">
+	<h2>{{ 'Modification d\'une demande d\'hébergement'}}</h2>
+
+		{{ form_label(form.handicapPhysique,'Présence d\'un handicap physique :') }}
+		{{ form_widget(form.handicapPhysique) }}
+		<div class="handicapPhysique">
+		{{ form_label(form.detailHandicap, 'Détail de cet handicap :') }}
+		{{ form_widget(form.detailHandicap) }}		
+		</div>		
+		{{ form_label(form.traitementMedical, 'Suivi d\'un traitement médical :') }}
+		{{ form_widget(form.traitementMedical) }}
+		<div class="traitementMedical">
+		{{ form_label(form.detailTraitement, 'Détail de ce traitement :') }}
+		{{ form_widget(form.detailTraitement) }}
+		</div>
+		{{ form_label(form.allergiesAnimaux, 'Sujet à des allergies animales :') }}
+		{{ form_widget(form.allergiesAnimaux) }}
+				
+		<div class="allergiesAnimaux">		
+		{{ form_label(form.detailAllergiesAnimaux, 'Détail de ces allergies :') }}
+		{{ form_widget(form.detailAllergiesAnimaux) }}
+		</div>
+		{{ form_label(form.allergiesAlimentaires, 'Sujet à des allergies alimentaires ?') }}
+		{{ form_widget(form.allergiesAlimentaires) }}
+		<div class="allergiesAlimentaires">		
+		{{ form_label(form.detailAllergiesAlimentaires, 'Détail de ces allergies :') }}
+		{{ form_widget(form.detailAllergiesAlimentaires) }}
+		</div>
+		{{ form_label(form.allergiesAutres, 'Sujet à d\'autres allergies ?') }}
+		{{ form_widget(form.allergiesAutres) }}
+		<div class="allergiesAutres">
+		{{ form_label(form.detailAllergiesAutres, 'Détail de ces allergies :') }}
+		{{ form_widget(form.detailAllergiesAutres) }}
+		</div>
+		{{ form_label(form.fumeur, 'Fumeur :') }}
+		{{ form_widget(form.fumeur) }}
+
+		{{ form_label(form.tolerantFumee, 'Tolérant à la fumée des autres :') }}
+		{{ form_widget(form.tolerantFumee) }}
+
+		{{ form_label(form.vehicule, 'Véhicule à disposition à Besançon :') }}
+		{{ form_widget(form.vehicule) }}
+		
+		{{ form_label(form.voeuxPersonnels, 'Voeux personnels :') }}
+		{{ form_widget(form.voeuxPersonnels) }}
+		<div class="detailVoeuxPersonnels">
+		{{ form_label(form.detailVoeuxPersonnels, 'Détails Voeux personnels :') }}
+		{{ form_widget(form.detailVoeuxPersonnels) }}
+		</div>
+		{{ form_label(form.loisirsParticuliers, 'Loisirs à partager :') }}
+		{{ form_widget(form.loisirsParticuliers) }}
+		<div class="detailLoisirsParticuliers">
+		{{ form_label(form.detailLoisirsParticuliers, 'Détails Loisirs à partager :') }}
+		{{ form_widget(form.detailLoisirsParticuliers) }}
+		</div>
+		{{ form_label(form.Loisirs, 'Loisirs personnels de l\'apprenant :') }}
+		{{ form_widget(form.Loisirs) }}
+
+
+
+	<button class="btn btn-warning" type="submit">Modifier</button>
+</form>
+{% endblock %}
+
+
+	

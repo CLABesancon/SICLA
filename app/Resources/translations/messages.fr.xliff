@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2013-04-22T12:51:10Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="3c34c1156b2717b9a16195597ac8e0fddd4d4d36" resname="infos.node.created_by">
+        <jms:reference-file line="128">Resources/views/base.html.twig</jms:reference-file>
+        <source>Created by</source>
+        <target state="new">Created by</target>
+      </trans-unit>
+      <trans-unit id="6dd67e291e8e7cf00823621c92dd52a4d69ae8c6" resname="infos.node.type">
+        <jms:reference-file line="127">Resources/views/base.html.twig</jms:reference-file>
+        <source>Type</source>
+        <target state="new">Type</target>
+      </trans-unit>
+      <trans-unit id="bb19c9994ffd497b50b8809c9d6627678c050115" resname="menu.node.add">
+        <jms:reference-file line="93">Resources/views/base.html.twig</jms:reference-file>
+        <source>Add an element</source>
+        <target state="new">Add an element</target>
+      </trans-unit>
+      <trans-unit id="b1532329d556b20fb7ae4ac83789137e1c68cf7e" resname="menu.node.copy">
+        <jms:reference-file line="103">Resources/views/base.html.twig</jms:reference-file>
+        <source>Copy</source>
+        <target state="new">Copy</target>
+      </trans-unit>
+      <trans-unit id="7e37a3fbd1ba64d6bfb158d23cafd82b30a31954" resname="menu.node.delete">
+        <jms:reference-file line="119">Resources/views/base.html.twig</jms:reference-file>
+        <source>Delete</source>
+        <target state="new">Delete</target>
+      </trans-unit>
+      <trans-unit id="aacef18f5b645a10c7347d4afee72e31b883f2eb" resname="menu.node.edit">
+        <jms:reference-file line="94">Resources/views/base.html.twig</jms:reference-file>
+        <source>Edit</source>
+        <target state="new">Edit</target>
+      </trans-unit>
+      <trans-unit id="b24bf3abc63f7eb1eedb7de5431522c02f1f3a09" resname="menu.node.favorite">
+        <jms:reference-file line="95">Resources/views/base.html.twig</jms:reference-file>
+        <source>Add to favorites</source>
+        <target state="new">Add to favorites</target>
+      </trans-unit>
+      <trans-unit id="ae766ecc5efb8fb774e68a210631d943f0c2c601" resname="menu.node.feed">
+        <jms:reference-file line="117">Resources/views/base.html.twig</jms:reference-file>
+        <source>Feed</source>
+        <target state="new">Feed</target>
+      </trans-unit>
+      <trans-unit id="5952b461f4ee38d7afc01ea46f174280c53d0dd0" resname="menu.node.history">
+        <jms:reference-file line="116">Resources/views/base.html.twig</jms:reference-file>
+        <source>History</source>
+        <target state="new">History</target>
+      </trans-unit>
+      <trans-unit id="dbc0b2f0d8cbe4d64df3c50566e8c19d53022950" resname="menu.node.link">
+        <jms:reference-file line="102">Resources/views/base.html.twig</jms:reference-file>
+        <source>Link</source>
+        <target state="new">Link</target>
+      </trans-unit>
+      <trans-unit id="695bee9f2e5759b80a2ff4684d04d79de2823493" resname="menu.node.localize">
+        <jms:reference-file line="114">Resources/views/base.html.twig</jms:reference-file>
+        <source>Localize</source>
+        <target state="new">Localize</target>
+      </trans-unit>
+      <trans-unit id="70710f1ac12c8d4a5f36fe5f789fb30623f15b66" resname="menu.node.move">
+        <jms:reference-file line="101">Resources/views/base.html.twig</jms:reference-file>
+        <source>Move</source>
+        <target state="new">Move</target>
+      </trans-unit>
+      <trans-unit id="bd33ad5ffea9991462336ce7694f4d93bea71034" resname="menu.node.permissions">
+        <jms:reference-file line="104">Resources/views/base.html.twig</jms:reference-file>
+        <source>Permissions</source>
+        <target state="new">Permissions</target>
+      </trans-unit>
+      <trans-unit id="6f8a11844725316115de7f4350678dc86466e679" resname="menu.node.print">
+        <jms:reference-file line="96">Resources/views/base.html.twig</jms:reference-file>
+        <source>Print</source>
+        <target state="new">Print</target>
+      </trans-unit>
+      <trans-unit id="b83defc847687cd90865ad1e6cf7b7944097a33b" resname="menu.node.version">
+        <jms:reference-file line="112">Resources/views/base.html.twig</jms:reference-file>
+        <source>%lang% version</source>
+        <target state="new">%lang% version</target>
+      </trans-unit>
+      <trans-unit id="c6293f9284a88f5f66be69c6fd7066c6c7d30a18" resname="menu.user.logout">
+        <jms:reference-file line="57">Resources/views/base.html.twig</jms:reference-file>
+        <source>Logout</source>
+        <target state="new">Logout</target>
+      </trans-unit>
+      <trans-unit id="90be6eccaaa93b6b80e0baa239d01f3e9902913e" resname="menu.user.preferences">
+        <jms:reference-file line="55">Resources/views/base.html.twig</jms:reference-file>
+        <source>Preferences</source>
+        <target state="new">Preferences</target>
+      </trans-unit>
+      <trans-unit id="d85172db4e9a35a41acec3937b8c4af40bf3aeec" resname="menu.user.profile">
+        <jms:reference-file line="54">Resources/views/base.html.twig</jms:reference-file>
+        <source>Profile</source>
+        <target state="new">Profile</target>
+      </trans-unit>
+      <trans-unit id="c5fc70b41893642ae20a1f94f564203548d90243" resname="menu.west.favorites">
+        <jms:reference-file line="72">Resources/views/base.html.twig</jms:reference-file>
+        <source>Favorites</source>
+        <target state="new">Favorites</target>
+      </trans-unit>
+      <trans-unit id="4ca007618bb15d814d492afa84648464934231b7" resname="menu.west.siblings">
+        <jms:reference-file line="70">Resources/views/base.html.twig</jms:reference-file>
+        <source>Siblings</source>
+        <target state="new">Siblings</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

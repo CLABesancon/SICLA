@@ -1,7 +1,14 @@
 sidus_sidus:
     resource: "@SidusBundle/Resources/config/routing.yml"
     prefix:   /
+    
+sicla_hydra:
+    resource: "@SICLAHydraBundle/Resources/config/routing.yml"
+    prefix:   /hydra
 
+sicla_ara:
+    resource: "@SICLAAraBundle/Resources/config/routing.yml"
+    prefix:   /ara
 # Internal routing configuration to handle ESI
 # ****** WARNING ******
 # This route should be enabled with caution as it can open a security vulnerability

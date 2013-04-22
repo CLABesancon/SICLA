@@ -1,0 +1,53 @@
+{% extends 'SICLAAraBundle::araBase.html.twig' %}
+{% form_theme form 'SICLAAraBundle:Form:form_div_layout.html.twig' %}
+{% block main %}
+<form action="{{path('sicla_listes')}}" method="POST" {{ form_enctype(form) }}>
+	{% for key,entite in entites %}	
+		<h3>{{entite.name}}</h3>
+		<div class="liste">
+			{%if key=="animaux" %}
+			<div class="{{key}}" data-prototype="{{ form_widget(form.animaux.vars.prototype.libelle)|e }}">
+				{% for objet in form.animaux %} 
+			
+				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
+				{% endfor %}
+			{% endif %}
+			{%if key=="logements" %}
+			<div class="{{key}}" data-prototype="{{ form_widget(form.logements.vars.prototype.libelle)|e }}">
+				{% for objet in form.logements %} 
+			
+				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
+				{% endfor %}
+			{% endif %}
+			{%if key=="regimes" %}
+			<div class="{{key}}" data-prototype="{{ form_widget(form.regimes.vars.prototype.libelle)|e }}">
+				{% for objet in form.regimes %} 
+			
+				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
+				{% endfor %}
+			{% endif %}
+			{%if key=="loisirs" %}
+			<div class="{{key}}" data-prototype="{{ form_widget(form.loisirs.vars.prototype.libelle)|e }}">
+				{% for objet in form.loisirs %} 
+			
+				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
+				{% endfor %}
+			{% endif %}
+			{%if key=="equipements" %}
+			<div class="{{key}}" data-prototype="{{ form_widget(form.equipements.vars.prototype.libelle)|e }}">
+				{% for objet in form.equipements %} 
+			
+				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
+				{% endfor %}
+			{% endif %}	
+			</div>
+		
+			
+	</div>
+		
+
+				
+
+{% endfor %}
+</form>
+{% endblock %}

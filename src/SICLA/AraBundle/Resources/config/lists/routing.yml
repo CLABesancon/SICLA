@@ -1,0 +1,7 @@
+sicla_listes:
+    pattern:  /listes
+    defaults: { _controller: SICLAAraBundle:Liste:view }
+    
+sicla_ara_view_liste_logements:
+    pattern:  /liste_logements
+    defaults: { _controller: SICLAAraBundle:Logement:view_liste_logements }    

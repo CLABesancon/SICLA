@@ -1,0 +1,109 @@
+{% extends 'SICLAAraBundle::araBase.html.twig' %}
+{% block message %}
+<div class="alert">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Warning!</strong> This is a warning example.
+</div>
+{% endblock %}
+{% block main %}
+<div class="btn-toolbar pull-right">
+		<button class="btn" title="Thumbnail view"><i class="icon-th"></i></button>
+		<button class="btn" title="Preview view"><i class="icon-th-list"></i></button>
+		<button class="btn disabled" title="List view"><i class="icon-list-alt"></i></button>
+	</div>
+	<form class="form-search filter-form pull-left" action="?filter" method="get">
+		<input type="text" name="filter" placeholder="Filter by title">
+		<input type="text" name="filter" placeholder="Filter by keyword">
+		<div class="btn-group">
+			<button type="submit" class="btn" title="Filter"><i class="icon-filter"></i></button>
+			<button type="reset" class="btn" title="Clear filters"><i class="icon-remove"></i></button>
+			<button class="btn" title="Save search"><i class="icon-pushpin"></i></button>
+		</div>
+		<input type="submit" class="hide">
+	</form>
+	<table class="table table-striped table-hover table-condensed">
+		{% for i in range(0,1) %}
+			<caption{% if i is odd %} class="caption-bottom"{% endif %}>
+				<div class="pagination pagination-small pull-right">
+					<ul>
+						<li class="active"><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li class="disabled"><a href="#">&hellip;</a></li>
+						<li><a href="#">12</a></li>
+					</ul>
+				</div>
+				<div class="btn-toolbar actions pull-left">
+					<div class="btn-group">
+						<button class="btn btn-small" title="Move"><i class="icon-arrow-right"></i></button>
+						<button class="btn btn-small" title="Copy"><i class="icon-copy"></i></button>
+						<button class="btn btn-small" title="Add to favorites"><i class="icon-star-empty"></i></button>
+						<button class="btn dropdown-toggle btn-small" data-toggle="dropdown">
+							<i class="icon-wrench"></i> <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu pull-right">
+							<li><a href="#"><i class="icon-share-alt"></i> Link</a></li>
+							<li class="divider"></li>
+							<li><a href="#"><i class="icon-list"></i> History</a></li>
+							<li><a href="#"><i class="icon-signal"></i> Feed</a></li>
+							<li class="divider"></li>
+							<li class="btn-danger"><a href="#"><i class="icon-trash"></i> Delete</a></li>
+						</ul>
+					</div>
+				</div>
+				<p class="infos muted pull-left">Elements 1-20 of 131</p>
+			</caption>
+		{% endfor %}
+		<thead>
+			<tr>
+				<th><input type="checkbox" class="radio-condensed"/> #</th>
+			  <th>Type de logement</th> 
+				<th>Meublé</th>
+				<th>Surface</th>
+				<th>Loyer</th>
+				<th>Charges</th>
+				<th class="actions">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for logement in logements %}
+			<tr>
+				<td><input type="checkbox" class="radio-condensed"/>{{logement.id}}</td>
+				<td>{{logement.typeLogement.libelle}}</td> 
+				{% if logement.meuble == 1 %}
+					<td>oui</td>
+				{% else %}
+					<td>non</td>
+				{% endif %}
+				<td>{{logement.surface}}</td>
+				<td>{{logement.loyer}}</td>
+				<td>{{logement.charges}}</td>
+				<td>
+					<div class="btn-toolbar actions-condensed">
+						<div class="btn-group">
+							<button class="btn btn-mini" title="View"><i class="icon-search"></i></button>
+							<button class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></button>
+							<button class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></button>
+							<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
+								<i class="icon-wrench"></i> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu pull-right">
+								<li><a href="#"><i class="icon-arrow-right"></i> Move</a></li>
+								<li><a href="#"><i class="icon-share-alt"></i> Link</a></li>
+								<li><a href="#"><i class="icon-repeat"></i> Copy</a></li>
+								<li><a href="#"><i class="icon-lock"></i> Permissions</a></li>
+								<li class="divider"></li>
+								<li><a href="#"><i class="icon-list"></i> History</a></li>
+								<li><a href="#"><i class="icon-signal"></i> Feed</a></li>
+								<li class="divider"></li>
+								<li class="disabled"><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
+							</ul>
+						</div>
+					</div>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

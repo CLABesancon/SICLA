@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2a0194509059df892f2493b85d052de2",
+    "hash": "8b66b96f19be980b31927621706aab8c",
     "packages": [
         {
             "name": "bmatzner/fontawesome-bundle",
@@ -59,12 +59,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/craue/CraueFormFlowBundle.git",
-                "reference": "a60f1e32466b1bd21733c8735ff63725e3c551de"
+                "reference": "1.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/a60f1e32466b1bd21733c8735ff63725e3c551de",
-                "reference": "a60f1e32466b1bd21733c8735ff63725e3c551de",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/1.1.2",
+                "reference": "1.1.2",
                 "shasum": ""
             },
             "require": {
@@ -104,7 +104,7 @@
                 "Symfony2",
                 "form"
             ],
-            "time": "2013-04-16 00:19:46"
+            "time": "2013-04-17 19:01:13"
         },
         {
             "name": "doctrine/common",
@@ -496,12 +496,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "b31e0a4664f13dbf24b0215547e42c401ca5300a"
+                "reference": "ae5ff75ac8076213af0bfece16ecc012bf3ec151"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/b31e0a4664f13dbf24b0215547e42c401ca5300a",
-                "reference": "b31e0a4664f13dbf24b0215547e42c401ca5300a",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/ae5ff75ac8076213af0bfece16ecc012bf3ec151",
+                "reference": "ae5ff75ac8076213af0bfece16ecc012bf3ec151",
                 "shasum": ""
             },
             "require": {
@@ -567,7 +567,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-04-12 04:03:22"
+            "time": "2013-04-22 12:44:19"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -763,6 +763,71 @@
             "time": "2012-09-21 01:56:32"
         },
         {
+            "name": "jms/i18n-routing-bundle",
+            "version": "dev-master",
+            "target-dir": "JMS/I18nRoutingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle.git",
+                "reference": "5e8b7199ee109c266eb353d137195eb56ba86521"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/5e8b7199ee109c266eb353d137195eb56ba86521",
+                "reference": "5e8b7199ee109c266eb353d137195eb56ba86521",
+                "shasum": ""
+            },
+            "require": {
+                "jms/translation-bundle": ">=1.0,<2.0-dev",
+                "symfony/framework-bundle": ">=2.1,<2.3-dev"
+            },
+            "require-dev": {
+                "jms/di-extra-bundle": "*",
+                "sensio/framework-extra-bundle": "*",
+                "symfony/browser-kit": "*",
+                "symfony/class-loader": "*",
+                "symfony/css-selector": "*",
+                "symfony/finder": "*",
+                "symfony/form": "*",
+                "symfony/http-kernel": "*",
+                "symfony/process": "*",
+                "symfony/twig-bundle": "*",
+                "symfony/validator": "*",
+                "symfony/yaml": "*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JMS\\I18nRoutingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "This bundle allows you to create i18n routes.",
+            "homepage": "http://jmsyst.com/bundles/JMSI18nRoutingBundle",
+            "keywords": [
+                "multilanguage",
+                "routing",
+                "translation"
+            ],
+            "time": "2013-02-11 21:00:49"
+        },
+        {
             "name": "jms/metadata",
             "version": "1.1.1",
             "source": {
@@ -870,6 +935,80 @@
                 "security"
             ],
             "time": "2012-09-06 09:12:03"
+        },
+        {
+            "name": "jms/translation-bundle",
+            "version": "dev-master",
+            "target-dir": "JMS/TranslationBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
+                "reference": "9d844494a0ad5a93cb7f81f4bd1a1d46950690ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/9d844494a0ad5a93cb7f81f4bd1a1d46950690ef",
+                "reference": "9d844494a0ad5a93cb7f81f4bd1a1d46950690ef",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "0.9.1",
+                "symfony/console": "*",
+                "symfony/framework-bundle": ">=2.1,<2.3-dev"
+            },
+            "conflict": {
+                "twig/twig": "1.10.2"
+            },
+            "require-dev": {
+                "jms/di-extra-bundle": "*",
+                "sensio/framework-extra-bundle": "*",
+                "symfony/browser-kit": "*",
+                "symfony/class-loader": "*",
+                "symfony/css-selector": "*",
+                "symfony/finder": "*",
+                "symfony/form": "*",
+                "symfony/process": "*",
+                "symfony/security": "*",
+                "symfony/twig-bundle": "*",
+                "symfony/validator": "*",
+                "symfony/yaml": "*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "JMS\\TranslationBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Puts the Symfony2 Translation Component on steroids",
+            "homepage": "http://jmsyst.com/bundles/JMSTranslationBundle",
+            "keywords": [
+                "extract",
+                "extraction",
+                "i18n",
+                "interface",
+                "multilanguage",
+                "translation",
+                "ui",
+                "webinterface"
+            ],
+            "time": "2013-04-12 07:13:08"
         },
         {
             "name": "knplabs/knp-components",
@@ -1413,6 +1552,45 @@
             "time": "2012-05-12 08:31:30"
         },
         {
+            "name": "nikic/php-parser",
+            "version": "v0.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser",
+                "reference": "v0.9.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/nikic/PHP-Parser/archive/v0.9.1.zip",
+                "reference": "v0.9.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPParser": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov"
+                }
+            ],
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "time": "2012-04-23 15:52:11"
+        },
+        {
             "name": "sensio/distribution-bundle",
             "version": "v2.1.9",
             "target-dir": "Sensio/Bundle/DistributionBundle",
@@ -1560,35 +1738,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VincentChalnot/SidusBundle.git",
-                "reference": "593265b62cb7957027324221ddaeb42759a25b79"
+                "reference": "7b2a14242f940b19cbb56e2cd1dfbd775cea16d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VincentChalnot/SidusBundle/zipball/593265b62cb7957027324221ddaeb42759a25b79",
-                "reference": "593265b62cb7957027324221ddaeb42759a25b79",
+                "url": "https://api.github.com/repos/VincentChalnot/SidusBundle/zipball/7b2a14242f940b19cbb56e2cd1dfbd775cea16d1",
+                "reference": "7b2a14242f940b19cbb56e2cd1dfbd775cea16d1",
                 "shasum": ""
-            },
-            "require": {
-                "bmatzner/fontawesome-bundle": "dev-master",
-                "craue/formflow-bundle": "dev-master",
-                "doctrine/doctrine-bundle": "1.1.*",
-                "doctrine/orm": ">=2.2.3,<2.4-dev",
-                "gedmo/doctrine-extensions": "dev-master",
-                "jms/di-extra-bundle": "1.1.*",
-                "jms/security-extra-bundle": "1.2.*",
-                "knplabs/knp-menu": "dev-master",
-                "knplabs/knp-menu-bundle": "dev-master",
-                "knplabs/knp-paginator-bundle": "dev-master",
-                "kriswallsmith/assetic": "1.1.*@dev",
-                "mopa/bootstrap-bundle": "dev-master",
-                "php": ">=5.3.3",
-                "sensio/distribution-bundle": "2.1.*",
-                "sensio/framework-extra-bundle": "2.1.*",
-                "stof/doctrine-extensions-bundle": "dev-master",
-                "symfony/assetic-bundle": "2.1.*",
-                "symfony/monolog-bundle": "2.1.*",
-                "symfony/swiftmailer-bundle": "2.1.*",
-                "twig/extensions": "1.0.*@dev"
             },
             "type": "framework",
             "autoload": {
@@ -1618,7 +1774,7 @@
                 "tree",
                 "typed"
             ],
-            "time": "2013-04-16 10:28:58"
+            "time": "2013-04-22 12:36:52"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -2107,7 +2263,7 @@
                 "shasum": null
             },
             "type": "library",
-            "time": "2013-02-21 21:10:21"
+            "time": "2013-03-15 05:21:06"
         }
     ],
     "packages-dev": [
@@ -2133,7 +2289,9 @@
         "leafo/lessphp": 20,
         "nervo/yuicompressor": 20,
         "stof/doctrine-extensions-bundle": 20,
-        "sidus/sidus-bundle": 20
+        "sidus/sidus-bundle": 20,
+        "jms/i18n-routing-bundle": 20,
+        "jms/translation-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"

@@ -1,0 +1,10 @@
+{% extends 'SICLAHydraBundle::hydraBase.html.twig' %}
+
+{% block main %}
+{% form_theme form 'SICLAHydraBundle:Form:fields.html.twig' %}
+<h1>Edit a Person</h1>
+<form action="" method="post">
+	{{form_widget(form)}}
+	<button class="btn" type="submit">Validate</button>
+</form>
+{% endblock %}

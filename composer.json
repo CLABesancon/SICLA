@@ -32,7 +32,9 @@
         "leafo/lessphp": "dev-master",
         "nervo/yuicompressor": "dev-master",
         "stof/doctrine-extensions-bundle": "dev-master",
-        "sidus/sidus-bundle": "dev-master"
+        "sidus/sidus-bundle": "dev-master",
+		"jms/i18n-routing-bundle": "dev-master",
+		"jms/translation-bundle": "dev-master"
     },
     "repositories": [
        {
