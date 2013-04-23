@@ -17,7 +17,7 @@ class FamilleAccueilController extends CommonController {
 	}
 
 	public function editAction($version, $object, $loaded_objects, Request $request) {
-		$form = $this->createForm(FamilleAccueilType(), $object);
+		$form = $this->createForm(new FamilleAccueilType(), $object);
 		$em = $this->getDoctrine()->getEntityManager();
 
 		if ($request->isMethod('POST')) {
@@ -39,12 +39,15 @@ class FamilleAccueilController extends CommonController {
 		$em = $this->getDoctrine()->getEntityManager();
 		//@TODO : get connected user
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
-
+		
+		$regimeAlimentaire=$em->getRepository('SICLAAraBundle:RegimeAlimentaire')->find(1);
+		
 		$new_object = new FamilleAccueil();
 		$new_object->setType($type);
 		$new_object->setTitle('');
 		$new_object->setDureeSejour('');
 		$new_object->setFumeur('');
+		$new_object->setRegimeAlimentaire($regimeAlimentaire);
 		$new_object->setAdaptableRegimeAlimentaire('');
 		$new_object->setNbEnfants('');
 		$new_object->setNbLit('');

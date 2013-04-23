@@ -1,5 +1,6 @@
-{% extends 'SICLAAraBundle::araBase.html.twig' %}
+{% extends 'SICLAAraBundle::listes_base.html.twig' %}
 {% form_theme form 'SICLAAraBundle:Form:form_div_layout.html.twig' %}
+
 {% block main %}
 <form action="{{path('sicla_listes')}}" method="POST" {{ form_enctype(form) }}>
 	{% for key,entite in entites %}	

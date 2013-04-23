@@ -1,1 +1,127 @@
-{% extends 'AraBundle:Default:show.html.twig' %}
+{% extends 'SICLAAraBundle:Default:show.html.twig' %}
+
+{% block main %}
+<table >
+	<tbody>
+		<tr>
+			<th class="record_properties">Id:</th>
+			<td>{{ object.id }}</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Handicap physique:</th>
+			{%if object.handicapPhysique==1 %}
+				<td>Oui</td>
+			</tr>
+			<tr>
+				<th class="record_properties">Détails concernant cet handicap:</th>
+				<td>{{ object.detailHandicap }}</td>
+			</tr>
+			{% else %}
+		<td>Non</td>
+	</tr>
+			{% endif %}
+	<tr>
+		<th class="record_properties">Traitement médical:</th>
+			{%if object.traitementMedical==1 %}
+			<td>Oui</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Détails concernant ce traitement:</th>
+			<td>{{ object.detailTraitement }}</td>
+		</tr>
+			{% else %}
+		<td>Non</td>
+	</tr>
+			{% endif %}	
+	<tr>
+		<th class="record_properties">Allergies animales:</th>
+			{%if object.allergiesAnimaux==1 %}
+			<td>Oui</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Détails concernant ces allergies:</th>
+			<td>{{ object.detailAllergiesAnimaux }}</td>
+		</tr>
+			{% else %}
+		<td>Non</td>
+	</tr>
+			{% endif %}		
+	<tr>
+		<th class="record_properties">Allergies alimentaires:</th>
+			{%if object.allergiesAlimentaires==1 %}
+			<td>Oui</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Détails concernant ces allergies:</th>
+			<td>{{ object.detailAllergiesAlimentaires }}</td>
+		</tr>
+			{% else %}
+		<td>Non</td>
+	</tr>
+			{% endif %}		
+	<tr>
+		<th class="record_properties">Allergies autres:</th>
+			{%if object.allergiesAutres==1 %}
+			<td>Oui</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Détails concernant ces allergies:</th>
+			<td>{{ object.detailAllergiesAutres }}</td>
+		</tr>
+			{% else %}
+		<td>Non</td>
+	</tr>
+			{% endif %}
+	<tr>
+		<th class="record_properties">Fumeur:</th>
+				{%if object.fumeur==1 %}
+			<td>Oui</td>
+				{% else %}
+			<td>Non</td>
+				{% endif %}		
+		</tr>
+		<tr>
+			<th class="record_properties">Tolérant à la fumée:</th>
+				{%if object.tolerantFumee==1 %}
+				<td>Oui</td>
+				{% else %}
+				<td>Non</td>
+				{% endif %}		
+			</tr>
+			<tr>
+				<th class="record_properties">Véhicule à disposition:</th>
+				{%if object.vehicule==1 %}
+					<td>Oui</td>
+				{% else %}
+					<td>Non</td>
+				{% endif %}	
+				</tr>
+				<tr>
+					<th class="record_properties">Voeux personnels:</th>
+			{%if object.voeuxPersonnels==1 %}
+						<td>Oui</td>
+					</tr>
+					<tr>
+						<th class="record_properties">Détails concernant ces allergies:</th>
+						<td>{{ object.detailVoeuxPersonnels }}</td>
+					</tr>
+			{% else %}
+					<td>Non</td>
+				</tr>
+			{% endif %}
+				<tr>
+					<th class="record_properties">Loisirs à partager:</th>
+			{%if object.loisirsParticuliers==1 %}
+						<td>Oui</td>
+					</tr>
+					<tr>
+						<th class="record_properties">Détails concernant ces allergies:</th>
+						<td>{{ object.detailLoisirsParticuliers }}</td>
+					</tr>
+			{% else %}
+					<td>Non</td>
+				</tr>
+			{% endif %}	
+			</tbody>
+		</table>
+{% endblock %}

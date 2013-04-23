@@ -61,4 +61,9 @@ class TypeLogement
     {
         return $this->libelle;
     }
+	
+	public function __construct()
+    {
+        $this->libelle ="";
+    }
 }

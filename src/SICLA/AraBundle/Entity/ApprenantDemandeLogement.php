@@ -14,14 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ApprenantDemandeLogement extends Object
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var boolean
@@ -147,17 +139,7 @@ class ApprenantDemandeLogement extends Object
 	* @ORM\JoinTable(name="ara_apprenantDemandeLogement_loisir")
 	*/
 	private $loisirs;
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
+	
     /**
      * Set handicapPhysique
      *

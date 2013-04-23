@@ -4,6 +4,7 @@ namespace SICLA\AraBundle\Controller;
 use Sidus\SidusBundle\Controller\CommonController;
 use Sidus\SidusBundle\Entity\Version;
 use SICLA\AraBundle\Entity\Logement;
+use SICLA\AraBundle\Entity\TypeLogement;
 use SICLA\AraBundle\Form\LogementType;
 
 
@@ -36,7 +37,7 @@ class LogementController extends CommonController
 		$em = $this->getDoctrine()->getEntityManager();
 		//@TODO : get connected user
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
-
+		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(1);
 		$new_object = new Logement();
 		$new_object->setType($type);
 		$new_object->setTitle('');
@@ -49,7 +50,7 @@ class LogementController extends CommonController
 		$new_object->setCharges('');
 		$new_object->setAscenseur('');
 		$new_object->setSdbPrivative('');
-		$new_object->setTypeLogement(1);
+		$new_object->setTypeLogement($typeLogement); // à modifier
 		
 		$em->persist($new_object);
 		$em->flush();
