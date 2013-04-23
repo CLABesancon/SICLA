@@ -22,13 +22,13 @@ class FamilleAccueilController extends CommonController {
 
 		if ($request->isMethod('POST')) {
 			$form->bind($request);
-			if ($form->isValid()) {
+			//if ($form->isValid()) {
 				//@TODO version
 				$em->persist($object);
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');
 				return $this->redirect($this->generateUrl('sidus_show_node', array('node_id' => $version->getNode()->getId(), '_locale' => $version->getLang())));
-			}
+			//}
 		}
 		$loaded_objects['form'] = $form->createView();
 		return $this->render('SICLAAraBundle:FamilleAccueil:edit.html.twig', $loaded_objects);

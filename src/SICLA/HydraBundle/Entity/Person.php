@@ -207,9 +207,11 @@ class Person extends Object
 	/*
 	 * Set Phones
 	 */
-	public function setPhones(ArrayCollection $phones)
+	public function setPhones(Array $phones)
     {
-        $this->phones = $phones;
+		$collectionPhones=new ArrayCollection($phones);
+        $this->phones =$collectionPhones;
+       
     }
 	
 	/*
@@ -222,8 +224,11 @@ class Person extends Object
 	/*
 	 * Set Phones
 	 */
-	public function setAddresses(ArrayCollection $addresses)
+	public function setAddresses(Array $addresses)
     {
-        $this->addresses = $addresses;
+        foreach($addresses as $addresse)
+		{
+			 $this->addresses->add($addresse);
+		}
     }
 }

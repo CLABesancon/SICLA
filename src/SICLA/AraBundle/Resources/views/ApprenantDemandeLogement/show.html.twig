@@ -122,6 +122,16 @@
 					<td>Non</td>
 				</tr>
 			{% endif %}	
+			<tr>
+				<th class="record_properties">Loisirs:</th>
+					<td>
+						<ul>
+							{% for loisir in object.Loisirs %}
+							<li>{{ loisir.getLibelle() }}</li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 {% endblock %}

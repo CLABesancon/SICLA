@@ -1,28 +1,68 @@
 {% extends 'SICLAAraBundle:Default:show.html.twig' %}
-	
-	Type du logement : {{ object.typeLogement }}
-	
-	Loyer hors charges : {{ object.loyer }}
-	
-	Montant des charges : {{ object.charges }}
-	
-	Surface du logement (en m²) : {{ object.surface }}
-	
-	De combien de chambres le logement dispose-t-il ? {{ object.nbChambres }}
-	
-	Le logement est-il meublé ? {{ object.meuble }}
-	
-	Le logement dispose-t-il d\'un ascenseur ? {{ object.ascenseur }}
-	
-	Consommation énergétique : {{ object.consommationEnergie }}
-				
-	Emission de gaz à effet de serre : {{ object.emissionGes }}
-	 
-	Le logement dispose-t-il d\'une salle de bains privative ? {{ object.sdbPrivative }}
-	
-	Le logement dispose des équipements suivants : {{ object.equipement }}
-	
-	<div id="map" style="width: 300px; height: 300px;"></div>
+{% block main %}
+<div class="block">
+	<div class="block-left">
+<table class="table table-hover">
+	<tbody>
+		<tr>
+			<th>Type du logement</th>
+			<td>{{ object.typeLogement.getLibelle() }}</td>
+		</tr>
+		<tr>
+			<th>Loyer hors charges</th>
+			<td>{{ object.loyer }}€</td>
+		</tr>
+		<tr>
+			<th>Montant des charges</th>
+			<td>{{ object.charges }}€</td>
+		</tr>
+		<tr>
+			<th>Surface du logement</th>
+			<td>{{ object.surface }}m²</td>
+		</tr>
+		<tr>
+			<th>Nombre de chambres</th>
+			<td>{{ object.nbChambres }}</td>
+		</tr>
+		<tr>
+			<th>Logement meublé</th>
+			{% if object.meuble==1 %}
+				<td>Oui</td>
+			{% else %}
+				<td>Non</td>
+			{% endif %}
+		</tr>
+		<tr>
+			<th>Ascenseur</th>
+			{% if object.ascenseur==1 %}
+				<td>Oui</td>
+			{% else %}
+				<td>Non</td>
+			{% endif %}
+		</tr>
+		<tr>
+			<th>Consommation énergétique</th>
+			<td>{{ object.consommationEnergie }}</td>
+		</tr>
+		<tr>
+			<th>Émission de gaz à effet de serre</th>
+			<td>{{ object.emissionGes }}</td>
+		</tr>
+		<tr>
+			<th>Salle de bains privative</th>
+			{% if object.sdbPrivative==1 %}
+				<td>Oui</td>
+			{% else %}
+				<td>Non</td>
+			{% endif %}
+		</tr>
+	</tbody>
+</table>
+			
+
+</div>
+<div class="block-right">
+	<div id="map" style="width: 450px; height: 300px;"></div>
 	<div class="adresse">44 avenue georges clémenceau Besançon, France</div>
 	<div class="adresse">6 rue gabriel plancon 25000 besançon</div>
 	<div id="way"></div>
@@ -32,9 +72,13 @@
 			<--
 		</div>
 	</div>
-	
 	<div class="ges">
 		<div class="curseur_ges">
 			<--
 		</div>
 	</div>
+	
+</div>
+</div>
+
+{% endblock %}	

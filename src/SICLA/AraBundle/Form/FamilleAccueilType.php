@@ -12,19 +12,19 @@ class FamilleAccueilType extends AbstractType
     {
         $builder
             ->add('dureeSejour')
-             ->add('fumeur', 'choice', array(
+            ->add('fumeur', 'choice', array(
 			  'choices' => array('1' => 'Oui', '0' => 'Non'),
 			  'expanded' => true,
 			  'multiple' => false))	
+			->add('RegimeAlimentaire','entity', array(
+				'class'    =>'SICLAAraBundle:RegimeAlimentaire',
+				'property'=>'libelle',
+				'multiple'=>false))
 			->add('adaptableRegimeAlimentaire', 'choice', array(
 			  'choices' => array('1' => 'Oui', '0' => 'Non'),
 			  'expanded' => true,
 			  'multiple' => false))	
             ->add('nbEnfants')
-			->add('RegimeAlimentaire','entity', array(
-				'class'    =>'SICLAAraBundle:RegimeAlimentaire',
-				'property'=>'libelle',
-				'multiple'=>false))
 			->add('Loisirs','entity', array(
 				'class'    =>'SICLAAraBundle:Loisir',
 				'property'=>'libelle',

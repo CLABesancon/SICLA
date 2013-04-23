@@ -1,1 +1,72 @@
-{% extends 'HydraBundle:Default:show.html.twig' %}
+{% extends 'SICLAAraBundle:Default:show.html.twig' %}
+{% block main %}
+<table >
+	<tbody>
+		<tr>
+			<th class="record_properties">Id:</th>
+			<td>{{ object.id }}</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Durée du séjour possible (en semaines) :</th>
+			<td>{{ object.dureeSejour }}</td>
+		</tr>
+		<tr>
+		<th class="record_properties">Fumeur:</th>
+				{%if object.fumeur==1 %}
+			<td>Oui</td>
+				{% else %}
+			<td>Non</td>
+				{% endif %}		
+		</tr>
+		<tr>
+		<th class="record_properties">Régime alimentaire:</th>
+			<td>{{ object.RegimeAlimentaire.getLibelle() }}</td>
+		</tr>
+		<tr>
+		<th class="record_properties">Adaptable à un régime alimentaire:</th>
+				{%if object.adaptableRegimeAlimentaire==1 %}
+			<td>Oui</td>
+				{% else %}
+			<td>Non</td>
+				{% endif %}		
+		</tr>
+		<tr>
+			<th class="record_properties">Nombre d'enfants:</th>
+			<td>{{ object.nbEnfants }}</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Loisirs:</th>
+			<td>
+				<ul>
+					{% for loisir in object.Loisirs %}
+					<li>{{ loisir.getLibelle() }}</li>
+					{% endfor %}
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Animaux:</th>
+			<td>
+				<ul>
+					{% for animal in object.animaux %}
+					<li>{{ animal.getLibelle() }}</li>
+					{% endfor %}
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Nombre de lits:</th>
+			<td>{{ object.nbLit }}</td>
+		</tr>
+		<tr>
+		<th class="record_properties">Ascenseur:</th>
+				{%if object.ascenseur==1 %}
+			<td>Oui</td>
+				{% else %}
+			<td>Non</td>
+				{% endif %}		
+		</tr>
+			</tbody>
+		</table>
+	
+{% endblock %}
