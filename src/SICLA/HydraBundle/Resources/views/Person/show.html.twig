@@ -1,1 +1,15 @@
 {% extends 'SICLAHydraBundle:Default:show.html.twig' %}
+
+{% block main %}
+<table >
+	<tbody>
+		<tr>
+			<th class="record_properties">Id:</th>
+			<td>{{ object.id }}</td>
+			<td>{{ object.firstname() }}</td>
+			
+		</tr>
+		<tr>
+	</tbody>
+</table>
+{% endblock %}

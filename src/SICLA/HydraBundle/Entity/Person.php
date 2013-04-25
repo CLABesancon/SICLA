@@ -15,15 +15,6 @@ use Sidus\SidusBundle\Entity\Object;
 class Person extends Object
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=255)
@@ -60,11 +51,15 @@ class Person extends Object
 	
 	/**
      * @Assert\Type(type="SICLA\HydraBundle\Entity\Phone")
+	 * @ORM\OneToMany(targetEntity="SICLA\HydraBundle\Entity\Phone", cascade={"persist"}, mappedBy="person"))
      */
 	private $phones;
+	
 	/**
      * @Assert\Type(type="SICLA\HydraBundle\Entity\Address")
-     */
+	 * 
+	 * @ORM\OneToMany(targetEntity="SICLA\HydraBundle\Entity\Address", cascade={"persist"}, mappedBy="person"))
+	*/
 	private $addresses;
 	
 	 public function __construct()
@@ -72,16 +67,17 @@ class Person extends Object
         $this->phones= new ArrayCollection();
 		$this->addresses= new ArrayCollection();
     }
-    /**
+	/**
      * Get id
      *
      * @return integer 
      */
+	
     public function getId()
     {
-        return $this->id;
+        return parent::getId();
     }
-
+	
     /**
      * Set firstName
      *
@@ -197,38 +193,81 @@ class Person extends Object
         return $this->birthday;
     }
 	
-	/*
-	 * Get Phones
-	 */
-	public function getPhones()
+	
+
+    /**
+     * Add phones
+     *
+     * @param \SICLA\HydraBundle\Entity\Phone $phones
+     * @return Person
+     */
+    public function addPhone(\SICLA\HydraBundle\Entity\Phone $phones)
+    {
+        $this->phones[] = $phones;
+        return $this;
+    }
+
+    /**
+     * Remove phones
+     *
+     * @param \SICLA\HydraBundle\Entity\Phone $phones
+     */
+    public function removePhone(\SICLA\HydraBundle\Entity\Phone $phones)
+    {
+        $this->phones->removeElement($phones);
+    }
+
+    /**
+     * Get phones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPhones()
     {
         return $this->phones;
     }
-	/*
-	 * Set Phones
-	 */
-	public function setPhones(Array $phones)
-    {
-		$collectionPhones=new ArrayCollection($phones);
-        $this->phones =$collectionPhones;
-       
-    }
 	
-	/*
-	 * Get Phones
-	 */
-	public function getAddresses()
+	/**
+	* Set comments
+	*
+	* @param \Doctrine\Common\Collections\Collection $comments
+	*/
+	
+	public function setPhones(\Doctrine\Common\Collections\Collection $phones)
+	{
+		$this->phones = $phones;
+	}
+
+    /**
+     * Add addresses
+     *
+     * @param \SICLA\HydraBundle\Entity\Address $addresses
+     * @return Person
+     */
+    public function addAddresse(\SICLA\HydraBundle\Entity\Address $addresses)
+    {
+        $this->addresses[] = $addresses;
+		$addresses->setPerson($this);
+        return $this;
+    }
+
+    /**
+     * Remove addresses
+     *
+     * @param \SICLA\HydraBundle\Entity\Address $addresses
+     */
+    public function removeAddresse(\SICLA\HydraBundle\Entity\Address $addresses)
+    {
+        $this->addresses->removeElement($addresses);
+    }
+
+    /**
+     * Get addresses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAddresses()
     {
         return $this->addresses;
-    }
-	/*
-	 * Set Phones
-	 */
-	public function setAddresses(Array $addresses)
-    {
-        foreach($addresses as $addresse)
-		{
-			 $this->addresses->add($addresse);
-		}
     }
 }

@@ -25,14 +25,14 @@ class ApprenantDemandeLogementController extends CommonController {
 				$em->persist($object);
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');
-				return $this->redirect($this->generateUrl('sidus_show_node', array('node_id' => $version->getNode()->getId(), '_locale' => $version->getLang())));
+				return $this->redirect($this->generateUrl('sidus_show_node', array('node_id' => $version->getNode()->getId(), 'lang' => $version->getLang())));
 			//}
 		}
 		$loaded_objects['form'] = $form->createView();
 		return $this->render('SICLAAraBundle:ApprenantDemandeLogement:edit.html.twig', $loaded_objects);
 	}
 
-	public function addAction($node, $_locale, $type) {
+	public function addAction($node, $lang, $type) {
 
 		$em = $this->getDoctrine()->getEntityManager();
 		//@TODO : get connected user
@@ -65,7 +65,7 @@ class ApprenantDemandeLogementController extends CommonController {
 		$new_version = new Version();
 		$new_version->setNode($node);
 		$new_version->setObject($new_object);
-		$new_version->setLang($_locale);
+		$new_version->setLang($lang);
 		$new_version->setRevision(1);
 		$new_version->setRevisionBy($user);
 		$em->persist($new_version);
@@ -74,7 +74,7 @@ class ApprenantDemandeLogementController extends CommonController {
 
 		return $this->redirect($this->generateUrl('sidus_edit_node',array(
 					'node_id' => $node->getId(),
-					'_locale' => $_locale,
+					'lang' => $lang,
 		)), 301 );
 	}
 	/*

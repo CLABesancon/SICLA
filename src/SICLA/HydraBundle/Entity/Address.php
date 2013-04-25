@@ -119,6 +119,12 @@ class Address
      */
     private $postofficeNumber;
 	
+	/**
+	* @ORM\ManyToOne(targetEntity="SICLA\HydraBundle\Entity\Person", inversedBy="addresses", cascade={"remove"})
+	* @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+	*/
+	
+	protected $person;
     /**
      * Get id
      *
@@ -449,5 +455,28 @@ class Address
     public function getPostofficeNumber()
     {
         return $this->postofficeNumber;
+    }
+
+    /**
+     * Set person
+     *
+     * @param \SICLA\HydraBundle\Entity\Person $person
+     * @return Address
+     */
+    public function setPerson(\SICLA\HydraBundle\Entity\Person $person)
+    {
+        $this->person = $person;
+    
+        return $this;
+    }
+
+    /**
+     * Get person
+     *
+     * @return \SICLA\HydraBundle\Entity\Person 
+     */
+    public function getPerson()
+    {
+        return $this->person;
     }
 }

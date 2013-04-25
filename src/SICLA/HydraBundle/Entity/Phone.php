@@ -34,7 +34,12 @@ class Phone
      * @ORM\Column(name="phoneNumber", type="string", length=255)
      */
     private $phoneNumber;
-
+	
+	/**
+	* @ORM\ManyToOne(targetEntity="SICLA\HydraBundle\Entity\Person", inversedBy="phones")
+	* @ORM\JoinColumn(name="person_id", referencedColumnName="id"))
+	*/
+	protected $person;
 
     /**
      * Get id
@@ -90,5 +95,28 @@ class Phone
     public function getPhoneNumber()
     {
         return $this->phoneNumber;
+    }
+
+    /**
+     * Set person
+     *
+     * @param \SICLA\HydraBundle\Entity\Person $person
+     * @return Phone
+     */
+    public function setPerson(\SICLA\HydraBundle\Entity\Person $person)
+    {
+        $this->person = $person;
+    
+        return $this;
+    }
+
+    /**
+     * Get person
+     *
+     * @return \SICLA\HydraBundle\Entity\Person 
+     */
+    public function getPerson()
+    {
+        return $this->person;
     }
 }
