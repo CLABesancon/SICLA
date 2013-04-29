@@ -24,98 +24,98 @@ class Address
     /**
      * @var integer
      *
-     * @ORM\Column(name="streetNumber", type="integer")
+     * @ORM\Column(name="streetNumber", type="integer", nullable=true)
      */
     private $streetNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="streetNumberSuffix", type="string", length=255)
+     * @ORM\Column(name="streetNumberSuffix", type="string", length=255, nullable=true)
      */
     private $streetNumberSuffix;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="streetType", type="string", length=255)
+     * @ORM\Column(name="streetType", type="string", length=255, nullable=true)
      */
     private $streetType;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="streetName", type="string", length=255)
+     * @ORM\Column(name="streetName", type="string", length=255, nullable=true)
      */
     private $streetName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="addressType", type="string", length=255)
+     * @ORM\Column(name="addressType", type="string", length=255, nullable=true)
      */
     private $addressType;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="addressTypeNumber", type="integer")
+     * @ORM\Column(name="addressTypeNumber", type="integer", nullable=true)
      */
     private $addressTypeNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="minorMunicipality", type="string", length=255)
+     * @ORM\Column(name="minorMunicipality", type="string", length=255, nullable=true)
      */
     private $minorMunicipality;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="majorMunicipality", type="string", length=255)
+     * @ORM\Column(name="majorMunicipality", type="string", length=255, nullable=true)
      */
     private $majorMunicipality;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="governinsDistrict", type="string", length=255)
+     * @ORM\Column(name="governinsDistrict", type="string", length=255, nullable=true)
      */
     private $governinsDistrict;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="postalCode", type="string", length=10)
+     * @ORM\Column(name="postalCode", type="string", length=10, nullable=true)
      */
     private $postalCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255)
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
     private $country;
 	
 	 /**
      * @var string
      *
-     * @ORM\Column(name="cedex", type="boolean")
+     * @ORM\Column(name="cedex", type="boolean", nullable=true)
      */
     private $cedex;
 	
 	 /**
      * @var string
      *
-     * @ORM\Column(name="cedexNumber", type="string", length=255)
+     * @ORM\Column(name="cedexNumber", type="string", length=255, nullable=true)
      */
     private $cedexNumber;
 	
 	/**
      * @var string
      *
-     * @ORM\Column(name="postofficeNumber", type="string", length=255)
+     * @ORM\Column(name="postofficeNumber", type="string", length=255, nullable=true)
      */
     private $postofficeNumber;
 	

@@ -1,0 +1,3 @@
+sicla_list_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: SICLAListBundle:Default:index }

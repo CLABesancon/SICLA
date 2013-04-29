@@ -233,9 +233,10 @@ $(function() {
 			
 			        direction.route(request, function(response, status) {
 			            if (status == google.maps.DirectionsStatus.OK) {
+							$('div.alert').css('display','none')
 			                way.setDirections(response);
 			            } else {
-			                alert("Address not found");
+			                $('div.alert').append("L'adresse définie n'a pas pu être géolocalisée.")
 			            }
 			        });
 		
@@ -253,9 +254,10 @@ $(function() {
 	
 	        direction.route(request, function(response, status) {
 	            if (status == google.maps.DirectionsStatus.OK) {
+					$('div.alert').css('display','none')
 	                way.setDirections(response);
 	            } else {
-	                alert("Address not found");
+	                 $('div.alert').append("L'adresse définie n'a pas pu être géolocalisée.")
 	            }
 	        });
 		}

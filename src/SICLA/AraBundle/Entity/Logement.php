@@ -100,7 +100,12 @@ class Logement extends Object
 	* 
 	*/
 	private $typeLogement;
-
+	
+	/**
+	* @ORM\OneToOne(targetEntity="SICLA\HydraBundle\Entity\Address", cascade={"persist"})
+	*/
+	private $address;
+   
     /**
      * Get id
      *
@@ -389,5 +394,28 @@ class Logement extends Object
     public function getEquipements()
     {
         return $this->equipements;
+    }
+
+    /**
+     * Set address
+     *
+     * @param \SICLA\HydraBundle\Entity\Address; $address
+     * @return Logement
+     */
+    public function setAddress(\SICLA\HydraBundle\Entity\Address $address = null)
+    {
+        $this->address = $address;
+    
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \SICLA\HydraBundle\Entity\Address; 
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

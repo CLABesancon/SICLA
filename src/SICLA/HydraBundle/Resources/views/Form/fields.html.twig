@@ -19,6 +19,7 @@
 			   {{ form_label(form,'Genre') }}
 </div>
 {% endblock %}
+
 {% block _sicla_hydrabundle_persontype_birthday_label %}
 <div class="birthday">
 			   {{ form_label(form,'Date de naissance')}}
@@ -40,10 +41,11 @@
 			   {{ form_label(form,'Numéro de rue') }}
 </div>
 {% endblock %}
-{# adresse #}
+
+{# adresse Hydra #}
 {% block _sicla_hydrabundle_addresstype_streetNumber_label %}
 <div class="streetNumber">
-			   {{ form_label(form,'Numéro de rue') }}
+			   {{ form_label(form,'Numéro de voie') }}
 </div>
 {% endblock %}
 {% block _sicla_hydrabundle_addresstype_streetNumberSuffix_label %}
@@ -110,4 +112,76 @@
 <div class="postofficeNumber">		
 	{{ form_label(form,'Numéro de boite postale:') }}
 </div>
+{% endblock %}	
+
+{# adresse Ara #}
+{% block _arabundle_logementtype_address_streetNumber_label %}
+<div class="streetNumber">
+			   {{ form_label(form,'Numéro de voie') }}
+</div>
+{% endblock %}
+{% block _arabundle_logementtype_address_streetNumberSuffix_label %}
+<div class="streetNumberSuffix">
+		{{ form_label(form,'Suffixe du n° de voie') }}
+</div>
+ {% endblock %}				
+{% block _arabundle_logementtype_address_streetType_label %}
+<div class="streetType">		
+		{{ form_label(form,'Type de voie:') }}
+</div>
 {% endblock %}					
+{% block _arabundle_logementtype_address_streetName_label %}
+<div class="streetName">	
+		{{ form_label(form,'Nom de la voie:') }}
+</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_addressType_label %}
+<div class="addressType">		
+		{{ form_label(form,'Type de bâtiment:') }}
+</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_addressTypeNumber_label %}
+<div class="addressTypeNumber">		
+		{{ form_label(form,'Numéro de bâtiment:') }}
+</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_minorMunicipality_label %}
+<div class="minorMunicipality">		
+		{{ form_label(form,'Hameau:') }}
+</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_majorMunicipality_label %}
+<div class="majorMunicipality">		
+		{{ form_label(form,'Ville:') }}
+</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_governinsDistrict_label %}
+<div class="governinsDistrict">	
+		{{ form_label(form,'District:') }}
+</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_postalCode_label %}
+<div class="postalCode">		
+		{{ form_label(form,'Code postal:') }}
+</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_country_label %}
+<div class="country">		
+		{{ form_label(form,'Pays:') }}
+</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_cedex_label %}
+											<div class="cedex">		
+		{{ form_label(form,'Cédex:') }}
+												</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_cedexNumber_label %}
+<div class="cedexNumber">		
+		{{ form_label(form,'Numéro du cédex:') }}
+</div>
+{% endblock %}					
+{% block _arabundle_logementtype_address_postofficeNumber_label %}
+<div class="postofficeNumber">		
+	{{ form_label(form,'Numéro de boite postale:') }}
+</div>
+{% endblock %} 

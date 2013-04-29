@@ -5,6 +5,7 @@ namespace SICLA\AraBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use SICLA\HydraBundle\Form\AddressType;
 
 class LogementType extends AbstractType
 {
@@ -37,7 +38,8 @@ class LogementType extends AbstractType
 			 ->add ('typeLogement', 'entity', array(
 				'class'    =>'SICLAAraBundle:TypeLogement',
 				'property'=>'libelle',
-				'multiple'=>false));
+				'multiple'=>false))
+			->add('address', new AddressType());
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

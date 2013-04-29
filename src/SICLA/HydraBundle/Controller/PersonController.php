@@ -21,7 +21,7 @@ class PersonController extends CommonController {
 			$form->bind($request);
 			//if ($form->isValid()) {
 				//@TODO version
-				$object->addPhone($object->getPhones()->get(0));
+				
 				$em->persist($object);
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');

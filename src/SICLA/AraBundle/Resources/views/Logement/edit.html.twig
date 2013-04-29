@@ -1,7 +1,8 @@
-{% extends 'SICLAAraBundle::araBase.html.twig' %}
+{% extends 'SICLAAraBundle::base.html.twig' %}
 
 {% block main %}
 {% form_theme form 'SICLAAraBundle:Form:form_div_layout.html.twig' %}
+{% form_theme form 'SICLAHydraBundle:Form:fields.html.twig' %}
 <form action="" method="post">
 	<h1>{{ 'Création d\'un nouveau logement'}}</h1>
 	
@@ -37,6 +38,12 @@
 	
 	{{ form_label(form.equipement,'Le logement dispose des équipements suivants :') }}
 	{{ form_widget(form.equipement) }}
+	
+	<h3>Adresse du logement</h3>
+	{{ form_row(form.address.streetNumber) }}	{{ form_row(form.address.streetNumberSuffix) }}
+	{{ form_row(form.address.streetType) }}		{{ form_row(form.address.streetName) }}
+	{{ form_row(form.address.postalCode) }}		{{ form_row(form.address.majorMunicipality) }}
+	
 
 	<button class="btn btn-success" type="submit">Valider</button>
 </form>

@@ -1,4 +1,4 @@
-{% extends 'SICLAAraBundle:Default:show.html.twig' %}
+{% extends 'SICLAAraBundle::base.html.twig' %}
 {% block main %}
 <div class="block">
 	<div class="block-left">
@@ -42,11 +42,11 @@
 		</tr>
 		<tr>
 			<th>Consommation énergétique</th>
-			<td>{{ object.consommationEnergie }}</td>
+			<td class="consommationEnergie">{{ object.consommationEnergie }} </td>
 		</tr>
 		<tr>
 			<th>Émission de gaz à effet de serre</th>
-			<td>{{ object.emissionGes }}</td>
+			<td class="emissionGes">{{ object.emissionGes }} </td>
 		</tr>
 		<tr>
 			<th>Salle de bains privative</th>
@@ -58,14 +58,17 @@
 		</tr>
 	</tbody>
 </table>
-			
+<p class="label">Adresse : </p>
+<pre class="adresse">
+{{ object.address.streetNumber }}{{ object.address.streetNumberSuffix }} {{ object.address.streetType }} {{ object.address.streetName }}
+{{ object.address.postalCode }} {{ object.address.majorMunicipality |capitalize }}
+</pre>			
+<div id="way"><p class="label">Distance par rapport au CLA :</p></div>
 
 </div>
 <div class="block-right">
 	<div id="map" style="width: 450px; height: 300px;"></div>
-	<div class="adresse">44 avenue georges clémenceau Besançon, France</div>
-	<div class="adresse">6 rue gabriel plancon 25000 besançon</div>
-	<div id="way"></div>
+	<div class="alert alert-error"></div>
 	
 	<div class="energie">
 		<div class="curseur_energie">

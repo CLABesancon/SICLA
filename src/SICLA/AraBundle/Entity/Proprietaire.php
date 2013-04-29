@@ -13,15 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Proprietaire extends Object
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="telephone2", type="string", length=255)
@@ -34,16 +25,6 @@ class Proprietaire extends Object
      * @ORM\Column(name="courrier2", type="string", length=255)
      */
     private $courriel2;
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set telephone2

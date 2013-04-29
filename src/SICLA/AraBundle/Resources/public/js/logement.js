@@ -2,8 +2,7 @@ jQuery(document).ready(function() {
 	//on modifie l'emplacement du curseur en fonction de la valeur indiquée dans le champ
 	
 	// ***** Consommation d'énergie *****
-	consommation=$("#arabundle_logementtype_consommationEnergie").val();
-	
+	consommation=$("td.consommationEnergie").text();
 	if(consommation <=50){
 		$(".curseur_energie").css('top','15px');
 	}
@@ -27,7 +26,7 @@ jQuery(document).ready(function() {
 	}
 	
 	// ***** Emissions GES *****
-	GES=$("#arabundle_logementtype_emissionGes").val();
+	GES=$(".emissionGes").text();
 	if(GES<=5){
 			$(".curseur_ges").css('top','15px')
 	}

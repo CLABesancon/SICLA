@@ -1,3 +1,7 @@
+sicla_list:
+    resource: "@SICLAListBundle/Resources/config/routing.yml"
+    prefix:   /
+
 sidus_sidus:
     resource: "@SidusBundle/Resources/config/routing.yml"
     prefix:   /

@@ -31,6 +31,7 @@ class AppKernel extends Kernel
 			new SICLA\AraBundle\SICLAAraBundle(),
 			new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new SICLA\ListBundle\SICLAListBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
