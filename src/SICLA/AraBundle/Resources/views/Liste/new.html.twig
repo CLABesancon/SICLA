@@ -40,7 +40,14 @@
 			
 				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
 				{% endfor %}
-			{% endif %}	
+			{% endif %}
+			{%if key=="statuts" %}
+			<div class="{{key}}" data-prototype="{{ form_widget(form.statuts.vars.prototype.libelle)|e }}">
+				{% for objet in form.statuts %} 
+			
+				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
+			{% endfor %}
+			{% endif %}
 			</div>
 		
 			

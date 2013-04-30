@@ -13,7 +13,21 @@ class AddressType extends AbstractType
         $builder
             ->add('streetNumber')
             ->add('streetNumberSuffix')
-            ->add('streetType')
+			->add('streetType', 'choice', array(
+					'choices'   => array(
+						'allée'   => 'Allée',
+						'avenue' => 'Avenue',
+						'boulevard'   => 'Boulevard',
+						'chemin'   => 'Chemin',
+						'impasse'   => 'Impasse',
+						'place'   => 'Place',
+						'rue'   => 'Rue',
+						'route'   => 'Route',
+						'voie'   => 'Voie',
+						
+					),
+					'multiple'  =>false,
+				))
             ->add('streetName')
             ->add('addressType')
             ->add('addressTypeNumber')

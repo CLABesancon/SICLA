@@ -22,6 +22,7 @@ class LogementController extends CommonController
 			$form->bind($request);
 			//if ($form->isValid()) {
 				//@TODO version
+				$object->setTitle($object->getTypeLogement()->getLibelle()." de ".$object->getSurface()." m² à ".$object->getLoyer()."€");
 				$em->persist($object);
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');
@@ -37,7 +38,7 @@ class LogementController extends CommonController
 		$em = $this->getDoctrine()->getEntityManager();
 		//@TODO : get connected user
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
-		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(1);
+		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(2);
 		$new_object = new Logement();
 		$new_object->setType($type);
 		$new_object->setTitle('');
@@ -50,7 +51,7 @@ class LogementController extends CommonController
 		$new_object->setCharges('');
 		$new_object->setAscenseur('');
 		$new_object->setSdbPrivative('');
-		$new_object->setTypeLogement($typeLogement); // à modifier
+		$new_object->setTypeLogement($typeLogement); 
 		
 		$em->persist($new_object);
 		$em->flush();

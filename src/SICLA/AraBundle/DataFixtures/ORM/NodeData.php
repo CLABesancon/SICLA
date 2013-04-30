@@ -28,7 +28,7 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface, Conta
 	
 	public function load(ObjectManager $manager) {
 		
-		$types = array('ApprenantDemandeLogement','FamilleAccueil','Logement','Proprietaire');
+		$types = array('ApprenantDemandeLogement','FamilleAccueil','Logement','Proprietaire','FolderLogement','Annonce');
 		foreach ($types as $type) {
 			$node= new Node();
 			$node->setNodeName('type-'.strtolower($type));

@@ -51,12 +51,20 @@ class Logement extends Object
      * @ORM\Column(name="loyer", type="float")
      */
     private $loyer;
+	
+	 /**
+     * @var string
+     *
+     * @ORM\Column(name="echeanceLoyer", type="string", length=255)
+     */
+    private $echeanceLoyer;
 
     /**
      * @var float
      *
      * @ORM\Column(name="charges", type="float")
      */
+	
     private $charges;
 
     /**
@@ -417,5 +425,28 @@ class Logement extends Object
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Set echeanceLoyer
+     *
+     * @param string $echeanceLoyer
+     * @return Logement
+     */
+    public function setEcheanceLoyer($echeanceLoyer)
+    {
+        $this->echeanceLoyer = $echeanceLoyer;
+    
+        return $this;
+    }
+
+    /**
+     * Get echeanceLoyer
+     *
+     * @return string 
+     */
+    public function getEcheanceLoyer()
+    {
+        return $this->echeanceLoyer;
     }
 }

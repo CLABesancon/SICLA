@@ -32,7 +32,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface,Con
 		$user = $this->container->get('doctrine')->getRepository('SidusBundle:Node')->find(2);
 
 		//Other Types
-		$types = array('ApprenantDemandeLogement','FamilleAccueil','Logement','Proprietaire');
+		$types = array('ApprenantDemandeLogement','FamilleAccueil','Logement','Proprietaire','FolderLogement','Annonce');
 		foreach ($types as $type) {
 			$version = new Version();
 			$version->setNode($this->getReference('node-type-'.strtolower($type)));

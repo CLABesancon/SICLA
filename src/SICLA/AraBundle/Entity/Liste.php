@@ -14,6 +14,7 @@ class Liste
 	protected $regimes;
 	protected $loisirs;
 	protected $equipements;
+	protected $statuts;
 
     public function __construct()
     {
@@ -22,7 +23,8 @@ class Liste
 			"logements"=>array("entity"=>"SICLAAraBundle:TypeLogement","name"=>"Types de logements"),
 			"regimes"=>array("entity"=>"SICLAAraBundle:RegimeAlimentaire","name"=>"Régimes alimentaires"),
 			"loisirs"=>array("entity"=>"SICLAAraBundle:Loisir","name"=>"Loisirs"),
-			"equipements"=>array("entity"=>"SICLAAraBundle:Equipement","name"=>"Types d'équipements")
+			"equipements"=>array("entity"=>"SICLAAraBundle:Equipement","name"=>"Types d'équipements"),
+			"statuts"=>array("entity"=>"SICLAAraBundle:StatutAnnonce","name"=>"Statuts d'annonces")
 		);
     }
 
@@ -77,5 +79,15 @@ class Liste
 	public function setEquipements(ArrayCollection $equipements)
 	{
 		$this->equipements=$equipements;
+	}
+	
+	public function getStatuts()
+	{
+		return $this->statuts;
+	}
+	
+	public function setStatuts(ArrayCollection $statuts)
+	{
+		$this->statuts=$statuts;
 	}
 }

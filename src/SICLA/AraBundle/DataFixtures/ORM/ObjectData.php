@@ -31,7 +31,7 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 		$now = new \Datetime('now');
          
 		//Other Types
-		$types = array('ApprenantDemandeLogement','FamilleAccueil','Logement','Proprietaire');
+		$types = array('ApprenantDemandeLogement','FamilleAccueil','Logement','Proprietaire','FolderLogement','Annonce');
 		foreach ($types as $type) {
 			$object = new Type();
 			$object->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));

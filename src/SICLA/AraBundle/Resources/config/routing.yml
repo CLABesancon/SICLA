@@ -37,3 +37,14 @@ sicla_ara_view_form_famille_accueil:
 sicla_ara_view_map:
   pattern:    /map
   defaults: {_controller: SICLAAraBundle:Map:view_Map}
+  
+sicla_ara_validate:
+  pattern:  /validate/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:Annonce:validate, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$
+sicla_ara_archivate:
+  pattern:  /archivate/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:Annonce:archivate/, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$    

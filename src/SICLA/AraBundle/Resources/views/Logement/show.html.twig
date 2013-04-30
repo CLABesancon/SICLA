@@ -17,6 +17,14 @@
 			<td>{{ object.charges }}€</td>
 		</tr>
 		<tr>
+			<th>Échéance du loyer</th>
+			{% if object.echeanceLoyer=="mois"%}
+				<td>Paiement au mois</td>
+			{% else %}
+				<td>Paiement à la semaine</td>
+			{% endif %}
+		</tr>
+		<tr>
 			<th>Surface du logement</th>
 			<td>{{ object.surface }}m²</td>
 		</tr>
@@ -56,6 +64,12 @@
 				<td>Non</td>
 			{% endif %}
 		</tr>
+		<tr>
+			<th>Équipements</th>
+			<td>{% for equipement in object.equipement %}
+				<li>{{equipement.getLibelle}}<br/></li>
+				{% endfor %}
+			</td>
 	</tbody>
 </table>
 <p class="label">Adresse : </p>
@@ -64,7 +78,41 @@
 {{ object.address.postalCode }} {{ object.address.majorMunicipality |capitalize }}
 </pre>			
 <div id="way"><p class="label">Distance par rapport au CLA :</p></div>
-
+<p class="label">Annonce : </p>
+<div class="annonce">
+{% for child in children %}
+		{% if child.object.getType().getTypeName()=="Annonce" %}
+			{% if child.object.getStatut().getId()==1 %}
+			<div class="date">Date de création : {% for version in versions %}  {% if loop.first %} {{version.getRevisionDate|date('d-m-Y') }} {% endif %} {% endfor %}</div>
+			<div class="date">Date de dernière modification : {{ version.getRevisionDate|date('d-m-Y') }}</div>
+			<div>{{ child.object.annonce }}</div>
+				<div class="btn-toolbar actions-condensed">
+										<div class="btn-group">
+											<a href="{{ path('sicla_ara_archivate', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Archiver"><i class="icon-trash"></i></a>
+											<a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>
+											<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></a>
+											<a href="{{ path('sidus_favorite_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></a>
+											<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
+												<i class="icon-wrench"></i> <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu pull-right">
+												<li><a href="{{ path('sidus_move_node', { 'node_id': child.node.id }) }}"><i class="icon-arrow-right"></i> Move</a></li>
+												<li><a href="{{ path('sidus_link_node', { 'node_id': child.node.id }) }}"><i class="icon-share-alt"></i> Link</a></li>
+												<li><a href="{{ path('sidus_copy_node', { 'node_id': child.node.id }) }}"><i class="icon-repeat"></i> Copy</a></li>
+												<li><a href="{{ path('sidus_node_permissions', { 'node_id': child.node.id }) }}"><i class="icon-lock"></i> Permissions</a></li>
+												<li class="divider"></li>
+												<li><a href="{{ path('sidus_node_history', { 'node_id': child.node.id }) }}"><i class="icon-list"></i> History</a></li>
+												<li><a href="{{ path('sidus_node_feed', { 'node_id': child.node.id }) }}"><i class="icon-signal"></i> Feed</a></li>
+												<li class="divider"></li>
+												<li class="disabled"><a href="{{ path('sidus_delete_node', { 'node_id': child.node.id }) }}"><i class="icon-trash icon-white"></i> Delete</a></li>
+											</ul>
+										</div>
+				</div>
+			{% endif %}
+		{% endif %}
+{% endfor %}
+</div>
+	
 </div>
 <div class="block-right">
 	<div id="map" style="width: 450px; height: 300px;"></div>

@@ -1,0 +1,7 @@
+ *  "sicla_ara_logement" = "SICLA\AraBundle\Entity\Logement",
+ *	"sicla_ara_apprenant_demande_logement" = "SICLA\AraBundle\Entity\ApprenantDemandeLogement",
+ *	"sicla_ara_famille_accueil" = "SICLA\AraBundle\Entity\FamilleAccueil",
+ *	"sicla_ara_proprietaire" = "SICLA\AraBundle\Entity\Proprietaire",
+ *  "sicla_ara_annonce" = "SICLA\AraBundle\Entity\Annonce",
+ *	"sicla_hydra_person" = "SICLA\HydraBundle\Entity\Person",
+ *	"sicla_list_liste"="SICLA\ListBundle\Entity\Liste"

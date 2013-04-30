@@ -40,6 +40,12 @@ class ListeType extends AbstractType
 					'allow_add' => true,
 					'allow_delete' => true,
 					'by_reference' => false,
+		))
+				 ->add('statuts', 'collection', array(
+					'type' => new StatutAnnonceType(),
+					'allow_add' => true,
+					'allow_delete' => true,
+					'by_reference' => false,
 		));
     }
 

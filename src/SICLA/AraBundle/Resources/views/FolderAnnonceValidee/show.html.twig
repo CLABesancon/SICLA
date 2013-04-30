@@ -59,11 +59,8 @@
 			<tr>
 				<th{% if children.isSorted('n.id') %} class="sorted"{% endif %}><input type="checkbox" class="radio-condensed"/> {{ knp_pagination_sortable(children, '#', 'n.id') }}</th>
 				<th{% if children.isSorted('o.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(children, 'Title', 'o.title') }}</th>
-				<th>Type de logement</th> 
-				<th>Meublé</th>
-				<th>Surface</th>
-				<th>Loyer</th>
-				<th>Charges</th>
+				<th>Contenu</th> 
+				
 				<th class="actions">Actions</th>
 			</tr>
 		</thead>
@@ -72,15 +69,7 @@
 				<tr>
 					<td><input type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
 					<td><a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{child.object.title}}</a></td>
-					<td>{{child.object.typeLogement.libelle}}</td> 
-				{% if child.object.meuble == 1 %}
-					<td>oui</td>
-				{% else %}
-					<td>non</td>
-				{% endif %}
-					<td>{{child.object.surface}}m²</td>
-					<td>{{child.object.loyer}}€</td>
-					<td>{{child.object.charges}}€</td>
+					<td>{{child.object.annonce}}</td> 
 					<td>
 						<div class="btn-toolbar actions-condensed">
 							<div class="btn-group">

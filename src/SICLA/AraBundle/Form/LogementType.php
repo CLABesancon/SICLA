@@ -21,6 +21,10 @@ class LogementType extends AbstractType
 			->add('consommationEnergie')
 			->add('emissionGes')
 			->add('loyer')
+			->add('echeanceLoyer','choice', array(
+			  'choices' => array('semaine' => 'Paiement à la semaine', 'mois' => 'Paiement au mois'),
+			  'expanded' => true,
+			  'multiple' => false))
 			->add('charges')
 			->add('ascenseur','choice', array(
 			  'choices' => array('1' => 'Oui', '0' => 'Non'),

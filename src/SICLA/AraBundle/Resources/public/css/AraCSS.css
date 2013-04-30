@@ -29,8 +29,7 @@ border: 1px solid rgba(0,0,0,0.15);
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
 border-radius: 4px;}
-
-.block-left{float:left; }
+.block-left{float:left;width:40%; }
 .block-right{float:right; }
 div.energie{
 	float:left;
@@ -65,3 +64,4 @@ div.curseur_ges{
 
 .record_properties{text-align: right;}
 .error_address{font-weight : bold; color:red;}
+.date{font-size: 10px; font-weight: bold;}
