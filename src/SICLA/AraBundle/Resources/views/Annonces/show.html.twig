@@ -1,5 +1,14 @@
 {% extends 'SidusBundle:Default:show.html.twig' %}
 
+{% block nodeInfos %}
+	<p class="node-infos-line">
+		<big class="node-title"><i class="icon-folder-open"></i> {{object}}</big><br class="hidden-phone"/>
+		<span class="text-info">Type: <b>{{object.type}}</b></span><br class="hidden-phone"/>
+		<small class="muted">Created by <a href="{{ path('sidus_show_node', { 'node_id': version.revisionby.id }) }}">{{ version.revisionby }}</a> {{ version.revisionDate|datediff() }}</small>
+	</p>
+	<p>{{ object.content }}</p>
+{% endblock %}
+
 {% block main %}
 	<div class="btn-toolbar pull-right">
 		<button class="btn" title="Thumbnail view"><i class="icon-th"></i></button>
@@ -50,32 +59,26 @@
 			<tr>
 				<th{% if children.isSorted('n.id') %} class="sorted"{% endif %}><input type="checkbox" class="radio-condensed"/> {{ knp_pagination_sortable(children, '#', 'n.id') }}</th>
 				<th{% if children.isSorted('o.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(children, 'Title', 'o.title') }}</th>
-				<th>Type de logement</th> 
-				<th>Meublé</th>
-				<th>Surface</th>
-				<th>Loyer</th>
-				<th>Charges</th>
-				<th>Annonce</th>
+				<th>Logement associé</th>
+				<th>Date de création</th>
+				<th>Date de dernière modification</th>
+				<th>Contenu de l'annonce</th>
 				<th class="actions">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
+				
+
+					
 			{% for child in children %}
 				<tr>
 					<td><input type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
-					<td><a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{child.object.title}}</a></td>
-					<td>{{child.object.typeLogement.libelle}}</td> 
-				{% if child.object.meuble == 1 %}
-					<td>oui</td>
-				{% else %}
-					<td>non</td>
-				{% endif %}
-					<td>{{child.object.surface}}m²</td>
-					<td>{{child.object.loyer}}€</td>
-					<td>{{child.object.charges}}€</td>
-					{% for child in child %}
-					<td>{{child.object.annonce}} </td>
-					{% endfor %}
+					<td><a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{ child.object }}</a></td>
+					<td>
+					</td>
+					<td>{% for version in versions %}  {% if loop.first %} {{version.getRevisionDate|date('d-m-Y') }} {% endif %} {% endfor %}</td>
+					<td>{{ version.getRevisionDate|date('d-m-Y') }}</td>
+					<td>{{ child.object.annonce }}</td>
 					<td>
 						<div class="btn-toolbar actions-condensed">
 							<div class="btn-group">

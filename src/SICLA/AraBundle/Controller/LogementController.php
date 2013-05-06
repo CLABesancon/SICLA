@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sidus\SidusBundle\Controller\CommonController;
 use Sidus\SidusBundle\Entity\Version;
 use SICLA\AraBundle\Entity\Logement;
+use Sidus\SidusBundle\Entity\Node;
 use SICLA\AraBundle\Form\LogementType;
 
 
@@ -37,6 +38,7 @@ class LogementController extends CommonController
 
 		$em = $this->getDoctrine()->getEntityManager();
 		//@TODO : get connected user
+		$user = $em->getRepository('SidusBundle:Version')->find(2);
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
 		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(2);
 		$new_object = new Logement();
@@ -45,6 +47,7 @@ class LogementController extends CommonController
 		$new_object->setMeuble('');
 		$new_object->setNbChambres('');
 		$new_object->setLoyer('');
+		$new_object->setEcheanceLoyer('');
 		$new_object->setSurface('');
 		$new_object->setConsommationEnergie('');
 		$new_object->setEmissionGes('');
@@ -63,7 +66,43 @@ class LogementController extends CommonController
 		$new_version->setRevision(1);
 		$new_version->setRevisionBy($user);
 		$em->persist($new_version);
-
+		
+		// Node liste logement
+		
+		$node_logement=new Node();
+		$node_logement->setNodeName('');
+		$node_logement->setParent($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des logements'));
+		$em->persist($node_logement);
+		
+		// version liste logement
+		
+		$version_logement=new Version();
+		$version_logement->setNode($node_logement);
+		$version_logement->setObject($new_object);
+		$version_logement->setLang($lang);
+		$version_logement->setRevision(1);
+		$version_logement->setRevisionBy($user);
+		$em->persist($version_logement);
+		
+		
+		
+		// Node liste annonces
+		
+		$node_annonce=new Node();
+		$node_annonce->setNodeName('');
+		$node_annonce->setParent($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des annonces'));
+		$em->persist($node_annonce);
+		
+		// version liste annonces
+		
+		$version_annonce=new Version();
+		$version_annonce->setNode($node_annonce);
+		$version_annonce->setObject($new_object);
+		$version_annonce->setLang($lang);
+		$version_annonce->setRevision(1);
+		$version_annonce->setRevisionBy($user);
+		$em->persist($version_annonce);
+		
 		$em->flush();
 
 		return $this->redirect($this->generateUrl('sidus_edit_node',array(
@@ -71,40 +110,7 @@ class LogementController extends CommonController
 					'lang' => $lang,
 		)), 301 );
 	}
-	
-	/* public function form_logementAction(Request $request)
-    {
-		$form=$this->createForm(new LogementType());
 		
-		$em = $this->getDoctrine()->getEntityManager();
-		
-		if ($request->isMethod('POST')) {
-			$form->bind($request);
-			$logement= $form->getData();
-			$em->persist($logement);
-			$em->flush();
-			
-			
-		}
-		
-        return $this->render('SICLAAraBundle:Form:form_logement.html.twig', array('form'=>$form->createView()));
-	}
-	 public function view_form_logementAction($id,Request $request)
-    {
-		$logement=$this->getDoctrine()->getRepository('SICLAAraBundle:Logement')->find($id);
-		$form = $this->createForm(new LogementType(),$logement);
-		
-		$em = $this->getDoctrine()->getEntityManager();
-		
-		if ($request->isMethod('POST')) {
-			$form->bind($request);
-			$logement = $form->getData();
-			$em->flush();
-			
-		}
-		
-		return $this->render('SICLAAraBundle:Form:view_logement.html.twig', array('logement' => $logement, 'form' => $form->createView()));
-	}*/
 	
 }
 

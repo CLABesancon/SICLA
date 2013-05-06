@@ -6,6 +6,7 @@ use Sidus\SidusBundle\Controller\CommonController;
 use Sidus\SidusBundle\Entity\Version;
 use SICLA\AraBundle\Form\AnnonceType;
 use SICLA\AraBundle\Entity\Annonce;
+use Sidus\SidusBundle\Entity\Node;
 
 
 class AnnonceController extends CommonController
@@ -44,7 +45,7 @@ class AnnonceController extends CommonController
 		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(2);
 		$new_object = new Annonce();
 		$new_object->setType($type);
-		$new_object->setTitle('Annonce concernant le logement de type '.$object_parent->getTitle());
+		$new_object->setTitle($object_parent->getTitle());
 		$new_object->setAnnonce('');
 		$new_object->setStatut($statut);
 		$em->persist($new_object);
@@ -57,7 +58,8 @@ class AnnonceController extends CommonController
 		$new_version->setRevision(1);
 		$new_version->setRevisionBy($user);
 		$em->persist($new_version);
-
+		
+		
 		$em->flush();
 		
 
