@@ -26,7 +26,6 @@ class AnnonceController extends CommonController
 				$em->persist($object);
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');
-				
 				return $this->redirect($this->generateUrl('sidus_show_node', array('node_id' => $version->getNode()->getId(), 'lang' => $version->getLang())));
 			//}
 		}
@@ -48,6 +47,7 @@ class AnnonceController extends CommonController
 		$new_object->setTitle($object_parent->getTitle());
 		$new_object->setAnnonce('');
 		$new_object->setStatut($statut);
+		$new_object->setParentIdLogement($node->getParent()->getId());
 		$em->persist($new_object);
 		$em->flush();
 
@@ -59,6 +59,22 @@ class AnnonceController extends CommonController
 		$new_version->setRevisionBy($user);
 		$em->persist($new_version);
 		
+		// Node liste annonces
+		
+		$node_annonce=new Node();
+		$node_annonce->setNodeName('');
+		$node_annonce->setParent($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des annonces'));
+		$em->persist($node_annonce);
+		
+		// version liste annonces
+		
+		$version_annonce=new Version();
+		$version_annonce->setNode($node_annonce);
+		$version_annonce->setObject($new_object);
+		$version_annonce->setLang($lang);
+		$version_annonce->setRevision(1);
+		$version_annonce->setRevisionBy($user);
+		$em->persist($version_annonce);
 		
 		$em->flush();
 		
@@ -91,20 +107,26 @@ class AnnonceController extends CommonController
 		
 		$em->flush();
 		
-		return $this->render('SICLAAraBundle:Annonce:show.html.twig', $this->loaded_objects);
-
 	}
 	
 	public function contactAction($node_id, $lang = null) {
 		$this->loadObjectsForNodeUID($node_id, $lang);
 		
-		$em = $this->getDoctrine()->	getEntityManager();
-		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(4);
+		$em = $this->getDoctrine()->getEntityManager();
+		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(3);
 		$this->loaded_objects['object']->setStatut($statut);
+		// Récupération de l'adresse mail //
+		
+		// On récupère le logement associé à l'annonce
+		$this->loadObjectsForNodeUID(42, $lang);
+		// On récupère le parent de ce logement càd le propriétaire, puis l'user correspondant à ce propriétaire
+		//$node_user=$this->loaded_objects['node']->getParent()->getParent();
+		$node_user=$this->loaded_objects['node']->getParent()->getParent()->getId();
+		$this->loadObjectsForNodeUID($node_user, $lang);
+		$mail=$this->loaded_objects['version']->getObject()->getEmail();
 		
 		$em->flush();
-		
-		return $this->render('SICLAAraBundle:Annonce:show.html.twig', $this->loaded_objects);
+		return $this->render('SICLAAraBundle:Annonce:show.html.twig', $mail);
 
 	}
 	

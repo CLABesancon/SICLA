@@ -35,8 +35,14 @@ class Annonce extends Object
 	* 
 	*/
 	private $statut;
-
-
+	
+	 /**
+     * @var integer
+     *
+     * @ORM\Column(name="parent_id_logement", type="integer")
+     */
+	private $parentIdLogement;
+	
     /**
      * Get id
      *
@@ -91,5 +97,28 @@ class Annonce extends Object
     public function getStatut()
     {
         return $this->statut;
+    }
+
+    /**
+     * Set parentIdLogement
+     *
+     * @param integer $parentIdLogement
+     * @return Annonce
+     */
+    public function setParentIdLogement($parentIdLogement)
+    {
+        $this->parentIdLogement = $parentIdLogement;
+    
+        return $this;
+    }
+
+    /**
+     * Get parentIdLogement
+     *
+     * @return integer 
+     */
+    public function getParentIdLogement()
+    {
+        return $this->parentIdLogement;
     }
 }

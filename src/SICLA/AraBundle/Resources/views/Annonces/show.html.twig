@@ -58,7 +58,6 @@
 		<thead>
 			<tr>
 				<th{% if children.isSorted('n.id') %} class="sorted"{% endif %}><input type="checkbox" class="radio-condensed"/> {{ knp_pagination_sortable(children, '#', 'n.id') }}</th>
-				<th{% if children.isSorted('o.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(children, 'Title', 'o.title') }}</th>
 				<th>Logement associé</th>
 				<th>Date de création</th>
 				<th>Date de dernière modification</th>
@@ -73,18 +72,19 @@
 			{% for child in children %}
 				<tr>
 					<td><input type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
-					<td><a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{ child.object }}</a></td>
-					<td>
-					</td>
+					<td><a target="_blank" href="{{ path('sidus_show_node', { 'node_id': child.object.parentIdLogement }) }}">{{ child.object }}</a></td>
 					<td>{% for version in versions %}  {% if loop.first %} {{version.getRevisionDate|date('d-m-Y') }} {% endif %} {% endfor %}</td>
 					<td>{{ version.getRevisionDate|date('d-m-Y') }}</td>
 					<td>{{ child.object.annonce }}</td>
 					<td>
 						<div class="btn-toolbar actions-condensed">
 							<div class="btn-group">
-								<a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>
-								<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></a>
-								<a href="{{ path('sidus_favorite_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></a>
+									<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Valider"><i class="icon-ok"></i></a>
+								<a target="_blank" href="{{ path('sicla_ara_contact', { 'node_id': child.node.id}) }}" class="btn btn-mini" title="Demander la révision"><i class="icon-plane"></i></a>
+								<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Archiver"><i class="icon-folder-open"></i></a>
+								<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Supprimer"><i class="icon-trash"></i></a>
+								<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Modifier"><i class="icon-pencil"></i></a>
+
 								<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
 									<i class="icon-wrench"></i> <span class="caret"></span>
 								</button>

@@ -3,15 +3,6 @@
 {% block main %}
 {% form_theme form 'SICLAHydraBundle:Form:fields.html.twig' %}
 <h1>Edit a Person</h1>
-<table >
-	<tbody>
-		<tr>
-			<th class="record_properties">Id:</th>
-			<td>{{ object.id }}</td>
-		</tr>
-		<tr>
-	</tbody>
-</table>
 <form action="" method="post">
 	{{form_widget(form)}}
 	<button class="btn" type="submit">Validate</button>

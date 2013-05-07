@@ -1,50 +1,21 @@
 sicla_list_ara:
     resource: "@SICLAAraBundle/Resources/config/lists/routing.yml"
     prefix:   /list
-    
-sicla_ara_homepage:
-    pattern:  /home
-    defaults: { _controller: SICLAAraBundle:Default:index }
 
-sicla_ara_form_apprenant:
-    pattern:  /form_apprenant
-    defaults: { _controller: SICLAAraBundle:ApprenantDemandeLogement:form_apprenant }
-      
-sicla_ara_view_form_apprenant:
-    pattern:  /view_form_apprenant/{id}
-    defaults: { _controller: SICLAAraBundle:ApprenantDemandeLogement:view_form_apprenant }
-    
-sicla_ara_form_proprietaire:
-    pattern:  /form_proprietaire
-    defaults: { _controller: SICLAAraBundle:Proprietaire:form_proprietaire }
-    
-sicla_ara_form_logement:
-    pattern:  /form_logement
-    defaults: { _controller: SICLAAraBundle:Logement:form_logement }
-
-sicla_ara_view_form_logement:
-    pattern:  /view_form_logement/{id}
-    defaults: { _controller: SICLAAraBundle:Logement:view_form_logement }
-    
-sicla_ara_form_famille_accueil:
-    pattern:  /form_famille_accueil
-    defaults: { _controller: SICLAAraBundle:FamilleAccueil:form_famille_accueil}
-    
-sicla_ara_view_form_famille_accueil:
-    pattern:  /view_form_famille_accueil/{id}
-    defaults: { _controller: SICLAAraBundle:FamilleAccueil:view_form_famille_accueil}
-    
-sicla_ara_view_map:
-  pattern:    /map
-  defaults: {_controller: SICLAAraBundle:Map:view_Map}
-  
 sicla_ara_validate:
   pattern:  /validate/{node_id}/{lang}
   defaults: { _controller: SICLAAraBundle:Annonce:validate, lang: ~ }
   requirements:
     lang: ^[a-z]{2}$
+    
 sicla_ara_archivate:
   pattern:  /archivate/{node_id}/{lang}
-  defaults: { _controller: SICLAAraBundle:Annonce:archivate/, lang: ~ }
+  defaults: { _controller: SICLAAraBundle:Annonce:archivate, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$   
+    
+sicla_ara_contact:
+  pattern:  /contact/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:Annonce:contact, lang: ~ }
   requirements:
     lang: ^[a-z]{2}$    

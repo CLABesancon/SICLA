@@ -5,7 +5,7 @@ namespace SICLA\AraBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * StatutAnnonce
+ * LibelleAnnonce
  *
  * @ORM\Table(name="ara_statutAnnonce")
  * @ORM\Entity(repositoryClass="SICLA\AraBundle\Entity\StatutAnnonceRepository")
@@ -43,7 +43,7 @@ class StatutAnnonce
      * Set libelle
      *
      * @param string $libelle
-     * @return StatutAnnonce
+     * @return LibelleAnnonce
      */
     public function setLibelle($libelle)
     {

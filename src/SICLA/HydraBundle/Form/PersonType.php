@@ -13,8 +13,15 @@ class PersonType extends AbstractType
         $builder
             ->add('firstName')
             ->add('lastName')
+			->add('gender', 'choice', array(
+					'choices'   => array(
+						'-'   => '-',
+						'homme'   => 'Homme',
+						'femme' => 'Femme'
+					),
+					'multiple'  =>false,
+			))
             ->add('maidenName')
-            ->add('gender')
             ->add('birthday')
 				
 			  ->add('phones','collection', array(

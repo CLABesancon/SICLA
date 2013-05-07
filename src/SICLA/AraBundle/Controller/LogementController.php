@@ -84,25 +84,6 @@ class LogementController extends CommonController
 		$version_logement->setRevisionBy($user);
 		$em->persist($version_logement);
 		
-		
-		
-		// Node liste annonces
-		
-		$node_annonce=new Node();
-		$node_annonce->setNodeName('');
-		$node_annonce->setParent($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des annonces'));
-		$em->persist($node_annonce);
-		
-		// version liste annonces
-		
-		$version_annonce=new Version();
-		$version_annonce->setNode($node_annonce);
-		$version_annonce->setObject($new_object);
-		$version_annonce->setLang($lang);
-		$version_annonce->setRevision(1);
-		$version_annonce->setRevisionBy($user);
-		$em->persist($version_annonce);
-		
 		$em->flush();
 
 		return $this->redirect($this->generateUrl('sidus_edit_node',array(

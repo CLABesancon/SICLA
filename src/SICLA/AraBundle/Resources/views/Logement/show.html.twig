@@ -78,11 +78,12 @@
 {{ object.address.postalCode }} {{ object.address.majorMunicipality |capitalize }}
 </pre>			
 <div id="way"><p class="label">Distance par rapport au CLA :</p></div>
-<p class="label">Annonce : </p>
+
 <div class="annonce">
 {% for child in children %}
 		{% if child.object.getType().getTypeName()=="Annonce" %}
-			{# {% if child.object.getStatut().getId()==1 %} #}
+			 {% if child.object.getStatut().getLibelle()=="Validée" %} 
+			<p class="label">Annonce : </p>
 			<div class="date">Date de création : {% for version in versions %}  {% if loop.first %} {{version.getRevisionDate|date('d-m-Y') }} {% endif %} {% endfor %}</div>
 			<div class="date">Date de dernière modification : {{ version.getRevisionDate|date('d-m-Y') }}</div>
 			<div>{{ child.object.annonce }}</div>
@@ -109,7 +110,7 @@
 										</div>
 				</div>
 			{% endif %}
-		{# {% endif %} #}
+		 {% endif %} 
 {% endfor %}
 </div>
 	
