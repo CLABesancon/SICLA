@@ -19,3 +19,7 @@ sicla_ara_contact:
   defaults: { _controller: SICLAAraBundle:Annonce:contact, lang: ~ }
   requirements:
     lang: ^[a-z]{2}$    
+    
+sicla_ara_view_map:
+  pattern:    /map
+  defaults: {_controller: SICLAAraBundle:Map:view_Map}

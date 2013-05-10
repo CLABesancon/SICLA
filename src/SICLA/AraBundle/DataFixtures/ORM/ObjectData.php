@@ -32,7 +32,7 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 		$now = new \Datetime('now');
          
 		//Other Types
-		$types = array('Apprenant demande de logement','Famille d\'accueil','Proprietaire','Logement','Annonce');
+		$types = array('Proprietaire','Logement');
 		foreach ($types as $type) {
 			$object = new Type();
 			$object->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
@@ -43,6 +43,27 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 			$manager->persist($object);
 			$this->addReference('object-type-'.str_replace(' ','',strtolower($type)),$object);
 		}
+		// apprenant
+		$object_apprenant=new Type();
+		$object_apprenant->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
+		$object_apprenant->setTitle('Type Apprenant : Demande de logement');
+		$object_apprenant->setController('SICLAAraBundle:ApprenantDemandeLogement');
+		$object_apprenant->setTypeName('Type Apprenant : Demande de logement');
+		$object_apprenant->addForbiddenType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(2));
+		$manager->persist($object_apprenant);
+		$this->addReference('object-type-apprenantdemandedelogement',$object_apprenant);
+		
+		// famille d'accueil
+		
+		$object_famille=new Type();
+		$object_famille->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
+		$object_famille->setTitle('Type Famille d\'accueil');
+		$object_famille->setController('SICLAAraBundle:FamilleAccueil');
+		$object_famille->setTypeName('Type  Famille d\'accueil');
+		$object_famille->addForbiddenType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(2));
+		$manager->persist($object_famille);
+		$this->addReference('object-type-familledaccueil', $object_famille);
+		
 		
 		// Folder Ara
 		$object_ara = new Folder();
@@ -64,6 +85,28 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 		$manager->persist($object_folder_logement);
 		$this->addReference('object-type-folderlogement',$object_folder_logement);
 		
+		//Folder Propriétaire
+		
+		$object_folder_proprietaire= new Type();
+		$object_folder_proprietaire->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
+		$object_folder_proprietaire->setTitle('Type Folder Propriétaires');
+		$object_folder_proprietaire->setController('SICLAAraBundle:FolderProprietaire');
+		$object_folder_proprietaire->setTypename($type);
+		$object_folder_proprietaire->addAuthorizedType($this->getReference('object-type-proprietaire'));
+		$manager->persist($object_folder_proprietaire);
+		$this->addReference('object-type-folderproprietaire',$object_folder_proprietaire);
+		
+		//Folder apprenants demandes de logements
+		
+		$object_folder_demande_apprenant= new Type();
+		$object_folder_demande_apprenant->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
+		$object_folder_demande_apprenant->setTitle('Type Folder Apprenants');
+		$object_folder_demande_apprenant->setController('SICLAAraBundle:FolderApprenant');
+		$object_folder_demande_apprenant->setTypename($type);
+		$object_folder_demande_apprenant->addAuthorizedType($this->getReference('object-type-apprenantdemandedelogement'));
+		$manager->persist($object_folder_demande_apprenant);
+		$this->addReference('object-type-folderapprenant',$object_folder_demande_apprenant);
+		
 		//Folders Annonces 
 		
 		$annonces = array('Annonces','Petites annonces');
@@ -73,10 +116,28 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 			$object_annonce->setTitle('Type '.$annonce);
 			$object_annonce->setController('SICLAAraBundle:'.str_replace(' ','',ucwords($annonce)));
 			$object_annonce->setTypename($annonce);
-			$object_annonce->addAuthorizedType($this->getReference('object-type-annonce'));
+			$object_annonce->addAuthorizedType($this->getReference('object-type-logement'));
 			$manager->persist($object_annonce);
 			$this->addReference('object-type-'.str_replace(' ','',strtolower($annonce)),$object_annonce);
 		}
+		
+		//Liste des propriétaires
+		$object_liste_proprietaires = new Folder();
+		$object_liste_proprietaires->setTitle('Liste des propriétaires');
+		$object_liste_proprietaires->setContent('Liste des propriétaires');
+		$object_liste_proprietaires->setTags('propriétaires, folder');
+		$object_liste_proprietaires->setType($this->getReference('object-type-folderproprietaire'));
+		$manager->persist($object_liste_proprietaires);
+		$this->addReference('object-liste-proprietaires',$object_liste_proprietaires);
+		
+		//Liste des demandes d'apprenants
+		$object_liste_apprenants = new Folder();
+		$object_liste_apprenants->setTitle('Liste des demandes de logement d\'apprenants');
+		$object_liste_apprenants->setContent('Liste des demandes de logement d\'apprenants');
+		$object_liste_apprenants->setTags('apprenants, folder');
+		$object_liste_apprenants->setType($this->getReference('object-type-folderapprenant'));
+		$manager->persist($object_liste_apprenants);
+		$this->addReference('object-liste-apprenants',$object_liste_apprenants);
 		
 		//Liste des logements
 		$object_liste_logements = new Folder();

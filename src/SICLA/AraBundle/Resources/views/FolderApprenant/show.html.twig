@@ -1,13 +1,4 @@
-{% extends 'SICLAAraBundle::base.html.twig' %}
-
-{% block nodeInfos %}
-	<p class="node-infos-line">
-		<big class="node-title"><i class="icon-folder-open"></i> {{object}}</big><br class="hidden-phone"/>
-		<span class="text-info">Type: <b>{{object.type}}</b></span><br class="hidden-phone"/>
-		<small class="muted">Created by <a href="{{ path('sidus_show_node', { 'node_id': version.revisionby.id }) }}">{{ version.revisionby }}</a> {{ version.revisionDate|datediff() }}</small>
-	</p>
-	<p>{{ object.content }}</p>
-{% endblock %}
+{% extends 'SidusBundle:Default:show.html.twig' %}
 
 {% block main %}
 	<div class="btn-toolbar pull-right">
@@ -25,7 +16,6 @@
 		</div>
 		<input type="submit" class="hide">
 	</form>
-	
 	<table class="table table-striped table-hover table-condensed">
 		{% for i in range(0,1) %}
 			<caption{% if i is odd %} class="caption-bottom"{% endif %}>
@@ -59,37 +49,61 @@
 		<thead>
 			<tr>
 				<th{% if children.isSorted('n.id') %} class="sorted"{% endif %}><input type="checkbox" class="radio-condensed"/> {{ knp_pagination_sortable(children, '#', 'n.id') }}</th>
-				<th>Logement associé</th>
-				<th>Date de création</th>
-				<th>Date de dernière modification</th>
-				<th>Contenu de l'annonce</th>
+				<th{% if children.isSorted('o.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(children, 'Title', 'o.title') }}</th>
+				<th>Handicap Physique</th> 
+				<th>Traitement Médical</th>
+				<th>Allergies Animaux</th>
+				<th>Allergies Alimentaires</th>
+				<th>Allergies Autres</th>
+				<th>Fumeur</th>
+				<th>Tolérant à la fumée</th>
+				<th>Véhicule</th>
+				<th>Voeux personnels</th>
+				<th>Loisirs particuliers à partager</th>
 				<th class="actions">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-				
-
-					
 			{% for child in children %}
-				{% if child.object.statut.getLibelle()=="Validée" %}
-				<tr class="annonce-validee">
-
-						
-					<td><input 
-							type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
-					<td><a target="_blank" href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{ child.object }}</a></td>
-					<td>{% for version in versions %}  {% if loop.first %} {{version.getRevisionDate|date('d-m-Y') }} {% endif %} {% endfor %}</td>
-					<td>{{ version.getRevisionDate|date('d-m-Y') }}</td>
-					<td>{{ child.object.annonce }}</td>
-					<td>
+				<tr>
+					<td><input type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
+					<td><a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{child.object.title}}</a></td>
+					<td>{{child.object.handicapPhysique}}</td>
+					<td>{{child.object.traitementMedical}}</td> 
+					<td>{{child.object.allergiesAnimaux}}</td> 
+					<td>{{child.object.allergiesAlimentaires}}</td> 
+					<td>{{child.object.allergiesAutres}}</td> 
+					{%if child.object.fumeur==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}	
+					{%if child.object.tolerantFumee==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}		
+					{%if child.object.vehicule==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}	
+					{%if child.object.voeuxPersonnels==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}	
+					{%if child.object.loisirsParticuliers==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}	
+				
 						<div class="btn-toolbar actions-condensed">
 							<div class="btn-group">
-								<a href="{{ path('sicla_ara_validate', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Valider"><i class="icon-ok"></i></a>
-								<a target="_blank" href="{{ path('sicla_ara_contact', { 'node_id': child.node.id}) }}" class="btn btn-mini" title="Demander la révision"><i class="icon-plane"></i></a>
-								<a href="{{ path('sicla_ara_archivate', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Archiver"><i class="icon-folder-open"></i></a>
-								<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Supprimer"><i class="icon-trash"></i></a>
-								<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Modifier"><i class="icon-pencil"></i></a>
-
+								<a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>
+								<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Edit"><i class="icon-pencil"></i></a>
+								<a href="{{ path('sidus_favorite_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Add to favorites"><i class="icon-star-empty"></i></a>
 								<button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
 									<i class="icon-wrench"></i> <span class="caret"></span>
 								</button>
@@ -108,7 +122,6 @@
 						</div>
 					</td>
 				</tr>
-				{% endif %}
 			{% endfor %}
 		</tbody>
 	</table>

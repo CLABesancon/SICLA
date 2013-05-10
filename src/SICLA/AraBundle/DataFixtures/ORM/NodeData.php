@@ -28,7 +28,7 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface, Conta
 	
 	public function load(ObjectManager $manager) {
 		
-		$types = array('Apprenant demande de logement','Famille d\'accueil','Proprietaire','Logement','Folder Logement','Annonce','Annonces','Petites annonces');
+		$types = array('Apprenant demande de logement','Famille d accueil','Proprietaire','Logement','Folder Logement','Folder Proprietaire','Folder Apprenant', 'Annonces','Petites annonces');
 		foreach ($types as $type) {
 			$node= new Node();
 			$node->setNodeName('type-'.strtolower($type));
@@ -51,6 +51,20 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface, Conta
 		$node_liste_logements->setParent($node_ara);
 		$manager->persist($node_liste_logements);
 		$this->addReference('node-liste-logements',$node_liste_logements);
+		
+		//Liste des propriétaires
+		$node_liste_proprietaires= new Node();
+		$node_liste_proprietaires->setNodeName('Liste des propriétaires');
+		$node_liste_proprietaires->setParent($node_ara);
+		$manager->persist($node_liste_proprietaires);
+		$this->addReference('node-liste-proprietaires',$node_liste_proprietaires);
+		
+		//Liste des demandes d'apprenants
+		$node_liste_apprenants= new Node();
+		$node_liste_apprenants->setNodeName('Liste des demandes d\hébergement des apprenants');
+		$node_liste_apprenants->setParent($node_ara);
+		$manager->persist($node_liste_apprenants);
+		$this->addReference('node-liste-apprenants',$node_liste_apprenants);
 
 		// Liste de toutes les annonces 
 		$node_liste_annonces=new Node();

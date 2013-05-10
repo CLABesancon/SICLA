@@ -113,12 +113,32 @@ class Logement extends Object
 	* @ORM\OneToOne(targetEntity="SICLA\HydraBundle\Entity\Address", cascade={"persist"})
 	*/
 	private $address;
-   
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="annonce", type="text")
+     */
+    private $annonce;
+	
+	/**
+	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\StatutAnnonce")
+	* @ORM\JoinColumn( nullable=false )
+	* 
+	*/
+	private $statut;
+	
+	 /**
+     * @var integer
+     *
+     * @ORM\Column(name="parent_id_logement", type="integer")
+     */
+	private $parentIdProprietaire;
     /**
      * Get id
      *
      * @return integer 
      */
+	
     public function getId()
     {
         return $this->id;
@@ -448,5 +468,74 @@ class Logement extends Object
     public function getEcheanceLoyer()
     {
         return $this->echeanceLoyer;
+    }
+
+    /**
+     * Set annonce
+     *
+     * @param string $annonce
+     * @return Logement
+     */
+    public function setAnnonce($annonce)
+    {
+        $this->annonce = $annonce;
+    
+        return $this;
+    }
+
+    /**
+     * Get annonce
+     *
+     * @return string 
+     */
+    public function getAnnonce()
+    {
+        return $this->annonce;
+    }
+
+    /**
+     * Set parentIdProprietaire
+     *
+     * @param integer $parentIdProprietaire
+     * @return Logement
+     */
+    public function setParentIdProprietaire($parentIdProprietaire)
+    {
+        $this->parentIdProprietaire = $parentIdProprietaire;
+    
+        return $this;
+    }
+
+    /**
+     * Get parentIdProprietaire
+     *
+     * @return integer 
+     */
+    public function getParentIdProprietaire()
+    {
+        return $this->parentIdProprietaire;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param \SICLA\AraBundle\Entity\StatutAnnonce $statut
+     * @return Logement
+     */
+    public function setStatut(\SICLA\AraBundle\Entity\StatutAnnonce $statut)
+    {
+        $this->statut = $statut;
+    
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return \SICLA\AraBundle\Entity\StatutAnnonce 
+     */
+    public function getStatut()
+    {
+        return $this->statut;
     }
 }

@@ -21,7 +21,7 @@ class PersonController extends CommonController {
 			$form->bind($request);
 			//if ($form->isValid()) {
 				//@TODO version
-				
+				$object->setTitle($object->getFirstName().' '.$object->getLastName());
 				$em->persist($object);
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');
@@ -64,21 +64,4 @@ class PersonController extends CommonController {
 					'lang' => $lang,
 		)), 301 );
 	}
-	
-	/*
-	public function form_personAction(Request $request){
-		$person=new Person();
-		$form=$this->createForm(new PersonType(), $person);
-		
-		$em = $this->getDoctrine()->getEntityManager();
-		
-		
-		if ($request->isMethod('POST')) {
-			$form->bind($this->getRequest());
-			$person = $form->getData();
-			$em->persist($person);
-			$em->flush();
-		}
-		return $this->render('SICLAHydraBundle:Form:form_person.html.twig', array('form'=>$form->createView()));
-	}*/
 }

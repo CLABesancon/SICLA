@@ -76,6 +76,23 @@ class AnnonceController extends CommonController
 		$version_annonce->setRevisionBy($user);
 		$em->persist($version_annonce);
 		
+		// Node liste des petites annonces
+		
+		$node_petites_annonces=new Node();
+		$node_petites_annonces->setNodeName('');
+		$node_petites_annonces->setParent($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des annonces'));
+		$em->persist($node_petites_annonces);
+		
+		// version liste petites annonces
+		
+		$version_petites_annonces=new Version();
+		$version_petites_annonces->setNode($node_petites_annonces);
+		$version_petites_annonces->setObject($new_object);
+		$version_petites_annonces->setLang($lang);
+		$version_petites_annonces->setRevision(1);
+		$version_petites_annonces->setRevisionBy($user);
+		$em->persist($version_petites_annonces);
+		
 		$em->flush();
 		
 
@@ -93,8 +110,8 @@ class AnnonceController extends CommonController
 		$this->loaded_objects['object']->setStatut($statut);
 		
 		$em->flush();
-		
-		return $this->render('SICLAAraBundle:Annonce:show.html.twig', $this->loaded_objects);
+		$this->loadObjectsForNodeUID($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des annonces')->getId(), $lang);
+		return $this->render('SICLAAraBundle:Annonces:show.html.twig', $this->loaded_objects);
 
 	}
 	
@@ -106,7 +123,9 @@ class AnnonceController extends CommonController
 		$this->loaded_objects['object']->setStatut($statut);
 		
 		$em->flush();
-		
+		$this->loadObjectsForNodeUID($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des annonces')->getId(), $lang);
+		return $this->render('SICLAAraBundle:Annonces:show.html.twig', $this->loaded_objects);
+
 	}
 	
 	public function contactAction($node_id, $lang = null) {
@@ -119,7 +138,7 @@ class AnnonceController extends CommonController
 		
 		// On récupère le logement associé à l'annonce
 		$this->loadObjectsForNodeUID(42, $lang);
-		// On récupère le parent de ce logement càd le propriétaire, puis l'user correspondant à ce propriétaire
+		// On récupère le parent de ce logement càd le propriétaire, ensuite la personne, puis l'user correspondant à ce propriétaire
 		//$node_user=$this->loaded_objects['node']->getParent()->getParent();
 		$node_user=$this->loaded_objects['node']->getParent()->getParent()->getId();
 		$this->loadObjectsForNodeUID($node_user, $lang);

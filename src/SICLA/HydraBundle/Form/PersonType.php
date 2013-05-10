@@ -16,13 +16,16 @@ class PersonType extends AbstractType
 			->add('gender', 'choice', array(
 					'choices'   => array(
 						'-'   => '-',
-						'homme'   => 'Homme',
-						'femme' => 'Femme'
+						'Homme'   => 'Homme',
+						'Femme' => 'Femme'
 					),
 					'multiple'  =>false,
 			))
             ->add('maidenName')
-            ->add('birthday')
+            ->add('birthday', 'date', array(
+				'input'  => 'datetime',
+				'widget' => 'choice',
+				'years' => range(1960,2013)))
 				
 			  ->add('phones','collection', array(
                 'type' => new PhoneType(),

@@ -16,6 +16,7 @@ class LogementController extends CommonController
 	}
 
 	public function editAction($version, $object, $loaded_objects, Request $request) {
+		
 		$form = $this->createForm(new LogementType(), $object);
 		$em = $this->getDoctrine()->getEntityManager();
 
@@ -38,8 +39,8 @@ class LogementController extends CommonController
 
 		$em = $this->getDoctrine()->getEntityManager();
 		//@TODO : get connected user
-		$user = $em->getRepository('SidusBundle:Version')->find(2);
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
+		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(2);
 		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(2);
 		$new_object = new Logement();
 		$new_object->setType($type);
@@ -55,6 +56,9 @@ class LogementController extends CommonController
 		$new_object->setAscenseur('');
 		$new_object->setSdbPrivative('');
 		$new_object->setTypeLogement($typeLogement); 
+		$new_object->setAnnonce('');
+		$new_object->setStatut($statut);
+		$new_object->setParentIdProprietaire($node->getParent()->getId());
 		
 		$em->persist($new_object);
 		$em->flush();
@@ -65,6 +69,7 @@ class LogementController extends CommonController
 		$new_version->setLang($lang);
 		$new_version->setRevision(1);
 		$new_version->setRevisionBy($user);
+		
 		$em->persist($new_version);
 		
 		// Node liste logement
@@ -83,6 +88,40 @@ class LogementController extends CommonController
 		$version_logement->setRevision(1);
 		$version_logement->setRevisionBy($user);
 		$em->persist($version_logement);
+		
+		 //Node liste annonces
+		
+		$node_annonce=new Node();
+		$node_annonce->setNodeName('');
+		$node_annonce->setParent($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des annonces'));
+		$em->persist($node_annonce);
+		
+		// version liste annonces
+		
+		$version_annonce=new Version();
+		$version_annonce->setNode($node_annonce);
+		$version_annonce->setObject($new_object);
+		$version_annonce->setLang($lang);
+		$version_annonce->setRevision(1);
+		$version_annonce->setRevisionBy($user);
+		$em->persist($version_annonce);
+		
+		// Node liste petites annonces
+		
+		$node_petites_annonce=new Node();
+		$node_petites_annonce->setNodeName('');
+		$node_petites_annonce->setParent($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des petites annonces'));
+		$em->persist($node_petites_annonce);
+		
+		// version liste petites annonces
+		
+		$version_petites_annonce=new Version();
+		$version_petites_annonce->setNode($node_petites_annonce);
+		$version_petites_annonce->setObject($new_object);
+		$version_petites_annonce->setLang($lang);
+		$version_petites_annonce->setRevision(1);
+		$version_petites_annonce->setRevisionBy($user);
+		$em->persist($version_petites_annonce);
 		
 		$em->flush();
 

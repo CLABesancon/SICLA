@@ -32,7 +32,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface,Con
 		$user = $this->container->get('doctrine')->getRepository('SidusBundle:Node')->find(2);
 
 		//Other Types
-		$types = array('Apprenant demande de logement','Famille d\'accueil','Proprietaire','Logement','Folder Logement','Annonce','Annonces','Petites annonces');
+		$types = array('Apprenant demande de logement','Famille d accueil','Proprietaire','Logement','Folder Logement','Folder Apprenant','Folder Proprietaire','Annonces','Petites annonces');
 		foreach ($types as $type) {
 			$version = new Version();
 			$version->setNode($this->getReference('node-type-'.str_replace(' ','',strtolower($type))));
@@ -65,6 +65,26 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface,Con
 		$version_liste_logements->setRevisionDate($now);
 		$version_liste_logements->setRevisionBy($user);
 		$manager->persist($version_liste_logements);
+		
+		//Liste des propriétaires
+		$version_liste_proprietaires= new Version();
+		$version_liste_proprietaires->setNode($this->getReference('node-liste-proprietaires'));
+		$version_liste_proprietaires->setObject($this->getReference('object-liste-proprietaires'));
+		$version_liste_proprietaires->setLang('en');
+		$version_liste_proprietaires->setRevision(1);
+		$version_liste_proprietaires->setRevisionDate($now);
+		$version_liste_proprietaires->setRevisionBy($user);
+		$manager->persist($version_liste_proprietaires);
+		
+		//Liste des demandes d'hébergement des apprenants
+		$version_liste_apprenants= new Version();
+		$version_liste_apprenants->setNode($this->getReference('node-liste-apprenants'));
+		$version_liste_apprenants->setObject($this->getReference('object-liste-apprenants'));
+		$version_liste_apprenants->setLang('en');
+		$version_liste_apprenants->setRevision(1);
+		$version_liste_apprenants->setRevisionDate($now);
+		$version_liste_apprenants->setRevisionBy($user);
+		$manager->persist($version_liste_apprenants);
 		
 		// Liste des annonces validées
 		$version_liste_annonces = new Version();

@@ -4,6 +4,7 @@ namespace SICLA\AraBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sidus\SidusBundle\Controller\CommonController;
 use Sidus\SidusBundle\Entity\Version;
+use Sidus\SidusBundle\Entity\Node;
 use SICLA\AraBundle\Form\ApprenantDemandeLogementType;
 use SICLA\AraBundle\Entity\ApprenantDemandeLogement;
 
@@ -69,7 +70,24 @@ class ApprenantDemandeLogementController extends CommonController {
 		$new_version->setRevision(1);
 		$new_version->setRevisionBy($user);
 		$em->persist($new_version);
-
+		
+		//Node Liste des demandes de logement des apprenants
+		
+		$node_liste_demandes=new Node();
+		$node_liste_demandes->setNodeName('');
+		$node_liste_demandes->setParent($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des demandes d\hébergement des apprenants'));
+		$em->persist($node_liste_demandes);
+		
+		// version Liste des demandes de logement des apprenants
+		
+		$version_liste_demandes=new Version();
+		$version_liste_demandes->setNode($node_liste_demandes);
+		$version_liste_demandes->setObject($new_object);
+		$version_liste_demandes->setLang($lang);
+		$version_liste_demandes->setRevision(1);
+		$version_liste_demandes->setRevisionBy($user);
+		$em->persist($version_liste_demandes);
+		
 		$em->flush();
 
 		return $this->redirect($this->generateUrl('sidus_edit_node',array(
@@ -77,52 +95,7 @@ class ApprenantDemandeLogementController extends CommonController {
 					'lang' => $lang,
 		)), 301 );
 	}
-	/*
- public function form_apprenantAction(Request $request)
-    {
-		$form=$this->createForm(new ApprenantDemandeLogementType());
-        
-		
-		$em = $this->getDoctrine()->getEntityManager();
-		
-		$form->bind($this->getRequest());
-		
-		if ($request->isMethod('POST')) {
 
-			$apprenantDemandeLogement = $form->getData();
-			$em->persist($apprenantDemandeLogement);
-			$em->flush();
-			
-
-		}
-	
-		return $this->render('SICLAAraBundle:Form:form_apprenant.html.twig', array('form'=>$form->createView()));
-
-	}
-	 public function view_form_apprenantAction($id,Request $request)
-    {
-		$apprenant=$this->getDoctrine()->getRepository('SICLAAraBundle:ApprenantDemandeLogement')->find($id);
-		$form = $this->createForm(new ApprenantDemandeLogementType(),$apprenant);;
-		
-		$em = $this->getDoctrine()->getEntityManager();
-		
-		if ($request->isMethod('POST')) {
-			$form->bind($request);
-			$apprenant = $form->getData();
-			$em->flush();
-		}
-		
-		
-		
-		return $this->render('SICLAAraBundle:Form:view_apprenant.html.twig', array('apprenant' => $apprenant, 'form' => $form->createView()));
-	}
-	
-	 public function view_liste_apprenantsAction()
-    {
-		$apprenants=$this->getDoctrine()->getRepository('SICLAAraBundle:ApprenantDemandeLogement')->findall();
-		
-		return $this->render('SICLAAraBundle:Liste:liste_apprenants.html.twig', array('apprenants' => $apprenants));
-	}*/
 }
 
 ?>

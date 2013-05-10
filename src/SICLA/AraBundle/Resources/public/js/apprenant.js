@@ -1,5 +1,4 @@
 jQuery(document).ready(function() {
-	
 	// On masque automatiquement les div concernant les détails si la valeur cochée est non au chargement de la page
 	// Utile pour les view_apprenant, étant donné qu'il n'y a pas de changement, la valeur est cochée par défaut
 	if($("input[name='sicla_arabundle_apprenantdemandelogementtype[handicapPhysique]']:checked").val()=="0"){
@@ -74,6 +73,8 @@ jQuery(document).ready(function() {
 		}else{
 			$(".detailLoisirsParticuliers").hide();
 		}
-	});		
+	});	
+	
+
 
 });

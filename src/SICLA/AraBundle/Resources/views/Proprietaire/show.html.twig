@@ -1,1 +1,41 @@
 {% extends 'SICLAAraBundle::base.html.twig' %}
+{% block main %}
+<table class="table table-hover">
+	<tbody>
+		<tr>
+			<th>ID:</th>
+			<td>{{ object.id }}</td>
+		</tr>
+		<tr>
+			<th>Nom</th>
+			<td>{{ object.firstname }}</td>
+		</tr>
+		<tr>
+			<th>Prénom</th>
+			<td>{{ object.lastname }}</td>
+		</tr>
+		<tr>
+			<th>Nom de jeune fille</th>
+			<td>{{ object.maidenName }}</td>
+		</tr>
+		<tr>
+			<th>Genre</th>
+			<td>{{ object.gender }}</td>
+		</tr>
+		<tr>
+			<th>Date de naissance</th>
+			<td>{{ object.birthday |date('d-m-Y')}}</td>
+		</tr>
+		
+	</tbody>
+</table>
+<table >
+	<tbody>
+			
+			<td></td>
+			
+			
+		</tr>
+		<tr>
+</table>
+{% endblock %}

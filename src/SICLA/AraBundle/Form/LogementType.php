@@ -43,6 +43,7 @@ class LogementType extends AbstractType
 				'class'    =>'SICLAAraBundle:TypeLogement',
 				'property'=>'libelle',
 				'multiple'=>false))
+			->add('annonce')
 			->add('address', new AddressType());
     }
 

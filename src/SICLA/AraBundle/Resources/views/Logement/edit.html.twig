@@ -42,6 +42,9 @@
 	{{ form_label(form.equipement,'Le logement dispose des équipements suivants :') }}
 	{{ form_widget(form.equipement) }}
 	
+	{{ form_label(form.annonce,'Contenu de votre annonce') }}
+	{{ form_widget(form.annonce) }}
+	
 	<h3>Adresse du logement</h3>
 	{{ form_row(form.address.streetNumber) }}	{{ form_row(form.address.streetNumberSuffix) }}
 	{{ form_row(form.address.streetType) }}		{{ form_row(form.address.streetName) }}
