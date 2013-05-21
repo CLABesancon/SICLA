@@ -1,4 +1,4 @@
-{% extends 'SidusBundle:Default:show.html.twig' %}
+{% extends 'SICLAAraBundle::base.html.twig' %}
 
 {% block main %}
 	<div class="btn-toolbar pull-right">
@@ -55,7 +55,6 @@
 				<th>Surface</th>
 				<th>Loyer</th>
 				<th>Charges</th>
-				<th>Annonce</th>
 				<th class="actions">Actions</th>
 			</tr>
 		</thead>
@@ -73,6 +72,7 @@
 					<td>{{child.object.surface}}m²</td>
 					<td>{{child.object.loyer}}€</td>
 					<td>{{child.object.charges}}€</td>
+					<td>
 						<div class="btn-toolbar actions-condensed">
 							<div class="btn-group">
 								<a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="View"><i class="icon-search"></i></a>

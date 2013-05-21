@@ -22,7 +22,7 @@
         "jms/security-extra-bundle": "1.2.*",
         "jms/di-extra-bundle": "1.1.*",
         "kriswallsmith/assetic": "1.1.*@dev",
-        "mopa/bootstrap-bundle": "dev-master",
+        "mopa/bootstrap-bundle": "2.2.*@dev",
         "twitter/bootstrap": "dev-master",
         "bmatzner/fontawesome-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",

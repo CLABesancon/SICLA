@@ -46,7 +46,20 @@ class ListeType extends AbstractType
 					'allow_add' => true,
 					'allow_delete' => true,
 					'by_reference' => false,
-		));
+		))
+				  ->add('statutfamille', 'collection', array(
+					'type' => new StatutFamilleType(),
+					'allow_add' => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+		))
+				  ->add('groupeapprenants', 'collection', array(
+					'type' => new GroupeApprenantsType(),
+					'allow_add' => true,
+					'allow_delete' => true,
+					'by_reference' => false,
+		))
+			;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

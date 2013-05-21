@@ -1,4 +1,4 @@
-{% extends 'SidusBundle::base.html.twig' %}
+{% extends 'SidusBundle:Default:show.html.twig' %}
 
 {% block stylesheets %}
 	{{ parent() }}
@@ -10,8 +10,5 @@
 
 {% block javascripts %}
 	{{ parent() }}
-	{% javascripts '@SICLAAraBundle/Resources/public/js/*'%}
-			<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcddNM-WSBoerm0kAJIi4lpIYhwAfUQKQ&sensor=false"></script>
-			<script type="text/javascript" src="{{ asset_url }}"></script>
-	{% endjavascripts %}
+	
 {% endblock %}	

@@ -7,6 +7,7 @@ use Sidus\SidusBundle\Controller\CommonController;
 use Sidus\SidusBundle\Entity\Version;
 use SICLA\AraBundle\Form\FamilleAccueilType;
 use SICLA\AraBundle\Entity\FamilleAccueil;
+use Sidus\SidusBundle\Entity\Node;
 
 
 class FamilleAccueilController extends CommonController {
@@ -24,6 +25,9 @@ class FamilleAccueilController extends CommonController {
 			$form->bind($request);
 			//if ($form->isValid()) {
 				//@TODO version
+		$node_parent=$loaded_objects['node']->getParent()->getId();
+		$this->loadObjectsForNodeUID($node_parent, $lang=null);
+		$object->setTitle('Famille '.$this->loaded_objects['object']->getFirstName());
 				$em->persist($object);
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');
@@ -41,17 +45,33 @@ class FamilleAccueilController extends CommonController {
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
 		
 		$regimeAlimentaire=$em->getRepository('SICLAAraBundle:RegimeAlimentaire')->find(1);
-		
+		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(1);
+		$statut=$em->getRepository('SICLAAraBundle:StatutFamille')->find(1);
+			
 		$new_object = new FamilleAccueil();
 		$new_object->setType($type);
 		$new_object->setTitle('');
-		$new_object->setDureeSejour('');
 		$new_object->setFumeur('');
 		$new_object->setRegimeAlimentaire($regimeAlimentaire);
 		$new_object->setAdaptableRegimeAlimentaire('');
 		$new_object->setNbEnfants('');
 		$new_object->setNbLit('');
 		$new_object->setAscenseur('');
+		$new_object->setAccesCuisine('');
+		$new_object->setSdbPrivative('');
+		$new_object->setConditionsAccesCuisine('');
+		$new_object->setRemarquesParticulieres('');
+		$new_object->setRemarquesServiceLogement('');
+		$new_object->setLigneBus('');
+		$new_object->setArretBus('');
+		$new_object->setLoyer('');
+		$new_object->setCharges('');
+		$new_object->setTypeLogement($typeLogement);
+		$new_object->setSouhaitNationalite('');
+		$new_object->setSouhaitPublic('');
+		$new_object->setSouhaitSexe('');
+		$new_object->setTypeAccueil('');
+		$new_object->setStatut($statut);
 		
 		$em->persist($new_object);
 		$em->flush();
@@ -63,49 +83,101 @@ class FamilleAccueilController extends CommonController {
 		$new_version->setRevision(1);
 		$new_version->setRevisionBy($user);
 		$em->persist($new_version);
+		
+		// Node liste familles
+		
+		$node_liste_familles=new Node();
+		$node_liste_familles->setNodeName('');
+		$node_liste_familles->setParent($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name("Liste des familles d'accueil"));
+		$em->persist($node_liste_familles);
+		
+		// version liste familles
+		
+		$version_liste_familles=new Version();
+		$version_liste_familles->setNode($node_liste_familles);
+		$version_liste_familles->setObject($new_object);
+		$version_liste_familles->setLang($lang);
+		$version_liste_familles->setRevision(1);
+		$version_liste_familles->setRevisionBy($user);
+		$em->persist($version_liste_familles);
 
 		$em->flush();
 
-		return $this->redirect($this->generateUrl('sidus_edit_node',array(
+		return $this->redirect($this->generateUrl("sidus_edit_node",array(
 					'node_id' => $node->getId(),
 					'lang' => $lang,
 		)), 301 );
 	}
-
-/*
-	public function form_famille_accueilAction(Request $request) {
-		$form = $this->createForm(new FamilleAccueilType());
-
+	
+	public function statutDisponibleAction($node_id, $lang = null) {
+		$this->loadObjectsForNodeUID($node_id, $lang);
+		
 		$em = $this->getDoctrine()->getEntityManager();
+		$statut= $em->getRepository('SICLAAraBundle:StatutFamille')->find(1);
+		$this->loaded_objects['object']->setStatut($statut);
+		
+		$em->flush();
+	
+		$this->loadObjectsForNodeUID($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name("Liste des familles d'accueil")->getId(), $lang);
+		return $this->render('SICLAAraBundle:FolderFamilleAccueil:show.html.twig', $this->loaded_objects);
 
-		$form->bind($this->getRequest());
-
-		if ($request->isMethod('POST')) {
-
-			$famille = $form->getData();
-			$em->persist($famille);
-			$em->flush();
-		}
-
-		return $this->render('SICLAAraBundle:Form:form_famille_accueil.html.twig', array('form' => $form->createView()));
 	}
-	public function view_form_famille_accueilAction($id,Request $request)
-    {
-		$famille=$this->getDoctrine()->getRepository('SICLAAraBundle:FamilleAccueil')->find($id);
-		$form = $this->createForm(new FamilleAccueilType(),$famille);
+	
+	public function statutIndisponibleAction($node_id, $lang = null) {
+		$this->loadObjectsForNodeUID($node_id, $lang);
 		
 		$em = $this->getDoctrine()->getEntityManager();
+		$statut= $em->getRepository('SICLAAraBundle:StatutFamille')->find(2);
+		$this->loaded_objects['object']->setStatut($statut);
 		
-		if ($request->isMethod('POST')) {
-			$form->bind($request);
-			$famille = $form->getData();
-			$em->flush();
-		}
+		$em->flush();
+	
+		$this->loadObjectsForNodeUID($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name("Liste des familles d'accueil")->getId(), $lang);
+		return $this->render('SICLAAraBundle:FolderFamilleAccueil:show.html.twig', $this->loaded_objects);
+
+	}
+	
+	public function statutAttenteAction($node_id, $lang = null) {
+		$this->loadObjectsForNodeUID($node_id, $lang);
 		
-		return $this->render('SICLAAraBundle:Form:view_famille_accueil.html.twig', array('logement' => $famille, 'form' => $form->createView()));
-	}*/
+		$em = $this->getDoctrine()->getEntityManager();
+		$statut= $em->getRepository('SICLAAraBundle:StatutFamille')->find(3);
+		$this->loaded_objects['object']->setStatut($statut);
+		
+		$em->flush();
+	
+		$this->loadObjectsForNodeUID($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name("Liste des familles d'accueil")->getId(), $lang);
+		return $this->render('SICLAAraBundle:FolderFamilleAccueil:show.html.twig', $this->loaded_objects);
 
+	}
+	
+	public function statutPropositionAccepteeAction($node_id, $lang = null) {
+		$this->loadObjectsForNodeUID($node_id, $lang);
+		
+		$em = $this->getDoctrine()->getEntityManager();
+		$statut= $em->getRepository('SICLAAraBundle:StatutFamille')->find(4);
+		$this->loaded_objects['object']->setStatut($statut);
+		
+		$em->flush();
+	
+		$this->loadObjectsForNodeUID($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name("Liste des familles d'accueil")->getId(), $lang);
+		return $this->render('SICLAAraBundle:FolderFamilleAccueil:show.html.twig', $this->loaded_objects);
 
+	}
+	
+	public function statutAffecteAction($node_id, $lang = null) {
+		$this->loadObjectsForNodeUID($node_id, $lang);
+		
+		$em = $this->getDoctrine()->getEntityManager();
+		$statut= $em->getRepository('SICLAAraBundle:StatutFamille')->find(5);
+		$this->loaded_objects['object']->setStatut($statut);
+		
+		$em->flush();
+	
+		$this->loadObjectsForNodeUID($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name("Liste des familles d'accueil")->getId(), $lang);
+		return $this->render('SICLAAraBundle:FolderFamilleAccueil:show.html.twig', $this->loaded_objects);
+
+	}
 }
 
 ?>

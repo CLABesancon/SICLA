@@ -21,6 +21,14 @@ class LogementType extends AbstractType
 			->add('consommationEnergie')
 			->add('emissionGes')
 			->add('loyer')
+			->add('debutDispo', 'date', array(
+				'input'  => 'datetime',
+				'widget' => 'choice',
+				'years' => range(2013,2020)))
+			->add('finDispo', 'date', array(
+				'input'  => 'datetime',
+				'widget' => 'choice',
+				'years' => range(2013,2020)))	
 			->add('echeanceLoyer','choice', array(
 			  'choices' => array('semaine' => 'Paiement à la semaine', 'mois' => 'Paiement au mois'),
 			  'expanded' => true,

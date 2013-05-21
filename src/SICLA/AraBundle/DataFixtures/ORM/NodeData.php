@@ -28,7 +28,7 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface, Conta
 	
 	public function load(ObjectManager $manager) {
 		
-		$types = array('Apprenant demande de logement','Famille d accueil','Proprietaire','Logement','Folder Logement','Folder Proprietaire','Folder Apprenant', 'Annonces','Petites annonces');
+		$types = array('Apprenant demande de logement','Famille d accueil','Proprietaire','Logement','Folder Logement','Folder Proprietaire','Folder Apprenant', 'Folder Famille Accueil','Annonces','Petites annonces');
 		foreach ($types as $type) {
 			$node= new Node();
 			$node->setNodeName('type-'.strtolower($type));
@@ -79,6 +79,13 @@ class NodeData extends AbstractFixture implements OrderedFixtureInterface, Conta
 		$node_liste_petites_annonces->setParent($node_ara);
 		$manager->persist($node_liste_petites_annonces);
 		$this->addReference('node-liste-petites-annonces', $node_liste_petites_annonces);
+		
+		// Liste des familles d'accueil
+		$node_liste_familles=new Node();
+		$node_liste_familles->setNodeName("Liste des familles d'accueil");
+		$node_liste_familles->setParent($node_ara);
+		$manager->persist($node_liste_familles);
+		$this->addReference('node-liste-famillesaccueil', $node_liste_familles);
 		
 		$manager->flush();
 

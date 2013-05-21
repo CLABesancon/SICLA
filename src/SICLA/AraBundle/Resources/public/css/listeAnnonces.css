@@ -1,0 +1,15 @@
+/* 
+    Document   : listeAnnonces
+    Created on : 13 mai 2013, 14:46:11
+    Author     : laurent
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.table-striped tbody > tr:nth-child(odd) > th {
+  background-color: #f9f9f9;
+}

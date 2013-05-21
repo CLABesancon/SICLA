@@ -15,15 +15,16 @@ class AddressType extends AbstractType
             ->add('streetNumberSuffix')
 			->add('streetType', 'choice', array(
 					'choices'   => array(
-						'allée'   => 'Allée',
-						'avenue' => 'Avenue',
-						'boulevard'   => 'Boulevard',
-						'chemin'   => 'Chemin',
-						'impasse'   => 'Impasse',
-						'place'   => 'Place',
-						'rue'   => 'Rue',
-						'route'   => 'Route',
-						'voie'   => 'Voie',
+						'-'   => '-',
+						'Allée'   => 'Allée',
+						'Avenue' => 'Avenue',
+						'Boulevard'   => 'Boulevard',
+						'Chemin'   => 'Chemin',
+						'Impasse'   => 'Impasse',
+						'Place'   => 'Place',
+						'Rue'   => 'Rue',
+						'Route'   => 'Route',
+						'Voie'   => 'Voie',
 						
 					),
 					'multiple'  =>false,

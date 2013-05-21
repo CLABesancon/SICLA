@@ -12,22 +12,28 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FamilleAccueil extends Object
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
+	/**
      * @var string
      *
-     * @ORM\Column(name="dureeSejour", type="string", length=255)
+     * @ORM\Column(name="typeAccueil", type="string", length=255, nullable=true)
      */
-    private $dureeSejour;
-
+    private $typeAccueil;
+	
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="debutDispo", type="date", nullable=true)
+     */
+    private $debutDispo;
+	
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="finDispo", type="date", nullable=true)
+     */
+    private $finDispo;
+	
+    
     /**
      * @var boolean
      *
@@ -51,7 +57,7 @@ class FamilleAccueil extends Object
     /**
      * @var integer
      *
-     * @ORM\Column(name="nbEnfants", type="integer")
+     * @ORM\Column(name="nbEnfants", type="integer", nullable=true)
      */
     private $nbEnfants;
 	
@@ -71,7 +77,7 @@ class FamilleAccueil extends Object
 	 * 
      * @var integer
      *
-     * @ORM\Column(name="nbLit", type="integer")
+     * @ORM\Column(name="nbLit", type="integer", nullable=true)
      */
     private $nbLit;
 	
@@ -82,39 +88,126 @@ class FamilleAccueil extends Object
      */
 	private $ascenseur;
 	
-    /**
-     * Get id
+	/**
+     * @var string
      *
-     * @return integer 
+     * @ORM\Column(name="souhaitNationalite", type="string", length=255)
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set dureeSejour
+    private $souhaitNationalite;
+	
+	/**
+     * @var string
      *
-     * @param string $dureeSejour
+     * @ORM\Column(name="souhaitSexe", type="string", length=255)
+     */
+    private $souhaitSexe;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="souhaitPublic", type="string", length=255)
+     */
+    private $souhaitPublic;
+	
+	 /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sdbPrivative", type="boolean")
+     */
+    private $sdbPrivative;
+	
+	 /**
+     * @var boolean
+     *
+     * @ORM\Column(name="accesCuisine", type="boolean")
+     */
+    private $accesCuisine;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="conditionsAccesCuisine", type="text", nullable=true)
+     */
+    private $conditionsAccesCuisine;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="remarquesParticulieres", type="text", nullable=true)
+     */
+    private $remarquesParticulieres;
+	
+	/**
+	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\TypeLogement")
+	* @ORM\JoinColumn( nullable=false )
+	* 
+	*/
+	private $typeLogement;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="ligneBus", type="string", length=255, nullable=true)
+     */
+    private $ligneBus;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="arretBus", type="string", length=255, nullable=true)
+     */
+    private $arretBus;
+	
+	 /**
+     * @var float
+     *
+     * @ORM\Column(name="loyer", type="float", nullable=true)
+     */
+    private $loyer;
+	
+	/**
+     * @var float
+     *
+     * @ORM\Column(name="charges", type="float", nullable=true)
+     */
+    private $charges;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="remarquesServiceLogement", type="text", nullable=false)
+     */
+    private $remarquesServiceLogement;
+	
+	/**
+	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\StatutFamille")
+	* @ORM\JoinColumn( nullable=false )
+	* 
+	*/
+	private $statut;
+	
+	 /* Set TypeAccueil
+	 * 
+     * @param string $typeAccueil
      * @return FamilleAccueil
      */
-    public function setDureeSejour($dureeSejour)
+    public function setTypeAccueil($typeAccueil)
     {
-        $this->dureeSejour = $dureeSejour;
+        $this->typeAccueil = $typeAccueil;
     
         return $this;
     }
 
     /**
-     * Get dureeSejour
+     * Get TypeAccueil
      *
      * @return string 
      */
-    public function getDureeSejour()
+    public function getTypeAccueil()
     {
-        return $this->dureeSejour;
+        return $this->typeAccueil;
     }
-
+	
     /**
      * Set fumeur
      *
@@ -321,4 +414,373 @@ class FamilleAccueil extends Object
         $this->animaux = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
+
+    /**
+     * Set debutDispo
+     *
+     * @param \DateTime $debutDispo
+     * @return FamilleAccueil
+     */
+    public function setDebutDispo($debutDispo)
+    {
+        $this->debutDispo = $debutDispo;
+    
+        return $this;
+    }
+
+    /**
+     * Get debutDispo
+     *
+     * @return \DateTime 
+     */
+    public function getDebutDispo()
+    {
+        return $this->debutDispo;
+    }
+
+    /**
+     * Set finDispo
+     *
+     * @param \DateTime $finDispo
+     * @return FamilleAccueil
+     */
+    public function setFinDispo($finDispo)
+    {
+        $this->finDispo = $finDispo;
+    
+        return $this;
+    }
+
+    /**
+     * Get finDispo
+     *
+     * @return \DateTime 
+     */
+    public function getFinDispo()
+    {
+        return $this->finDispo;
+    }
+
+    /**
+     * Set souhaitNationalite
+     *
+     * @param string $souhaitNationalite
+     * @return FamilleAccueil
+     */
+    public function setSouhaitNationalite($souhaitNationalite)
+    {
+        $this->souhaitNationalite = $souhaitNationalite;
+    
+        return $this;
+    }
+
+    /**
+     * Get souhaitNationalite
+     *
+     * @return string 
+     */
+    public function getSouhaitNationalite()
+    {
+        return $this->souhaitNationalite;
+    }
+
+    /**
+     * Set souhaitSexe
+     *
+     * @param string $souhaitSexe
+     * @return FamilleAccueil
+     */
+    public function setSouhaitSexe($souhaitSexe)
+    {
+        $this->souhaitSexe = $souhaitSexe;
+    
+        return $this;
+    }
+
+    /**
+     * Get souhaitSexe
+     *
+     * @return string 
+     */
+    public function getSouhaitSexe()
+    {
+        return $this->souhaitSexe;
+    }
+
+    /**
+     * Set souhaitPublic
+     *
+     * @param string $souhaitPublic
+     * @return FamilleAccueil
+     */
+    public function setSouhaitPublic($souhaitPublic)
+    {
+        $this->souhaitPublic = $souhaitPublic;
+    
+        return $this;
+    }
+
+    /**
+     * Get souhaitPublic
+     *
+     * @return string 
+     */
+    public function getSouhaitPublic()
+    {
+        return $this->souhaitPublic;
+    }
+
+    /**
+     * Set sdbPrivative
+     *
+     * @param boolean $sdbPrivative
+     * @return FamilleAccueil
+     */
+    public function setSdbPrivative($sdbPrivative)
+    {
+        $this->sdbPrivative = $sdbPrivative;
+    
+        return $this;
+    }
+
+    /**
+     * Get sdbPrivative
+     *
+     * @return boolean 
+     */
+    public function getSdbPrivative()
+    {
+        return $this->sdbPrivative;
+    }
+
+    /**
+     * Set accesCuisine
+     *
+     * @param boolean $accesCuisine
+     * @return FamilleAccueil
+     */
+    public function setAccesCuisine($accesCuisine)
+    {
+        $this->accesCuisine = $accesCuisine;
+    
+        return $this;
+    }
+
+    /**
+     * Get accesCuisine
+     *
+     * @return boolean 
+     */
+    public function getAccesCuisine()
+    {
+        return $this->accesCuisine;
+    }
+
+    /**
+     * Set conditionsAccesCuisine
+     *
+     * @param string $conditionsAccesCuisine
+     * @return FamilleAccueil
+     */
+    public function setConditionsAccesCuisine($conditionsAccesCuisine)
+    {
+        $this->conditionsAccesCuisine = $conditionsAccesCuisine;
+    
+        return $this;
+    }
+
+    /**
+     * Get conditionsAccesCuisine
+     *
+     * @return string 
+     */
+    public function getConditionsAccesCuisine()
+    {
+        return $this->conditionsAccesCuisine;
+    }
+
+    /**
+     * Set remarquesParticulieres
+     *
+     * @param string $remarquesParticulieres
+     * @return FamilleAccueil
+     */
+    public function setRemarquesParticulieres($remarquesParticulieres)
+    {
+        $this->remarquesParticulieres = $remarquesParticulieres;
+    
+        return $this;
+    }
+
+    /**
+     * Get remarquesParticulieres
+     *
+     * @return string 
+     */
+    public function getRemarquesParticulieres()
+    {
+        return $this->remarquesParticulieres;
+    }
+
+    /**
+     * Set ligneBus
+     *
+     * @param string $ligneBus
+     * @return FamilleAccueil
+     */
+    public function setLigneBus($ligneBus)
+    {
+        $this->ligneBus = $ligneBus;
+    
+        return $this;
+    }
+
+    /**
+     * Get ligneBus
+     *
+     * @return string 
+     */
+    public function getLigneBus()
+    {
+        return $this->ligneBus;
+    }
+
+    /**
+     * Set arretBus
+     *
+     * @param string $arretBus
+     * @return FamilleAccueil
+     */
+    public function setArretBus($arretBus)
+    {
+        $this->arretBus = $arretBus;
+    
+        return $this;
+    }
+
+    /**
+     * Get arretBus
+     *
+     * @return string 
+     */
+    public function getArretBus()
+    {
+        return $this->arretBus;
+    }
+
+    /**
+     * Set remarquesServiceLogement
+     *
+     * @param string $remarquesServiceLogement
+     * @return FamilleAccueil
+     */
+    public function setRemarquesServiceLogement($remarquesServiceLogement)
+    {
+        $this->remarquesServiceLogement = $remarquesServiceLogement;
+    
+        return $this;
+    }
+
+    /**
+     * Get remarquesServiceLogement
+     *
+     * @return string 
+     */
+    public function getRemarquesServiceLogement()
+    {
+        return $this->remarquesServiceLogement;
+    }
+
+	    /**
+     * Set typeLogement
+     *
+     * @param \SICLA\AraBundle\Entity\TypeLogement $typeLogement
+     * @return FamilleAccueil
+     */
+    public function setTypeLogement(\SICLA\AraBundle\Entity\TypeLogement $typeLogement)
+    {
+        $this->typeLogement = $typeLogement;
+    
+        return $this;
+    }
+
+    /**
+     * Get typeLogement
+     *
+     * @return \SICLA\AraBundle\Entity\TypeLogement 
+     */
+    public function getTypeLogement()
+    {
+        return $this->typeLogement;
+    }
+	
+	/**
+     * Set loyer
+     *
+     * @param float $loyer
+     * @return Logement
+     */
+    public function setLoyer($loyer)
+    {
+        $this->loyer = $loyer;
+    
+        return $this;
+    }
+
+    /**
+     * Get loyer
+     *
+     * @return float 
+     */
+    public function getLoyer()
+    {
+        return $this->loyer;
+    }
+	
+	/**
+     * Set charges
+     *
+     * @param float $charges
+     * @return Logement
+     */
+    public function setCharges($charges)
+    {
+        $this->charges = $charges;
+    
+        return $this;
+    }
+
+    /**
+     * Get charges
+     *
+     * @return float 
+     */
+    public function getCharges()
+    {
+        return $this->charges;
+    }
+	
+	/**
+     * Set statut
+     *
+     * @param \SICLA\AraBundle\Entity\StatutFamille $statut
+     * @return FamilleAccueil
+     */
+    public function setStatut(\SICLA\AraBundle\Entity\StatutFamille $statut)
+    {
+        $this->statut = $statut;
+    
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return \SICLA\AraBundle\Entity\StatutFamille
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
 }

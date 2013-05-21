@@ -15,6 +15,10 @@ class PhoneController extends Controller{
 		if ($request->isMethod('POST')) {
 
 			$phone = $form->getData();
+			echo'<pre>';
+			var_dump($phone);
+			echo'</pre>';
+			exit;
 			$em->persist($phone);
 			$em->flush();
 		}

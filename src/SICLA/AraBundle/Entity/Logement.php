@@ -15,14 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Logement extends Object
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    
 
     /**
      * @var boolean
@@ -113,10 +106,11 @@ class Logement extends Object
 	* @ORM\OneToOne(targetEntity="SICLA\HydraBundle\Entity\Address", cascade={"persist"})
 	*/
 	private $address;
+	
    /**
      * @var string
      *
-     * @ORM\Column(name="annonce", type="text")
+     * @ORM\Column(name="annonce", type="text", nullable=false)
      */
     private $annonce;
 	
@@ -133,17 +127,22 @@ class Logement extends Object
      * @ORM\Column(name="parent_id_logement", type="integer")
      */
 	private $parentIdProprietaire;
-    /**
-     * Get id
+   
+	/**
+     * @var \DateTime
      *
-     * @return integer 
+     * @ORM\Column(name="debutDispo", type="date", nullable=true)
      */
+    private $debutDispo;
 	
-    public function getId()
-    {
-        return $this->id;
-    }
-
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="finDispo", type="date", nullable=true)
+     */
+    private $finDispo;
+	
+	
     /**
      * Set meuble
      *
@@ -281,8 +280,6 @@ class Logement extends Object
     {
         return $this->emissionGes;
     }
-
-	
 
     /**
      * Set charges
@@ -537,5 +534,51 @@ class Logement extends Object
     public function getStatut()
     {
         return $this->statut;
+    }
+
+    /**
+     * Set debutDispo
+     *
+     * @param \DateTime $debutDispo
+     * @return Logement
+     */
+    public function setDebutDispo($debutDispo)
+    {
+        $this->debutDispo = $debutDispo;
+    
+        return $this;
+    }
+
+    /**
+     * Get debutDispo
+     *
+     * @return \DateTime 
+     */
+    public function getDebutDispo()
+    {
+        return $this->debutDispo;
+    }
+
+    /**
+     * Set finDispo
+     *
+     * @param \DateTime $finDispo
+     * @return Logement
+     */
+    public function setFinDispo($finDispo)
+    {
+        $this->finDispo = $finDispo;
+    
+        return $this;
+    }
+
+    /**
+     * Get finDispo
+     *
+     * @return \DateTime 
+     */
+    public function getFinDispo()
+    {
+        return $this->finDispo;
     }
 }

@@ -64,7 +64,13 @@ class ApprenantDemandeLogementType extends AbstractType
 				'multiple' => true,
 				'expanded' => true,
 				'required'=>false))
-			
+			->add('groupeApprenants','entity', array(
+				'class'    =>'SICLAAraBundle:GroupeApprenants',
+				'property'=>'libelle',
+				'multiple' => true,
+				'expanded' => true,
+				'required'=>false))	
+			->add('idStagiaire')
 			;
     }
 

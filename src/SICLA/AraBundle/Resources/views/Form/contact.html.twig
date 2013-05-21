@@ -1,0 +1,16 @@
+{% extends 'SICLAAraBundle::base.html.twig' %}
+{% block main %}
+<form>
+  <fieldset>
+    <legend>Contacter le propriétaire</legend>
+	<label>Destinataire</label>
+    <input type="text" readonly="readonly" value="{{ mail }}">
+    <label>Objet</label>
+    <input type="text" class="input-xlarge" value="{{ mail_title }}">
+    <label>Contenu de votre message</label>
+    <textarea class="input-xlarge"></textarea>
+    <button type="submit" class="btn">Envoyer</button>
+  </fieldset>
+</form>
+
+{% endblock %}

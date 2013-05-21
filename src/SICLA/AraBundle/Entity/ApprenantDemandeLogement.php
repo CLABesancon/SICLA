@@ -140,6 +140,19 @@ class ApprenantDemandeLogement extends Object
 	*/
 	private $loisirs;
 	
+	/**
+	* @ORM\ManyToMany(targetEntity="SICLA\AraBundle\Entity\GroupeApprenants")
+	* @ORM\JoinTable(name="ara_apprenantDemandeLogement_groupe")
+	*/
+	private $groupeApprenants;
+	
+	/**
+     * @var integer
+     * @ORM\Column(name="idStagiaire", type="integer")
+     */
+    private $idStagiaire;
+	
+	
     /**
      * Set handicapPhysique
      *
@@ -572,4 +585,83 @@ class ApprenantDemandeLogement extends Object
         $this->loisirs = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
+
+    /**
+     * Set idStagiaire
+     *
+     * @param integer $idStagiaire
+     * @return ApprenantDemandeLogement
+     */
+    public function setIdStagiaire($idStagiaire)
+    {
+        $this->idStagiaire = $idStagiaire;
+    
+        return $this;
+    }
+
+    /**
+     * Get idStagiaire
+     *
+     * @return integer 
+     */
+    public function getIdStagiaire()
+    {
+        return $this->idStagiaire;
+    }
+
+    /**
+     * Add groupeApprenants
+     *
+     * @param \SICLA\AraBundle\Entity\GroupeApprenants $groupeApprenants
+     * @return ApprenantDemandeLogement
+     */
+    public function addGroupeApprenant(\SICLA\AraBundle\Entity\GroupeApprenants $groupeApprenants)
+    {
+        $this->groupeApprenants[] = $groupeApprenants;
+    
+        return $this;
+    }
+
+    /**
+     * Remove groupeApprenants
+     *
+     * @param \SICLA\AraBundle\Entity\GroupeApprenants $groupeApprenants
+     */
+    public function removeGroupeApprenant(\SICLA\AraBundle\Entity\GroupeApprenants $groupeApprenants)
+    {
+        $this->groupeApprenants->removeElement($groupeApprenants);
+    }
+
+    /**
+     * Get groupeApprenants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGroupeApprenants()
+    {
+        return $this->groupeApprenants;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \Sidus\SidusBundle\Entity\Type $type
+     * @return ApprenantDemandeLogement
+     */
+    public function setType(\Sidus\SidusBundle\Entity\Type $type = null)
+    {
+        $this->type = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \Sidus\SidusBundle\Entity\Type 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 }

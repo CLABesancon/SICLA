@@ -25,7 +25,7 @@ class PersonType extends AbstractType
             ->add('birthday', 'date', array(
 				'input'  => 'datetime',
 				'widget' => 'choice',
-				'years' => range(1960,2013)))
+				'years' => range(1920,2013)))
 				
 			  ->add('phones','collection', array(
                 'type' => new PhoneType(),
@@ -37,7 +37,7 @@ class PersonType extends AbstractType
                 'options' => array( // options for collection fields
                     'label_render' => false,
                     'widget_control_group' => false,
-                    'widget_remove_btn' => array('label' => "Supprimer", 'attr' => array('class' => 'btn')),
+                    'widget_remove_btn' => array('label' => "Supprimer", 'attr' => array('class' => 'btn btn-danger')),
                     'attr' => array('class' => 'input-large'),
                 )
             ))

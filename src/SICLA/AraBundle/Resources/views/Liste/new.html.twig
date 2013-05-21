@@ -1,6 +1,13 @@
 {% extends 'SICLAAraBundle::araBase.html.twig' %}
 {% form_theme form 'SICLAAraBundle:Form:form_div_layout.html.twig' %}
 
+{% block javascripts %}
+	{{ parent() }}
+	{% javascripts '@SICLAAraBundle/Resources/public/js/listes.js'%}
+			<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}	
+			
 {% block main %}
 <form action="{{path('sicla_listes')}}" method="POST" {{ form_enctype(form) }}>
 	{% for key,entite in entites %}	
@@ -46,12 +53,28 @@
 				{% for objet in form.statuts %} 
 			
 				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
-			{% endfor %}
+				{% endfor %}
+			{% endif %}
+			{%if key=="statutfamille" %}
+			<div class="{{key}}" data-prototype="{{ form_widget(form.statutfamille.vars.prototype.libelle)|e }}">
+				{% for objet in form.statutfamille %} 
+			
+				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
+				{% endfor %}
+			{% endif %}
+			{%if key=="groupeapprenants" %}
+			<div class="{{key}}" data-prototype="{{ form_widget(form.groupeapprenants.vars.prototype.libelle)|e }}">
+				{% for objet in form.groupeapprenants %} 
+			
+				<div class="input-append">{{ form_widget(objet.libelle) }}</div>
+				{% endfor %}
 			{% endif %}
 			</div>
-		
 			
-	</div>
+			
+			
+			
+		</div>
 		
 
 				

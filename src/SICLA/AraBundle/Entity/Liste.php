@@ -15,6 +15,8 @@ class Liste
 	protected $loisirs;
 	protected $equipements;
 	protected $statuts;
+	protected $statut_famille;
+	protected $groupe_apprenants;
 
     public function __construct()
     {
@@ -24,7 +26,9 @@ class Liste
 			"regimes"=>array("entity"=>"SICLAAraBundle:RegimeAlimentaire","name"=>"Régimes alimentaires"),
 			"loisirs"=>array("entity"=>"SICLAAraBundle:Loisir","name"=>"Loisirs"),
 			"equipements"=>array("entity"=>"SICLAAraBundle:Equipement","name"=>"Types d'équipements"),
-			"statuts"=>array("entity"=>"SICLAAraBundle:StatutAnnonce","name"=>"Statuts d'annonces")
+			"statuts"=>array("entity"=>"SICLAAraBundle:StatutAnnonce","name"=>"Statuts d'annonces"),
+			"statutfamille"=>array("entity"=>"SICLAAraBundle:StatutFamille","name"=>"Statuts des familles"),
+			"groupeapprenants"=>array("entity"=>"SICLAAraBundle:GroupeApprenants","name"=>"Groupe d'apprenants")
 		);
     }
 
@@ -90,4 +94,25 @@ class Liste
 	{
 		$this->statuts=$statuts;
 	}
+	
+	public function getStatutfamille()
+	{
+		return $this->statut_famille;
+	}
+	
+	public function setStatutfamille(ArrayCollection $statutfamille)
+	{
+		$this->statut_famille=$statutfamille;
+	}
+	
+	public function getGroupeApprenants()
+	{
+		return $this->groupe_apprenants;
+	}
+	
+	public function setGroupeApprenants(ArrayCollection $groupe_apprenants)
+	{
+		$this->groupe_apprenants=$groupe_apprenants;
+	}
+	
 }

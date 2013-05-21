@@ -24,6 +24,16 @@ class LogementController extends CommonController
 			$form->bind($request);
 			//if ($form->isValid()) {
 				//@TODO version
+				$contenu_annonce=trim($object->getAnnonce());
+				
+				if($contenu_annonce=='')
+				{
+					$object->setStatut($em->getRepository('SICLAAraBundle:StatutAnnonce')->find(4));
+				}
+				else
+				{
+					$object->setStatut($em->getRepository('SICLAAraBundle:StatutAnnonce')->find(2));
+				}
 				$object->setTitle($object->getTypeLogement()->getLibelle()." de ".$object->getSurface()." m² à ".$object->getLoyer()."€");
 				$em->persist($object);
 				$em->flush();
@@ -40,8 +50,8 @@ class LogementController extends CommonController
 		$em = $this->getDoctrine()->getEntityManager();
 		//@TODO : get connected user
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
-		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(2);
-		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(2);
+		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(1);
+		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(1);
 		$new_object = new Logement();
 		$new_object->setType($type);
 		$new_object->setTitle('');

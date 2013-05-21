@@ -12,7 +12,19 @@ sicla_ara_archivate:
   pattern:  /archivate/{node_id}/{lang}
   defaults: { _controller: SICLAAraBundle:Annonce:archivate, lang: ~ }
   requirements:
-    lang: ^[a-z]{2}$   
+    lang: ^[a-z]{2}$
+    
+sicla_ara_archivate_logement:
+  pattern:  /archivate_logement/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:Annonce:archivateLogement, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$      
+    
+sicla_ara_delete:
+  pattern:  /delete/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:Annonce:delete, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$      
     
 sicla_ara_contact:
   pattern:  /contact/{node_id}/{lang}
@@ -23,3 +35,33 @@ sicla_ara_contact:
 sicla_ara_view_map:
   pattern:    /map
   defaults: {_controller: SICLAAraBundle:Map:view_Map}
+  
+sicla_ara_statut_disponible:
+  pattern:  /statut_disponible/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:FamilleAccueil:statutDisponible, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$
+    
+sicla_ara_statut_indisponible:
+  pattern:  /statut_indisponible/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:FamilleAccueil:statutIndisponible, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$    
+ 
+sicla_ara_statut_attente:
+  pattern:  /statut_attente/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:FamilleAccueil:statutAttente, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$
+    
+sicla_ara_statut_proposition_acceptee:
+  pattern:  /statut_proposition_acceptee/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:FamilleAccueil:statutPropositionAcceptee, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$
+    
+sicla_ara_statut_affecte:
+  pattern:  /statut_affecte/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:FamilleAccueil:statutAffecte, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$

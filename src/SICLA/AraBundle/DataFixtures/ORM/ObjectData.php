@@ -121,6 +121,18 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 			$this->addReference('object-type-'.str_replace(' ','',strtolower($annonce)),$object_annonce);
 		}
 		
+		//Folder famille accueil
+		
+		$object_folder_famille_accueil= new Type();
+		$object_folder_famille_accueil->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
+		$object_folder_famille_accueil->setTitle('Type Folder Famille Accueil');
+		$object_folder_famille_accueil->setController('SICLAAraBundle:FolderFamilleAccueil');
+		$object_folder_famille_accueil->setTypename($type);
+		$object_folder_famille_accueil->addAuthorizedType($this->getReference('object-type-familledaccueil'));
+		$manager->persist($object_folder_famille_accueil);
+		$this->addReference('object-type-folderfamilleaccueil',$object_folder_famille_accueil);
+		
+		
 		//Liste des propriétaires
 		$object_liste_proprietaires = new Folder();
 		$object_liste_proprietaires->setTitle('Liste des propriétaires');
@@ -166,6 +178,14 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 		$manager->persist($object_liste_petites_annonces);
 		$this->addReference('object-liste-petites-annonces',$object_liste_petites_annonces);
 		
+		//Liste des familles d'accueil
+		$object_liste_familles= new Folder();
+		$object_liste_familles->setTitle("Liste des familles d'accueil");
+		$object_liste_familles->setContent("Liste des familles d'accueil");
+		$object_liste_familles->setTags('familles, folder');
+		$object_liste_familles->setType($this->getReference('object-type-folderfamilleaccueil'));
+		$manager->persist($object_liste_familles);
+		$this->addReference('object-liste-famillesaccueil',$object_liste_familles);
 		
 		$manager->flush();
 		

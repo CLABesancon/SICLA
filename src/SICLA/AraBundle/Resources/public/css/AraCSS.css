@@ -65,3 +65,12 @@ div.curseur_ges{
 .record_properties{text-align: right;}
 .error_address{font-weight : bold; color:red;}
 .date{font-size: 10px; font-weight: bold;}
+.annonce-non-validee{}
+.annonce-validee{  background-color:rgba(155, 255, 154, 0.6);}
+.annonce-archivee{ color:#999;}
+.annonce-revisee{  background-color:rgba(255, 204, 153, 0.6);}
+.table-striped tbody > tr:nth-child(odd) > td{background:transparent;}
+.table td{text-align:right;}
+form label:after {
+content: '';
+}

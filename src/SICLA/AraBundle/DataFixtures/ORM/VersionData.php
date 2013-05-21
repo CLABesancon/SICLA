@@ -32,7 +32,7 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface,Con
 		$user = $this->container->get('doctrine')->getRepository('SidusBundle:Node')->find(2);
 
 		//Other Types
-		$types = array('Apprenant demande de logement','Famille d accueil','Proprietaire','Logement','Folder Logement','Folder Apprenant','Folder Proprietaire','Annonces','Petites annonces');
+		$types = array('Apprenant demande de logement','Famille d accueil','Proprietaire','Logement','Folder Logement','Folder Apprenant','Folder Proprietaire', 'Folder Famille Accueil','Annonces','Petites annonces');
 		foreach ($types as $type) {
 			$version = new Version();
 			$version->setNode($this->getReference('node-type-'.str_replace(' ','',strtolower($type))));
@@ -105,6 +105,16 @@ class VersionData extends AbstractFixture implements OrderedFixtureInterface,Con
 		$version_liste_petites_annonces->setRevisionDate($now);
 		$version_liste_petites_annonces->setRevisionBy($user);
 		$manager->persist($version_liste_petites_annonces);
+		
+		// Liste des familles d'accueil
+		$version_liste_familles = new Version();
+		$version_liste_familles->setNode($this->getReference('node-liste-famillesaccueil'));
+		$version_liste_familles->setObject($this->getReference('object-liste-famillesaccueil'));
+		$version_liste_familles->setLang('en');
+		$version_liste_familles->setRevision(1);
+		$version_liste_familles->setRevisionDate($now);
+		$version_liste_familles->setRevisionBy($user);
+		$manager->persist($version_liste_familles);
 		
 		$manager->flush();
 	}
