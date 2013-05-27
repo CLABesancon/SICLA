@@ -1,7 +1,6 @@
 <?php
 
 namespace SICLA\AraBundle\Entity;
-
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +11,40 @@ use Doctrine\ORM\EntityRepository;
  */
 class FamilleAccueilRepository extends EntityRepository
 {
+	public function findFamillesDispo()
+	{
+		// Familles affectées
+		$queryFamillesAffectees = 'SELECT a FROM SICLA\AraBundle\Entity\AffectationDemande a';
+		
+		// Familles ayant des lits dispo
+		$queryLitsDispos='SELECT COUNT(ad.id) FROM SICLA\AraBundle\Entity\AffectationDemande ad WHERE ad.dateArrivee IS NOT NULL GROUP BY ad.famille ';
+		
+		$query=$this->_em->createQuery('SELECT DISTINCT f 
+										FROM SICLA\AraBundle\Entity\FamilleAccueil f 
+										WHERE f.id NOT IN ('.$queryFamillesAffectees.')
+										OR f.nbLit > ('.$queryLitsDispos.')
+										');
+		$familles= $query->getResult();
+		return $familles;
+	}
 }
+
+
+/* 
+ * 			
+			
+SELECT DISTINCT ara_familleAccueil.id
+FROM ara_familleAccueil, AffectationDemande
+WHERE ara_familleAccueil.id = AffectationDemande.famille_id
+AND ara_familleAccueil.id NOT IN (
+								SELECT ara_familleAccueil.id
+								FROM AffectationDemande, ara_familleAccueil
+								WHERE famille_id = ara_familleAccueil.id
+								)
+OR dateArrivee IS NULL 
+OR ara_familleAccueil.nbLit > ( 
+								SELECT COUNT(  `id` ) 
+								FROM AffectationDemande
+								WHERE  `dateArrivee` IS NOT NULL 
+								GROUP BY  `famille_id` ) 
+ */

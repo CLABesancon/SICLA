@@ -43,7 +43,7 @@ class FamilleAccueil extends Object
 
     /**
 	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\RegimeAlimentaire")
-	* @ORM\JoinColumn(nullable=false)
+	* @ORM\JoinColumn(nullable=true)
 	*/
     private $regimeAlimentaire;
 
@@ -66,10 +66,10 @@ class FamilleAccueil extends Object
 	* @ORM\JoinTable(name="ara_familleAccueil_loisir")
 	*/
 	private $loisirs;
-
+	
 	/**
 	* @ORM\ManyToMany(targetEntity="SICLA\AraBundle\Entity\TypeAnimal")
-	 * @ORM\JoinTable(name="ara_familleAccueil_typeAnimal")
+	* @ORM\JoinTable(name="ara_familleAccueil_animaux")
 	*/
 	private $animaux;
 	
@@ -139,7 +139,7 @@ class FamilleAccueil extends Object
 	
 	/**
 	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\TypeLogement")
-	* @ORM\JoinColumn( nullable=false )
+	* @ORM\JoinColumn( nullable=true )
 	* 
 	*/
 	private $typeLogement;
@@ -181,10 +181,20 @@ class FamilleAccueil extends Object
 	
 	/**
 	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\StatutFamille")
-	* @ORM\JoinColumn( nullable=false )
+	* @ORM\JoinColumn( nullable=true)
 	* 
 	*/
 	private $statut;
+	
+	/**
+	* @ORM\OneToMany(targetEntity="SICLA\AraBundle\Entity\AffectationDemande", mappedBy="famille")
+	*/
+	 private $affectationsDemandes;
+	 
+	 /**
+	* @ORM\OneToMany(targetEntity="SICLA\AraBundle\Entity\AffectationGroupe", mappedBy="famille")
+	*/
+	 private $affectationsGroupes;
 	
 	 /* Set TypeAccueil
 	 * 
@@ -329,37 +339,7 @@ class FamilleAccueil extends Object
 	  return $this->loisirs;
 	}
   
-   /**
-		* Add Animaux
-		*
-		* @param \SICLA\AraBundle\Entity\TypeAnimal $animal
-		*/
-	public function addAnimaux(\SICLA\AraBundle\Entity\TypeAnimal $animal) 
-	{
-	  $this->animaux[] = $animal;
-	}
-
-  /**
-    * Remove animaux
-    *
-    * @param SICLA\AraBundle\Entity\TypeAnimal $animal
-    */
-  public function removeAnimaux(SICLA\AraBundle\Entity\TypeAnimal $animal)
-  {
    
-    $this->animaux->removeElement($animal);
-  }
- 
-  /**
-    * Get animaux
-    *
-    * @return Doctrine\Common\Collections\Collection
-    */
-  public function getAnimaux() 
-  {
-    return $this->animaux;
-  }
-  
   /**
      * Set nbLit
      *
@@ -781,6 +761,107 @@ class FamilleAccueil extends Object
     public function getStatut()
     {
         return $this->statut;
+    }
+    
+    /**
+     * Add animaux
+     *
+     * @param \SICLA\AraBundle\Entity\TypeAnimal $animaux
+     * @return FamilleAccueil
+     */
+    public function addAnimaux(\SICLA\AraBundle\Entity\TypeAnimal $animaux)
+    {
+        $this->animaux[] = $animaux;
+    
+        return $this;
+    }
+
+    /**
+     * Remove animaux
+     *
+     * @param \SICLA\AraBundle\Entity\TypeAnimal $animaux
+     */
+    public function removeAnimaux(\SICLA\AraBundle\Entity\TypeAnimal $animaux)
+    {
+        $this->animaux->removeElement($animaux);
+    }
+
+    /**
+     * Get animaux
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnimaux()
+    {
+        return $this->animaux;
+    }
+
+    /**
+     * Add affectationDemande
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationDemande $affectations
+     * @return FamilleAccueil
+     */
+    public function addAffectationDemande(\SICLA\AraBundle\Entity\AffectationDemande $affectation)
+    {
+        $this->affectationsDemandes[] = $affectation;
+		$affectation->setFamille($this);
+        return $this;
+    }
+
+    /**
+     * Remove affectationDemande
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationDemande $affectation
+     */
+    public function removeAffectationDemande(\SICLA\AraBundle\Entity\AffectationDemande $affectation)
+    {
+        $this->affectationsDemandes->removeElement($affectation);
+		$affectation->setFamille(null);
+    }
+
+    /**
+     * Get affectationsDemandes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAffectationsDemandes()
+    {
+        return $this->affectationsDemandes;
+    }
+
+    /**
+     * Add affectationGroupe
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationGroupe $affectationsGroupe
+     * @return FamilleAccueil
+     */
+    public function addAffectationGroupe(\SICLA\AraBundle\Entity\AffectationGroupe $affectationGroupe)
+    {
+        $this->affectationsGroupes[] = $affectationGroupe;
+		$affectationGroupe->setFamille($this);
+        return $this;
+    }
+
+    /**
+     * Remove affectationGroupe
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationGroupe $affectationsGroupes
+     */
+    public function removeAffectationsGroupe(\SICLA\AraBundle\Entity\AffectationGroupe $affectationGroupe)
+    {
+        $this->affectationsGroupes->removeElement($affectationGroupe);
+		$affectationGroupe->setFamille(null);
+    }
+
+    /**
+     * Get affectationsGroupes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAffectationsGroupes()
+    {
+        return $this->affectationsGroupes;
     }
 
 }

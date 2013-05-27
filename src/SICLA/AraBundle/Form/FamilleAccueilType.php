@@ -88,7 +88,7 @@ class FamilleAccueilType extends AbstractType {
 					'multiple' => true,
 					'expanded' => true,
 					'required' => false))
-				->add('animaux', 'entity', array(
+				->add('Animaux', 'entity', array(
 					'class' => 'SICLAAraBundle:TypeAnimal',
 					'property' => 'libelle',
 					'multiple' => true,

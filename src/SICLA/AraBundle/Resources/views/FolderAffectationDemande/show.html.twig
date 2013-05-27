@@ -50,8 +50,10 @@
 			<tr>
 				<th{% if children.isSorted('n.id') %} class="sorted"{% endif %}><input type="checkbox" class="radio-condensed"/> {{ knp_pagination_sortable(children, '#', 'n.id') }}</th>
 				<th{% if children.isSorted('o.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(children, 'Title', 'o.title') }}</th>
-				<th>Groupe</th>
-				<th>ID Stagiaire</th>
+				<th>Famille d'accueil</th>
+				<th>Apprenant</th>
+				<th>Date d'arrivée</th>
+				<th>Date de départ</th>
 				<th class="actions">Actions</th>
 			</tr>
 		</thead>
@@ -60,10 +62,10 @@
 				<tr>
 					<td><input type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
 					<td><a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{child.object.title}}</a></td>
-					<td>{% for child in child.object.groupeApprenants%}
-							{{child.libelle }}
-					{% endfor %}</td>
-					<td>{{child.object.idStagiaire}}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 					<td>
 						<div class="btn-toolbar actions-condensed">
 							<div class="btn-group">
@@ -92,3 +94,4 @@
 		</tbody>
 	</table>
 {% endblock %}
+{# empty Twig template #}

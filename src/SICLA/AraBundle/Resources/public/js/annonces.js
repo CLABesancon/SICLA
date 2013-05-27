@@ -1,8 +1,5 @@
 jQuery(document).ready(function() {
-			   $(".annonce-validee").hide();
-			   $(".annonce-non-validee").show();
-			   $(".annonce-archivee").hide();
-			   $(".annonce-revisee").show();
+	
 	$('#Annonces').change(function(){
 			   
        var type=$(this).find("option:selected").attr('value');

@@ -10,7 +10,7 @@
 			<td>{{ object.lastname }}</td>
 			<td>{{ object.maidenName }}</td>
 			<td>{{ object.gender }}</td>
-			<td>{{ object.birthday }}</td>
+			<td>{{ object.birthday |date('d-m-Y') }}</td>
 		</tr>
 		<tr>
 	</tbody>

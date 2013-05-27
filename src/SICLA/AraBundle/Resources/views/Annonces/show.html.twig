@@ -1,7 +1,8 @@
 {% extends 'SICLAAraBundle::base.html.twig' %}
 {% block javascripts %}
 	{{ parent() }}
-	{% javascripts '@SICLAAraBundle/Resources/public/js/annonces.js'%}
+	{% javascripts '@SICLAAraBundle/Resources/public/js/annonces.js'
+					'@SICLAAraBundle/Resources/public/js/jquery.cookie.js'%}
 			<script type="text/javascript" src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 {% endblock %}	

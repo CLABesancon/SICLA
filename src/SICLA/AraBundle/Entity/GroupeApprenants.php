@@ -27,7 +27,11 @@ class GroupeApprenants
      * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
-
+	
+	 /**
+	* @ORM\OneToMany(targetEntity="SICLA\AraBundle\Entity\AffectationGroupe", mappedBy="groupeApprenants")
+	*/
+	 private $affectationsGroupes;
 
     /**
      * Get id
@@ -60,5 +64,47 @@ class GroupeApprenants
     public function getLibelle()
     {
         return $this->libelle;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->affectationsGroupes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add affectationGroupe
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationGroupe $affectationGroupe
+     * @return GroupeApprenants
+     */
+    public function addAffectationGroupe(\SICLA\AraBundle\Entity\AffectationGroupe $affectationGroupe)
+    {
+        $this->affectationsGroupes[] = $affectationGroupe;
+		$affectationGroupe->setStatutFamille($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove affectationGroupe
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationGroupe $affectationGroupe
+     */
+    public function removeAffectationGroupe(\SICLA\AraBundle\Entity\AffectationGroupe $affectationGroupe)
+    {
+        $this->affectationsGroupes->removeElement($affectationGroupe);
+		$affectationGroupe->setStatutFamille(null);
+    }	
+
+    /**
+     * Get affectationsGroupes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAffectationsGroupes()
+    {
+        return $this->affectationsGroupes;
     }
 }

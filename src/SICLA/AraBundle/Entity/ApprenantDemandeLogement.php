@@ -148,10 +148,14 @@ class ApprenantDemandeLogement extends Object
 	
 	/**
      * @var integer
-     * @ORM\Column(name="idStagiaire", type="integer")
+     * @ORM\Column(name="idStagiaire", type="integer", nullable=true)
      */
     private $idStagiaire;
 	
+	/**
+	* @ORM\OneToMany(targetEntity="SICLA\AraBundle\Entity\AffectationDemande", mappedBy="demande")
+	*/
+	 private $affectations;
 	
     /**
      * Set handicapPhysique
@@ -641,27 +645,39 @@ class ApprenantDemandeLogement extends Object
     {
         return $this->groupeApprenants;
     }
-
     /**
-     * Set type
+     * Add affectations
      *
-     * @param \Sidus\SidusBundle\Entity\Type $type
+     * @param \SICLA\AraBundle\Entity\AffectationDemande $affectations
      * @return ApprenantDemandeLogement
      */
-    public function setType(\Sidus\SidusBundle\Entity\Type $type = null)
+    public function addAffectation(\SICLA\AraBundle\Entity\AffectationDemande $affectations)
     {
-        $this->type = $type;
+        $this->affectations[] = $affectations;
+		$affectations->setDemande($this);
     
         return $this;
     }
 
     /**
-     * Get type
+     * Remove affectations
      *
-     * @return \Sidus\SidusBundle\Entity\Type 
+     * @param \SICLA\AraBundle\Entity\AffectationDemande $affectation
      */
-    public function getType()
+    public function removeAffectation(\SICLA\AraBundle\Entity\AffectationDemande $affectation)
     {
-        return $this->type;
+        $this->affectations->removeElement($affectation);
+		$affectation->setDemande(null);
     }
+
+    /**
+     * Get affectations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAffectations()
+    {
+        return $this->affectations;
+    }
+
 }

@@ -85,7 +85,7 @@
 				</thead>
 				<tbody>
 			{% for child in children %}
-						{% if child.object.typeAccueil=="Famille d'accueil" %}
+						{# {% if child.object.typeAccueil=="Famille d'accueil" %}
 								{% if child.object.statut.libelle=="Disponible" %}
 									<tr class="famille_accueil disponible">
 								{% elseif child.object.statut.libelle=="Indisponible" %}
@@ -108,8 +108,10 @@
 									<tr class="semi_independance proposition_ok">
 								{% elseif child.object.statut.libelle=="Etudiant affecté" %}
 									<tr class="semi_independance affectation_ok">
-								{% endif %}		
-						{% endif %}
+								{% endif %}	
+								{% else %}
+						{% endif %} #}
+						<tr>
 							<td><input type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
 							<td>
 								<div class="btn-toolbar actions-condensed">		

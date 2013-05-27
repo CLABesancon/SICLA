@@ -1,41 +1,48 @@
 <?php
 
 namespace SICLA\AraBundle\Entity;
+use Sidus\SidusBundle\Entity\Object;
 use Doctrine\ORM\Mapping as ORM;
- 
+
 /**
- * @ORM\Entity
+ * AffectationDemande
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="SICLA\AraBundle\Entity\AffectationDemandeRepository")
  */
+class AffectationDemande extends Object
+{
 
-class AffectationDemande {
-	
-	/**
-   * @ORM\Id
-   * @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\FamilleAccueil")
-   */
-	private $famille;
-	
-	/**
-   * @ORM\Id
-   * @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\ApprenantDemandeLogement")
-   */
-	private $demande;
-	
-	/**
-   * @ORM\Column()
-   */
-	private $dateArrivee;
-	
-	
-	/**
-   * @ORM\Column()
-   */
-	private $dateDepart;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateArrivee", type="date", nullable=true)
+     */
+    private $dateArrivee;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDepart", type="date", nullable=true)
+     */
+    private $dateDepart;
+	
+	/**
+	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\ApprenantDemandeLogement", inversedBy="affectations")
+	* @ORM\JoinColumn(nullable=true)
+	*/
+   private $demande;
+   
+	/**
+	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\FamilleAccueil", inversedBy="affectationsDemandes")
+	* @ORM\JoinColumn(nullable=true)
+	*/
+   private $famille;
+   
     /**
      * Set dateArrivee
      *
-     * @param string $dateArrivee
+     * @param \DateTime $dateArrivee
      * @return AffectationDemande
      */
     public function setDateArrivee($dateArrivee)
@@ -48,7 +55,7 @@ class AffectationDemande {
     /**
      * Get dateArrivee
      *
-     * @return string 
+     * @return \DateTime 
      */
     public function getDateArrivee()
     {
@@ -58,7 +65,7 @@ class AffectationDemande {
     /**
      * Set dateDepart
      *
-     * @param string $dateDepart
+     * @param \DateTime $dateDepart
      * @return AffectationDemande
      */
     public function setDateDepart($dateDepart)
@@ -71,34 +78,11 @@ class AffectationDemande {
     /**
      * Get dateDepart
      *
-     * @return string 
+     * @return \DateTime 
      */
     public function getDateDepart()
     {
         return $this->dateDepart;
-    }
-
-    /**
-     * Set famille
-     *
-     * @param \SICLA\AraBundle\Entity\FamilleAccueil $famille
-     * @return AffectationDemande
-     */
-    public function setFamille(\SICLA\AraBundle\Entity\FamilleAccueil $famille)
-    {
-        $this->famille = $famille;
-    
-        return $this;
-    }
-
-    /**
-     * Get famille
-     *
-     * @return \SICLA\AraBundle\Entity\FamilleAccueil 
-     */
-    public function getFamille()
-    {
-        return $this->famille;
     }
 
     /**
@@ -122,5 +106,28 @@ class AffectationDemande {
     public function getDemande()
     {
         return $this->demande;
+    }
+    
+    /**
+     * Set famille
+     *
+     * @param \SICLA\AraBundle\Entity\FamilleAccueil $famille
+     * @return AffectationDemande
+     */
+    public function setFamille(\SICLA\AraBundle\Entity\FamilleAccueil $famille = null)
+    {
+        $this->famille = $famille;
+    
+        return $this;
+    }
+
+    /**
+     * Get famille
+     *
+     * @return \SICLA\AraBundle\Entity\FamilleAccueil 
+     */
+    public function getFamille()
+    {
+        return $this->famille;
     }
 }

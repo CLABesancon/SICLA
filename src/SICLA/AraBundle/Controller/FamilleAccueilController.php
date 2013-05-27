@@ -27,7 +27,7 @@ class FamilleAccueilController extends CommonController {
 				//@TODO version
 		$node_parent=$loaded_objects['node']->getParent()->getId();
 		$this->loadObjectsForNodeUID($node_parent, $lang=null);
-		$object->setTitle('Famille '.$this->loaded_objects['object']->getFirstName());
+		//$object->setTitle('Famille '.$this->loaded_objects['object']->getFirstName());
 				$em->persist($object);
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');
@@ -44,15 +44,11 @@ class FamilleAccueilController extends CommonController {
 		//@TODO : get connected user
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
 		
-		$regimeAlimentaire=$em->getRepository('SICLAAraBundle:RegimeAlimentaire')->find(1);
-		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(1);
-		$statut=$em->getRepository('SICLAAraBundle:StatutFamille')->find(1);
 			
 		$new_object = new FamilleAccueil();
 		$new_object->setType($type);
 		$new_object->setTitle('');
 		$new_object->setFumeur('');
-		$new_object->setRegimeAlimentaire($regimeAlimentaire);
 		$new_object->setAdaptableRegimeAlimentaire('');
 		$new_object->setNbEnfants('');
 		$new_object->setNbLit('');
@@ -66,12 +62,10 @@ class FamilleAccueilController extends CommonController {
 		$new_object->setArretBus('');
 		$new_object->setLoyer('');
 		$new_object->setCharges('');
-		$new_object->setTypeLogement($typeLogement);
 		$new_object->setSouhaitNationalite('');
 		$new_object->setSouhaitPublic('');
 		$new_object->setSouhaitSexe('');
 		$new_object->setTypeAccueil('');
-		$new_object->setStatut($statut);
 		
 		$em->persist($new_object);
 		$em->flush();

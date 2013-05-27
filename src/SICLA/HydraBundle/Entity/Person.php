@@ -51,14 +51,14 @@ class Person extends Object
 	
 	/**
      * @Assert\Type(type="SICLA\HydraBundle\Entity\Phone")
-	 * @ORM\OneToMany(targetEntity="SICLA\HydraBundle\Entity\Phone", cascade={"persist"}, mappedBy="person"))
+	 * @ORM\OneToMany(targetEntity="SICLA\HydraBundle\Entity\Phone",cascade={"persist"}, mappedBy="person"))
      */
 	private $phones;
 	
 	/**
      * @Assert\Type(type="SICLA\HydraBundle\Entity\Address")
 	 * 
-	 * @ORM\OneToMany(targetEntity="SICLA\HydraBundle\Entity\Address", cascade={"persist"}, mappedBy="person"))
+	 * @ORM\OneToMany(targetEntity="SICLA\HydraBundle\Entity\Address",cascade={"persist"}, mappedBy="person"))
 	*/
 	private $addresses;
 	
@@ -198,23 +198,25 @@ class Person extends Object
     /**
      * Add phones
      *
-     * @param \SICLA\HydraBundle\Entity\Phone $phones
+     * @param \SICLA\HydraBundle\Entity\Phone $phone
      * @return Person
      */
-    public function addPhone(\SICLA\HydraBundle\Entity\Phone $phones)
+    public function addPhone(\SICLA\HydraBundle\Entity\Phone $phone)
     {
-        $this->phones[] = $phones;
+        $this->phones[] = $phone;
+		$phone->setPerson($this);
         return $this;
     }
 
     /**
      * Remove phones
      *
-     * @param \SICLA\HydraBundle\Entity\Phone $phones
+     * @param \SICLA\HydraBundle\Entity\Phone $phone
      */
-    public function removePhone(\SICLA\HydraBundle\Entity\Phone $phones)
+    public function removePhone(\SICLA\HydraBundle\Entity\Phone $phone)
     {
-        $this->phones->removeElement($phones);
+        $this->phones->removeElement($phone);
+		$phone->setPerson(null);
     }
 
     /**

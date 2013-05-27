@@ -63,6 +63,16 @@
 			<td>Non</td>
 				{% endif %}		
 		</tr>
+		<tr>
+				<th class="record_properties">Affectations:</th>
+					<td>
+						<ul>
+							{% for affectation in object.affectations %}
+							<li>{{ affectation.id }}</li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	

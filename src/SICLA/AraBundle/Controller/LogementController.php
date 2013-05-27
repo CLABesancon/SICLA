@@ -28,7 +28,7 @@ class LogementController extends CommonController
 				
 				if($contenu_annonce=='')
 				{
-					$object->setStatut($em->getRepository('SICLAAraBundle:StatutAnnonce')->find(4));
+					$object->setStatut($em->getRepository('SICLAAraBundle:StatutAnnonce')->find(2));
 				}
 				else
 				{
@@ -51,7 +51,7 @@ class LogementController extends CommonController
 		//@TODO : get connected user
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
 		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(1);
-		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(1);
+		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(2);
 		$new_object = new Logement();
 		$new_object->setType($type);
 		$new_object->setTitle('');

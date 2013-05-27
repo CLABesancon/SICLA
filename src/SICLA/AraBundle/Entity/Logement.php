@@ -110,7 +110,7 @@ class Logement extends Object
    /**
      * @var string
      *
-     * @ORM\Column(name="annonce", type="text", nullable=false)
+     * @ORM\Column(name="annonce", type="text", nullable=true)
      */
     private $annonce;
 	

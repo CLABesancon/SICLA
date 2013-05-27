@@ -65,3 +65,10 @@ sicla_ara_statut_affecte:
   defaults: { _controller: SICLAAraBundle:FamilleAccueil:statutAffecte, lang: ~ }
   requirements:
     lang: ^[a-z]{2}$
+    
+    
+sicla_ara_search:
+    pattern:  /test
+    defaults: { _controller: SICLAAraBundle:AffectationDemande:search }
+    requirements:
+        _method: POST    

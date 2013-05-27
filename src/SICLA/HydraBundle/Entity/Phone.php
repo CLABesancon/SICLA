@@ -37,7 +37,7 @@ class Phone
 	
 	/**
 	* @ORM\ManyToOne(targetEntity="SICLA\HydraBundle\Entity\Person", inversedBy="phones")
-	* @ORM\JoinColumn(name="person_id", referencedColumnName="id"))
+	* @ORM\JoinColumn(nullable=true)
 	*/
 	protected $person;
 

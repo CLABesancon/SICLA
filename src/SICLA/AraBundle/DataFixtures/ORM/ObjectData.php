@@ -43,6 +43,17 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 			$manager->persist($object);
 			$this->addReference('object-type-'.str_replace(' ','',strtolower($type)),$object);
 		}
+		
+		// affectation demande de logement 
+		$object_affectation_demande=new Type();
+		$object_affectation_demande->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
+		$object_affectation_demande->setTitle('Type Affectation des demandes de logements');
+		$object_affectation_demande->setController('SICLAAraBundle:AffectationDemande');
+		$object_affectation_demande->setTypeName('Type Affectation des Demandes de logement');
+		$object_affectation_demande->addForbiddenType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(2));
+		$manager->persist($object_affectation_demande);
+		$this->addReference('object-type-affectationdemandeslogement',$object_affectation_demande);
+		
 		// apprenant
 		$object_apprenant=new Type();
 		$object_apprenant->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
@@ -132,6 +143,16 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 		$manager->persist($object_folder_famille_accueil);
 		$this->addReference('object-type-folderfamilleaccueil',$object_folder_famille_accueil);
 		
+		//Folder Affectation Demande de logement
+		
+		$object_folder_affectation = new Type();
+		$object_folder_affectation->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
+		$object_folder_affectation->setTitle('Type Folder Affectation Demandes de Logement');
+		$object_folder_affectation->setController('SICLAAraBundle:FolderAffectationDemande');
+		$object_folder_affectation->setTypename($type);
+		$object_folder_affectation->addAuthorizedType($this->getReference('object-type-affectationdemandeslogement'));
+		$manager->persist($object_folder_affectation);
+		$this->addReference('object-type-folderaffectationdemandeslogement',$object_folder_affectation);
 		
 		//Liste des propriétaires
 		$object_liste_proprietaires = new Folder();
@@ -186,6 +207,15 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 		$object_liste_familles->setType($this->getReference('object-type-folderfamilleaccueil'));
 		$manager->persist($object_liste_familles);
 		$this->addReference('object-liste-famillesaccueil',$object_liste_familles);
+		
+		//Liste des affectations de demandes de logement 
+		$object_liste_affectations= new Folder();
+		$object_liste_affectations->setTitle("Liste des affectations de demandes de logement");
+		$object_liste_affectations->setContent("Liste des affectations de demandes de logement");
+		$object_liste_affectations->setTags('affectations, demandes, folder');
+		$object_liste_affectations->setType($this->getReference('object-type-folderaffectationdemandeslogement'));
+		$manager->persist($object_liste_affectations);
+		$this->addReference('object-liste-affectationsdemandeslogement',$object_liste_affectations);
 		
 		$manager->flush();
 		

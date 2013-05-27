@@ -2,7 +2,6 @@
 {% block javascripts %}
 	{{ parent() }}
 	{% javascripts '@SICLAAraBundle/Resources/public/js/apprenant.js'%}
-			<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAS7Uc8vQAWOsnT6bA7ikC9xhy7Dry25S8&sensor=false"></script>
 			<script type="text/javascript" src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 {% endblock %}	
@@ -66,6 +65,12 @@
 	
 		{{ form_label(form.Loisirs, 'Quels sont vos loisirs ?') }}
 		{{ form_widget(form.Loisirs) }}
+		
+		{{ form_label(form.groupeApprenants, 'Groupe du stagiaire') }}
+		{{ form_widget(form.groupeApprenants) }}
+		
+		{{ form_label(form.idStagiaire, 'Id du stagiaire') }}
+		{{ form_widget(form.idStagiaire) }}
 	<button class="btn" type="submit">Valider</button>
 </form>
 {% endblock %}

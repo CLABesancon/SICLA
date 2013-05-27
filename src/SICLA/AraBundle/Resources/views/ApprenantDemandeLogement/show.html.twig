@@ -2,17 +2,51 @@
 {% block javascripts %}
 	{{ parent() }}
 	{% javascripts '@SICLAAraBundle/Resources/public/js/apprenant.js'%}
-			<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAS7Uc8vQAWOsnT6bA7ikC9xhy7Dry25S8&sensor=false"></script>
 			<script type="text/javascript" src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 {% endblock %}	
 {% block main %}
+
 <table >
 	<tbody>
+		{# informations relatives aux stagiaires #}
 		<tr>
-			<th class="record_properties">Id:</th>
-			<td>{{ object.id }}</td>
+			<th class="record_properties">ID :</th>
+			<td id="id_stagiaire" class="id_stagiaire">{{ object.idStagiaire }}</td>
 		</tr>
+		<tr>
+			<th class="record_properties">Nom:</th>
+			<td class="nom"></td>
+		</tr>
+		<tr>
+			<th class="record_properties">Prénom:</th>
+			<td class="prenom"></td>
+		</tr>
+		<tr>
+			<th class="record_properties">Pays:</th>
+			<td class="pays"></td>
+		</tr>
+		<tr>
+			<th class="record_properties">Adresse mail:</th>
+			<td class="mail"></td>
+		</tr>
+		<tr>
+			<th class="record_properties">Date de naissance:</th>
+			<td class="ddn"></td>
+		</tr>
+		<tr>
+			<th class="record_properties">Tel perso:</th>
+			<td class="tel"></td>
+		</tr>
+		<tr>
+			<th class="record_properties">Adresse:</th>
+			<td class="adresse"></td>
+		</tr>
+		<tr>
+			<th class="record_properties">Niveau en français:</th>
+			<td class="niveau"></td>
+		</tr>
+		{# fin des informations relatives aux stagiaires #}
 		<tr>
 			<th class="record_properties">Handicap physique:</th>
 			{%if object.handicapPhysique==1 %}
@@ -134,6 +168,16 @@
 						<ul>
 							{% for loisir in object.Loisirs %}
 							<li>{{ loisir.getLibelle() }}</li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+				<tr>
+				<th class="record_properties">Affectations:</th>
+					<td>
+						<ul>
+							{% for affectation in object.affectations %}
+							<li>{{ affectation.id }}</li>
 							{% endfor %}
 						</ul>
 					</td>

@@ -32,8 +32,6 @@
 	{{ form_label(form.arretBus,"Nom de l'arrêt") }}
 	{{ form_widget(form.arretBus) }}
 	
-	{{ form_label(form.animaux, "Quels types d'animaux domestiques possédez-vous ?") }}
-	{{ form_widget(form.animaux) }}
 	
 	{{ form_label(form.fumeur,'Êtes-vous fumeur ?') }}
 	{{ form_widget(form.fumeur	) }}
@@ -48,6 +46,9 @@
 			
 	{{ form_label(form.Loisirs, 'Quels sont vos loisirs ?') }}
 	{{ form_widget(form.Loisirs) }}
+			
+	{{ form_label(form.Animaux, "Quels types d'animaux possédez vous ?") }}
+	{{ form_widget(form.Animaux) }}
 	</div>
 	{{ form_label(form.nbLit, 'Combien de lits sont-ils disponibles ?') }}
 	{{ form_widget(form.nbLit) }}

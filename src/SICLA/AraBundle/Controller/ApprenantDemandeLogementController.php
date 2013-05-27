@@ -70,7 +70,7 @@ class ApprenantDemandeLogementController extends CommonController {
 		$new_version->setRevision(1);
 		$new_version->setRevisionBy($user);
 		$em->persist($new_version);
-		
+		 /*
 		//Node Liste des demandes de logement des apprenants
 		
 		$node_liste_demandes=new Node();
@@ -87,7 +87,7 @@ class ApprenantDemandeLogementController extends CommonController {
 		$version_liste_demandes->setRevision(1);
 		$version_liste_demandes->setRevisionBy($user);
 		$em->persist($version_liste_demandes);
-		
+		*/
 		$em->flush();
 
 		return $this->redirect($this->generateUrl('sidus_edit_node',array(

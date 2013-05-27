@@ -1,4 +1,19 @@
 jQuery(document).ready(function() {
+	
+	$('#sicla_arabundle_affectationdemandetype_famille').change(function(){
+		  
+      var id='famille-'+$(this).find("option:selected").attr('value');
+	  
+	  $(".table_famille").each(function(){ 
+			if($(this).attr("id")==id)
+				{
+					$('#'+$(this).attr("id")).show();
+				}else{
+					$('#'+$(this).attr("id")).hide();
+				}
+		});
+	});
+	
 	// On masque automatiquement les div concernant les détails si la valeur cochée est non au chargement de la page
 	// Utile pour les view_apprenant, étant donné qu'il n'y a pas de changement, la valeur est cochée par défaut
 	if($("input[name='sicla_arabundle_apprenantdemandelogementtype[handicapPhysique]']:checked").val()=="0"){
