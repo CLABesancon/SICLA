@@ -116,7 +116,7 @@ class Logement extends Object
 	
 	/**
 	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\StatutAnnonce")
-	* @ORM\JoinColumn( nullable=false )
+	* @ORM\JoinColumn( nullable=true )
 	* 
 	*/
 	private $statut;

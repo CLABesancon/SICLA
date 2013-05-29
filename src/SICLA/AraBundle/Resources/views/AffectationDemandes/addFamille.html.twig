@@ -1,0 +1,19 @@
+{% extends 'SICLAAraBundle::base.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	{% javascripts '@SICLAAraBundle/Resources/public/js/apprenant.js'%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}	
+
+{% block main %}
+<h3>Choisir la famille</h3>
+<form method="POST">
+	{{ form_widget(form) }}
+	<button class="btn" id="charger_familles" type="submit">Chercher les familles disponibles à ces dates</button>
+</form>
+
+
+
+
+{% endblock %}

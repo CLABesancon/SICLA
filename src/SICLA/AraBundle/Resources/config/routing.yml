@@ -67,8 +67,9 @@ sicla_ara_statut_affecte:
     lang: ^[a-z]{2}$
     
     
-sicla_ara_search:
-    pattern:  /test
-    defaults: { _controller: SICLAAraBundle:AffectationDemande:search }
-    requirements:
-        _method: POST    
+sicla_ara_addFamille:
+  pattern:  /addFamille/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:AffectationDemande:addFamille, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$
+  

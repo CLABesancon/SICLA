@@ -6,13 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AffectationDemandeType extends AbstractType
+class AffectationDemandeFamilleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-			->add ('demande', 'entity', array(
-				'class'    =>'SICLAAraBundle:ApprenantDemandeLogement',
+			
+			->add ('famille', 'entity', array(
+				'class'    =>'SICLAAraBundle:FamilleAccueil',
 				'property'=>'id',
 				'multiple' => false))
 			->add('dateArrivee')

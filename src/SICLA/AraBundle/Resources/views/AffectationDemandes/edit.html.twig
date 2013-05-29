@@ -7,84 +7,162 @@
 {% endblock %}	
 
 {% block main %}
-{% form_theme form 'SICLAAraBundle:Form:form_div_layout.html.twig' %}
-<form action="" method="post">
-	{{ form_label(form.demande, 'Demande') }}
-	{{ form_widget(form.demande) }}	
-
-	{{ form_label(form.famille, 'Famille') }}
-	{{ form_widget(form.famille) }}	
-
-
-	<button class="btn" id="rechercher" type="submit">Établir l'affectation</button>
+<h3>Choisir la demande</h3>
+<form method="POST">
+	{{ form_widget(form) }}
+	<button class="btn" id="charger_familles" type="submit">Chercher les familles disponibles à ces dates</button>
 </form>
 
-{% for famille in familles %}
-<table id="famille-{{famille.id}}" class="table_famille" style="display: none;" >
-	<tbody>
-		<tr>
-			<th class="record_properties">Id:</th>
-			<td>{{ famille.id }}</td>
-		</tr>
 
+{% for demande in demandes %}
+
+<table class="demandes_logement" id="{{demande.id}}" >
+	<tbody>
+		
 		<tr>
-			<th class="record_properties">Fumeur:</th>
-						{%if famille.fumeur==1 %}
-			<td>Oui</td>
-						{% else %}
-			<td>Non</td>
-						{% endif %}		
+			<th class="record_properties">ID :</th>
+			<td id="id_stagiaire" class="id_stagiaire">{{ demande.idStagiaire }}</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Handicap physique:</th>
+			{%if demande.handicapPhysique==1 %}
+				<td>Oui</td>
 			</tr>
-		<tr>
-			<th class="record_properties">Régime alimentaire:</th>
-			<td>{{ famille.RegimeAlimentaire.getLibelle() }}</td>
-		</tr>
-		<tr>
-			<th class="record_properties">Adaptable à un régime alimentaire:</th>
-			{%if famille.adaptableRegimeAlimentaire==1 %}
-			<td>Oui</td>
+			<tr>
+				<th class="record_properties">Détails concernant cet handicap:</th>
+				<td>{{ demande.detailHandicap }}</td>
+			</tr>
 			{% else %}
-			<td>Non</td>
-			{% endif %}		
-		</tr>
-		<tr>
-			<th class="record_properties">Nombre d'enfants:</th>
-			<td>{{ famille.nbEnfants }}</td>
-		</tr>
-		<tr>
-			<th class="record_properties">Loisirs:</th>
-			<td>
-				<ul>
-					{% for loisir in famille.Loisirs %}
-					<li>{{ loisir.getLibelle() }}</li>
-					{% endfor %}
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<th class="record_properties">Animaux:</th>
-			<td>
-				<ul>
-					{% for animal in famille.animaux %}
-					<li>{{ animal.getLibelle() }}</li>
-					{% endfor %}
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<th class="record_properties">Nombre de lits:</th>
-			<td>{{ famille.nbLit }}</td>
-		</tr>
-		<tr>
-			<th class="record_properties">Ascenseur:</th>
-			{%if famille.ascenseur==1 %}
+		<td>Non</td>
+	</tr>
+			{% endif %}
+	<tr>
+		<th class="record_properties">Traitement médical:</th>
+			{%if demande.traitementMedical==1 %}
 			<td>Oui</td>
-			{% else %}
-			<td>Non</td>
-			{% endif %}		
 		</tr>
-	</tbody>
-</table>
+		<tr>
+			<th class="record_properties">Détails concernant ce traitement:</th>
+			<td>{{ demande.detailTraitement }}</td>
+		</tr>
+			{% else %}
+		<td>Non</td>
+	</tr>
+			{% endif %}	
+	<tr>
+		<th class="record_properties">Allergies animales:</th>
+			{%if demande.allergiesAnimaux==1 %}
+			<td>Oui</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Détails concernant ces allergies:</th>
+			<td>{{ demande.detailAllergiesAnimaux }}</td>
+		</tr>
+			{% else %}
+		<td>Non</td>
+	</tr>
+			{% endif %}		
+	<tr>
+		<th class="record_properties">Allergies alimentaires:</th>
+			{%if demande.allergiesAlimentaires==1 %}
+			<td>Oui</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Détails concernant ces allergies:</th>
+			<td>{{ demande.detailAllergiesAlimentaires }}</td>
+		</tr>
+			{% else %}
+		<td>Non</td>
+	</tr>
+			{% endif %}		
+	<tr>
+		<th class="record_properties">Allergies autres:</th>
+			{%if demande.allergiesAutres==1 %}
+			<td>Oui</td>
+		</tr>
+		<tr>
+			<th class="record_properties">Détails concernant ces allergies:</th>
+			<td>{{ demande.detailAllergiesAutres }}</td>
+		</tr>
+			{% else %}
+		<td>Non</td>
+	</tr>
+			{% endif %}
+	<tr>
+		<th class="record_properties">Fumeur:</th>
+				{%if demande.fumeur==1 %}
+			<td>Oui</td>
+				{% else %}
+			<td>Non</td>
+				{% endif %}		
+		</tr>
+		<tr>
+			<th class="record_properties">Tolérant à la fumée:</th>
+				{%if demande.tolerantFumee==1 %}
+				<td>Oui</td>
+				{% else %}
+				<td>Non</td>
+				{% endif %}		
+			</tr>
+			<tr>
+				<th class="record_properties">Véhicule à disposition:</th>
+				{%if demande.vehicule==1 %}
+					<td>Oui</td>
+				{% else %}
+					<td>Non</td>
+				{% endif %}	
+				</tr>
+				<tr>
+					<th class="record_properties">Voeux personnels:</th>
+			{%if demande.voeuxPersonnels==1 %}
+						<td>Oui</td>
+					</tr>
+					<tr>
+						<th class="record_properties">Détails des voeux:</th>
+						<td>{{ demande.detailVoeuxPersonnels }}</td>
+					</tr>
+			{% else %}
+					<td>Non</td>
+				</tr>
+			{% endif %}
+				<tr>
+					<th class="record_properties">Loisirs à partager:</th>
+			{%if demande.loisirsParticuliers==1 %}
+						<td>Oui</td>
+					</tr>
+					<tr>
+						<th class="record_properties">Détails des loisirs:</th>
+						<td>{{ demande.detailLoisirsParticuliers }}</td>
+					</tr>
+			{% else %}
+					<td>Non</td>
+				</tr>
+			{% endif %}	
+			<tr>
+				<th class="record_properties">Loisirs:</th>
+					<td>
+						<ul>
+							{% for loisir in demande.Loisirs %}
+							<li>{{ loisir.getLibelle() }}</li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+				<tr>
+				<th class="record_properties">Affectations:</th>
+					<td>
+						<ul>
+							{% for affectation in demande.affectations %}
+							<li>{{ affectation.id }}</li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
 {% endfor %}
+
+
 
 {% endblock %}

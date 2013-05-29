@@ -50,7 +50,6 @@ class LogementController extends CommonController
 		$em = $this->getDoctrine()->getEntityManager();
 		//@TODO : get connected user
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
-		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(1);
 		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(2);
 		$new_object = new Logement();
 		$new_object->setType($type);
@@ -67,7 +66,6 @@ class LogementController extends CommonController
 		$new_object->setSdbPrivative('');
 		$new_object->setTypeLogement($typeLogement); 
 		$new_object->setAnnonce('');
-		$new_object->setStatut($statut);
 		$new_object->setParentIdProprietaire($node->getParent()->getId());
 		
 		$em->persist($new_object);

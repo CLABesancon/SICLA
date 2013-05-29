@@ -31,14 +31,14 @@ class Person extends Object
     /**
      * @var string
      *
-     * @ORM\Column(name="maidenName", type="string", length=255)
+     * @ORM\Column(name="maidenName", type="string", length=255, nullable=true)
      */
     private $maidenName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="gender", type="string", length=255, nullable=true)
+     * @ORM\Column(name="gender", type="string", length=255)
      */
     private $gender;
 

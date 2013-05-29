@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bmatzner/BmatznerFontAwesomeBundle.git",
-                "reference": "d4bb8150ca49d751d035c11679a794861067c41e"
+                "reference": "3.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bmatzner/BmatznerFontAwesomeBundle/zipball/d4bb8150ca49d751d035c11679a794861067c41e",
-                "reference": "d4bb8150ca49d751d035c11679a794861067c41e",
+                "url": "https://api.github.com/repos/bmatzner/BmatznerFontAwesomeBundle/zipball/3.1.1",
+                "reference": "3.1.1",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                 "typography",
                 "webfonts"
             ],
-            "time": "2013-02-04 13:05:42"
+            "time": "2013-05-19 14:49:00"
         },
         {
             "name": "craue/formflow-bundle",
@@ -59,12 +59,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/craue/CraueFormFlowBundle.git",
-                "reference": "d225817bbae89ecd754e10111f2a662991638a29"
+                "reference": "1e02893d5efbfc4c1f244275215f315cc05b5df7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/d225817bbae89ecd754e10111f2a662991638a29",
-                "reference": "d225817bbae89ecd754e10111f2a662991638a29",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/1e02893d5efbfc4c1f244275215f315cc05b5df7",
+                "reference": "1e02893d5efbfc4c1f244275215f315cc05b5df7",
                 "shasum": ""
             },
             "require": {
@@ -104,7 +104,7 @@
                 "Symfony2",
                 "form"
             ],
-            "time": "2013-04-27 10:10:16"
+            "time": "2013-05-17 14:30:58"
         },
         {
             "name": "doctrine/common",
@@ -496,12 +496,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "fdb5cd60befca720f3ef80d121f0a48a01e85766"
+                "reference": "v2.3.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/fdb5cd60befca720f3ef80d121f0a48a01e85766",
-                "reference": "fdb5cd60befca720f3ef80d121f0a48a01e85766",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/v2.3.6",
+                "reference": "v2.3.6",
                 "shasum": ""
             },
             "require": {
@@ -568,7 +568,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-05-16 15:28:00"
+            "time": "2013-05-21 12:09:55"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -947,12 +947,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
-                "reference": "91c96119ba7727c5c3b429ed4c2728d60e5e2346"
+                "reference": "982736a8e04f1efa3105bc64371affc5af4ec4a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/91c96119ba7727c5c3b429ed4c2728d60e5e2346",
-                "reference": "91c96119ba7727c5c3b429ed4c2728d60e5e2346",
+                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/982736a8e04f1efa3105bc64371affc5af4ec4a4",
+                "reference": "982736a8e04f1efa3105bc64371affc5af4ec4a4",
                 "shasum": ""
             },
             "require": {
@@ -964,7 +964,7 @@
                 "twig/twig": "1.10.2"
             },
             "require-dev": {
-                "jms/di-extra-bundle": "*",
+                "jms/di-extra-bundle": ">=1.1",
                 "sensio/framework-extra-bundle": "*",
                 "symfony/browser-kit": "*",
                 "symfony/class-loader": "*",
@@ -1012,7 +1012,7 @@
                 "ui",
                 "webinterface"
             ],
-            "time": "2013-05-14 05:31:00"
+            "time": "2013-05-18 06:44:01"
         },
         {
             "name": "knplabs/knp-components",
@@ -1081,12 +1081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenu.git",
-                "reference": "5cf5ab4948d8c573f260e2b612bfc9721da1c892"
+                "reference": "6e3d276aef1d621249c23e0321f9737b45dc5084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/5cf5ab4948d8c573f260e2b612bfc9721da1c892",
-                "reference": "5cf5ab4948d8c573f260e2b612bfc9721da1c892",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/6e3d276aef1d621249c23e0321f9737b45dc5084",
+                "reference": "6e3d276aef1d621249c23e0321f9737b45dc5084",
                 "shasum": ""
             },
             "require": {
@@ -1137,7 +1137,7 @@
                 "menu",
                 "tree"
             ],
-            "time": "2013-04-15 14:10:52"
+            "time": "2013-05-20 16:52:41"
         },
         {
             "name": "knplabs/knp-menu-bundle",
@@ -1254,16 +1254,16 @@
         },
         {
             "name": "kriswallsmith/assetic",
-            "version": "dev-master",
+            "version": "1.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "386d37e6b70f267e55009304a94dfda108b1799c"
+                "reference": "1aadc97c40e806ed083bc2188042a85f8f6cc6f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/386d37e6b70f267e55009304a94dfda108b1799c",
-                "reference": "386d37e6b70f267e55009304a94dfda108b1799c",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/1aadc97c40e806ed083bc2188042a85f8f6cc6f5",
+                "reference": "1aadc97c40e806ed083bc2188042a85f8f6cc6f5",
                 "shasum": ""
             },
             "require": {
@@ -1321,7 +1321,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-05-16 13:10:17"
+            "time": "2013-05-20 15:39:01"
         },
         {
             "name": "leafo/lessphp",
