@@ -6,16 +6,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AffectationDemandeFamilleType extends AbstractType
+class AffectationDemandeAddFamilleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-			
 			->add ('famille', 'entity', array(
 				'class'    =>'SICLAAraBundle:FamilleAccueil',
 				'property'=>'id',
 				'multiple' => false))
+			->add ('statutFamille', 'entity', array(
+				'class'    =>'SICLAAraBundle:StatutFamille',
+				'property'=>'libelle',
+				'multiple' => false))		
 			->add('dateArrivee')
 			->add('dateDepart');
 		

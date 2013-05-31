@@ -1,5 +1,11 @@
 jQuery(document).ready(function() {
-		
+	/************** Partie concernant les affectations des apprenants **************/
+	$(".demandes_logement").each(function(){ 
+
+					$('#'+$(this).attr("id")).hide();
+		});
+	
+	
 	// demandes présentes au chargement de la page
 	var tableau_id_demandes=new Array();
 	var i=0;
@@ -38,11 +44,11 @@ jQuery(document).ready(function() {
 
 	// On affiche la fiche lorsque l'élément est sélectionné
 	
-	$('#sicla_arabundle_affectationdemandetype_famille').change(function(){
+	$('#sicla_arabundle_affectationdemandetype_demande').change(function(){
 		  
-      var id='famille-'+$(this).find("option:selected").attr('value');
+      var id=$(this).find("option:selected").attr('value');
 	  
-	  $(".table_famille").each(function(){ 
+	  $(".demandes_logement").each(function(){ 
 			if($(this).attr("id")==id)
 				{
 					$('#'+$(this).attr("id")).show();
@@ -51,4 +57,5 @@ jQuery(document).ready(function() {
 				}
 		});
 	});
+	
 });	

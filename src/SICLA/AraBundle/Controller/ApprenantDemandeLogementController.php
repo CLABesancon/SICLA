@@ -21,13 +21,13 @@ class ApprenantDemandeLogementController extends CommonController {
 
 		if ($request->isMethod('POST')) {
 			$form->bind($request);
-			//if ($form->isValid()) {
 				//@TODO version
+				
+				$object->setTitle($object->getNom().' '.$object->getPrenom());
 				$em->persist($object);
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');
 				return $this->redirect($this->generateUrl('sidus_show_node', array('node_id' => $version->getNode()->getId(), 'lang' => $version->getLang())));
-			//}
 		}
 		$loaded_objects['form'] = $form->createView();
 		return $this->render('SICLAAraBundle:ApprenantDemandeLogement:edit.html.twig', $loaded_objects);

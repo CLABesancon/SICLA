@@ -1,35 +1,43 @@
 {% extends 'SICLAAraBundle::base.html.twig' %}
 {% block javascripts %}
 	{{ parent() }}
-	{% javascripts '@SICLAAraBundle/Resources/public/js/apprenant.js'%}
+	{% javascripts '@SICLAAraBundle/Resources/public/js/affectationDemande.js'%}
 <script type="text/javascript" src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 {% endblock %}	
 
 {% block main %}
+<div class="block-left">
 <h3>Choisir la demande</h3>
 <form method="POST">
-	{{ form_widget(form) }}
-	<button class="btn" id="charger_familles" type="submit">Chercher les familles disponibles à ces dates</button>
+	{{ form_label(form.demande,'Sélectionner la demande de logement') }}
+	{{ form_widget(form.demande) }}
+		
+	{{ form_label(form.dateArrivee,"Date de début d'affectation") }}
+	{{ form_widget(form.dateArrivee) }}	
+		
+	{{ form_label(form.dateDepart,"Date de fin d'affectation") }}
+	{{ form_widget(form.dateDepart) }}		<br/>
+	<button class="btn btn-success" id="charger_familles" type="submit">Chercher les familles disponibles à ces dates</button>
 </form>
-
+</div>
 
 {% for demande in demandes %}
-
-<table class="demandes_logement" id="{{demande.id}}" >
+<div class="block-right">
+	<table class="demandes_logement table table-hover" id="{{demande.id}}" >
 	<tbody>
 		
 		<tr>
-			<th class="record_properties">ID :</th>
+			<th >ID :</th>
 			<td id="id_stagiaire" class="id_stagiaire">{{ demande.idStagiaire }}</td>
 		</tr>
 		<tr>
-			<th class="record_properties">Handicap physique:</th>
+			<th >Handicap physique:</th>
 			{%if demande.handicapPhysique==1 %}
 				<td>Oui</td>
 			</tr>
 			<tr>
-				<th class="record_properties">Détails concernant cet handicap:</th>
+				<th >Détails concernant cet handicap:</th>
 				<td>{{ demande.detailHandicap }}</td>
 			</tr>
 			{% else %}
@@ -37,12 +45,12 @@
 	</tr>
 			{% endif %}
 	<tr>
-		<th class="record_properties">Traitement médical:</th>
+		<th >Traitement médical:</th>
 			{%if demande.traitementMedical==1 %}
 			<td>Oui</td>
 		</tr>
 		<tr>
-			<th class="record_properties">Détails concernant ce traitement:</th>
+			<th >Détails concernant ce traitement:</th>
 			<td>{{ demande.detailTraitement }}</td>
 		</tr>
 			{% else %}
@@ -50,12 +58,12 @@
 	</tr>
 			{% endif %}	
 	<tr>
-		<th class="record_properties">Allergies animales:</th>
+		<th >Allergies animales:</th>
 			{%if demande.allergiesAnimaux==1 %}
 			<td>Oui</td>
 		</tr>
 		<tr>
-			<th class="record_properties">Détails concernant ces allergies:</th>
+			<th >Détails concernant ces allergies:</th>
 			<td>{{ demande.detailAllergiesAnimaux }}</td>
 		</tr>
 			{% else %}
@@ -63,12 +71,12 @@
 	</tr>
 			{% endif %}		
 	<tr>
-		<th class="record_properties">Allergies alimentaires:</th>
+		<th >Allergies alimentaires:</th>
 			{%if demande.allergiesAlimentaires==1 %}
 			<td>Oui</td>
 		</tr>
 		<tr>
-			<th class="record_properties">Détails concernant ces allergies:</th>
+			<th >Détails concernant ces allergies:</th>
 			<td>{{ demande.detailAllergiesAlimentaires }}</td>
 		</tr>
 			{% else %}
@@ -76,12 +84,12 @@
 	</tr>
 			{% endif %}		
 	<tr>
-		<th class="record_properties">Allergies autres:</th>
+		<th >Allergies autres:</th>
 			{%if demande.allergiesAutres==1 %}
 			<td>Oui</td>
 		</tr>
 		<tr>
-			<th class="record_properties">Détails concernant ces allergies:</th>
+			<th >Détails concernant ces allergies:</th>
 			<td>{{ demande.detailAllergiesAutres }}</td>
 		</tr>
 			{% else %}
@@ -89,7 +97,7 @@
 	</tr>
 			{% endif %}
 	<tr>
-		<th class="record_properties">Fumeur:</th>
+		<th >Fumeur:</th>
 				{%if demande.fumeur==1 %}
 			<td>Oui</td>
 				{% else %}
@@ -97,7 +105,7 @@
 				{% endif %}		
 		</tr>
 		<tr>
-			<th class="record_properties">Tolérant à la fumée:</th>
+			<th >Tolérant à la fumée:</th>
 				{%if demande.tolerantFumee==1 %}
 				<td>Oui</td>
 				{% else %}
@@ -105,7 +113,7 @@
 				{% endif %}		
 			</tr>
 			<tr>
-				<th class="record_properties">Véhicule à disposition:</th>
+				<th >Véhicule à disposition:</th>
 				{%if demande.vehicule==1 %}
 					<td>Oui</td>
 				{% else %}
@@ -113,12 +121,12 @@
 				{% endif %}	
 				</tr>
 				<tr>
-					<th class="record_properties">Voeux personnels:</th>
+					<th >Voeux personnels:</th>
 			{%if demande.voeuxPersonnels==1 %}
 						<td>Oui</td>
 					</tr>
 					<tr>
-						<th class="record_properties">Détails des voeux:</th>
+						<th >Détails des voeux:</th>
 						<td>{{ demande.detailVoeuxPersonnels }}</td>
 					</tr>
 			{% else %}
@@ -126,12 +134,12 @@
 				</tr>
 			{% endif %}
 				<tr>
-					<th class="record_properties">Loisirs à partager:</th>
+					<th >Loisirs à partager:</th>
 			{%if demande.loisirsParticuliers==1 %}
 						<td>Oui</td>
 					</tr>
 					<tr>
-						<th class="record_properties">Détails des loisirs:</th>
+						<th >Détails des loisirs:</th>
 						<td>{{ demande.detailLoisirsParticuliers }}</td>
 					</tr>
 			{% else %}
@@ -139,7 +147,7 @@
 				</tr>
 			{% endif %}	
 			<tr>
-				<th class="record_properties">Loisirs:</th>
+				<th >Loisirs:</th>
 					<td>
 						<ul>
 							{% for loisir in demande.Loisirs %}
@@ -149,7 +157,7 @@
 					</td>
 				</tr>
 				<tr>
-				<th class="record_properties">Affectations:</th>
+				<th >Affectations:</th>
 					<td>
 						<ul>
 							{% for affectation in demande.affectations %}
@@ -160,6 +168,8 @@
 				</tr>
 			</tbody>
 		</table>
+</div>
+
 
 {% endfor %}
 

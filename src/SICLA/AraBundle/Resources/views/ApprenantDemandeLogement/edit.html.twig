@@ -9,7 +9,49 @@
 {% block main %}
 {% form_theme form 'SICLAAraBundle:Form:form_div_layout.html.twig' %}
 <form action="" method="post">
-	{{ form_label(form.handicapPhysique,'Êtes vous victime d\'un handicap physique ?') }}
+		{{ form_label(form.idStagiaire, 'Id du stagiaire') }}
+		{{ form_widget(form.idStagiaire) }}
+		
+		{{ form_label(form.groupeApprenants, 'Groupe du stagiaire') }}
+		{{ form_widget(form.groupeApprenants) }}
+		
+		{{ form_label(form.nom, 'Nom :') }}
+		{{ form_widget(form.nom) }}
+		
+		{{ form_label(form.prenom, 'Prénom :') }}
+		{{ form_widget(form.prenom) }}
+		
+		{{ form_label(form.ddn, 'Date de naissance :') }}
+		{{ form_widget(form.ddn) }}
+		
+		{{ form_label(form.mail, 'Mail :') }}
+		{{ form_widget(form.mail) }}
+		
+		{{ form_label(form.tel,' Téléphone :') }}
+		{{ form_widget(form.tel) }}
+		
+		{{ form_label(form.adresse, 'Adresse :') }}
+		{{ form_widget(form.adresse) }}
+		
+		{{ form_label(form.pays, 'Pays :') }}
+		{{ form_widget(form.pays) }}
+		
+		{{ form_label(form.debutantFrancais, 'Débutant en Français :') }}
+		{{ form_widget(form.debutantFrancais) }}
+		
+		{{ form_label(form.typeHebergement, "Type d'hébergement :") }}
+		{{ form_widget(form.typeHebergement) }}
+		
+		{{ form_label(form.nomFormation, "Nom de la formation :") }}
+		{{ form_widget(form.nomFormation) }}
+		
+		{{ form_label(form.debutFormation, "Début de la formation :") }}
+		{{ form_widget(form.debutFormation) }}
+				
+		{{ form_label(form.finFormation, "Fin de la formation :") }}
+		{{ form_widget(form.finFormation) }}
+		
+		{{ form_label(form.handicapPhysique,'Êtes vous victime d\'un handicap physique ?') }}
 		{{ form_widget(form.handicapPhysique) }}
 		<div class="handicapPhysique">
 		{{ form_label(form.detailHandicap, 'Précisez cet handicap') }}
@@ -27,6 +69,10 @@
 		{{ form_label(form.detailAllergiesAnimaux, 'Précisez ces allergies') }}
 		{{ form_widget(form.detailAllergiesAnimaux) }}
 		</div>
+		
+		{{ form_label(form.regimeAlimentaire, 'Suivez vous un régime alimentaire spécifique') }}
+		{{ form_widget(form.regimeAlimentaire) }}
+		
 		{{ form_label(form.allergiesAlimentaires, 'Êtes vous sujet à des allergies alimentaires ?') }}
 		{{ form_widget(form.allergiesAlimentaires) }}
 		<div class="allergiesAlimentaires">		
@@ -66,11 +112,9 @@
 		{{ form_label(form.Loisirs, 'Quels sont vos loisirs ?') }}
 		{{ form_widget(form.Loisirs) }}
 		
-		{{ form_label(form.groupeApprenants, 'Groupe du stagiaire') }}
-		{{ form_widget(form.groupeApprenants) }}
 		
-		{{ form_label(form.idStagiaire, 'Id du stagiaire') }}
-		{{ form_widget(form.idStagiaire) }}
+		
+		
 	<button class="btn" type="submit">Valider</button>
 </form>
 {% endblock %}

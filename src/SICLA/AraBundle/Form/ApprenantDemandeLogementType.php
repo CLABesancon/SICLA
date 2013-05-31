@@ -11,6 +11,51 @@ class ApprenantDemandeLogementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+			->add('nom')
+			->add('prenom')
+			->add('mail')
+			->add('adresse')
+			->add('tel')
+			->add('ddn', 'date', array(
+					'input' => 'datetime',
+					'widget' => 'choice',
+					'years' => range(1920, 2020)))		
+			->add('situationMaritale', 'choice', array(
+					'choices' => array(
+						'Célibataire' => 'Célibataire',
+						"Marié" => "Marié",
+						"Divorcé" => "Divorcé",
+						"Veuf" => "Veuf"
+					),
+					'multiple' => false,
+				))	
+			->add('pays')
+			->add('debutantFrancais', 'choice', array(
+			  'choices' => array('1' => 'Oui', '0' => 'Non'),
+			  'expanded' => true,
+			  'multiple' => false))
+			->add('nomFormation')	
+			->add('typeHebergement', 'choice', array(
+					'choices' => array(
+						'Semi indépendance' => 'Semi indépendance',
+						"Famille d'accueil" => "Famille d'accueil",
+						"Logement" => "Logement",
+						
+					),
+					'multiple' => false,
+				))
+			->add('regimeAlimentaire', 'entity', array(
+					'class' => 'SICLAAraBundle:RegimeAlimentaire',
+					'property' => 'libelle',
+					'multiple' => false))	
+			->add('debutFormation', 'date', array(
+					'input' => 'datetime',
+					'widget' => 'choice',
+					'years' => range(2013, 2020)))
+			->add('finFormation', 'date', array(
+					'input' => 'datetime',
+					'widget' => 'choice',
+					'years' => range(2013, 2020)))	
 			->add('handicapPhysique', 'choice', array(
 			  'choices' => array('1' => 'Oui', '0' => 'Non'),
 			  'expanded' => true,
@@ -71,6 +116,9 @@ class ApprenantDemandeLogementType extends AbstractType
 				'expanded' => true,
 				'required'=>false))	
 			->add('idStagiaire')
+			->add('nbPersonne')
+			->add('nbLit')	
+			->add('loyerMax')
 			;
     }
 

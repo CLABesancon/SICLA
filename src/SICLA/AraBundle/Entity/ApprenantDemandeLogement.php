@@ -13,8 +13,116 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="SICLA\AraBundle\Entity\ApprenantDemandeLogementRepository")
  */
 class ApprenantDemandeLogement extends Object
-{
+{	
+	/**
+     * @var integer
+     * @ORM\Column(name="idStagiaire", type="integer", nullable=true)
+     */
+    private $idStagiaire;
+	
+	/**
+	* @ORM\ManyToMany(targetEntity="SICLA\AraBundle\Entity\GroupeApprenants")
+	* @ORM\JoinTable(name="ara_apprenantDemandeLogement_groupe")
+	*/
+	private $groupeApprenants;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     */
+    private $nom;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
+     */
+    private $prenom;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
+     */
+    private $mail;
+	
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="ddn", type="date", nullable=true)
+     */
+    private $ddn;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="tel", type="string", length=255, nullable=true)
+     */
+    private $tel;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="text", length=255, nullable=true)
+     */
+    private $adresse;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="pays", type="string", length=255, nullable=true)
+     */
+    private $pays;
+	
+	 /**
+	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\RegimeAlimentaire")
+	* @ORM\JoinColumn(nullable=true)
+	*/
+    private $regimeAlimentaire;
+	
+	/**
+     * @var boolean
+     *
+     * @ORM\Column(name="debutantFrancais", type="boolean", nullable=true)
+     */
+    private $debutantFrancais;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="situationMaritale", type="string", length=255, nullable=true)
+     */
+    private $situationMaritale;
 
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="debutFormation", type="date", nullable=true)
+     */
+    private $debutFormation;
+	
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="finFormation", type="date", nullable=true)
+     */
+    private $finFormation;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="typeHebergement", type="string", length=255, nullable=true)
+     */
+    private $typeHebergement;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="nomFormation", type="string", length=255, nullable=true)
+     */
+    private $nomFormation;
+	
     /**
      * @var boolean
      *
@@ -141,22 +249,28 @@ class ApprenantDemandeLogement extends Object
 	private $loisirs;
 	
 	/**
-	* @ORM\ManyToMany(targetEntity="SICLA\AraBundle\Entity\GroupeApprenants")
-	* @ORM\JoinTable(name="ara_apprenantDemandeLogement_groupe")
-	*/
-	private $groupeApprenants;
-	
-	/**
-     * @var integer
-     * @ORM\Column(name="idStagiaire", type="integer", nullable=true)
-     */
-    private $idStagiaire;
-	
-	/**
 	* @ORM\OneToMany(targetEntity="SICLA\AraBundle\Entity\AffectationDemande", mappedBy="demande")
 	*/
 	 private $affectations;
 	
+	 /**
+     * @var integer
+     * @ORM\Column(name="nbPersonne", type="integer", nullable=true)
+     */
+    private $nbPersonne;
+	
+	 /**
+     * @var integer
+     * @ORM\Column(name="nbLit", type="integer", nullable=true)
+     */
+    private $nbLit;
+	
+	 /**
+     * @var integer
+     * @ORM\Column(name="loyerMax", type="integer", nullable=true)
+     */
+    private $loyerMax;
+	 
     /**
      * Set handicapPhysique
      *
@@ -680,4 +794,395 @@ class ApprenantDemandeLogement extends Object
         return $this->affectations;
     }
 
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return ApprenantDemandeLogement
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     * @return ApprenantDemandeLogement
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+    
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string 
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set pays
+     *
+     * @param string $pays
+     * @return ApprenantDemandeLogement
+     */
+    public function setPays($pays)
+    {
+        $this->pays = $pays;
+    
+        return $this;
+    }
+
+    /**
+     * Get pays
+     *
+     * @return string 
+     */
+    public function getPays()
+    {
+        return $this->pays;
+    }
+
+    /**
+     * Set debutantFrancais
+     *
+     * @param boolean $debutantFrancais
+     * @return ApprenantDemandeLogement
+     */
+    public function setDebutantFrancais($debutantFrancais)
+    {
+        $this->debutantFrancais = $debutantFrancais;
+    
+        return $this;
+    }
+
+    /**
+     * Get debutantFrancais
+     *
+     * @return boolean 
+     */
+    public function getDebutantFrancais()
+    {
+        return $this->debutantFrancais;
+    }
+
+    /**
+     * Set situationMaritale
+     *
+     * @param string $situationMaritale
+     * @return ApprenantDemandeLogement
+     */
+    public function setSituationMaritale($situationMaritale)
+    {
+        $this->situationMaritale = $situationMaritale;
+    
+        return $this;
+    }
+
+    /**
+     * Get situationMaritale
+     *
+     * @return string 
+     */
+    public function getSituationMaritale()
+    {
+        return $this->situationMaritale;
+    }
+
+    /**
+     * Set debutFormation
+     *
+     * @param \DateTime $debutFormation
+     * @return ApprenantDemandeLogement
+     */
+    public function setDebutFormation($debutFormation)
+    {
+        $this->debutFormation = $debutFormation;
+    
+        return $this;
+    }
+
+    /**
+     * Get debutFormation
+     *
+     * @return \DateTime 
+     */
+    public function getDebutFormation()
+    {
+        return $this->debutFormation;
+    }
+
+    /**
+     * Set finFormation
+     *
+     * @param \DateTime $finFormation
+     * @return ApprenantDemandeLogement
+     */
+    public function setFinFormation($finFormation)
+    {
+        $this->finFormation = $finFormation;
+    
+        return $this;
+    }
+
+    /**
+     * Get finFormation
+     *
+     * @return \DateTime 
+     */
+    public function getFinFormation()
+    {
+        return $this->finFormation;
+    }
+
+    /**
+     * Set typeHebergement
+     *
+     * @param string $typeHebergement
+     * @return ApprenantDemandeLogement
+     */
+    public function setTypeHebergement($typeHebergement)
+    {
+        $this->typeHebergement = $typeHebergement;
+    
+        return $this;
+    }
+
+    /**
+     * Get typeHebergement
+     *
+     * @return string 
+     */
+    public function getTypeHebergement()
+    {
+        return $this->typeHebergement;
+    }
+
+    /**
+     * Set nomFormation
+     *
+     * @param string $nomFormation
+     * @return ApprenantDemandeLogement
+     */
+    public function setNomFormation($nomFormation)
+    {
+        $this->nomFormation = $nomFormation;
+    
+        return $this;
+    }
+
+    /**
+     * Get nomFormation
+     *
+     * @return string 
+     */
+    public function getNomFormation()
+    {
+        return $this->nomFormation;
+    }
+
+    /**
+     * Set mail
+     *
+     * @param string $mail
+     * @return ApprenantDemandeLogement
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+    
+        return $this;
+    }
+
+    /**
+     * Get mail
+     *
+     * @return string 
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * Set ddn
+     *
+     * @param \DateTime $ddn
+     * @return ApprenantDemandeLogement
+     */
+    public function setDdn($ddn)
+    {
+        $this->ddn = $ddn;
+    
+        return $this;
+    }
+
+    /**
+     * Get ddn
+     *
+     * @return \DateTime 
+     */
+    public function getDdn()
+    {
+        return $this->ddn;
+    }
+
+    /**
+     * Set tel
+     *
+     * @param string $tel
+     * @return ApprenantDemandeLogement
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+    
+        return $this;
+    }
+
+    /**
+     * Get tel
+     *
+     * @return string 
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     * @return ApprenantDemandeLogement
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string 
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+	
+	 /**
+   * Set regimeAlimentaire
+   *
+   * @param \SICLA\AraBundle\Entity\RegimeALimentaire $regimeAlimentaire
+   */
+	
+    public function setRegimeAlimentaire($regimeAlimentaire)
+    {
+        $this->regimeAlimentaire = $regimeAlimentaire;
+    }
+
+    /**
+     * Get regimeAlimentaire
+     *
+     * @return \SICLA\AraBundle\Entity\RegimeALimentaire $regimeAlimentaire
+     */
+    public function getRegimeAlimentaire()
+    {
+        return $this->regimeAlimentaire;
+    }
+  
+    
+    /**
+     * Set nbPersonne
+     *
+     * @param integer $nbPersonne
+     * @return ApprenantDemandeLogement
+     */
+    public function setNbPersonne($nbPersonne)
+    {
+        $this->nbPersonne = $nbPersonne;
+    
+        return $this;
+    }
+
+    /**
+     * Get nbPersonne
+     *
+     * @return integer 
+     */
+    public function getNbPersonne()
+    {
+        return $this->nbPersonne;
+    }
+
+    /**
+     * Set nbLit
+     *
+     * @param integer $nbLit
+     * @return ApprenantDemandeLogement
+     */
+    public function setNbLit($nbLit)
+    {
+        $this->nbLit = $nbLit;
+    
+        return $this;
+    }
+
+    /**
+     * Get nbLit
+     *
+     * @return integer 
+     */
+    public function getNbLit()
+    {
+        return $this->nbLit;
+    }
+
+    /**
+     * Set loyerMax
+     *
+     * @param integer $loyerMax
+     * @return ApprenantDemandeLogement
+     */
+    public function setLoyerMax($loyerMax)
+    {
+        $this->loyerMax = $loyerMax;
+    
+        return $this;
+    }
+
+    /**
+     * Get loyerMax
+     *
+     * @return integer 
+     */
+    public function getLoyerMax()
+    {
+        return $this->loyerMax;
+    }
+
+	
 }

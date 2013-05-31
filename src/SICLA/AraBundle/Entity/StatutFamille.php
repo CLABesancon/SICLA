@@ -32,6 +32,11 @@ class StatutFamille
 	* @ORM\OneToMany(targetEntity="SICLA\AraBundle\Entity\AffectationGroupe", mappedBy="statutFamille")
 	*/
 	 private $affectationsGroupes;
+	 
+	 	 /**
+	* @ORM\OneToMany(targetEntity="SICLA\AraBundle\Entity\AffectationDemande", mappedBy="statutFamille")
+	*/
+	 private $affectationsDemandes;
 
     /**
      * Get id
@@ -105,5 +110,61 @@ class StatutFamille
     public function getAffectationsGroupes()
     {
         return $this->affectationsGroupes;
+    }
+
+    /**
+     * Add affectationsGroupes
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationGroupe $affectationsGroupes
+     * @return StatutFamille
+     */
+    public function addAffectationsGroupe(\SICLA\AraBundle\Entity\AffectationGroupe $affectationsGroupes)
+    {
+        $this->affectationsGroupes[] = $affectationsGroupes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove affectationsGroupes
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationGroupe $affectationsGroupes
+     */
+    public function removeAffectationsGroupe(\SICLA\AraBundle\Entity\AffectationGroupe $affectationsGroupes)
+    {
+        $this->affectationsGroupes->removeElement($affectationsGroupes);
+    }
+
+    /**
+     * Add affectationsDemandes
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationDemande $affectationsDemandes
+     * @return StatutFamille
+     */
+    public function addAffectationsDemande(\SICLA\AraBundle\Entity\AffectationDemande $affectationsDemandes)
+    {
+        $this->affectationsDemandes[] = $affectationsDemandes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove affectationsDemandes
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationDemande $affectationsDemandes
+     */
+    public function removeAffectationsDemande(\SICLA\AraBundle\Entity\AffectationDemande $affectationsDemandes)
+    {
+        $this->affectationsDemandes->removeElement($affectationsDemandes);
+    }
+
+    /**
+     * Get affectationsDemandes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAffectationsDemandes()
+    {
+        return $this->affectationsDemandes;
     }
 }

@@ -59,24 +59,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/craue/CraueFormFlowBundle.git",
-                "reference": "1e02893d5efbfc4c1f244275215f315cc05b5df7"
+                "reference": "2.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/1e02893d5efbfc4c1f244275215f315cc05b5df7",
-                "reference": "1e02893d5efbfc4c1f244275215f315cc05b5df7",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/2.0.0",
+                "reference": "2.0.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/form": ">=2.1-dev,<2.3-dev",
-                "symfony/framework-bundle": ">=2.1-dev,<2.3-dev"
+                "symfony/form": ">=2.1,<3.0",
+                "symfony/framework-bundle": ">=2.1,<3.0"
             },
             "require-dev": {
                 "doctrine/common": ">=2.3,<3.0",
                 "phpunit/phpunit": ">=3.7.10.0,<3.8",
-                "sensio/framework-extra-bundle": ">=2.1-dev,<2.3-dev",
-                "symfony/symfony": ">=2.1-dev,<2.3-dev"
+                "sensio/framework-extra-bundle": ">=2.1,<3.0",
+                "symfony/symfony": ">=2.1,<3.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -104,7 +104,7 @@
                 "Symfony2",
                 "form"
             ],
-            "time": "2013-05-17 14:30:58"
+            "time": "2013-05-27 15:02:50"
         },
         {
             "name": "doctrine/common",
@@ -496,12 +496,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "v2.3.6"
+                "reference": "5916b3ab254f2e52404fd76311c38e4219f548bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/v2.3.6",
-                "reference": "v2.3.6",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/5916b3ab254f2e52404fd76311c38e4219f548bc",
+                "reference": "5916b3ab254f2e52404fd76311c38e4219f548bc",
                 "shasum": ""
             },
             "require": {
@@ -568,7 +568,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-05-21 12:09:55"
+            "time": "2013-05-26 16:54:03"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1146,17 +1146,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "a4d6b338e47920880d1c972143ef39ffb564665f"
+                "reference": "f090ba579745484f73e22877f0b59a6039645f65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/a4d6b338e47920880d1c972143ef39ffb564665f",
-                "reference": "a4d6b338e47920880d1c972143ef39ffb564665f",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/f090ba579745484f73e22877f0b59a6039645f65",
+                "reference": "f090ba579745484f73e22877f0b59a6039645f65",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-menu": "2.0.*",
-                "symfony/framework-bundle": ">=2.0,<2.4-dev"
+                "symfony/framework-bundle": ">=2.0,<3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1191,7 +1191,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2013-05-01 01:55:58"
+            "time": "2013-05-25 11:24:09"
         },
         {
             "name": "knplabs/knp-paginator-bundle",
@@ -1258,12 +1258,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "1aadc97c40e806ed083bc2188042a85f8f6cc6f5"
+                "reference": "05173acc5277d7813a61ba344e39540db06a6ca7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/1aadc97c40e806ed083bc2188042a85f8f6cc6f5",
-                "reference": "1aadc97c40e806ed083bc2188042a85f8f6cc6f5",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/05173acc5277d7813a61ba344e39540db06a6ca7",
+                "reference": "05173acc5277d7813a61ba344e39540db06a6ca7",
                 "shasum": ""
             },
             "require": {
@@ -1321,7 +1321,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-05-20 15:39:01"
+            "time": "2013-05-28 19:49:14"
         },
         {
             "name": "leafo/lessphp",
@@ -1329,12 +1329,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/lessphp.git",
-                "reference": "dbb61d4beaafb0d708b79b008d0b708abeb4eae9"
+                "reference": "ff86f2941c3f3d67d56acad2f8902ca57c73b359"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/dbb61d4beaafb0d708b79b008d0b708abeb4eae9",
-                "reference": "dbb61d4beaafb0d708b79b008d0b708abeb4eae9",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/ff86f2941c3f3d67d56acad2f8902ca57c73b359",
+                "reference": "ff86f2941c3f3d67d56acad2f8902ca57c73b359",
                 "shasum": ""
             },
             "type": "library",
@@ -1362,7 +1362,7 @@
             ],
             "description": "lessphp is a compiler for LESS written in PHP.",
             "homepage": "http://leafo.net/lessphp/",
-            "time": "2013-05-07 23:46:12"
+            "time": "2013-05-22 17:52:29"
         },
         {
             "name": "monolog/monolog",
@@ -1427,12 +1427,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
-                "reference": "2dc88ba75d2f3f0637491a68545c5dc07a8cdfdc"
+                "reference": "587b130c09f9a1586cdff147a58a0ec68b9b4442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/2dc88ba75d2f3f0637491a68545c5dc07a8cdfdc",
-                "reference": "2dc88ba75d2f3f0637491a68545c5dc07a8cdfdc",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/587b130c09f9a1586cdff147a58a0ec68b9b4442",
+                "reference": "587b130c09f9a1586cdff147a58a0ec68b9b4442",
                 "shasum": ""
             },
             "require": {
@@ -1480,7 +1480,7 @@
                 "form",
                 "template"
             ],
-            "time": "2013-04-30 09:35:42"
+            "time": "2013-05-25 16:03:33"
         },
         {
             "name": "mopa/composer-bridge",
@@ -1742,12 +1742,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VincentChalnot/SidusBundle.git",
-                "reference": "c7379b455297a7826ed2ff44eafb24e274a38a97"
+                "reference": "befdc5cdc5c16a4a2944178340d7228ef5161479"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VincentChalnot/SidusBundle/zipball/c7379b455297a7826ed2ff44eafb24e274a38a97",
-                "reference": "c7379b455297a7826ed2ff44eafb24e274a38a97",
+                "url": "https://api.github.com/repos/VincentChalnot/SidusBundle/zipball/befdc5cdc5c16a4a2944178340d7228ef5161479",
+                "reference": "befdc5cdc5c16a4a2944178340d7228ef5161479",
                 "shasum": ""
             },
             "type": "framework",
@@ -1778,7 +1778,7 @@
                 "tree",
                 "typed"
             ],
-            "time": "2013-05-16 22:39:22"
+            "time": "2013-05-28 12:13:38"
         },
         {
             "name": "stof/doctrine-extensions-bundle",

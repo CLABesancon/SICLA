@@ -6,8 +6,10 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sidus\SidusBundle\Entity\Type;
 use Sidus\SidusBundle\Entity\Folder;
+namespace SICLA\AraBundle\Entity\ApprenantDemandeLogement;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use SICLA\AraBundle\DataFixtures\ORM\LoadDatasFromYamlFile;
 
 
 class ObjectData extends AbstractFixture implements OrderedFixtureInterface,ContainerAwareInterface {

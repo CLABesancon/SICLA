@@ -34,7 +34,7 @@ class AffectationGroupe extends Object
    private $famille;
    
     /**
-	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\GroupeApprenants", inversedBy="affectationsGroupes")
+	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\StatutFamille", inversedBy="affectationsGroupes")
 	* @ORM\JoinColumn(nullable=true)
 	*/
    private $statutFamille;

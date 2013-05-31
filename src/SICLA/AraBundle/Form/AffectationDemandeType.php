@@ -15,6 +15,10 @@ class AffectationDemandeType extends AbstractType
 				'class'    =>'SICLAAraBundle:ApprenantDemandeLogement',
 				'property'=>'id',
 				'multiple' => false))
+			->add ('famille', 'entity', array(
+				'class'    =>'SICLAAraBundle:FamilleAccueil',
+				'property'=>'id',
+				'multiple' => false))	
 			->add('dateArrivee')
 			->add('dateDepart');
 		

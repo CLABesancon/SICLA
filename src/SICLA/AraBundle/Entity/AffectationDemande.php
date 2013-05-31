@@ -40,6 +40,12 @@ class AffectationDemande extends Object
    private $famille;
    
     /**
+	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\StatutFamille", inversedBy="affectationsDemandes")
+	* @ORM\JoinColumn(nullable=true)
+	*/
+   private $statutFamille;
+   
+    /**
      * Set dateArrivee
      *
      * @param \DateTime $dateArrivee
@@ -130,4 +136,29 @@ class AffectationDemande extends Object
     {
         return $this->famille;
     }
+   
+    /**
+     * Set statutFamille
+     *
+     * @param \SICLA\AraBundle\Entity\StatutFamille $statutFamille
+     * @return AffectationDemande
+     */
+    public function setStatutFamille(\SICLA\AraBundle\Entity\StatutFamille $statutFamille = null)
+    {
+        $this->statutFamille = $statutFamille;
+    
+        return $this;
+    }
+
+    /**
+     * Get statutFamille
+     *
+     * @return \SICLA\AraBundle\Entity\StatutFamille 
+     */
+    public function getStatutFamille()
+    {
+        return $this->statutFamille;
+    }
+
+    
 }

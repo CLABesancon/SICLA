@@ -242,7 +242,7 @@ class FamilleAccueil extends Object
     }
 
     /**
-   * Set typeLogement
+   * Set regimeAlimentaire
    *
    * @param \SICLA\AraBundle\Entity\RegimeALimentaire $regimeAlimentaire
    */
