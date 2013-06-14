@@ -46,7 +46,8 @@ class LogementType extends AbstractType
 				'class'    =>'SICLAAraBundle:Equipement',
 				'property'=>'libelle',
 				'multiple' => true,
-				'expanded' => true))
+				'expanded' => true
+				))
 			 ->add ('typeLogement', 'entity', array(
 				'class'    =>'SICLAAraBundle:TypeLogement',
 				'property'=>'libelle',

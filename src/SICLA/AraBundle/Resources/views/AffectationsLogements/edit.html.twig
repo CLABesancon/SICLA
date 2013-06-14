@@ -1,0 +1,217 @@
+{% extends 'SICLAAraBundle::base.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	{% javascripts '@SICLAAraBundle/Resources/public/js/affectationDemande.js'%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}	
+
+{% block main %}
+<div class="block-left">
+<h3>Choisir la demande</h3>
+<form method="POST">
+	{{ form_label(form.demande,'Sélectionner la demande de logement') }}
+	{{ form_widget(form.demande) }}
+		
+	{{ form_label(form.dateArrivee,"Date de début d'affectation") }}
+	{{ form_widget(form.dateArrivee) }}	
+		
+	{{ form_label(form.dateDepart,"Date de fin d'affectation") }}
+	{{ form_widget(form.dateDepart) }}		<br/>
+	<button class="btn btn-success" id="charger_familles" type="submit">Chercher les logements disponibles à ces dates</button>
+</form>
+</div>
+
+{% for demande in demandes %}
+
+<div class=" block-right demandes_logement" id="{{demande.id}}">
+		<h5>Résumé des informations concernant le stagiaire</h5>
+		<div class="donnees apprenant">
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<th >Nom</th>
+					<td>{{object.demande.nom}}</td>
+				</tr>
+				<tr>
+					<th >Prénom</th> 
+					<td>{{object.demande.nom}}</td>
+				</tr>
+				<tr>
+					<th >Date de naissance</th>
+					<td>{{object.demande.ddn|date('d-m-Y')}}</td>
+				</tr>
+				<tr>
+					<th >Pays</th>
+					<td>{{object.demande.pays}}</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+
+		<div class="donnees apprenant">
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<th >Débutant en français</th>
+					{%if object.demande.debutantFrancais==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}
+				</tr>
+				<tr>
+					<th >Date de début de formation</th>
+					<td>{{object.demande.debutFormation|date('d-m-Y')}}</td>
+				</tr>
+				<tr>	
+					<th >Date de fin de formation</th> 
+					<td>{{object.demande.finFormation|date('d-m-Y')}}</td>
+				</tr>
+				<tr>	
+					<th >Type d'hébergement</th>
+					<td>{{object.demande.typeHebergement}}</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		
+		<div class="donnees apprenant" >
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<th >Handicap physique</th>
+					{%if demande.handicapPhysique==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant cet handicap</th>
+					<td>{{ demande.detailHandicap }}</td>
+				</tr>
+				{% else %}
+					<td>Non</td>
+				</tr>
+				{% endif %}
+				<tr>
+				<th >Traitement médical</th>
+					{%if demande.traitementMedical==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant ce traitement</th>
+					<td>{{ demande.detailTraitement }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}	
+				<tr>
+					<th >Allergies animales</th>
+					{%if demande.allergiesAnimaux==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant ces allergies</th>
+					<td>{{demande.detailAllergiesAnimaux }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}		
+				<tr>
+					<th>Régime alimentaire</th>
+					<td>{{demande.regimeAlimentaire.libelle}}</td>
+				</tr>
+				<tr>
+					<th >Allergies alimentaires</th>
+					{%if demande.allergiesAlimentaires==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant ces allergies</th>
+					<td>{{ demande.detailAllergiesAlimentaires }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}		
+				<tr>
+					<th >Allergies autres</th>
+					{%if demande.allergiesAutres==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant ces allergies</th>
+					<td>{{ demande.detailAllergiesAutres }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}
+				<tr>
+					<th >Fumeur</th>
+					{%if demande.fumeur==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}		
+				</tr>
+				<tr>
+					<th >Tolérant à la fumée</th>
+					{%if demande.tolerantFumee==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}		
+				</tr>
+				<tr>
+					<th >Véhicule à disposition</th>
+					{%if demande.vehicule==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}	
+				</tr>
+				<tr>
+					<th >Voeux personnels</th>
+					{%if demande.voeuxPersonnels==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails des voeux</th>
+					<td>{{ demande.detailVoeuxPersonnels }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}
+				<tr>
+					<th >Loisirs à partager</th>
+					{%if demande.loisirsParticuliers==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails des loisirs</th>
+					<td>{{ demande.detailLoisirsParticuliers }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}	
+				<tr>
+					<th >Loisirs:</th>
+					<td>
+						<ul>
+							{% for loisir in demande.Loisirs %}
+							<li>{{ loisir.getLibelle() }}</li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>		
+{% endfor %}
+
+{% endblock %}

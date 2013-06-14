@@ -37,8 +37,8 @@ class ApprenantDemandeLogementType extends AbstractType
 			->add('nomFormation')	
 			->add('typeHebergement', 'choice', array(
 					'choices' => array(
-						'Semi indépendance' => 'Semi indépendance',
 						"Famille d'accueil" => "Famille d'accueil",
+						'Semi indépendance' => 'Semi indépendance',
 						"Logement" => "Logement",
 						
 					),

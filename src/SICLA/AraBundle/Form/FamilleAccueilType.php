@@ -33,7 +33,8 @@ class FamilleAccueilType extends AbstractType {
 					'choices' => array(
 						'A définir' => 'A définir',
 					),
-					'multiple' => false,
+					'expanded' => true,
+					'multiple' => false	
 				))
 				->add('typeAccueil', 'choice', array(
 					'choices' => array(
@@ -53,11 +54,11 @@ class FamilleAccueilType extends AbstractType {
 				))
 				->add('souhaitPublic', 'choice', array(
 					'choices' => array(
-						'Indifférent' => 'Indifférent',
-						'Jeune' => 'Jeune',
-						'Âge mûr' => 'Âge mûr',
+						'Étudiant' => 'Étudiant',
+						'Adulte' => 'Adulte',
 					),
-					'multiple' => false,
+					'expanded' => true,
+					'multiple' => false
 				))
 				->add('sdbPrivative', 'choice', array(
 					'choices' => array('1' => 'Oui', '0' => 'Non'),

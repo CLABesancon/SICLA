@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TypeLogement
  *
- * @ORM\Table(name="ara_typeLogement")
+ * @ORM\Table(name="ara_type_logement")
  * @ORM\Entity(repositoryClass="SICLA\AraBundle\Entity\TypeLogementRepository")
  */
 class TypeLogement

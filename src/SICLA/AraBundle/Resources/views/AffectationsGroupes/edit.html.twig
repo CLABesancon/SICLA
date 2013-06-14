@@ -1,0 +1,19 @@
+{% extends 'SICLAAraBundle::base.html.twig' %}
+
+{% block main %}
+<div class="block-left">
+<h3>Choix du groupe à affecter</h3>
+<form method="POST">
+	{{ form_label(form.groupeApprenants,'Sélectionner le groupe') }}
+	{{ form_widget(form.groupeApprenants	) }}
+		
+	{{ form_label(form.dateArrivee,"Date de début d'affectation") }}
+	{{ form_widget(form.dateArrivee) }}	
+		
+	{{ form_label(form.dateDepart,"Date de fin d'affectation") }}
+	{{ form_widget(form.dateDepart) }}		<br/>
+	<button class="btn btn-success" id="charger_familles" type="submit">Chercher les familles disponibles à ces dates</button>
+</form>
+</div>
+
+{% endblock %}

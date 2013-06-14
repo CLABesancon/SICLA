@@ -63,12 +63,13 @@
 				</p>
 			</caption>
 		{% endfor %}
-		<select id="Annonces" name="Annonces">
+		<select class="input-xlarge" id="Annonces" name="Annonces">
 				<option value="1" >Afficher les annonces à valider</option>
 				<option value="2" >Afficher les annonces validées</option>
 				<option value="3">Afficher les annonces archivées </option>
 				<option value="4">Afficher toutes les annonces </option>
-		</select>	
+		</select>
+		<input type="hidden" value="{{app.request.cookies.get("statut_select")}}" id="statut_select">	
 		<thead>
 			<tr>
 				<th{% if children.isSorted('n.id') %} class="sorted"{% endif %}><input type="checkbox" class="radio-condensed"/> {{ knp_pagination_sortable(children, '#', 'n.id') }}</th>
@@ -104,7 +105,7 @@
 						<div class="btn-toolbar actions-condensed">
 							<div class="btn-group">
 								<a href="{{ path('sicla_ara_validate', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Valider"><i class="icon-ok"></i></a>
-								<a target="_blank" href="{{ path('sicla_ara_contact', { 'node_id': child.node.id}) }}" class="btn btn-mini" title="Demander la révision"><i class="icon-plane"></i></a>
+								<a target="_blank" href="{{ path('sicla_ara_contact', { 'node_id': child.node.id}) }}" class="btn btn-mini" title="Demander la révision"><i class="icon-envelope"></i></a>
 								<a href="{{ path('sicla_ara_archivate', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Archiver"><i class="icon-folder-open"></i></a>
 								<a href="{{ path('sicla_ara_delete', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Supprimer"><i class="icon-trash"></i></a>
 								<a href="{{ path('sidus_edit_node', { 'node_id': child.node.id }) }}" class="btn btn-mini" title="Modifier"><i class="icon-pencil"></i></a>

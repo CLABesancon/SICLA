@@ -9,6 +9,7 @@
 {% block main %}
 {% form_theme form 'SICLAAraBundle:Form:form_div_layout.html.twig' %}
 <form action="" method="post">
+	<div class="block-left">
 		{{ form_label(form.idStagiaire, 'Id du stagiaire') }}
 		{{ form_widget(form.idStagiaire) }}
 		
@@ -38,10 +39,9 @@
 		
 		{{ form_label(form.debutantFrancais, 'Débutant en Français :') }}
 		{{ form_widget(form.debutantFrancais) }}
-		
-		{{ form_label(form.typeHebergement, "Type d'hébergement :") }}
-		{{ form_widget(form.typeHebergement) }}
-		
+		</div>
+		<div class="block-right">
+			
 		{{ form_label(form.nomFormation, "Nom de la formation :") }}
 		{{ form_widget(form.nomFormation) }}
 		
@@ -50,71 +50,84 @@
 				
 		{{ form_label(form.finFormation, "Fin de la formation :") }}
 		{{ form_widget(form.finFormation) }}
-		
-		{{ form_label(form.handicapPhysique,'Êtes vous victime d\'un handicap physique ?') }}
-		{{ form_widget(form.handicapPhysique) }}
-		<div class="handicapPhysique">
-		{{ form_label(form.detailHandicap, 'Précisez cet handicap') }}
-		{{ form_widget(form.detailHandicap) }}		
+	
+		{{ form_label(form.typeHebergement, "Type d'hébergement :") }}
+		{{ form_widget(form.typeHebergement) }}
+		<div class="famille_accueil">
+			{{ form_label(form.handicapPhysique,'Êtes vous victime d\'un handicap physique ?') }}
+			{{ form_widget(form.handicapPhysique) }}
+			<div class="handicapPhysique">
+			{{ form_label(form.detailHandicap, 'Précisez cet handicap') }}
+			{{ form_widget(form.detailHandicap) }}		
+			</div>		
+			{{ form_label(form.traitementMedical, 'Suivez vous un traitement médical ?') }}
+			{{ form_widget(form.traitementMedical) }}
+			<div class="traitementMedical">
+			{{ form_label(form.detailTraitement, 'Précisez ce traitement') }}
+			{{ form_widget(form.detailTraitement) }}
+			</div>
+			{{ form_label(form.regimeAlimentaire, 'Suivez vous un régime alimentaire spécifique') }}
+			{{ form_widget(form.regimeAlimentaire) }}	
+		</div>
+		<div class="famille_accueil semi-independance">
+			{{ form_label(form.allergiesAnimaux, 'Êtes vous sujet à des allergies animales ?') }}
+			{{ form_widget(form.allergiesAnimaux) }}
+			<div class="allergiesAnimaux">		
+			{{ form_label(form.detailAllergiesAnimaux, 'Précisez ces allergies') }}
+			{{ form_widget(form.detailAllergiesAnimaux) }}
+			</div>
+			{{ form_label(form.allergiesAlimentaires, 'Êtes vous sujet à des allergies alimentaires ?') }}
+			{{ form_widget(form.allergiesAlimentaires) }}
+			<div class="allergiesAlimentaires">		
+			{{ form_label(form.detailAllergiesAlimentaires, 'Précisez ces allergies') }}
+			{{ form_widget(form.detailAllergiesAlimentaires) }}
+			</div>
+			{{ form_label(form.allergiesAutres, 'Êtes vous sujet à d\'autres allergies ?') }}
+			{{ form_widget(form.allergiesAutres) }}
+			<div class="allergiesAutres">
+			{{ form_label(form.detailAllergiesAutres, 'Précisez ces allergies') }}
+			{{ form_widget(form.detailAllergiesAutres) }}
+			</div>
+			{{ form_label(form.fumeur, 'Êtes vous fumeur ?') }}
+			{{ form_widget(form.fumeur) }}
+
+			{{ form_label(form.tolerantFumee, 'Tolérez vous la fumée des autres ?') }}
+			{{ form_widget(form.tolerantFumee) }}
+
+			{{ form_label(form.vehicule, 'Disposerez vous d\'un véhicule à Besançon ?') }}
+			{{ form_widget(form.vehicule) }}
+		</div>
+		<div class="famille_accueil logement">
+			{{ form_label(form.voeuxPersonnels, 'Voeux personnels :') }}
+			{{ form_widget(form.voeuxPersonnels) }}
+			<div class="detailVoeuxPersonnels">
+			{{ form_label(form.detailVoeuxPersonnels, 'Détails Voeux personnels :') }}
+			{{ form_widget(form.detailVoeuxPersonnels) }}
+			</div>
+		</div>
+		<div class="famille_accueil">
+			{{ form_label(form.loisirsParticuliers, 'Loisirs à partager :') }}
+			{{ form_widget(form.loisirsParticuliers) }}
+
+			<div class="detailLoisirsParticuliers">
+			{{ form_label(form.detailLoisirsParticuliers, 'Détails Loisirs à partager :') }}
+			{{ form_widget(form.detailLoisirsParticuliers) }}
+			</div>
+
+			{{ form_label(form.Loisirs, 'Quels sont vos loisirs ?') }}
+			{{ form_widget(form.Loisirs) }}
 		</div>		
-		{{ form_label(form.traitementMedical, 'Suivez vous un traitement médical ?') }}
-		{{ form_widget(form.traitementMedical) }}
-		<div class="traitementMedical">
-		{{ form_label(form.detailTraitement, 'Précisez ce traitement') }}
-		{{ form_widget(form.detailTraitement) }}
+		<div class="logement">
+			{{ form_label(form.nbPersonne, 'Nombre de personnes à loger ?') }}
+			{{ form_widget(form.nbPersonne) }}
+				
+			{{ form_label(form.nbLit, 'Nombre de lits ?') }}
+			{{ form_widget(form.nbLit) }}
+				
+			{{ form_label(form.loyerMax, 'Loyer maximum souhaité ?	') }}
+			{{ form_widget(form.loyerMax) }}
 		</div>
-		{{ form_label(form.allergiesAnimaux, 'Êtes vous sujet à des allergies animales ?') }}
-		{{ form_widget(form.allergiesAnimaux) }}
-		<div class="allergiesAnimaux">		
-		{{ form_label(form.detailAllergiesAnimaux, 'Précisez ces allergies') }}
-		{{ form_widget(form.detailAllergiesAnimaux) }}
+		<button class="btn" type="submit">Valider</button>
 		</div>
-		
-		{{ form_label(form.regimeAlimentaire, 'Suivez vous un régime alimentaire spécifique') }}
-		{{ form_widget(form.regimeAlimentaire) }}
-		
-		{{ form_label(form.allergiesAlimentaires, 'Êtes vous sujet à des allergies alimentaires ?') }}
-		{{ form_widget(form.allergiesAlimentaires) }}
-		<div class="allergiesAlimentaires">		
-		{{ form_label(form.detailAllergiesAlimentaires, 'Précisez ces allergies') }}
-		{{ form_widget(form.detailAllergiesAlimentaires) }}
-		</div>
-		{{ form_label(form.allergiesAutres, 'Êtes vous sujet à d\'autres allergies ?') }}
-		{{ form_widget(form.allergiesAutres) }}
-		<div class="allergiesAutres">
-		{{ form_label(form.detailAllergiesAutres, 'Précisez ces allergies') }}
-		{{ form_widget(form.detailAllergiesAutres) }}
-		</div>
-		{{ form_label(form.fumeur, 'Êtes vous fumeur ?') }}
-		{{ form_widget(form.fumeur) }}
-
-		{{ form_label(form.tolerantFumee, 'Tolérez vous la fumée des autres ?') }}
-		{{ form_widget(form.tolerantFumee) }}
-
-		{{ form_label(form.vehicule, 'Disposerez vous d\'un véhicule à Besançon ?') }}
-		{{ form_widget(form.vehicule) }}
-
-		{{ form_label(form.voeuxPersonnels, 'Voeux personnels :') }}
-		{{ form_widget(form.voeuxPersonnels) }}
-		<div class="detailVoeuxPersonnels">
-		{{ form_label(form.detailVoeuxPersonnels, 'Détails Voeux personnels :') }}
-		{{ form_widget(form.detailVoeuxPersonnels) }}
-		</div>
-	
-		{{ form_label(form.loisirsParticuliers, 'Loisirs à partager :') }}
-		{{ form_widget(form.loisirsParticuliers) }}
-	
-		<div class="detailLoisirsParticuliers">
-		{{ form_label(form.detailLoisirsParticuliers, 'Détails Loisirs à partager :') }}
-		{{ form_widget(form.detailLoisirsParticuliers) }}
-		</div>
-	
-		{{ form_label(form.Loisirs, 'Quels sont vos loisirs ?') }}
-		{{ form_widget(form.Loisirs) }}
-		
-		
-		
-		
-	<button class="btn" type="submit">Valider</button>
 </form>
 {% endblock %}

@@ -1,5 +1,12 @@
 {% extends 'SICLAAraBundle::base.html.twig' %}
-
+{% block javascripts %}
+	{{ parent() }}
+	{% javascripts '@SICLAAraBundle/Resources/public/js/apprenant.js'
+					'@SICLAAraBundle/Resources/public/js/jquery.cookie.js'%}
+			<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}	
+			
 {% block main %}
 	<div class="btn-toolbar pull-right">
 		<button class="btn" title="Thumbnail view"><i class="icon-th"></i></button>
@@ -16,6 +23,13 @@
 		</div>
 		<input type="submit" class="hide">
 	</form>
+	<select class="input-xlarge" id="Demandes" name="Demandes">
+				<option value="1" >Hébergements en Famille d'accueil</option>
+				<option value="2" >Hébergements en Semi-indépendance</option>
+				<option value="3">Hébergements dans un Logement</option>
+				<option value="4">Tous les types d'hébergements	</option>
+		</select>
+		<input type="hidden" value="{{app.request.cookies.get("demande_select")}}" id="demande_select">			
 	<table class="table table-striped table-hover table-condensed">
 		{% for i in range(0,1) %}
 			<caption{% if i is odd %} class="caption-bottom"{% endif %}>
@@ -50,6 +64,7 @@
 			<tr>
 				<th{% if children.isSorted('n.id') %} class="sorted"{% endif %}><input type="checkbox" class="radio-condensed"/> {{ knp_pagination_sortable(children, '#', 'n.id') }}</th>
 				<th{% if children.isSorted('o.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(children, 'Title', 'o.title') }}</th>
+				<th>Type de demande</th>
 				<th>Groupe</th>
 				<th>ID Stagiaire</th>
 				<th class="actions">Actions</th>
@@ -57,9 +72,16 @@
 		</thead>
 		<tbody>
 			{% for child in children %}
-				<tr>
+				{% if child.object.typeHebergement =="Logement" %}
+					<tr class="logement">
+				{% elseif child.object.typeHebergement=="Famille d'accueil" %}
+					<tr class="famille_accueil"> 
+				{% elseif child.object.typeHebergement=="Semi indépendance" %}
+						<tr class="semi_independance">
+				{% endif %}
 					<td><input type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
 					<td><a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{child.object.title}}</a></td>
+					<td>{{ child.object.typeHebergement }}</td>
 					<td>{% for child in child.object.groupeApprenants%}
 							{{child.libelle }}
 					{% endfor %}</td>

@@ -8,24 +8,24 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * AffectationGroupe
  *
- * @ORM\Table()
+ * @ORM\Table(name="ara_affectation_groupe")
  * @ORM\Entity(repositoryClass="SICLA\AraBundle\Entity\AffectationGroupeRepository")
  */
 class AffectationGroupe extends Object
 {
-    /**
+  /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebut", type="date")
+     * @ORM\Column(name="dateArrivee", type="date", nullable=true)
      */
-    private $dateDebut;
+    private $dateArrivee;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateFin", type="date")
+     * @ORM\Column(name="dateDepart", type="date", nullable=true)
      */
-    private $dateFin;
+    private $dateDepart;
 	
 	/**
 	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\FamilleAccueil", inversedBy="affectationsGroupes")
@@ -58,50 +58,51 @@ class AffectationGroupe extends Object
     }
 
     /**
-     * Set dateDebut
+     * Set dateArrivee
      *
-     * @param \DateTime $dateDebut
-     * @return AffectationGroupe
+     * @param \DateTime $dateArrivee
+     * @return AffectationDemande
      */
-    public function setDateDebut($dateDebut)
+    public function setDateArrivee($dateArrivee)
     {
-        $this->dateDebut = $dateDebut;
+        $this->dateArrivee = $dateArrivee;
     
         return $this;
     }
 
     /**
-     * Get dateDebut
+     * Get dateArrivee
      *
      * @return \DateTime 
      */
-    public function getDateDebut()
+    public function getDateArrivee()
     {
-        return $this->dateDebut;
+        return $this->dateArrivee;
     }
 
     /**
-     * Set dateFin
+     * Set dateDepart
      *
-     * @param \DateTime $dateFin
-     * @return AffectationGroupe
+     * @param \DateTime $dateDepart
+     * @return AffectationDemande
      */
-    public function setDateFin($dateFin)
+    public function setDateDepart($dateDepart)
     {
-        $this->dateFin = $dateFin;
+        $this->dateDepart = $dateDepart;
     
         return $this;
     }
 
     /**
-     * Get dateFin
+     * Get dateDepart
      *
      * @return \DateTime 
      */
-    public function getDateFin()
+    public function getDateDepart()
     {
-        return $this->dateFin;
+        return $this->dateDepart;
     }
+
 
     /**
      * Set famille
@@ -125,13 +126,13 @@ class AffectationGroupe extends Object
         return $this->famille;
     }
 
-    /**
+     /**
      * Set statutFamille
      *
-     * @param \SICLA\AraBundle\Entity\GroupeApprenants $statutFamille
-     * @return AffectationGroupe
+     * @param \SICLA\AraBundle\Entity\StatutFamille $statutFamille
+     * @return AffectationDemande
      */
-    public function setStatutFamille(\SICLA\AraBundle\Entity\GroupeApprenants $statutFamille = null)
+    public function setStatutFamille(\SICLA\AraBundle\Entity\StatutFamille $statutFamille = null)
     {
         $this->statutFamille = $statutFamille;
     
@@ -141,13 +142,13 @@ class AffectationGroupe extends Object
     /**
      * Get statutFamille
      *
-     * @return \SICLA\AraBundle\Entity\GroupeApprenants 
+     * @return \SICLA\AraBundle\Entity\StatutFamille 
      */
     public function getStatutFamille()
     {
         return $this->statutFamille;
     }
-
+	
     /**
      * Set groupeApprenants
      *

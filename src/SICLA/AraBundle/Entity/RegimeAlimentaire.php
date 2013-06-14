@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * RegimeAlimentaire
  *
- * @ORM\Table(name="ara_regimeAlimentaire")
+ * @ORM\Table(name="ara_regime_alimentaire")
  * @ORM\Entity(repositoryClass="SICLA\AraBundle\Entity\RegimeAlimentaireRepository")
  */
 class RegimeAlimentaire

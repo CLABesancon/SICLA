@@ -3,3 +3,6 @@
  *	"sicla_ara_famille_accueil" = "SICLA\AraBundle\Entity\FamilleAccueil",
  *	"sicla_hydra_person" = "SICLA\HydraBundle\Entity\Person",
  *	"sicla_list_liste"="SICLA\ListBundle\Entity\Liste"
+ *  "sicla_ara_affectation_demande" = "SICLA\AraBundle\Entity\AffectationDemande",
+ *  "sicla_ara_affectation_groupe" = "SICLA\AraBundle\Entity\AffectationGroupe",
+ *  "sicla_ara_affectation_logement" = "SICLA\AraBundle\Entity\AffectationLogement",

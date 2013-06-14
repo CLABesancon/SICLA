@@ -30,12 +30,11 @@ class FamilleAccueilRepository extends EntityRepository
 		 $qb->select('COUNT(f)')
 		 ->from('SICLAAraBundle:AffectationDemande', 'f')
 		 ->where('f.famille = :id ')
-		 ->andWhere('f.dateArrivee > :dateArrivee')
-		 ->andWhere('f.dateDepart < :dateDepart')
+		 ->andWhere('f.dateArrivee < :dateArrivee')
+		 ->andWhere('f.dateDepart > :dateDepart')
 		 ->setParameter('id', $id)		 
 		 ->setParameter('dateArrivee', $date_arrivee)
 		 ->setParameter('dateDepart', $date_depart);
-		return $qb->getQuery()
-				  ->getResult();	  
+		return $qb->getQuery()->getArrayResult();	  
 		}
 }

@@ -23,7 +23,6 @@ class FamilleAccueilController extends CommonController {
 
 		if ($request->isMethod('POST')) {
 			$form->bind($request);
-			//if ($form->isValid()) {
 				//@TODO version
 		$node_parent=$loaded_objects['node']->getParent()->getId();
 		$this->loadObjectsForNodeUID($node_parent, $lang=null);
@@ -32,7 +31,6 @@ class FamilleAccueilController extends CommonController {
 				$em->flush();
 				$this->setFlash('success', 'Your modifications have been saved');
 				return $this->redirect($this->generateUrl('sidus_show_node', array('node_id' => $version->getNode()->getId(), 'lang' => $version->getLang())));
-			//}
 		}
 		$loaded_objects['form'] = $form->createView();
 		return $this->render('SICLAAraBundle:FamilleAccueil:edit.html.twig', $loaded_objects);

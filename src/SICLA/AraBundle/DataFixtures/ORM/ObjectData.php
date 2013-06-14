@@ -6,10 +6,8 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sidus\SidusBundle\Entity\Type;
 use Sidus\SidusBundle\Entity\Folder;
-namespace SICLA\AraBundle\Entity\ApprenantDemandeLogement;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use SICLA\AraBundle\DataFixtures\ORM\LoadDatasFromYamlFile;
 
 
 class ObjectData extends AbstractFixture implements OrderedFixtureInterface,ContainerAwareInterface {
@@ -46,7 +44,7 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 			$this->addReference('object-type-'.str_replace(' ','',strtolower($type)),$object);
 		}
 		
-		// affectation demande de logement 
+		// affectation demande de logement - famille accueil 
 		$object_affectation_demande=new Type();
 		$object_affectation_demande->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
 		$object_affectation_demande->setTitle('Type Affectation des demandes de logements');
@@ -55,6 +53,26 @@ class ObjectData extends AbstractFixture implements OrderedFixtureInterface,Cont
 		$object_affectation_demande->addForbiddenType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(2));
 		$manager->persist($object_affectation_demande);
 		$this->addReference('object-type-affectationdemandeslogement',$object_affectation_demande);
+		
+		// affectation apprenant - logement
+		$object_affectation_logement=new Type();
+		$object_affectation_logement->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
+		$object_affectation_logement->setTitle('Type Affectation de logement');
+		$object_affectation_logement->setController('SICLAAraBundle:AffectationLogement');
+		$object_affectation_logement->setTypeName('Type Affectation de logement');
+		$object_affectation_logement->addForbiddenType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(2));
+		$manager->persist($object_affectation_logement);
+		$this->addReference('object-type-affectationlogement',$object_affectation_logement);
+		
+		// affectation groupe - famille accueil
+		$object_affectation_groupe=new Type();
+		$object_affectation_groupe->setType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(1));
+		$object_affectation_groupe->setTitle('Type Affectation de groupe');
+		$object_affectation_groupe->setController('SICLAAraBundle:AffectationGroupe');
+		$object_affectation_groupe->setTypeName('Type Affectation de groupe');
+		$object_affectation_groupe->addForbiddenType($this->container->get('doctrine')->getRepository('SidusBundle:Type')->find(2));
+		$manager->persist($object_affectation_groupe);
+		$this->addReference('object-type-affectationgroupe',$object_affectation_groupe);
 		
 		// apprenant
 		$object_apprenant=new Type();

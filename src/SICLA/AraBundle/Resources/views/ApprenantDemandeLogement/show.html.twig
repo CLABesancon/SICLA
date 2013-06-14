@@ -6,44 +6,43 @@
 	{% endjavascripts %}
 {% endblock %}	
 {% block main %}
-
-<table  class="table table-hover">
+	<table  class="table table-striped">
 	<tbody>
 		{# informations relatives aux stagiaires #}
 		<tr>
-			<th >ID :</th>
+			<th >ID </th>
 			<td id="id_stagiaire">{{ object.idStagiaire }}</td>
 		</tr>
 		<tr>
-			<th >Nom:</th>
+			<th >Nom</th>
 			<td>{{object.nom}}</td>
 		</tr>
 		<tr>
-			<th >Prénom:</th>
+			<th >Prénom</th>
 			<td>{{object.prenom}}</td>
 		</tr>
 		<tr>
-			<th >Pays:</th>
+			<th >Pays</th>
 			<td>{{object.pays}}</td>
 		</tr>
 		<tr>
-			<th >Adresse mail :</th>
+			<th >Adresse mail </th>
 			<td>{{object.mail}}</td>
 		</tr>
 		<tr>
-			<th >Date de naissance:</th>
+			<th >Date de naissance</th>
 			<td>{{object.ddn|date('d-m-Y')}}</td>
 		</tr>
 		<tr>
-			<th >Tel perso:</th>
+			<th >Tel perso</th>
 			<td>{{object.tel}}</td>
 		</tr>
 		<tr>
-			<th >Adresse:</th>
+			<th >Adresse</th>
 			<td>{{object.adresse}}</td>
 		</tr>
 		<tr>
-			<th >Débutant en français:</th>
+			<th >Débutant en français</th>
 			{%if object.debutantFrancais==1 %}
 				<td>Oui</td>
 			{% else %}
@@ -52,147 +51,147 @@
 		</tr>
 		
 		<tr>
-			<th >Nom de la formation :</th>
+			<th >Nom de la formation </th>
 			<td >{{object.nomFormation}}</td>
 		</tr>
 		
 		<tr>
-			<th >Date de début de formation :</th>
+			<th >Date de début de formation </th>
 			<td c>{{object.debutFormation|date('d-m-Y')}}</td>
 		</tr>
 		
 		<tr>
-			<th >Date de fin de formation :</th>
+			<th >Date de fin de formation </th>
 			<td >{{object.finFormation|date('d-m-Y')}}</td>
 		</tr>
 		
 		<tr>
-			<th >Type d'hébergement :</th>
-			<td >{{object.typeHebergement}}</td>
+			<th >Type d'hébergement </th>
+			<td class="type_hebergement">{{object.typeHebergement}}</td>
 		</tr>
 		
 		{# fin des informations relatives aux stagiaires #}
-		<tr>
-			<th >Handicap physique:</th>
+		<tr class="famille_accueil">
+			<th >Handicap physique</th>
 			{%if object.handicapPhysique==1 %}
 				<td>Oui</td>
 		</tr>
-		<tr>
-				<th >Détails concernant cet handicap:</th>
+		<tr class="famille_accueil">
+				<th >Détails concernant cet handicap</th>
 				<td>{{ object.detailHandicap }}</td>
 		</tr>
 			{% else %}
 			<td>Non</td>
 		</tr>
 			{% endif %}
-	<tr>
-		<th >Traitement médical:</th>
+	<tr class="famille_accueil">
+		<th >Traitement médical</th>
 			{%if object.traitementMedical==1 %}
 			<td>Oui</td>
 	</tr>
-	<tr>
-			<th >Détails concernant ce traitement:</th>
+	<tr class="famille_accueil">
+			<th >Détails concernant ce traitement</th>
 			<td>{{ object.detailTraitement }}</td>
 	</tr>
 			{% else %}
 			<td>Non</td>
 	</tr>
 			{% endif %}	
-	<tr>
-		<th >Allergies animales:</th>
+	<tr class="famille_accueil semi-independance">
+		<th >Allergies animales</th>
 			{%if object.allergiesAnimaux==1 %}
 			<td>Oui</td>
 	</tr>
-	<tr>
-			<th >Détails concernant ces allergies:</th>
+	<tr class="famille_accueil semi-independance">
+			<th >Détails concernant ces allergies</th>
 			<td>{{ object.detailAllergiesAnimaux }}</td>
 	</tr>
 			{% else %}
 		<td>Non</td>
 	</tr>
 			{% endif %}		
-	<tr>
-			<th >Régime alimentaire:</th>
+	<tr class="famille_accueil semi-independance">
+			<th >Régime alimentaire</th>
 			<td>{{object.regimeAlimentaire.libelle}}</td>
 	</tr>
-	<tr>
-		<th >Allergies alimentaires:</th>
+	<tr class="famille_accueil semi-independance">
+		<th >Allergies alimentaires</th>
 			{%if object.allergiesAlimentaires==1 %}
 			<td>Oui</td>
 		</tr>
-		<tr>
-			<th >Détails concernant ces allergies:</th>
+		<tr class="famille_accueil semi-independance">
+			<th >Détails concernant ces allergies</th>
 			<td>{{ object.detailAllergiesAlimentaires }}</td>
 		</tr>
 			{% else %}
 		<td>Non</td>
 	</tr>
 			{% endif %}		
-	<tr>
-		<th >Allergies autres:</th>
+	<tr class="famille_accueil semi-independance">
+		<th >Allergies autres</th>
 			{%if object.allergiesAutres==1 %}
 			<td>Oui</td>
 		</tr>
 		<tr>
-			<th >Détails concernant ces allergies:</th>
+			<th >Détails concernant ces allergies</th>
 			<td>{{ object.detailAllergiesAutres }}</td>
 		</tr>
 			{% else %}
 		<td>Non</td>
 	</tr>
 			{% endif %}
-	<tr>
-		<th >Fumeur:</th>
+	<tr class="famille_accueil semi-independance">
+		<th >Fumeur</th>
 				{%if object.fumeur==1 %}
 			<td>Oui</td>
 				{% else %}
 			<td>Non</td>
 				{% endif %}		
 		</tr>
-		<tr>
-			<th >Tolérant à la fumée:</th>
+		<tr class="famille_accueil semi-independance">
+			<th >Tolérant à la fumée</th>
 				{%if object.tolerantFumee==1 %}
 				<td>Oui</td>
 				{% else %}
 				<td>Non</td>
 				{% endif %}		
 			</tr>
-			<tr>
-				<th >Véhicule à disposition:</th>
+			<tr class="famille_accueil semi-independance">
+				<th >Véhicule à disposition</th>
 				{%if object.vehicule==1 %}
 					<td>Oui</td>
 				{% else %}
 					<td>Non</td>
 				{% endif %}	
 				</tr>
-				<tr>
-					<th >Voeux personnels:</th>
+				<tr class="famille_accueil logement">
+					<th >Voeux personnels</th>
 			{%if object.voeuxPersonnels==1 %}
 						<td>Oui</td>
 					</tr>
-					<tr>
-						<th >Détails des voeux:</th>
+					<tr class="famille_accueil logement">
+						<th >Détails des voeux</th>
 						<td>{{ object.detailVoeuxPersonnels }}</td>
 					</tr>
 			{% else %}
 					<td>Non</td>
 				</tr>
 			{% endif %}
-				<tr>
-					<th >Loisirs à partager:</th>
+				<tr class="famille_accueil">
+					<th >Loisirs à partager</th>
 			{%if object.loisirsParticuliers==1 %}
 						<td>Oui</td>
 					</tr>
-					<tr>
-						<th >Détails des loisirs:</th>
+					<tr class="famille_accueil">
+						<th >Détails des loisirs</th>
 						<td>{{ object.detailLoisirsParticuliers }}</td>
 					</tr>
 			{% else %}
 					<td>Non</td>
 				</tr>
 			{% endif %}	
-			<tr>
-				<th >Loisirs:</th>
+			<tr class="famille_accueil">
+				<th >Loisirs</th>
 					<td>
 						<ul>
 							{% for loisir in object.Loisirs %}
@@ -201,8 +200,21 @@
 						</ul>
 					</td>
 				</tr>
+				
+				<tr class="logement">
+					<th>Nombre de personnes à loger</th>
+					<td>{{object.nbPersonne}}</td>
+				</tr>
+				<tr class="logement">
+					<th>Nombre de lits</th>
+					<td>{{object.nbLit}}</td>
+				</tr>
+				<tr class="logement">
+					<th>Loyer maximum</th>
+					<td>{{object.loyerMax}}</td>
+				</tr>
 				<tr>
-				<th >Affectations:</th>
+				<th >Affectations</th>
 					<td>
 						<ul>
 							{% for affectation in object.affectations %}
@@ -213,4 +225,5 @@
 				</tr>
 			</tbody>
 		</table>
+
 {% endblock %}

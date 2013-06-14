@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * StatutFamille
  *
- * @ORM\Table()
+ * @ORM\Table(name="ara_statut_famille")
  * @ORM\Entity(repositoryClass="SICLA\AraBundle\Entity\StatutFamilleRepository")
  */
 class StatutFamille

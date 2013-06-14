@@ -5,7 +5,8 @@
 {% form_theme form 'SICLAHydraBundle:Form:fields.html.twig' %}
 <form action="" method="post">
 	<h1>{{ 'Création d\'un nouveau logement'}}</h1>
-	
+	<div class="block-left">
+	<h3>Détails du logement</h3>
 	{{ form_label(form.typeLogement,'Type du logement :') }}
 	{{ form_widget(form.typeLogement) }}
 	
@@ -50,13 +51,18 @@
 	
 	{{ form_label(form.annonce,'Contenu de votre annonce') }}
 	{{ form_widget(form.annonce) }}
-	
+	</div>
+	<div class="block-right">
 	<h3>Adresse du logement</h3>
-	{{ form_row(form.address.streetNumber) }}	{{ form_row(form.address.streetNumberSuffix) }}
-	{{ form_row(form.address.streetType) }}		{{ form_row(form.address.streetName) }}
-	{{ form_row(form.address.postalCode) }}		{{ form_row(form.address.majorMunicipality) }}
-	
-
+	{{ form_row(form.address.streetNumber) }}	
+	{{ form_row(form.address.streetNumberSuffix) }}
+	{{ form_row(form.address.streetType) }}		
+	{{ form_row(form.address.streetName) }}
+	{{ form_row(form.address.postalCode) }}		
+	{{ form_row(form.address.majorMunicipality) }}
 	<button class="btn btn-success" type="submit">Valider</button>
+	</div>
+
+	
 </form>
 {% endblock %}

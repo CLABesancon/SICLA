@@ -1,10 +1,12 @@
 {% extends 'SICLAAraBundle::base.html.twig' %}
 {% block javascripts %}
 	{{ parent() }}
-	{% javascripts '@SICLAAraBundle/Resources/public/js/*'%}
+	{% javascripts '@SICLAAraBundle/Resources/public/js/famille_accueil.js'
+					'@SICLAAraBundle/Resources/public/js/jquery.cookie.js'%}
 			<script type="text/javascript" src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 {% endblock %}	
+			
 			 
 {% block main %}
 <div class="btn-toolbar pull-right">
@@ -28,16 +30,10 @@
 					<option value="2" >Hébergements en semi-indépendances</option>
 					<option value="3">Hébergements en familles d'accueil</option>
 				</select>
-				<select id="StatutFamilles" class="input-xlarge" name="StatutFamilles">
-					<option value="1" >disponibles</option>
-					<option value="2" >indisponibles</option>
-					<option value="3">contactées</option>
-					<option value="4">avec proposition acceptée</option>
-					<option value="5">ayant un apprenant affecté</option>
-				</select>	
+				
 			</div>
 <input type="hidden" value="{{app.request.cookies.get("famille_selectionee")}}" id="famille_select">
-<input type="hidden" value="{{app.request.cookies.get("statut_select")}}" id="statut_select">
+
 <table class="table table-striped table-hover table-condensed">
 		{% for i in range(0,1) %}
 		<caption{% if i is odd %} class="caption-bottom"{% endif %}>
@@ -73,6 +69,8 @@
 						<th{% if children.isSorted('n.id') %} class="sorted"{% endif %}><input type="checkbox" class="radio-condensed"/> {{ knp_pagination_sortable(children, '#', 'n.id') }}</th>
 						<th></th>
 						<th{% if children.isSorted('o.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(children, '', 'o.title') }}</th>
+						<th>Title</th>
+						<th>Type d'hébergement</th>
 						<th>Disponible du</th>
 						<th>Au</th>
 						<th>Nationalité</th>
@@ -85,33 +83,11 @@
 				</thead>
 				<tbody>
 			{% for child in children %}
-					{#	{% if child.object.typeAccueil=="Famille d'accueil" %}
-								{% if child.object.statut.libelle=="Disponible" %}
-									<tr class="famille_accueil disponible">
-								{% elseif child.object.statut.libelle=="Indisponible" %}
-									<tr class="famille_accueil indisponible">
-								{% elseif child.object.statut.libelle=="Attente de réponse" %}
-									<tr class="famille_accueil attente">
-								{% elseif child.object.statut.libelle=="Proposition acceptée" %}
-									<tr class="famille_accueil proposition_ok">
-								{% elseif child.object.statut.libelle=="Etudiant affecté" %}
-									<tr class="famille_accueil affectation_ok">
-								{% endif %}
-						{% elseif child.object.typeAccueil=="Semi indépendance"%}
-								{% if child.object.statut.libelle=="Disponible" %}
-									<tr class="semi_independance disponible">
-								{% elseif child.object.statut.libelle=="Indisponible" %}
-									<tr class="semi_independance indisponible">
-								{% elseif child.object.statut.libelle=="Attente de réponse" %}
-									<tr class="semi_independance attente">
-								{% elseif child.object.statut.libelle=="Proposition acceptée" %}
-									<tr class="semi_independance proposition_ok">
-								{% elseif child.object.statut.libelle=="Etudiant affecté" %}
-									<tr class="semi_independance affectation_ok">
-								{% endif %}	
-								{% else %}
-						{% endif %} #}
-						<tr>
+						{% if child.object.typeAccueil=="Famille d'accueil" %}
+							<tr class="famille_accueil">
+						{% elseif child.object.typeAccueil=="Semi indépendance" %}
+							<tr class="semi_independance">
+						{% endif %}
 							<td><input type="checkbox" class="radio-condensed"/> {{ child.node.id }}</td>
 							<td>
 								<div class="btn-toolbar actions-condensed">		
@@ -130,6 +106,8 @@
 								</div> 
 							</td> 
 							<td><a href="{{ path('sidus_show_node', { 'node_id': child.node.id }) }}">{{child.object.title}}</a></td>
+							<td>{{child.object.title}}</td>
+							<td>{{child.object.typeAccueil}}</td>
 							<td>{{child.object.debutDispo|date('d-m-Y') }}</td>
 							<td>{{child.object.finDispo|date('d-m-Y') }}</td>
 							<td>{{child.object.souhaitNationalite}}</td>

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * AffectationDemande
  *
- * @ORM\Table()
+ * @ORM\Table(name="ara_affectation_demande")
  * @ORM\Entity(repositoryClass="SICLA\AraBundle\Entity\AffectationDemandeRepository")
  */
 class AffectationDemande extends Object

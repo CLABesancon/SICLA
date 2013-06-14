@@ -1,0 +1,93 @@
+/* 
+    Document   : AraCSS
+    Created on : 17 avr. 2013, 15:25:15
+    Author     : laurent
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+label{font-weight : bold;}
+label.radio, .checkbox {display:inline-block; padding-right: 10px; font-weight:normal}
+div.input-append{display:block;}
+.table th{text-align: right;}
+.adp-directions, .adp-placemark, .adp-legal{display:none;}
+
+.adp-summary{
+	display: block;
+	padding: 9.5px;
+	margin: 0 0 10px;
+	font-size: 13px;
+	line-height: 20px;
+	word-break: break-all;
+	word-wrap: break-word;
+	white-space: pre;
+	white-space: pre-wrap;
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,0.15);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;}
+.block-left{float:left;width:36%; }
+.block-right{float:right; }
+div.energie{
+	float:left;
+	position: relative; 
+	margin-right: auto;
+	top:10px;
+	width: 237px;
+	height: 204px;
+	background-repeat:no-repeat;
+	background-image:url('../../bundles/siclaara/images/energie.png');}
+div.curseur_energie{
+	float:left;
+	position:absolute;
+	left:150px;
+	top:15px; 
+	width:250px;}
+
+div.ges{
+	position: relative; 
+	margin-left: 55%;
+	margin-right: auto;
+	top:10px;
+	width: 237px;
+	height: 250px;
+	background-repeat:no-repeat;
+	background-image:url('../../bundles/siclaara/images/GES.png');}
+div.curseur_ges{
+	position:absolute;
+	left:150px;
+	top:15px; 
+	width:250px;}
+
+.record_properties{text-align: right;}
+.error_address{font-weight : bold; color:red;}
+.date{font-size: 10px; font-weight: bold;}
+.annonce-non-validee{}
+.annonce-validee{  background-color:rgba(155, 255, 154, 0.6);}
+.annonce-archivee{ color:#999;}
+.annonce-revisee{  background-color:rgba(255, 204, 153, 0.6);}
+.table-striped tbody > tr:nth-child(odd) > td{background:transparent;}
+.table td{text-align:right;}
+form label:after {
+content: '';
+}
+.donnees{
+padding: 2px;
+margin: 0 0 10px;
+font-size: 13px;
+background-color: #f5f5f5;
+border: 1px solid rgba(0,0,0,0.15);
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+width:50%;
+}
+.perso {
+	float:left;
+}
+.technique{
+	float:right;
+}

@@ -97,14 +97,15 @@ class Logement extends Object
 	
     /**
 	* @ORM\ManyToOne(targetEntity="SICLA\AraBundle\Entity\TypeLogement")
-	* @ORM\JoinColumn( nullable=false )
+	* @ORM\JoinColumn( nullable=true )
 	* 
 	*/
 	private $typeLogement;
 	
 	/**
 	* @ORM\OneToOne(targetEntity="SICLA\HydraBundle\Entity\Address", cascade={"persist"})
-	*/
+	  @ORM\JoinColumn( nullable=true )
+	 */
 	private $address;
 	
    /**
@@ -142,6 +143,10 @@ class Logement extends Object
      */
     private $finDispo;
 	
+	/**
+	* @ORM\OneToMany(targetEntity="SICLA\AraBundle\Entity\AffectationLogement", mappedBy="logement")
+	*/
+	 private $affectations;
 	
     /**
      * Set meuble
@@ -580,5 +585,40 @@ class Logement extends Object
     public function getFinDispo()
     {
         return $this->finDispo;
+    }
+	
+	/**
+     * Add affectations
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationLogement $affectations
+     * @return ApprenantDemandeLogement
+     */
+    public function addAffectation(\SICLA\AraBundle\Entity\AffectationLogement $affectations)
+    {
+        $this->affectations[] = $affectations;
+		$affectations->setDemande($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove affectations
+     *
+     * @param \SICLA\AraBundle\Entity\AffectationLogement $affectation
+     */
+    public function removeAffectation(\SICLA\AraBundle\Entity\AffectationLogement $affectation)
+    {
+        $this->affectations->removeElement($affectation);
+		$affectation->setDemande(null);
+    }
+
+    /**
+     * Get affectations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAffectations()
+    {
+        return $this->affectations;
     }
 }

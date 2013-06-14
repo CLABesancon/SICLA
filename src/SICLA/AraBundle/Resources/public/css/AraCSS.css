@@ -10,7 +10,7 @@
 label{font-weight : bold;}
 label.radio, .checkbox {display:inline-block; padding-right: 10px; font-weight:normal}
 div.input-append{display:block;}
-.table th{text-align: right;}
+.table th{text-align: left;}
 .adp-directions, .adp-placemark, .adp-legal{display:none;}
 
 .adp-summary{
@@ -45,7 +45,8 @@ div.curseur_energie{
 	position:absolute;
 	left:150px;
 	top:15px; 
-	width:250px;}
+	width:250px;
+	font-size:40px;}
 
 div.ges{
 	position: relative; 
@@ -60,7 +61,8 @@ div.curseur_ges{
 	position:absolute;
 	left:150px;
 	top:15px; 
-	width:250px;}
+	width:250px;
+	font-size:40px;}
 
 .record_properties{text-align: right;}
 .error_address{font-weight : bold; color:red;}
@@ -69,8 +71,23 @@ div.curseur_ges{
 .annonce-validee{  background-color:rgba(155, 255, 154, 0.6);}
 .annonce-archivee{ color:#999;}
 .annonce-revisee{  background-color:rgba(255, 204, 153, 0.6);}
+.table tbody:first-child{border-top:0px solid #ddd;}
 .table-striped tbody > tr:nth-child(odd) > td{background:transparent;}
-.table td{text-align:right;}
+.table td{text-align:left;}
+.table th, .table td {padding:4px;}
+.table-striped{margin-bottom: 0px;}
 form label:after {
 content: '';
+}
+
+
+.donnees{
+padding: 2px;
+margin: 0 0 10px;
+font-size: 13px;
+background-color: #f5f5f5;
+border: 1px solid rgba(0,0,0,0.15);
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
 }

@@ -66,10 +66,14 @@ sicla_ara_statut_affecte:
   requirements:
     lang: ^[a-z]{2}$
     
-    
-sicla_ara_addFamille:
-  pattern:  /addFamille/{node_id}/{lang}
+sicla_ara_addFamille_demande:
+  pattern:  /addFamille_Demande/{node_id}/{lang}
   defaults: { _controller: SICLAAraBundle:AffectationDemande:addFamille, lang: ~ }
   requirements:
     lang: ^[a-z]{2}$
-  
+
+sicla_ara_addFamille_groupe:
+  pattern:  /addFamille_Groupe/{node_id}/{lang}
+  defaults: { _controller: SICLAAraBundle:AffectationGroupe:addFamille, lang: ~ }
+  requirements:
+    lang: ^[a-z]{2}$

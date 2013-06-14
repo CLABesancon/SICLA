@@ -1,0 +1,141 @@
+{% extends 'SICLAAraBundle::base.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	{% javascripts '@SICLAAraBundle/Resources/public/js/affectationDemande.js'%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}	
+
+{% block main %}
+{# informations relatives au stagiaire #}
+
+
+<h3>Choix de la famille</h3>
+<form method="POST">
+		
+	{{ form_label(form.famille,"Sélection de la famille d'accueil :") }}
+	{{ form_widget(form.famille) }}	
+	
+	{{ form_label(form.statutFamille,"Statut :") }}
+	{{ form_widget(form.statutFamille) }}	
+		
+	{{ form_label(form.dateArrivee,"Date de début d'affectation :") }}
+	{{ form_widget(form.dateArrivee) }}	
+		
+	{{ form_label(form.dateDepart,"Date de fin d'affectation :") }}
+	{{ form_widget(form.dateDepart) }}		<br/>
+	<button class="btn btn-success" type="submit">Valider l'affectation</button>
+</form>
+{% for famille in familles %}
+<div class="block-right famille" id="{{famille.id}}">
+	<h5>Informations concernant la famille d'accueil</h5>
+	
+		{# boucler sur les enfants de famille pour avoir les informations 
+		sur le propriétaire par rapport au type du child #}
+	
+		<div class="donnees famille">
+			<table class="table table-hover">
+			<tbody>	
+				<tr>
+					<th>Fumeur</th>
+					{% if famille.fumeur==1 %} 
+					<td>Oui </td>
+					{% else %} 
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>
+					<th>Régime Alimentaire</th>
+					<td>{{ famille.regimeAlimentaire.libelle }}</td>
+				</tr>
+				<tr>
+					<th>Adaptable à un autre régime alimentaire  </th>
+					{% if famille.adaptableRegimeAlimentaire==1 %}
+					<td>Oui </td>
+					{% else %} 
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>	
+					<th>Nombre d'enfants </th>
+					<td>{{ famille.nbEnfants }}</td>
+				</tr>
+				<tr>	
+					<th>Nombre de lits</th>
+					<td>{{famille.nbLit}}</td>
+				</tr>
+				<tr>	
+					<th>Ascenseur</th>
+					{% if famille.ascenseur==1 %} 
+					<td>Oui </td>
+					{% else %} 
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>	
+					<th>Nationalitée souhaitée</th>
+					<td>{{ famille.souhaitNationalite }}</td>
+				</tr>
+				<tr>	
+					<th>Sexe souhaité</th>
+					<td>{{famille.souhaitSexe }}</td>
+				</tr>
+				<tr>	
+					<th>Public souhaite</th>
+					<td>{{famille.souhaitPublic}}</td>
+				</tr>
+				<tr>	
+					<th>Salle de bains privative </th>
+					{% if famille.sdbPrivative==1 %} 
+					<td>Oui </td>
+					{% else %} 
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>	
+					<th>Accès à la cuisine</th>
+					{% if famille.accesCuisine==1 %}
+					{% else %}
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>	
+					<th>Conditions d'accès cuisine</th>
+					<td>{{ famille.conditionsAccesCuisine }}</td>
+				</tr>
+				<tr>	
+					<th>Remarques particulières</th>
+					<td>{{ famille.remarquesParticulieres }}</td>
+				</tr>
+				<tr>	
+					<th>Ligne de bus à proximité</th>
+					<td>{{ famille.ligneBus }}</td>
+				</tr>
+				<tr>	
+					<th>Arrêt de bus à proximité</th>
+					<td>{{ famille.arretBus }}</td>
+				</tr>
+				<tr>	
+					<th>Type de logement</th>
+					<td>{{ famille.typeLogement.libelle}}</td>
+				</tr>
+				<tr>	
+					<th>Loyer</th>
+					<td>{{ famille.Loyer }}€</td>
+				</tr>
+				<tr>	
+					<th>Charges</th>
+					<td>{{ famille.charges }}€</td>
+				</tr>
+				<tr>	
+					<th>Remarques du service Logement</th>
+					<td>{{famille.remarquesServiceLogement}}</td>
+				</tr>
+			</tbody>
+		</table>	
+		</div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

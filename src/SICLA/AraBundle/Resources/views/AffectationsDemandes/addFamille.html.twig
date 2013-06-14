@@ -1,0 +1,351 @@
+{% extends 'SICLAAraBundle::base.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	{% javascripts '@SICLAAraBundle/Resources/public/js/affectationDemande.js'%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}	
+
+{% block main %}
+{# informations relatives au stagiaire #}
+
+
+<h3>Choix de la famille</h3>
+<form method="POST">
+		
+	{{ form_label(form.famille,"Sélection de la famille d'accueil :") }}
+	{{ form_widget(form.famille) }}	
+	
+	{{ form_label(form.statutFamille,"Statut :") }}
+	{{ form_widget(form.statutFamille) }}	
+		
+	{{ form_label(form.dateArrivee,"Date de début d'affectation :") }}
+	{{ form_widget(form.dateArrivee) }}	
+		
+	{{ form_label(form.dateDepart,"Date de fin d'affectation :") }}
+	{{ form_widget(form.dateDepart) }}		<br/>
+	<button class="btn btn-success" type="submit">Valider l'affectation</button>
+</form>
+<div class="block-left">
+		<h5>Informations concernant le stagiaire</h5>
+		<div class="donnees apprenant">
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<th >Nom</th>
+					<td>{{object.demande.nom}}</td>
+				</tr>
+				<tr>
+					<th >Prénom</th> 
+					<td>{{object.demande.nom}}</td>
+				</tr>
+				<tr>
+					<th >Date de naissance</th>
+					<td>{{object.demande.ddn|date('d-m-Y')}}</td>
+				</tr>
+				<tr>
+					<th >Pays</th>
+					<td>{{object.demande.pays}}</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+
+		<div class="donnees apprenant">
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<th >Débutant en français</th>
+					{%if object.demande.debutantFrancais==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}
+				</tr>
+				<tr>
+					<th >Date de début de formation</th>
+					<td>{{object.demande.debutFormation|date('d-m-Y')}}</td>
+				</tr>
+				<tr>	
+					<th >Date de fin de formation</th> 
+					<td>{{object.demande.finFormation|date('d-m-Y')}}</td>
+				</tr>
+				<tr>	
+					<th >Type d'hébergement</th>
+					<td>{{object.demande.typeHebergement}}</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		
+		<div class="donnees apprenant" >
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<th >Handicap physique</th>
+					{%if object.demande.handicapPhysique==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant cet handicap</th>
+					<td>{{ object.demande.detailHandicap }}</td>
+				</tr>
+				{% else %}
+					<td>Non</td>
+				</tr>
+				{% endif %}
+				<tr>
+				<th >Traitement médical</th>
+					{%if object.demande.traitementMedical==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant ce traitement</th>
+					<td>{{ object.demande.detailTraitement }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}	
+				<tr>
+					<th >Allergies animales</th>
+					{%if object.demande.allergiesAnimaux==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant ces allergies</th>
+					<td>{{ object.demande.detailAllergiesAnimaux }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}		
+				<tr>
+					<th >Régime alimentaire</th>
+					<td>{{object.demande.regimeAlimentaire.libelle()}}</td>
+				</tr>
+				<tr>
+					<th >Allergies alimentaires</th>
+					{%if object.demande.allergiesAlimentaires==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant ces allergies</th>
+					<td>{{ object.demande.detailAllergiesAlimentaires }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}		
+				<tr>
+					<th >Allergies autres</th>
+					{%if object.demande.allergiesAutres==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails concernant ces allergies</th>
+					<td>{{ object.demande.detailAllergiesAutres }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}
+				<tr>
+					<th >Fumeur</th>
+					{%if object.demande.fumeur==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}		
+				</tr>
+				<tr>
+					<th >Tolérant à la fumée</th>
+					{%if object.demande.tolerantFumee==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}		
+				</tr>
+				<tr>
+					<th >Véhicule à disposition</th>
+					{%if object.demande.vehicule==1 %}
+					<td>Oui</td>
+					{% else %}
+					<td>Non</td>
+					{% endif %}	
+				</tr>
+				<tr>
+					<th >Voeux personnels</th>
+					{%if object.demande.voeuxPersonnels==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails des voeux</th>
+					<td>{{ object.demande.detailVoeuxPersonnels }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}
+				<tr>
+					<th >Loisirs à partager</th>
+					{%if object.demande.loisirsParticuliers==1 %}
+					<td>Oui</td>
+				</tr>
+				<tr>
+					<th >Détails des loisirs</th>
+					<td>{{ object.demande.detailLoisirsParticuliers }}</td>
+				</tr>
+					{% else %}
+					<td>Non</td>
+				</tr>
+					{% endif %}	
+				<tr>
+					<th >Loisirs:</th>
+					<td>
+						<ul>
+							{% for loisir in object.demande.Loisirs %}
+							<li>{{ loisir.getLibelle() }}</li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>		
+{% for famille in familles %}
+<div class="block-right famille" id="{{famille.id}}">
+	<h5>Informations concernant la famille d'accueil</h5>
+	
+		{# boucler sur les enfants de famille pour avoir les informations 
+		sur le propriétaire par rapport au type du child #}
+	
+		<div class="donnees famille">
+		<table class="table table-hover">
+			<tbody>	
+				<tr>
+					<th>id </th>
+					<td>{{famille.id}}  </td>
+				</tr>
+				<tr>
+					<th>Type d'accueil  </th>
+					<td>{{famille.typeAccueil}}  </td>
+				</tr>
+				<tr>	
+					<th>Disponible dés le  </th>
+					<td>{{famille.debutDispo|date('d-m-Y')}} </td>
+				</tr>
+				<tr>	
+					<th>jusqu'au </th>
+					<td>{{famille.finDispo|date('d-m-Y')}}</td>
+				</tr>
+			</tbody>
+		</table>		
+		</div>
+		<div class="donnees famille">
+			<table class="table table-hover">
+			<tbody>	
+				<tr>
+					<th>Fumeur</th>
+					{% if famille.fumeur==1 %} 
+					<td>Oui </td>
+					{% else %} 
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>
+					<th>Régime Alimentaire</th>
+					<td>{{ famille.regimeAlimentaire.libelle }}</td>
+				</tr>
+				<tr>
+					<th>Adaptable à un autre régime alimentaire  </th>
+					{% if famille.adaptableRegimeAlimentaire==1 %}
+					<td>Oui </td>
+					{% else %} 
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>	
+					<th>Nombre d'enfants </th>
+					<td>{{ famille.nbEnfants }}</td>
+				</tr>
+				<tr>	
+					<th>Nombre de lits</th>
+					<td>{{famille.nbLit}}</td>
+				</tr>
+				<tr>	
+					<th>Ascenseur</th>
+					{% if famille.ascenseur==1 %} 
+					<td>Oui </td>
+					{% else %} 
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>	
+					<th>Nationalitée souhaitée</th>
+					<td>{{ famille.souhaitNationalite }}</td>
+				</tr>
+				<tr>	
+					<th>Sexe souhaité</th>
+					<td>{{famille.souhaitSexe }}</td>
+				</tr>
+				<tr>	
+					<th>Public souhaite</th>
+					<td>{{famille.souhaitPublic}}</td>
+				</tr>
+				<tr>	
+					<th>Salle de bains privative </th>
+					{% if famille.sdbPrivative==1 %} 
+					<td>Oui </td>
+					{% else %} 
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>	
+					<th>Accès à la cuisine</th>
+					{% if famille.accesCuisine==1 %}
+					{% else %}
+					<td>Non </td>
+					{% endif %}
+				</tr>
+				<tr>	
+					<th>Conditions d'accès cuisine</th>
+					<td>{{ famille.conditionsAccesCuisine }}</td>
+				</tr>
+				<tr>	
+					<th>Remarques particulières</th>
+					<td>{{ famille.remarquesParticulieres }}</td>
+				</tr>
+				<tr>	
+					<th>Ligne de bus à proximité</th>
+					<td>{{ famille.ligneBus }}</td>
+				</tr>
+				<tr>	
+					<th>Arrêt de bus à proximité</th>
+					<td>{{ famille.arretBus }}</td>
+				</tr>
+				<tr>	
+					<th>Type de logement</th>
+					<td>{{ famille.typeLogement.libelle}}</td>
+				</tr>
+				<tr>	
+					<th>Loyer</th>
+					<td>{{ famille.Loyer }}€</td>
+				</tr>
+				<tr>	
+					<th>Charges</th>
+					<td>{{ famille.charges }}€</td>
+				</tr>
+				<tr>	
+					<th>Remarques du service Logement</th>
+					<td>{{famille.remarquesServiceLogement}}</td>
+				</tr>
+			</tbody>
+		</table>	
+		</div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

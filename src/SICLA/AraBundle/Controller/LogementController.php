@@ -7,12 +7,23 @@ use Sidus\SidusBundle\Entity\Version;
 use SICLA\AraBundle\Entity\Logement;
 use Sidus\SidusBundle\Entity\Node;
 use SICLA\AraBundle\Form\LogementType;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class LogementController extends CommonController
 {
 	public function showAction($loaded_objects) {
-		return $this->render('SICLAAraBundle:Logement:show.html.twig', $loaded_objects);
+		$html = $this->renderView('SICLAAraBundle:Logement:show.html.twig', $loaded_objects
+		);
+
+		return new Response(
+			$this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+			200,
+			array(
+				'Content-Type'          => 'application/pdf',
+				'Content-Disposition'   => 'attachment; filename="file.pdf"'
+			)
+		);
 	}
 
 	public function editAction($version, $object, $loaded_objects, Request $request) {
@@ -22,24 +33,21 @@ class LogementController extends CommonController
 
 		if ($request->isMethod('POST')) {
 			$form->bind($request);
-			//if ($form->isValid()) {
 				//@TODO version
 				$contenu_annonce=trim($object->getAnnonce());
 				
 				if($contenu_annonce=='')
 				{
-					$object->setStatut($em->getRepository('SICLAAraBundle:StatutAnnonce')->find(2));
+					$object->setStatut($em->getRepository('SICLAAraBundle:StatutAnnonce')->findOneByLibelle("Pas d'annonce"));
 				}
 				else
 				{
-					$object->setStatut($em->getRepository('SICLAAraBundle:StatutAnnonce')->find(2));
+					$object->setStatut($em->getRepository('SICLAAraBundle:StatutAnnonce')->findOneByLibelle('Non validée'));
 				}
 				$object->setTitle($object->getTypeLogement()->getLibelle()." de ".$object->getSurface()." m² à ".$object->getLoyer()."€");
 				$em->persist($object);
 				$em->flush();
-				$this->setFlash('success', 'Your modifications have been saved');
 				return $this->redirect($this->generateUrl('sidus_show_node', array('node_id' => $version->getNode()->getId(), 'lang' => $version->getLang())));
-			//	}
 		}
 		$loaded_objects['form'] = $form->createView();
 		return $this->render('SICLAAraBundle:Logement:edit.html.twig', $loaded_objects);
@@ -50,7 +58,6 @@ class LogementController extends CommonController
 		$em = $this->getDoctrine()->getEntityManager();
 		//@TODO : get connected user
 		$user = $em->getRepository('SidusBundle:Node')->find(2);
-		$typeLogement=$em->getRepository('SICLAAraBundle:TypeLogement')->find(2);
 		$new_object = new Logement();
 		$new_object->setType($type);
 		$new_object->setTitle('');
@@ -64,7 +71,6 @@ class LogementController extends CommonController
 		$new_object->setCharges('');
 		$new_object->setAscenseur('');
 		$new_object->setSdbPrivative('');
-		$new_object->setTypeLogement($typeLogement); 
 		$new_object->setAnnonce('');
 		$new_object->setParentIdProprietaire($node->getParent()->getId());
 		

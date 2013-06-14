@@ -9,9 +9,10 @@
 {% endblock %}	
 			
 {% block main %}
+<a target="_blank" href="{{ path('sicla_ara_contact', { 'node_id':node.id}) }}" class="btn" title="Contacter l'auteur de cette annonce"><i class="icon-envelope"></i> Contacter l'auteur de cette annonce</a>	
 <div class="block">
-	<div class="block-left">
-<table class="table table-hover">
+<div class="block-left">
+<table class="table table-striped">
 	<tbody>
 		<tr>
 			<th>Type du logement</th>
@@ -90,10 +91,10 @@
 
 <div class="annonce">
 
-			 {% if object.statut.getLibelle()=="Validée" %} 
 			<p class="label">Annonce : </p>
 			<div class="date">Date de création : {% for version in versions %}  {% if loop.first %} {{version.getRevisionDate|date('d-m-Y') }} {% endif %} {% endfor %}</div>
 			<div class="date">Date de dernière modification : {{ version.getRevisionDate|date('d-m-Y') }}</div>
+			<div class="date">Statut : {{ object.statut.libelle }}</div>
 			<div>{{ object.annonce }}</div>
 				<div class="btn-toolbar actions-condensed">
 										<div class="btn-group">
@@ -117,7 +118,6 @@
 											</ul>
 										</div>
 				</div>
-			{% endif %}
 </div>
 	
 </div>
@@ -127,12 +127,12 @@
 	
 	<div class="energie">
 		<div class="curseur_energie">
-			<--
+			←
 		</div>
 	</div>
 	<div class="ges">
 		<div class="curseur_ges">
-			<--
+			←
 		</div>
 	</div>
 	

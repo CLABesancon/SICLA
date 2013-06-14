@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ApprenantDemandeLogement
  *
- * @ORM\Table(name="ara_apprenantDemandeLogement")
+ * @ORM\Table(name="ara_demande_logement")
  * @ORM\Entity(repositoryClass="SICLA\AraBundle\Entity\ApprenantDemandeLogementRepository")
  */
 class ApprenantDemandeLogement extends Object

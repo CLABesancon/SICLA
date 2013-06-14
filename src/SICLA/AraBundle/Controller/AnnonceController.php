@@ -2,11 +2,12 @@
 namespace SICLA\AraBundle\Controller;
 
 use Sidus\SidusBundle\Controller\CommonController;
-
+use Symfony\Component\HttpFoundation\Request;
+use  SICLA\AraBundle\Form\ContactFormType;
 
 class AnnonceController extends CommonController
 {
-	
+	// validation d'une annonce [Service Logement]
 	public function validateAction($node_id, $lang = null) {
 		$this->loadObjectsForNodeUID($node_id, $lang);
 		
@@ -20,14 +21,14 @@ class AnnonceController extends CommonController
         ->setSubject('Validation de votre annonce '.$this->loaded_objects['object']->getTitle())
         ->setFrom('send@example.com')
         ->setTo('laurent.predine@gmail.com')
-        ->setBody('Bonjour <br/> Votre annonce a bien été validée.');
+        ->setBody('Bonjour <br/> Votre annonce a bien été validée.', 'text/html');
 		$this->get('mailer')->send($message);
 		
 		$this->loadObjectsForNodeUID($this->container->get('doctrine')->getRepository('SidusBundle:Node')->findOneByNode_name('Liste des annonces')->getId(), $lang);
 		return $this->render('SICLAAraBundle:Annonces:show.html.twig', $this->loaded_objects);
 
 	}
-	
+	// archivage d'une annonce [Service Logement]
 	public function archivateAction($node_id, $lang = null) {
 		$this->loadObjectsForNodeUID($node_id, $lang);
 		
@@ -37,9 +38,9 @@ class AnnonceController extends CommonController
 		
 		$message = \Swift_Message::newInstance()
         ->setSubject('Archivage de votre annonce '.$this->loaded_objects['object']->getTitle())
-        ->setFrom('send@example.com')
+        ->setFrom('logement-cla@univ-fcomte.fr')
         ->setTo('laurent.predine@gmail.com')
-        ->setBody('Bonjour <br/> Votre annonce a bien été validée.');
+        ->setBody('Bonjour <br/> Votre annonce a bien été archivée.', 'text/html');
 		$this->get('mailer')->send($message);
 		
 		$em->flush();
@@ -48,7 +49,7 @@ class AnnonceController extends CommonController
 
 	}
 	
-	// Archivage d'une annonce depuis un logement
+	// Archivage d'une annonce depuis la vue d'un logement [Propriétaire] [Service Logement]
 	
 	public function archivateLogementAction($node_id, $lang = null) {
 		$this->loadObjectsForNodeUID($node_id, $lang);
@@ -59,9 +60,9 @@ class AnnonceController extends CommonController
 		
 		$message = \Swift_Message::newInstance()
         ->setSubject('Archivage de votre annonce '.$this->loaded_objects['object']->getTitle())
-        ->setFrom('send@example.com')
+        ->setFrom('logement-cla@univ-fcomte.fr')
         ->setTo('laurent.predine@gmail.com')
-        ->setBody('Bonjour <br/> Votre annonce a bien été validée.');
+        ->setBody('Bonjour <br/> Votre annonce a bien été archivée.', 'text/html');
 		
 		$this->get('mailer')->send($message);
 		$em->flush();
@@ -69,7 +70,7 @@ class AnnonceController extends CommonController
 
 	}
 	
-	
+	// Suppression d'une annonce [Propriétaire] [Service Logement]
 	public function deleteAction($node_id, $lang = null) {
 		$this->loadObjectsForNodeUID($node_id, $lang);
 		
@@ -80,9 +81,9 @@ class AnnonceController extends CommonController
 		
 		$message = \Swift_Message::newInstance()
         ->setSubject('Suppression de votre annonce'.$this->loaded_objects['object']->getTitle())
-        ->setFrom('send@example.com')
+        ->setFrom('logement-cla@univ-fcomte.fr')
         ->setTo('laurent.predine@gmail.com')
-        ->setBody('Bonjour <br/> Votre annonce a bien été validée.');
+        ->setBody('Bonjour <br/> Votre annonce a bien été supprimée.', 'text/html');
 		$this->get('mailer')->send($message);
 		
 		$em->flush();
@@ -91,28 +92,87 @@ class AnnonceController extends CommonController
 
 	}
 	
-	public function contactAction($node_id, $lang = null) {
+	public function reviserAction($node_id, Request $request, $lang = null) {
 		$this->loadObjectsForNodeUID($node_id, $lang);
 		
 		$em = $this->getDoctrine()->getEntityManager();
-		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(3);
+		$statut= $em->getRepository('SICLAAraBundle:StatutAnnonce')->find(5);
 		$this->loaded_objects['object']->setStatut($statut);
 		$em->flush();
 		
 		// Récupération de l'adresse mail //
 		
-		// On récupère le logement associé à l'annonce
+		// On récupère le propriétaire associé au logement 
 		$title="Annonce concernant le ".$this->loaded_objects['object']->getTitle();
 		$idProprietaire=$this->loaded_objects['object']->getParentIdProprietaire();
 		$this->loadObjectsForNodeUID($idProprietaire, $lang);
 		
-		// On récupère le parent de ce logement càd le propriétaire,  puis l'user correspondant à ce propriétaire
-		$node_user=$this->loaded_objects['node']->getParent()->getId();
-		$this->loadObjectsForNodeUID($node_user, $lang);
-		$mail=$this->loaded_objects['object']->getEmail();
+		// On récupère le mail de ce propriétaire 
+		//$mail=$this->loaded_objects['object']->getMail();
+
+		$mail="test@test.fr"; // en attendant qu'une personne soit liée à un user
 		$this->loadObjectsForNodeUID($node_id, $lang);
 		$this->loaded_objects['mail']=$mail;
 		$this->loaded_objects['mail_title']=$title; 
+		$form = $this->createForm(new ContactFormType());
+		$this->loaded_objects['form'] = $form->createView();
+			if ($request->isMethod('POST')) {
+				$form->bind($request);
+					$message = \Swift_Message::newInstance()
+						->setSubject($form->get('sujet')->getData())
+						->setFrom($form->get('email')->getData())
+						->setTo($mail)
+						->setBody($form->get('message')->getData());
+
+					$this->get('mailer')->send($message);
+
+					$request->getSession()->getFlashBag()->add('success', 'Votre message a bien été envoyé.');
+
+					return $this->render('SICLAAraBundle:Form:contact.html.twig', $this->loaded_objects);
+				
+			}
+		
+		
+		return $this->render('SICLAAraBundle:Form:contact.html.twig', $this->loaded_objects);
+
+	}
+	
+	public function contactAction($node_id, Request $request, $lang = null) {
+		$this->loadObjectsForNodeUID($node_id, $lang);
+		
+		// Récupération de l'adresse mail //
+		
+		// On récupère le propriétaire associé au logement 
+		$title="Annonce concernant le ".$this->loaded_objects['object']->getTitle();
+		$idProprietaire=$this->loaded_objects['object']->getParentIdProprietaire();
+		$this->loadObjectsForNodeUID($idProprietaire, $lang);
+		
+		// On récupère le mail de ce propriétaire 
+		//$mail=$this->loaded_objects['object']->getMail();
+
+
+		$mail="test@test.fr"; // en attendant qu'une personne soit liée à un user
+		$this->loadObjectsForNodeUID($node_id, $lang);
+		$this->loaded_objects['mail']=$mail;
+		$this->loaded_objects['mail_title']=$title; 
+		$form = $this->createForm(new ContactFormType());
+		$this->loaded_objects['form'] = $form->createView();
+			if ($request->isMethod('POST')) {
+				$form->bind($request);
+					$message = \Swift_Message::newInstance()
+						->setSubject($form->get('sujet')->getData())
+						->setFrom($form->get('email')->getData())
+						->setTo($mail)
+						->setBody($form->get('message')->getData());
+
+					$this->get('mailer')->send($message);
+
+					$request->getSession()->getFlashBag()->add('success', 'Votre message a bien été envoyé.');
+
+					return $this->render('SICLAAraBundle:Form:contact.html.twig', $this->loaded_objects);
+				
+			}
+		
 		
 		return $this->render('SICLAAraBundle:Form:contact.html.twig', $this->loaded_objects);
 

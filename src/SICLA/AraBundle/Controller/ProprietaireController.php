@@ -5,7 +5,6 @@ use SICLA\HydraBundle\Controller\PersonController;
 use Sidus\SidusBundle\Entity\Version;
 use SICLA\HydraBundle\Entity\Person;
 use Sidus\SidusBundle\Entity\Node;
-use Sidus\SidusBundle\Entity\Object;
 
 class ProprietaireController extends PersonController {
 	
