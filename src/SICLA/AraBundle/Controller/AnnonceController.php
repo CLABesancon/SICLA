@@ -20,7 +20,7 @@ class AnnonceController extends CommonController
 		$message = \Swift_Message::newInstance()
         ->setSubject('Validation de votre annonce '.$this->loaded_objects['object']->getTitle())
         ->setFrom('send@example.com')
-        ->setTo('laurent.predine@gmail.com')
+        ->setTo('noname@gmail.com')
         ->setBody('Bonjour <br/> Votre annonce a bien été validée.', 'text/html');
 		$this->get('mailer')->send($message);
 		
@@ -39,7 +39,7 @@ class AnnonceController extends CommonController
 		$message = \Swift_Message::newInstance()
         ->setSubject('Archivage de votre annonce '.$this->loaded_objects['object']->getTitle())
         ->setFrom('logement-cla@univ-fcomte.fr')
-        ->setTo('laurent.predine@gmail.com')
+        ->setTo('noname@gmail.com')
         ->setBody('Bonjour <br/> Votre annonce a bien été archivée.', 'text/html');
 		$this->get('mailer')->send($message);
 		
@@ -61,7 +61,7 @@ class AnnonceController extends CommonController
 		$message = \Swift_Message::newInstance()
         ->setSubject('Archivage de votre annonce '.$this->loaded_objects['object']->getTitle())
         ->setFrom('logement-cla@univ-fcomte.fr')
-        ->setTo('laurent.predine@gmail.com')
+        ->setTo('noname@gmail.com')
         ->setBody('Bonjour <br/> Votre annonce a bien été archivée.', 'text/html');
 		
 		$this->get('mailer')->send($message);
@@ -82,7 +82,7 @@ class AnnonceController extends CommonController
 		$message = \Swift_Message::newInstance()
         ->setSubject('Suppression de votre annonce'.$this->loaded_objects['object']->getTitle())
         ->setFrom('logement-cla@univ-fcomte.fr')
-        ->setTo('laurent.predine@gmail.com')
+        ->setTo('noname@gmail.com')
         ->setBody('Bonjour <br/> Votre annonce a bien été supprimée.', 'text/html');
 		$this->get('mailer')->send($message);
 		
